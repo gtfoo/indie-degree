@@ -1,0 +1,1481 @@
+{
+  "course": "AIE-106",
+  "title": "Speech and Multimodal Systems",
+  "credits": 4,
+  "est_hours": 62,
+  "spec_version": "0.1",
+  "registered": "2026-08-13",
+  "premise": "Voice is the domain where the target employers live, and it is unusually unforgiving: a text product that takes two seconds is fine, and a voice product that takes two seconds is broken. Human conversation runs on a 300–500 ms response window, and most deployed voice agents sit at 1.4 seconds or worse. This course is about closing that gap and knowing exactly which hop to blame.",
+  "distinctive_asset": "You are a native Mandarin and English bilingual living in Singapore. That makes you able to build something almost nobody in this field can: a real evaluation set for Singaporean-accented English and spontaneous Mandarin-English code-switching. Every off-the-shelf ASR system degrades on this and very few vendors can tell you by how much, because the data does not exist outside SEAME. Module 3 makes you build it and measure it. It is the most differentiated artifact in the whole programme, and the one most likely to start a conversation with a company selling voice into this region.",
+  "consent_note": "M3.4 involves recording speech. Recording only yourself needs nothing. Recording anyone else requires their informed consent, and publishing a dataset of other people's voices requires explicit permission for that specific use — a voice is biometric data and consent to be recorded is not consent to be published. If consent is not clean, build the set from your own speech alone; the assignment is fully completable that way and the rubric does not reward volume.",
+  "advanced_standing_note": "Advanced standing awarded 1 of 3 credits. Read Any Language and 1 Percent More Fluent already evidence synthesis integration at level 2 — live voice and model enumeration, quota handling, shipped. LearnIndo's speech-to-text path evidences ASR at level 1, which is 'touched it' and does not exempt anything. Nothing carries over for streaming, latency budgeting, quality measurement or turn-taking, which is most of the course.",
+  "laboratory": "1 Percent More Fluent and LearnIndo. Both already move audio in one direction; neither closes the loop, measures what it costs, or handles a user interrupting.",
+  "sitting_rule": "Every item is completable in one sitting. Nothing exceeds 180 minutes, and anything over 90 declares its own checkpoints.",
+  "panel": {
+    "models": [
+      "claude-opus-5",
+      "gpt-5",
+      "gemini-flash-latest"
+    ],
+    "blind": true,
+    "blind_note": "Judges see the submission and the rubric, never each other's scores, and never the learner's self-assessment.",
+    "rubric_registered_before_submission": true,
+    "disagreement": "Scores are reported per judge and never averaged into a single number when the spread is 2 or more on any criterion.",
+    "measurement_note": "Latency claims must carry a distribution measured from the user's action, not from an outbound API call. A mean alone fails the blocking check before any judge reads it.",
+    "audio_handling": "Judges receive transcripts and measurements, not raw audio. Where a claim depends on how something sounds, the submission must carry a listening protocol and its results rather than asking a judge to take it on trust."
+  },
+  "modules": [
+    {
+      "id": "M1",
+      "title": "How speech becomes tokens",
+      "est_minutes": 450,
+      "items": [
+        {
+          "id": "M1.1",
+          "type": "reading",
+          "title": "Automatic speech recognition and text-to-speech chapters",
+          "resource": "slp3",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "speech-asr",
+            "speech-tts"
+          ],
+          "brief": "The best free treatment of the fundamentals that exists. Read before the papers, not after.",
+          "locator": "The automatic speech recognition and text-to-speech chapter."
+        },
+        {
+          "id": "M1.2",
+          "type": "lecture",
+          "title": "LLM-based spoken language processing",
+          "resource": "cs224s-llm-speech",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "speech-asr",
+            "speech-agents"
+          ]
+        },
+        {
+          "id": "M1.3",
+          "type": "reading",
+          "title": "Robust Speech Recognition via Large-Scale Weak Supervision",
+          "resource": "paper-whisper",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "speech-asr"
+          ]
+        },
+        {
+          "id": "M1.4",
+          "type": "reading",
+          "title": "wav2vec 2.0",
+          "resource": "paper-wav2vec2",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "speech-asr"
+          ]
+        },
+        {
+          "id": "M1.5",
+          "type": "reading",
+          "title": "Conformer",
+          "resource": "paper-conformer",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "speech-asr"
+          ]
+        },
+        {
+          "id": "M1.6",
+          "type": "reading",
+          "title": "whisper: the reference implementation",
+          "resource": "repo-whisper",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "speech-asr"
+          ],
+          "locator": "whisper/ — decoding and the timestamp logic in particular."
+        },
+        {
+          "id": "M1.7",
+          "type": "assignment",
+          "title": "Three systems, one voice",
+          "est_minutes": 60,
+          "tier": 1,
+          "rubric": "R-M1.7",
+          "skills": [
+            "speech-asr"
+          ],
+          "brief": "Record two minutes of your own speech — one minute reading prepared text, one minute spontaneous — and transcribe it with three different ASR systems. Report word error rate for each against your own reference transcript. Note where the spontaneous minute diverges from the prepared one; that gap is the whole subject of this course."
+        },
+        {
+          "id": "M1.8",
+          "type": "retention",
+          "title": "Retention: ASR architectures and their assumptions",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "speech-asr"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Measuring recognition properly",
+      "est_minutes": 420,
+      "items": [
+        {
+          "id": "M2.1",
+          "type": "reading",
+          "title": "Common Voice: a massively multilingual speech corpus",
+          "resource": "paper-common-voice",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "speech-asr",
+            "eval-datasets"
+          ]
+        },
+        {
+          "id": "M2.2",
+          "type": "reading",
+          "title": "WhisperX: time-accurate long-form transcription",
+          "resource": "paper-whisperx",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "speech-asr"
+          ]
+        },
+        {
+          "id": "M2.3",
+          "type": "reading",
+          "title": "Hugging Face Audio Course: evaluation",
+          "resource": "hf-audio-eval",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "speech-asr"
+          ]
+        },
+        {
+          "id": "M2.4",
+          "type": "assignment",
+          "title": "Word error rate is not enough",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M2.4",
+          "skills": [
+            "speech-asr"
+          ],
+          "brief": "Build an ASR eval harness that reports WER, and then at least two measures that WER hides: entity error rate on names, numbers and codes, and error rate on the words that change meaning. Show a case where WER improves and your application gets worse. That case is the reason this assignment exists. Build it inside the eval suite from AIE-102 M6.4 rather than beside it — what is new here is the metrics, not the plumbing.",
+          "checkpoints": [
+            "WER harness running",
+            "two additional measures implemented",
+            "a WER-improves-but-worse case demonstrated"
+          ]
+        },
+        {
+          "id": "M2.5",
+          "type": "assignment",
+          "title": "The errors that matter",
+          "est_minutes": 105,
+          "tier": 2,
+          "rubric": "R-M2.5",
+          "skills": [
+            "speech-asr"
+          ],
+          "brief": "For one product, classify transcription errors by downstream consequence rather than by linguistic type: harmless, recoverable, and silently wrong. Report the distribution. The third category is the one that determines whether you can ship, and it is almost never measured.",
+          "checkpoints": [
+            "consequence taxonomy defined",
+            "errors classified",
+            "distribution reported"
+          ]
+        },
+        {
+          "id": "M2.6",
+          "type": "retention",
+          "title": "Retention: recognition metrics and their blind spots",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "speech-asr"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Accented and code-switched speech",
+      "est_minutes": 450,
+      "items": [
+        {
+          "id": "M3.1",
+          "type": "reading",
+          "title": "On the End-to-End Solution to Mandarin-English Code-switching Speech Recognition",
+          "resource": "paper-codeswitch-seame",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "speech-asr"
+          ],
+          "brief": "Built on SEAME — spontaneous Mandarin-English code-switching from Singaporean and Malaysian speakers. Your own linguistic environment, treated as a research problem."
+        },
+        {
+          "id": "M3.2",
+          "type": "reading",
+          "title": "CS-Dialogue: 104 hours of spontaneous code-switching dialogue",
+          "resource": "paper-cs-dialogue",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "speech-asr",
+            "eval-datasets"
+          ]
+        },
+        {
+          "id": "M3.3",
+          "type": "reading",
+          "title": "SeamlessM4T",
+          "resource": "paper-seamlessm4t",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "speech-asr",
+            "speech-tts"
+          ]
+        },
+        {
+          "id": "M3.4",
+          "type": "assignment",
+          "title": "Build the eval set nobody has",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M3.4",
+          "skills": [
+            "speech-asr"
+          ],
+          "brief": "Construct an evaluation set of at least 60 utterances across three conditions: Singaporean-accented English, spontaneous Mandarin-English code-switching, and a monolingual control. Include the things that actually break systems here — particles, place names, mixed-language numerals, and terms that switch language mid-noun-phrase. Your own voice alone is sufficient; if you record anyone else, consent must be documented. Reference transcripts must state their own conventions, because how you transcribe a code-switch is a decision, not a fact.",
+          "checkpoints": [
+            "60+ utterances across three conditions",
+            "transcription conventions documented",
+            "consent documented or single-speaker declared"
+          ]
+        },
+        {
+          "id": "M3.5",
+          "type": "assignment",
+          "title": "Benchmark the vendors on it",
+          "est_minutes": 105,
+          "tier": 1,
+          "rubric": "R-M3.5",
+          "skills": [
+            "speech-asr"
+          ],
+          "brief": "Run at least three commercial or open ASR systems against your set and report per-condition error rates. Then answer the question a buyer in this region would ask: which one would you recommend for a Singapore deployment, and what is the honest caveat? Report the degradation from control to code-switched as a ratio, because that number is the finding.",
+          "checkpoints": [
+            "three systems benchmarked",
+            "per-condition rates reported",
+            "degradation ratio and a recommendation"
+          ]
+        },
+        {
+          "id": "M3.6",
+          "type": "retention",
+          "title": "Retention: accent, code-switching and evaluation coverage",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "speech-asr"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Synthesis",
+      "est_minutes": 495,
+      "items": [
+        {
+          "id": "M4.1",
+          "type": "reading",
+          "title": "Text-to-speech chapters",
+          "resource": "slp3",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "speech-tts"
+          ],
+          "locator": "The text-to-speech sections of the speech chapter."
+        },
+        {
+          "id": "M4.2",
+          "type": "reading",
+          "title": "FastSpeech 2",
+          "resource": "paper-fastspeech2",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "speech-tts"
+          ]
+        },
+        {
+          "id": "M4.3",
+          "type": "reading",
+          "title": "Neural codec language models for zero-shot TTS",
+          "resource": "paper-vall-e",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "speech-tts"
+          ]
+        },
+        {
+          "id": "M4.4",
+          "type": "reading",
+          "title": "ElevenLabs: models, voices and streaming",
+          "resource": "elevenlabs-streaming",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "speech-tts",
+            "speech-streaming"
+          ]
+        },
+        {
+          "id": "M4.5",
+          "type": "assignment",
+          "title": "Integrate synthesis properly",
+          "est_minutes": 45,
+          "tier": 1,
+          "rubric": "R-M4.5",
+          "skills": [
+            "speech-tts"
+          ],
+          "advanced_standing_exempt": true,
+          "exempt_rationale": "Read Any Language already does this in production: automatic language detection, live voice and model enumeration rather than hardcoded ids, instant previews and remaining-quota tracking. 1 Percent More Fluent adds language-appropriate narrator selection. Cite them.",
+          "brief": "Integrate a synthesis provider with live voice and model enumeration, language-appropriate selection, and quota handling that degrades gracefully rather than failing at the worst moment."
+        },
+        {
+          "id": "M4.6",
+          "type": "assignment",
+          "title": "Streaming synthesis",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M4.6",
+          "skills": [
+            "speech-tts",
+            "speech-streaming"
+          ],
+          "brief": "Convert a non-streaming synthesis path in one of your products to stream, so audio starts before the text is complete. Measure time to first audio before and after, as the user experiences it. Then handle the case the naive version gets wrong: what happens when the upstream text stops mid-sentence.",
+          "checkpoints": [
+            "streaming path implemented",
+            "time to first audio measured before and after",
+            "mid-sentence termination handled"
+          ]
+        },
+        {
+          "id": "M4.7",
+          "type": "assignment",
+          "title": "Voice quality is not one number",
+          "est_minutes": 75,
+          "tier": 2,
+          "rubric": "R-M4.7",
+          "skills": [
+            "speech-tts"
+          ],
+          "brief": "Design a listening protocol for comparing two voices on your own content — what is played, in what order, to whom, and what they are asked. Run it, even if the panel is five people. Report the result and the protocol's weaknesses. A mean opinion score with no protocol is decoration."
+        },
+        {
+          "id": "M4.8",
+          "type": "retention",
+          "title": "Retention: synthesis architectures and streaming",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "speech-tts"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Transport and streaming",
+      "est_minutes": 390,
+      "items": [
+        {
+          "id": "M5.1",
+          "type": "reading",
+          "title": "WebRTC for the Curious",
+          "resource": "webrtc-for-the-curious",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "speech-streaming",
+            "speech-latency"
+          ],
+          "brief": "Voice agents live or die on transport, and this is the only free text that explains why. Read at least the sections on jitter, packet loss and connection establishment.",
+          "locator": "The chapters on connecting, media, and jitter and loss."
+        },
+        {
+          "id": "M5.2",
+          "type": "reading",
+          "title": "Understand and improve voice agent latency",
+          "resource": "livekit-agent-latency",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "speech-latency",
+            "speech-agents"
+          ],
+          "brief": "Vendor-authored, so read the numbers as a floor rather than a promise. The decomposition by hop is the right one."
+        },
+        {
+          "id": "M5.3",
+          "type": "assignment",
+          "title": "Where the milliseconds actually go",
+          "est_minutes": 165,
+          "tier": 1,
+          "rubric": "R-M5.3",
+          "skills": [
+            "speech-latency",
+            "speech-streaming"
+          ],
+          "brief": "Build a full loop — microphone to recognition to model to synthesis to speaker — and instrument every hop. Report the budget as a distribution per hop, measured from the user's action. Then state which single hop you would attack first and what it would cost. Most people discover the model is not the problem.",
+          "checkpoints": [
+            "full loop working",
+            "every hop instrumented",
+            "per-hop distributions and an attack plan"
+          ]
+        },
+        {
+          "id": "M5.4",
+          "type": "assignment",
+          "title": "The transport experiment",
+          "est_minutes": 60,
+          "tier": 2,
+          "rubric": "R-M5.4",
+          "skills": [
+            "speech-streaming"
+          ],
+          "brief": "Degrade the network deliberately — added latency, jitter, packet loss — and report what your loop does at each level. State the conditions under which it becomes unusable, in terms a customer could check against their own office wifi."
+        },
+        {
+          "id": "M5.5",
+          "type": "retention",
+          "title": "Retention: transport, jitter and their latency effects",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "speech-streaming"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M6",
+      "title": "Turn-taking and barge-in",
+      "est_minutes": 390,
+      "items": [
+        {
+          "id": "M6.1",
+          "type": "reading",
+          "title": "Moshi: a speech-text foundation model for real-time dialogue",
+          "resource": "paper-moshi",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "speech-agents",
+            "speech-latency"
+          ],
+          "brief": "Full-duplex: the model listens while it speaks. The clearest argument that turn-taking is architectural rather than a feature you bolt on."
+        },
+        {
+          "id": "M6.2",
+          "type": "reading",
+          "title": "HuBERT",
+          "resource": "paper-hubert",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "speech-asr"
+          ]
+        },
+        {
+          "id": "M6.3",
+          "type": "assignment",
+          "title": "Barge-in that works",
+          "est_minutes": 165,
+          "tier": 1,
+          "rubric": "R-M6.3",
+          "skills": [
+            "speech-agents"
+          ],
+          "brief": "Make your loop interruptible: the user speaks over the agent, the agent stops promptly, and the conversation continues coherently from where it was cut. Measure stop latency from the onset of user speech. Then handle the hard half — distinguishing a genuine interruption from a cough, a background voice, or the user saying 'mm-hm' while agreeing.",
+          "checkpoints": [
+            "interruption detected and playback stopped",
+            "stop latency measured",
+            "false-interruption cases handled and reported"
+          ]
+        },
+        {
+          "id": "M6.4",
+          "type": "assignment",
+          "title": "The awkward pause",
+          "est_minutes": 75,
+          "tier": 2,
+          "rubric": "R-M6.4",
+          "skills": [
+            "speech-agents"
+          ],
+          "brief": "Find the endpointing threshold where your agent starts talking over people, and the one where it feels sluggish. Report both numbers and what you chose. Then say how the right answer differs for a Mandarin speaker, an English speaker, and someone switching between them mid-sentence — because it does, and it is the kind of thing a regional deployment gets wrong."
+        },
+        {
+          "id": "M6.5",
+          "type": "retention",
+          "title": "Retention: endpointing, barge-in and duplex behaviour",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "speech-agents"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M7",
+      "title": "Documents and vision-language models",
+      "est_minutes": 750,
+      "items": [
+        {
+          "id": "M7.1",
+          "type": "reading",
+          "title": "Learning transferable visual models from natural language supervision",
+          "resource": "paper-clip",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "mm-vlm"
+          ]
+        },
+        {
+          "id": "M7.2",
+          "type": "reading",
+          "title": "Visual Instruction Tuning",
+          "resource": "paper-llava",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "mm-vlm"
+          ]
+        },
+        {
+          "id": "M7.3",
+          "type": "reading",
+          "title": "Qwen2-VL: perception at any resolution",
+          "resource": "paper-qwen2vl",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "mm-vlm"
+          ]
+        },
+        {
+          "id": "M7.4",
+          "type": "reading",
+          "title": "OCR-free Document Understanding Transformer",
+          "resource": "paper-donut",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "mm-document"
+          ]
+        },
+        {
+          "id": "M7.5",
+          "type": "reading",
+          "title": "LayoutLMv3",
+          "resource": "paper-layoutlmv3",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "mm-document"
+          ]
+        },
+        {
+          "id": "M7.6",
+          "type": "reading",
+          "title": "Nougat: academic documents to markup",
+          "resource": "paper-nougat",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "mm-document"
+          ]
+        },
+        {
+          "id": "M7.7",
+          "type": "reading",
+          "title": "DocVQA: the benchmark",
+          "resource": "paper-docvqa",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "mm-document",
+            "eval-datasets"
+          ]
+        },
+        {
+          "id": "M7.8",
+          "type": "assignment",
+          "title": "Beat your own PDF extractor",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M7.8",
+          "skills": [
+            "mm-document"
+          ],
+          "brief": "Career Side Quests reads CVs by finding column gutters and reading inside each one — a solution you built by hand after two-column layouts spliced a sidebar label into someone's work history. Now attack the same problem with a vision-language model reading the page as an image. Build a labelled set of at least 25 real CVs and postings, including the two-column ones that broke the original, and measure both approaches on extraction accuracy, cost per document and latency. Report which wins and on which documents — the answer is very unlikely to be uniform.",
+          "checkpoints": [
+            "25+ labelled documents including known-hard layouts",
+            "both approaches measured",
+            "per-document-type breakdown reported"
+          ]
+        },
+        {
+          "id": "M7.9",
+          "type": "assignment",
+          "title": "Structured extraction that fails closed",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M7.9",
+          "skills": [
+            "mm-document"
+          ],
+          "brief": "A vision model reading a document will invent a field it cannot see, and a plausible invented salary is worse than a missing one. Apply AIE-101's schema discipline and AIE-102's verbatim-check discipline to visual extraction: every extracted value must be locatable on the page, and anything that cannot be located is discarded rather than returned. Report the rejection rate and what it catches.",
+          "checkpoints": [
+            "schema enforced on visual output",
+            "locatability check implemented",
+            "rejection rate reported with examples"
+          ]
+        },
+        {
+          "id": "M7.10",
+          "type": "assignment",
+          "title": "Where vision is the wrong tool",
+          "est_minutes": 75,
+          "tier": 2,
+          "rubric": "R-M7.10",
+          "skills": [
+            "mm-document"
+          ],
+          "brief": "Name the document types where your text pipeline should stay, and say why using your own numbers. Cost, latency and accuracy all matter here, and the fashionable answer is frequently the wrong one."
+        },
+        {
+          "id": "M7.11",
+          "type": "retention",
+          "title": "Retention: vision-language models and document extraction",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "mm-document"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M8",
+      "title": "Course project",
+      "est_minutes": 405,
+      "items": [
+        {
+          "id": "M8.1",
+          "type": "project",
+          "title": "Ship a voice loop",
+          "est_minutes": 165,
+          "tier": 3,
+          "rubric": "R-M8.1",
+          "skills": [
+            "speech-agents",
+            "speech-latency",
+            "speech-streaming"
+          ],
+          "brief": "Put a working voice interaction into one of your products, publicly reachable — LearnIndo's spoken exercises are the obvious home. Streaming in both directions, interruptible, with a measured end-to-end budget.",
+          "checkpoints": [
+            "deployed and reachable",
+            "streaming both directions",
+            "interruption working",
+            "budget measured"
+          ]
+        },
+        {
+          "id": "M8.2",
+          "type": "project",
+          "title": "The latency and accuracy report",
+          "est_minutes": 105,
+          "tier": 2,
+          "rubric": "R-M8.2",
+          "skills": [
+            "speech-asr",
+            "speech-latency"
+          ],
+          "brief": "Publish the per-hop latency budget, the code-switching benchmark from M3.5, the barge-in numbers, and what you could not fix. The code-switching results are the part a reader will not have seen anywhere else — lead with them.",
+          "checkpoints": [
+            "latency budget included",
+            "code-switching benchmark included",
+            "unfixed problems stated"
+          ]
+        },
+        {
+          "id": "M8.3",
+          "type": "project",
+          "title": "Publish",
+          "est_minutes": 75,
+          "tier": 3,
+          "rubric": "R-M8.3",
+          "skills": [
+            "speech-agents"
+          ],
+          "brief": "Publish this as the next chapter of your public engineering log — one growing site, not a sixth standalone post. The chapter must stand alone on its own page for a reader arriving cold, and must connect backwards to at least one result from an earlier chapter. Publish at a stable public URL. Release the code-switching evaluation set if and only if consent permits it; otherwise publish the methodology and the results without the audio."
+        },
+        {
+          "id": "M8.4",
+          "type": "defense",
+          "title": "Oral defense",
+          "est_minutes": 60,
+          "tier": 4,
+          "rubric": "R-M8.4",
+          "skills": [
+            "speech-agents",
+            "speech-asr"
+          ],
+          "brief": "Three unscripted questions generated from your report at defense time, answered aloud without notes. Fitting, for this course, that the defense is itself a speech interface.",
+          "sample_question_shapes": [
+            "A customer in Singapore asks whether your recommended ASR will work for their support line. Answer from your own numbers.",
+            "Your p95 end-to-end is X. Which hop, and what would you have to give up to fix it?",
+            "Your barge-in triggers on background speech. Talk me through the trade you made and who it hurts."
+          ]
+        }
+      ]
+    }
+  ],
+  "rubrics": [
+    {
+      "id": "R-M1.7",
+      "for": "M1.7",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "three systems compared on the identical audio",
+          "blocking": true
+        },
+        {
+          "check": "WER recomputes from the submitted reference and hypotheses",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The spontaneous/prepared gap is quantified",
+          "weight": 1.0,
+          "levels": {
+            "0": "Only one speech type recorded.",
+            "1": "Both recorded, not compared.",
+            "2": "Compared.",
+            "3": "Compared, with the specific disfluencies driving the gap identified."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.4",
+      "for": "M2.4",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "WER plus at least two additional measures implemented",
+          "blocking": true
+        },
+        {
+          "check": "a case where WER improves and application quality degrades is demonstrated with both numbers",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The additional measures are motivated",
+          "weight": 0.5,
+          "levels": {
+            "0": "Arbitrary.",
+            "1": "Generic.",
+            "2": "Motivated.",
+            "3": "Motivated by a failure the author observed in their own product."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The counterexample is genuine",
+          "weight": 0.5,
+          "levels": {
+            "0": "Contrived.",
+            "1": "Plausible but synthetic.",
+            "2": "Real.",
+            "3": "Real, from production audio, with the downstream consequence shown."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.5",
+      "for": "M2.5",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The taxonomy is by consequence, not linguistics",
+          "weight": 0.5,
+          "levels": {
+            "0": "Substitution/insertion/deletion.",
+            "1": "Mixed.",
+            "2": "Consequence-based.",
+            "3": "Consequence-based, with the boundary between recoverable and silently wrong defined operationally."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The silent category is taken seriously",
+          "weight": 0.5,
+          "levels": {
+            "0": "Not separated.",
+            "1": "Named.",
+            "2": "Counted.",
+            "3": "Counted, with an example that would have reached a user undetected."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.4",
+      "for": "M3.4",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "60 or more utterances across three declared conditions",
+          "blocking": true
+        },
+        {
+          "check": "transcription conventions documented before transcription",
+          "blocking": true
+        },
+        {
+          "check": "consent documented, or the set declared single-speaker",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The hard cases are actually present",
+          "weight": 0.45,
+          "levels": {
+            "0": "Clean read speech throughout.",
+            "1": "Some natural speech.",
+            "2": "Genuine code-switching present.",
+            "3": "Includes intra-phrase switches, particles, local place names and mixed-language numerals — the constructions that break systems rather than the ones that are easy to record."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Transcription decisions are explicit",
+          "weight": 0.35,
+          "levels": {
+            "0": "Undocumented.",
+            "1": "Partial.",
+            "2": "Documented.",
+            "3": "Documented with the ambiguous cases listed and the rule applied to each."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The control condition is comparable",
+          "weight": 0.2,
+          "levels": {
+            "0": "Absent.",
+            "1": "Different speaker or setting.",
+            "2": "Comparable.",
+            "3": "Comparable in speaker, recording conditions and content type, so the degradation is attributable to language rather than to audio quality."
+          }
+        }
+      ],
+      "anti_gaming": "Size is not the criterion — 60 well-chosen utterances beat 300 easy ones, and judges are told so explicitly. A set recorded entirely as prepared read speech cannot score above 1 on criterion 1 no matter how large."
+    },
+    {
+      "id": "R-M3.5",
+      "for": "M3.5",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "three or more systems run on the identical set",
+          "blocking": true
+        },
+        {
+          "check": "per-condition error rates reported, not a single aggregate",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The degradation ratio is the headline",
+          "weight": 0.5,
+          "levels": {
+            "0": "Only aggregate WER.",
+            "1": "Conditions reported separately.",
+            "2": "Ratio computed.",
+            "3": "Ratio computed per system, with which system degrades least identified as a distinct finding from which is best overall."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The recommendation is honest",
+          "weight": 0.5,
+          "levels": {
+            "0": "No recommendation.",
+            "1": "Vendor-flattering.",
+            "2": "A recommendation with reasons.",
+            "3": "A recommendation with the caveat stated as plainly as the endorsement, including where the author would not deploy any of them."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.5",
+      "for": "M4.5",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "voices and models enumerated live rather than hardcoded",
+          "blocking": true
+        },
+        {
+          "check": "quota exhaustion degrades rather than crashes",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Selection is appropriate to content",
+          "weight": 1.0,
+          "levels": {
+            "0": "One voice for everything.",
+            "1": "Manual selection.",
+            "2": "Language-matched.",
+            "3": "Language-matched using the provider's own verification data rather than assumption."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.6",
+      "for": "M4.6",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "time to first audio measured from user action, before and after",
+          "blocking": true
+        },
+        {
+          "check": "mid-sentence upstream termination handled and demonstrated",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The improvement is real and attributed",
+          "weight": 0.5,
+          "levels": {
+            "0": "Not measured.",
+            "1": "Measured once.",
+            "2": "Distributions before and after.",
+            "3": "Distributions before and after, with the streaming change isolated from other work."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The failure case is handled properly",
+          "weight": 0.5,
+          "levels": {
+            "0": "Crashes or truncates audibly.",
+            "1": "Handled crudely.",
+            "2": "Handled.",
+            "3": "Handled such that a listener cannot tell the text arrived incrementally."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.7",
+      "for": "M4.7",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The protocol controls the obvious biases",
+          "weight": 0.6,
+          "levels": {
+            "0": "Ad hoc listening.",
+            "1": "Informal.",
+            "2": "Ordered and blinded.",
+            "3": "Ordered, blinded, counterbalanced, with the same content across voices."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Weaknesses are stated",
+          "weight": 0.4,
+          "levels": {
+            "0": "Presented as definitive.",
+            "1": "Generic caveat.",
+            "2": "Weaknesses named.",
+            "3": "Weaknesses named with what a larger panel would and would not change."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.3",
+      "for": "M5.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "every hop instrumented, from user action to audible output",
+          "blocking": true
+        },
+        {
+          "check": "distributions reported per hop — a mean alone fails",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The budget is complete",
+          "weight": 0.5,
+          "levels": {
+            "0": "Model time only.",
+            "1": "Major hops.",
+            "2": "All hops.",
+            "3": "All hops including capture, transport, buffering and playback start, with the unaccounted remainder stated."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The attack plan follows the data",
+          "weight": 0.5,
+          "levels": {
+            "0": "Attacks the model by default.",
+            "1": "Attacks the largest number.",
+            "2": "Reasoned.",
+            "3": "Reasoned by achievable reduction against effort, with the cost of the change estimated."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.4",
+      "for": "M5.4",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Degradation is applied systematically",
+          "weight": 0.5,
+          "levels": {
+            "0": "Anecdotal.",
+            "1": "One condition.",
+            "2": "Several levels.",
+            "3": "Latency, jitter and loss varied independently."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The unusable threshold is expressible to a customer",
+          "weight": 0.5,
+          "levels": {
+            "0": "Not stated.",
+            "1": "Technical only.",
+            "2": "Stated.",
+            "3": "Stated in terms a customer could check on their own network without instrumentation."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M6.3",
+      "for": "M6.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "stop latency measured from onset of user speech",
+          "blocking": true
+        },
+        {
+          "check": "false-interruption cases tested and reported",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Recovery is coherent",
+          "weight": 0.4,
+          "levels": {
+            "0": "Conversation breaks.",
+            "1": "Restarts awkwardly.",
+            "2": "Continues.",
+            "3": "Continues with the interrupted content accounted for rather than silently dropped."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "False interruptions are handled with a stated trade",
+          "weight": 0.6,
+          "levels": {
+            "0": "Any sound interrupts.",
+            "1": "Threshold tuned by feel.",
+            "2": "Tested against non-speech.",
+            "3": "Tested, with the precision-recall trade named and the choice defended in terms of which error annoys users more."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M6.4",
+      "for": "M6.4",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Both thresholds are measured",
+          "weight": 0.5,
+          "levels": {
+            "0": "One value chosen.",
+            "1": "Range guessed.",
+            "2": "Both measured.",
+            "3": "Both measured with the method described and the chosen value justified."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The language-dependence is reasoned, not asserted",
+          "weight": 0.5,
+          "levels": {
+            "0": "Ignored.",
+            "1": "Asserted.",
+            "2": "Explained.",
+            "3": "Explained with reference to what the author can observe in their own recordings from M3.4."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M8.1",
+      "for": "M8.1",
+      "tier": 3,
+      "machine_checks": [
+        {
+          "check": "publicly reachable",
+          "blocking": true
+        },
+        {
+          "check": "streaming in both directions",
+          "blocking": true
+        },
+        {
+          "check": "interruption demonstrated working",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "It holds up in conversation",
+          "weight": 0.5,
+          "levels": {
+            "0": "Only survives scripted use.",
+            "1": "Fragile.",
+            "2": "Works conversationally.",
+            "3": "Works conversationally including interruption, silence and a speaker switching language mid-turn."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The budget is defensible",
+          "weight": 0.5,
+          "levels": {
+            "0": "Unmeasured.",
+            "1": "Measured once.",
+            "2": "Measured with distributions.",
+            "3": "Measured with distributions and compared against the 300–500 ms conversational window, with the gap owned."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M8.2",
+      "for": "M8.2",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The code-switching results lead",
+          "weight": 0.4,
+          "levels": {
+            "0": "Buried or omitted.",
+            "1": "Included late.",
+            "2": "Prominent.",
+            "3": "Leads, with why it is novel stated in one sentence a non-specialist would understand."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Unfixed problems are present",
+          "weight": 0.3,
+          "levels": {
+            "0": "Absent.",
+            "1": "One caveat.",
+            "2": "Listed.",
+            "3": "Listed with what each would take to fix."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Numbers traceable",
+          "weight": 0.3,
+          "levels": {
+            "0": "Unsourced.",
+            "1": "Partly.",
+            "2": "Traceable.",
+            "3": "Traceable to a harness a reader could rerun."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M8.3",
+      "for": "M8.3",
+      "tier": 3,
+      "machine_checks": [
+        {
+          "check": "stable public URL",
+          "blocking": true
+        },
+        {
+          "check": "if audio is released, consent for publication is documented; if not, methodology and results published without it",
+          "blocking": true
+        },
+        {
+          "check": "published at the same origin as previous chapters, reachable from the log index",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Reproducible without the audio",
+          "weight": 0.75,
+          "levels": {
+            "0": "Results only.",
+            "1": "Method sketched.",
+            "2": "Method described.",
+            "3": "Described such that a reader in another market could rebuild the equivalent set for their own languages."
+          }
+        },
+        {
+          "id": "clog",
+          "criterion": "Connects to the body of work",
+          "weight": 0.25,
+          "levels": {
+            "0": "Standalone post with no relation to earlier chapters.",
+            "1": "Links to an earlier chapter without using it.",
+            "2": "Builds on an earlier result.",
+            "3": "Builds on an earlier result and revises or qualifies it in light of what this course found."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M8.4",
+      "for": "M8.4",
+      "tier": 4,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Answers a regional deployment question from own data",
+          "weight": 0.4,
+          "levels": {
+            "0": "General opinions.",
+            "1": "Loosely connected.",
+            "2": "Cites own benchmark.",
+            "3": "Cites own benchmark and converts it into a recommendation with a stated confidence."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Owns a latency or accuracy shortfall",
+          "weight": 0.35,
+          "levels": {
+            "0": "Deflects to vendors.",
+            "1": "Vague.",
+            "2": "Explains the mechanism.",
+            "3": "Explains the mechanism, the fix and its cost."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Names who the system serves worst",
+          "weight": 0.25,
+          "levels": {
+            "0": "Claims it works for everyone.",
+            "1": "Generic caveat.",
+            "2": "Names a group.",
+            "3": "Names a group with the measurement that shows it, unprompted."
+          }
+        }
+      ],
+      "integrity": "Assessed from the recording and transcript. Long pauses are not penalised; reading from a prepared text is."
+    },
+    {
+      "id": "R-M7.8",
+      "for": "M7.8",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "25 or more labelled documents including known-hard layouts",
+          "blocking": true
+        },
+        {
+          "check": "accuracy, cost and latency reported for both approaches",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The hard cases are the ones that actually broke the original",
+          "weight": 0.5,
+          "levels": {
+            "0": "Clean single-column documents.",
+            "1": "Mostly easy.",
+            "2": "Includes multi-column.",
+            "3": "Includes the specific layouts that produced the original splicing bug, cited."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The verdict is per document type",
+          "weight": 0.5,
+          "levels": {
+            "0": "One aggregate number.",
+            "1": "Aggregate with a caveat.",
+            "2": "Broken down.",
+            "3": "Broken down, with a rule for routing a new document to the right pipeline."
+          }
+        }
+      ],
+      "anti_gaming": "The interesting result is a split decision. A submission concluding that the new approach wins everywhere should be checked for a labelled set that excludes the cases the old approach was built to handle."
+    },
+    {
+      "id": "R-M7.9",
+      "for": "M7.9",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "an unlocatable value is discarded, not returned with low confidence",
+          "blocking": true
+        },
+        {
+          "check": "rejection rate reported on real documents",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Locatability is checked mechanically",
+          "weight": 0.6,
+          "levels": {
+            "0": "A model judges it.",
+            "1": "Model with heuristics.",
+            "2": "Mostly deterministic.",
+            "3": "Deterministic — the value is found on the page by a check with no model in it."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The rejection rate is interpreted",
+          "weight": 0.4,
+          "levels": {
+            "0": "Not reported.",
+            "1": "Reported.",
+            "2": "With context.",
+            "3": "With a judgement on whether it indicates a model problem or an over-strict check."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M7.10",
+      "for": "M7.10",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The boundary is drawn from measurement",
+          "weight": 0.6,
+          "levels": {
+            "0": "Asserted.",
+            "1": "Intuition.",
+            "2": "Referenced to results.",
+            "3": "Drawn from M7.8's per-type breakdown with the threshold stated."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Resists the fashionable answer",
+          "weight": 0.4,
+          "levels": {
+            "0": "Vision everywhere.",
+            "1": "Vision by default.",
+            "2": "Balanced.",
+            "3": "Keeps the text pipeline where it wins and says so plainly."
+          }
+        }
+      ]
+    }
+  ],
+  "completion": {
+    "required": "All non-exempt assignments and the project submitted. Exempted items are satisfied by citing the existing artifact and are recorded as advanced standing, not as coursework.",
+    "grade_rollup": "Deterministic. Each item's tier sets its weight; panel scores enter as per-criterion values; nothing is rounded up. Computed in TypeScript, never by a model.",
+    "mastery_note": "Sets initial mastery on the five speech skills. FSRS then decays them, so the transcript reports what is currently held."
+  },
+  "multimodal_note": "Multimodal here means documents, not general vision. Image classification and object detection are a different specialisation and are not on the path to the target roles. Document understanding is, because 'can it read our contracts?' is one of the most common enterprise questions there is — and because Career Side Quests already solves a version of it by hand, which gives this module a baseline to beat rather than a toy to build.",
+  "optional_hours": 0
+}

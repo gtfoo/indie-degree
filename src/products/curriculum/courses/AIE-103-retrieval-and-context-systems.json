@@ -1,0 +1,1316 @@
+{
+  "course": "AIE-103",
+  "title": "Retrieval and Context Systems",
+  "credits": 3,
+  "est_hours": 50,
+  "spec_version": "0.1",
+  "registered": "2026-08-13",
+  "premise": "Retrieval is the default answer to most enterprise AI questions and is wrong often enough that knowing when not to use it is the differentiator. This course refuses the word RAG for as long as possible, because it welds together two separate problems — finding the right thing, and writing a good answer from it — and most broken systems are broken in only one of them.",
+  "laboratory": "Two corpora of your own, chosen because they fail differently. Carpark SG's official rate documents are dense with codes, acronyms and proper nouns — HDB and URA terminology that embeddings blur together and lexical search nails. Indie Degree's own resource corpus is prose-heavy with near-synonymous topics, where lexical search fails and embeddings shine. If a technique only helps on one of them, that is the finding.",
+  "sitting_rule": "Every item is completable in one sitting. Nothing exceeds 180 minutes, and anything over 90 declares its own checkpoints.",
+  "panel": {
+    "models": [
+      "claude-opus-5",
+      "gpt-5",
+      "gemini-flash-latest"
+    ],
+    "blind": true,
+    "blind_note": "Judges see the submission and the rubric, never each other's scores, and never the learner's self-assessment.",
+    "rubric_registered_before_submission": true,
+    "disagreement": "Scores are reported per judge and never averaged into a single number when the spread is 2 or more on any criterion.",
+    "measurement_note": "Most of this course is Tier 1 — machine-verified against a fixed query set. Where a number is claimed, the harness recomputes it from submitted outputs, and a claim that does not recompute fails before any judge reads it."
+  },
+  "modules": [
+    {
+      "id": "M1",
+      "title": "Two problems wearing one name",
+      "est_minutes": 345,
+      "items": [
+        {
+          "id": "M1.1",
+          "type": "lecture",
+          "title": "Beyond the Basics of Retrieval Augmented Generation",
+          "resource": "yt-ben-clavie-rag",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "rag-hybrid-search",
+            "rag-reranking"
+          ],
+          "brief": "Watch first. The argument that BM25 refuses to die, that reranking is the cheapest available win, and that most RAG advice is untested folklore."
+        },
+        {
+          "id": "M1.2",
+          "type": "lecture",
+          "title": "CMU Advanced NLP (10): Retrieval and RAG",
+          "resource": "cmu-anlp-retrieval",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "rag-embeddings",
+            "llm-context"
+          ],
+          "brief": "The same territory derived properly — sparse and dense retrieval from first principles, then long-context transformers as the competing answer."
+        },
+        {
+          "id": "M1.3",
+          "type": "reading",
+          "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+          "resource": "paper-rag",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "rag-embeddings"
+          ]
+        },
+        {
+          "id": "M1.4",
+          "type": "reading",
+          "title": "Bi-encoders and the embedding model landscape",
+          "resource": "sbert-bi-encoders",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "nlp-embeddings",
+            "rag-embeddings"
+          ]
+        },
+        {
+          "id": "M1.5",
+          "type": "assignment",
+          "title": "Separate the two problems",
+          "est_minutes": 75,
+          "tier": 2,
+          "rubric": "R-M1.5",
+          "skills": [
+            "rag-eval"
+          ],
+          "brief": "Take a question your own product could plausibly answer from documents. Write down, before building anything: what 'the right thing was retrieved' would mean, how you would check it without looking at the generated answer, and what a good answer from bad retrieval would look like. That last one is the trap the rest of the course exists to avoid."
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Embeddings and the limits of similarity",
+      "est_minutes": 360,
+      "items": [
+        {
+          "id": "M2.1",
+          "type": "reading",
+          "title": "Dense Passage Retrieval",
+          "resource": "paper-dpr",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "rag-embeddings"
+          ]
+        },
+        {
+          "id": "M2.2",
+          "type": "reading",
+          "title": "BEIR: zero-shot evaluation of retrieval models",
+          "resource": "paper-beir",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "rag-eval"
+          ],
+          "brief": "The paper that showed dense retrievers losing to BM25 out of domain. Read it before assuming embeddings win, because your instinct will be that they do."
+        },
+        {
+          "id": "M2.3",
+          "type": "assignment",
+          "title": "A dense baseline over both corpora",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M2.3",
+          "skills": [
+            "rag-embeddings"
+          ],
+          "brief": "Build embedding retrieval over the Carpark SG rate documents and over Indie Degree's resource corpus. Write 25 real queries per corpus with the correct document labelled first — real questions you would actually ask, not questions written to be easy. Report recall@5 and MRR for both. This is the number everything later is compared against.",
+          "checkpoints": [
+            "both corpora indexed",
+            "25 labelled queries each",
+            "recall@5 and MRR reported"
+          ]
+        },
+        {
+          "id": "M2.4",
+          "type": "assignment",
+          "title": "Find where embeddings fail",
+          "est_minutes": 90,
+          "tier": 1,
+          "rubric": "R-M2.4",
+          "skills": [
+            "rag-embeddings"
+          ],
+          "brief": "Construct ten queries your dense baseline gets wrong, and classify why. At least four must fail because the query contains an identifier, code or acronym that the embedding blurs into its neighbours. Show the retrieved results, not just the failure count."
+        },
+        {
+          "id": "M2.5",
+          "type": "retention",
+          "title": "Retention: embedding retrieval and its failure modes",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "rag-embeddings"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Chunking, measured",
+      "est_minutes": 375,
+      "items": [
+        {
+          "id": "M3.1",
+          "type": "reading",
+          "title": "Introducing Contextual Retrieval",
+          "resource": "anthropic-contextual-retrieval",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "rag-chunking"
+          ],
+          "brief": "Chunking destroys the context a chunk needed in order to be findable. This is the fix, and it comes with numbers you are going to try to reproduce."
+        },
+        {
+          "id": "M3.2",
+          "type": "reading",
+          "title": "Searching for Best Practices in RAG",
+          "resource": "paper-rag-best-practices",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "rag-chunking"
+          ]
+        },
+        {
+          "id": "M3.3",
+          "type": "assignment",
+          "title": "Four chunking strategies, one metric",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M3.3",
+          "skills": [
+            "rag-chunking"
+          ],
+          "brief": "Compare fixed-size, fixed-size with overlap, structural (by heading or record), and one strategy of your own design. Same embedding model, same query set, same everything else. Report recall@5 per strategy per corpus. Then answer the question that matters: is the winner the same on both corpora, and if not, what property of the documents decides it?",
+          "checkpoints": [
+            "four strategies implemented",
+            "held constant except chunking",
+            "per-corpus results and a stated deciding property"
+          ]
+        },
+        {
+          "id": "M3.4",
+          "type": "assignment",
+          "title": "Contextual retrieval, replicated",
+          "est_minutes": 105,
+          "tier": 1,
+          "rubric": "R-M3.4",
+          "skills": [
+            "rag-chunking"
+          ],
+          "brief": "Implement Anthropic's contextual retrieval on your winning chunking strategy: prepend model-generated context to each chunk before embedding. Report the improvement, the token cost of generating it, and whether you would pay that at your corpus size. A replication that fails to reproduce the reported gain is a full-credit outcome if the experiment is sound.",
+          "checkpoints": [
+            "contextualised chunks generated",
+            "improvement measured",
+            "cost per corpus refresh stated"
+          ]
+        },
+        {
+          "id": "M3.5",
+          "type": "retention",
+          "title": "Retention: chunking strategy and its measurement",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "rag-chunking"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Hybrid and lexical search",
+      "est_minutes": 375,
+      "items": [
+        {
+          "id": "M4.1",
+          "type": "reading",
+          "title": "Reciprocal Rank Fusion",
+          "resource": "bm25-rank-fusion",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "rag-hybrid-search"
+          ],
+          "brief": "Short, old, and still the method people reach for. Note how little it assumes."
+        },
+        {
+          "id": "M4.2",
+          "type": "reading",
+          "title": "ColBERT: late interaction",
+          "resource": "paper-colbert",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "rag-reranking"
+          ]
+        },
+        {
+          "id": "M4.3",
+          "type": "assignment",
+          "title": "Make BM25 beat your embeddings",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M4.3",
+          "skills": [
+            "rag-hybrid-search"
+          ],
+          "brief": "Implement BM25 over both corpora and run the same query sets. The claim to test is specific: on Carpark SG's rate documents, lexical search should beat your dense baseline, because the queries carry codes and official terminology. Report both, and if BM25 does not win, work out why before concluding the claim is false.",
+          "checkpoints": [
+            "BM25 implemented on both corpora",
+            "same query sets run",
+            "result reported with the winner explained"
+          ]
+        },
+        {
+          "id": "M4.4",
+          "type": "assignment",
+          "title": "Fuse them",
+          "est_minutes": 105,
+          "tier": 1,
+          "rubric": "R-M4.4",
+          "skills": [
+            "rag-hybrid-search"
+          ],
+          "brief": "Combine dense and lexical with reciprocal rank fusion. Report whether the fusion beats the better of its two inputs on each corpus — it frequently does not, and reporting that honestly is worth more than a tuned weighting that beats it on 50 queries.",
+          "checkpoints": [
+            "fusion implemented",
+            "compared against the better single method",
+            "verdict stated per corpus"
+          ]
+        },
+        {
+          "id": "M4.5",
+          "type": "retention",
+          "title": "Retention: lexical scoring and fusion",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "rag-hybrid-search"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Reranking",
+      "est_minutes": 300,
+      "items": [
+        {
+          "id": "M5.1",
+          "type": "reading",
+          "title": "Cross-encoders and rerankers",
+          "resource": "sbert-cross-encoders",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "rag-reranking"
+          ],
+          "brief": "The cross-encoder section specifically. Note why it cannot be used for first-stage retrieval, and why that is the whole design."
+        },
+        {
+          "id": "M5.2",
+          "type": "reading",
+          "title": "HyDE: zero-shot dense retrieval without relevance labels",
+          "resource": "paper-hyde",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "rag-embeddings"
+          ]
+        },
+        {
+          "id": "M5.3",
+          "type": "assignment",
+          "title": "Rerank, and pay for it",
+          "est_minutes": 120,
+          "tier": 1,
+          "rubric": "R-M5.3",
+          "skills": [
+            "rag-reranking"
+          ],
+          "brief": "Add a cross-encoder reranker over your best first-stage retriever. Report the quality gain, the added latency per query at p50 and p95, and the cost. Then state the candidate-set size at which the gain stops being worth the latency, with the measurement that shows it.",
+          "checkpoints": [
+            "reranker integrated",
+            "quality and latency both measured",
+            "break-even candidate-set size stated"
+          ]
+        },
+        {
+          "id": "M5.4",
+          "type": "assignment",
+          "title": "When reranking loses",
+          "est_minutes": 75,
+          "tier": 2,
+          "rubric": "R-M5.4",
+          "skills": [
+            "rag-reranking"
+          ],
+          "brief": "Find queries the reranker makes worse — where the correct document was in the first-stage results and reranking demoted it. Explain the pattern. Every reranker has these; a submission that finds none has not looked."
+        },
+        {
+          "id": "M5.5",
+          "type": "retention",
+          "title": "Retention: two-stage retrieval and its costs",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "rag-reranking"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M6",
+      "title": "Evaluating retrieval separately from generation",
+      "est_minutes": 330,
+      "items": [
+        {
+          "id": "M6.1",
+          "type": "reading",
+          "title": "RAGAS: automated evaluation of retrieval augmented generation",
+          "resource": "paper-ragas",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "rag-eval"
+          ]
+        },
+        {
+          "id": "M6.2",
+          "type": "reading",
+          "title": "RAGAS in practice",
+          "resource": "repo-ragas",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "rag-eval"
+          ],
+          "locator": "The metrics module — faithfulness, answer relevancy, context precision and context recall."
+        },
+        {
+          "id": "M6.3",
+          "type": "assignment",
+          "title": "Retrieval metrics that mean something",
+          "est_minutes": 120,
+          "tier": 1,
+          "rubric": "R-M6.3",
+          "skills": [
+            "rag-eval"
+          ],
+          "brief": "Build a retrieval eval that runs unattended over both corpora and reports recall@k, MRR and nDCG. Then justify which single metric you would put on a dashboard and why the other two would mislead the person reading it. Add this to the suite already running in CI from AIE-102 M6.4; a second independent harness is duplicated infrastructure, not a second skill.",
+          "checkpoints": [
+            "harness runs unattended",
+            "three metrics computed",
+            "dashboard metric chosen and justified"
+          ]
+        },
+        {
+          "id": "M6.4",
+          "type": "assignment",
+          "title": "Locate the failing half",
+          "est_minutes": 90,
+          "tier": 1,
+          "rubric": "R-M6.4",
+          "skills": [
+            "rag-eval"
+          ],
+          "brief": "Take ten cases where the final generated answer is wrong. For each, determine whether retrieval failed or generation failed, and state the evidence that decides it. Report the split. If you cannot decide for a case, that is a finding about your instrumentation."
+        },
+        {
+          "id": "M6.5",
+          "type": "retention",
+          "title": "Retention: retrieval metrics and attribution",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "rag-eval"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M7",
+      "title": "When long context replaces retrieval",
+      "est_minutes": 255,
+      "items": [
+        {
+          "id": "M7.1",
+          "type": "reading",
+          "title": "Lost in the Middle",
+          "resource": "paper-lost-in-middle",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "llm-context"
+          ],
+          "optional": true,
+          "optional_reason": "Lost in the Middle is required reading in AIE-101 M5.2. Re-read here only if the long-context argument in M7.3 does not land without it."
+        },
+        {
+          "id": "M7.2",
+          "type": "reading",
+          "title": "Retrieval Augmented Generation or Long-Context LLMs?",
+          "resource": "paper-rag-vs-longcontext",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-context"
+          ]
+        },
+        {
+          "id": "M7.3",
+          "type": "assignment",
+          "title": "The crossover point",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M7.3",
+          "skills": [
+            "rag-eval",
+            "rag-embeddings"
+          ],
+          "brief": "For one of your corpora, compare your best retrieval pipeline against simply putting the whole corpus in the context window, on the same queries. Report answer quality, cost per query and latency for both. Then state the corpus size at which your answer flips, and show the arithmetic. This is the question a customer will actually ask you, and 'it depends' is not an answer they can act on.",
+          "checkpoints": [
+            "both approaches run on the same queries",
+            "quality, cost and latency for each",
+            "crossover size derived with arithmetic shown"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M8",
+      "title": "Production retrieval",
+      "est_minutes": 330,
+      "items": [
+        {
+          "id": "M8.1",
+          "type": "reading",
+          "title": "Sensitive information disclosure",
+          "resource": "owasp-llm-top10",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "rag-access"
+          ],
+          "locator": "The sensitive-information-disclosure entry, and the excessive-agency entry alongside it."
+        },
+        {
+          "id": "M8.2",
+          "type": "assignment",
+          "title": "Retrieval that respects permissions",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M8.2",
+          "skills": [
+            "rag-access"
+          ],
+          "brief": "Every enterprise retrieval conversation reaches this question and most demos have no answer. Give your index documents with owners and visibility, then enforce that a query only ever retrieves what its caller may see - enforced at retrieval, not by filtering the answer afterwards, because a model that has read a document it should not have has already leaked it. Then prove it: query as a user who should see nothing, and show that nothing comes back.",
+          "checkpoints": [
+            "documents carry ownership and visibility",
+            "filtering happens before the model sees anything",
+            "negative case demonstrated"
+          ]
+        },
+        {
+          "id": "M8.3",
+          "type": "assignment",
+          "title": "Ingestion and staleness",
+          "est_minutes": 120,
+          "tier": 1,
+          "rubric": "R-M8.3",
+          "skills": [
+            "rag-ingestion"
+          ],
+          "brief": "Documents change. Build the ingestion path - add, update, delete - and measure how long a change takes to become visible to a query. Then answer the question a customer asks next: what does the system do when it retrieves a document that has since been superseded, and how would anyone notice?",
+          "checkpoints": [
+            "add, update and delete paths working",
+            "propagation delay measured",
+            "stale-retrieval behaviour stated"
+          ]
+        },
+        {
+          "id": "M8.4",
+          "type": "retention",
+          "title": "Retention: access control, ingestion and freshness",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "rag-access",
+            "rag-ingestion"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M9",
+      "title": "Course project",
+      "est_minutes": 390,
+      "items": [
+        {
+          "id": "M9.1",
+          "type": "project",
+          "title": "Ship retrieval into a product",
+          "est_minutes": 150,
+          "tier": 3,
+          "rubric": "R-M9.1",
+          "skills": [
+            "rag-embeddings",
+            "rag-hybrid-search",
+            "rag-reranking"
+          ],
+          "brief": "Put retrieval into one of your live products, publicly reachable. The design must follow from your own measurements rather than from defaults — if you ship dense-only, the report has to show why hybrid lost on that corpus.",
+          "checkpoints": [
+            "retrieval integrated",
+            "design traced to a measurement",
+            "deployed and reachable"
+          ]
+        },
+        {
+          "id": "M9.2",
+          "type": "project",
+          "title": "The retrieval report",
+          "est_minutes": 105,
+          "tier": 2,
+          "rubric": "R-M9.2",
+          "skills": [
+            "rag-eval"
+          ],
+          "brief": "Write up the whole sequence: baseline, chunking, lexical, fusion, reranking, and the long-context comparison. Every technique that did not help must appear with its number. A report in which everything worked is a report that was not measured.",
+          "checkpoints": [
+            "all techniques reported including failures",
+            "numbers traceable to the harness",
+            "recommendation stated"
+          ]
+        },
+        {
+          "id": "M9.3",
+          "type": "project",
+          "title": "Publish",
+          "est_minutes": 75,
+          "tier": 3,
+          "rubric": "R-M9.3",
+          "skills": [
+            "rag-eval"
+          ],
+          "brief": "Publish this as the next chapter of your public engineering log — one growing site, not a sixth standalone post. The chapter must stand alone on its own page for a reader arriving cold, and must connect backwards to at least one result from an earlier chapter. Publish at a stable public URL with the eval harness reachable, so a reader can rerun it against their own corpus."
+        },
+        {
+          "id": "M9.4",
+          "type": "defense",
+          "title": "Oral defense",
+          "est_minutes": 60,
+          "tier": 4,
+          "rubric": "R-M9.4",
+          "skills": [
+            "rag-eval",
+            "rag-hybrid-search"
+          ],
+          "brief": "Three unscripted questions generated from your report at defense time, answered aloud without notes.",
+          "sample_question_shapes": [
+            "A customer has 200 documents and wants an answer bot. From your numbers, do they need retrieval at all?",
+            "Your reranker added latency. Describe the user for whom that trade was wrong.",
+            "Which of your results do you least trust, and what would you run to check it?"
+          ]
+        }
+      ]
+    }
+  ],
+  "rubrics": [
+    {
+      "id": "R-M1.5",
+      "for": "M1.5",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Retrieval success is defined independently of the answer",
+          "weight": 0.5,
+          "levels": {
+            "0": "Defined as 'the answer was good'.",
+            "1": "Conflated in places.",
+            "2": "Separate.",
+            "3": "Separate, and checkable without reading a generated answer at all."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The good-answer-from-bad-retrieval case is taken seriously",
+          "weight": 0.5,
+          "levels": {
+            "0": "Not considered.",
+            "1": "Mentioned.",
+            "2": "Described.",
+            "3": "A concrete instance from the author's own domain, with why it would go undetected."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.3",
+      "for": "M2.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "50 labelled queries total, 25 per corpus",
+          "blocking": true
+        },
+        {
+          "check": "recall@5 and MRR recompute from submitted retrieval outputs",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Queries are realistic",
+          "weight": 0.6,
+          "levels": {
+            "0": "Written by paraphrasing the target document.",
+            "1": "Mostly paraphrases.",
+            "2": "Plausible.",
+            "3": "Queries a real user would type, including underspecified ones."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The baseline is reproducible",
+          "weight": 0.4,
+          "levels": {
+            "0": "Not runnable.",
+            "1": "Runs with manual steps.",
+            "2": "Runs.",
+            "3": "Runs unattended with the model and index parameters recorded."
+          }
+        }
+      ],
+      "anti_gaming": "Writing queries by copying phrases out of the target document inflates every number in this course and invalidates every later comparison. Judges are instructed to check a sample of queries against their targets for lexical overlap and to score criterion 1 at 0 where it is high."
+    },
+    {
+      "id": "R-M2.4",
+      "for": "M2.4",
+      "tier": 1,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Failures are diagnosed, not just collected",
+          "weight": 0.5,
+          "levels": {
+            "0": "A list of misses.",
+            "1": "Loose grouping.",
+            "2": "Categorised.",
+            "3": "Categorised with the mechanism named for each category."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The identifier-blurring cases are genuine",
+          "weight": 0.5,
+          "levels": {
+            "0": "Absent.",
+            "1": "One or two, arguable.",
+            "2": "Four, plausible.",
+            "3": "Four or more where the retrieved neighbours are visibly the semantic near-misses the mechanism predicts."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.3",
+      "for": "M3.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "four strategies run against the identical query set",
+          "blocking": true
+        },
+        {
+          "check": "embedding model and index parameters identical across strategies",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Only chunking varies",
+          "weight": 0.4,
+          "levels": {
+            "0": "Multiple variables changed.",
+            "1": "One confound.",
+            "2": "Controlled.",
+            "3": "Controlled, with what was held fixed stated explicitly."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The custom strategy is motivated",
+          "weight": 0.25,
+          "levels": {
+            "0": "A parameter tweak.",
+            "1": "Arbitrary.",
+            "2": "Motivated.",
+            "3": "Motivated by a failure observed in M2.4."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The deciding property is identified",
+          "weight": 0.35,
+          "levels": {
+            "0": "No cross-corpus comparison.",
+            "1": "Notes they differ.",
+            "2": "Offers an explanation.",
+            "3": "Names a document property that would predict the winner on a third corpus."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.4",
+      "for": "M3.4",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "improvement recomputes from submitted outputs",
+          "blocking": true
+        },
+        {
+          "check": "generation cost reported in tokens",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The replication is sound",
+          "weight": 0.5,
+          "levels": {
+            "0": "Method deviates without comment.",
+            "1": "Deviates, noted.",
+            "2": "Faithful.",
+            "3": "Faithful, with deviations forced by the corpus stated and justified."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The cost verdict is real",
+          "weight": 0.5,
+          "levels": {
+            "0": "Cost ignored.",
+            "1": "Cost stated.",
+            "2": "Cost weighed against gain.",
+            "3": "Weighed at a stated corpus size and refresh cadence, with a decision."
+          }
+        }
+      ],
+      "anti_gaming": "A failed replication scores full marks if the experiment is sound. Judges are instructed that matching the published number is not a criterion, and that a submission suspiciously close to it should be checked for the query-overlap problem in R-M2.3."
+    },
+    {
+      "id": "R-M4.3",
+      "for": "M4.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "BM25 run over both corpora with the same query sets as M2.3",
+          "blocking": true
+        },
+        {
+          "check": "results recompute from submitted outputs",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The comparison is like-for-like",
+          "weight": 0.5,
+          "levels": {
+            "0": "Different queries or documents.",
+            "1": "Minor drift.",
+            "2": "Matched.",
+            "3": "Matched, with tokenisation and preprocessing differences acknowledged as a limitation."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The result is explained, whichever way it went",
+          "weight": 0.5,
+          "levels": {
+            "0": "Reported without explanation.",
+            "1": "Restates the numbers.",
+            "2": "Explains.",
+            "3": "Explains with reference to specific queries and what each method matched on."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.4",
+      "for": "M4.4",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "fusion compared against the stronger of its two inputs, not against the weaker",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The honest baseline is used",
+          "weight": 0.6,
+          "levels": {
+            "0": "Compared only against the weaker input.",
+            "1": "Ambiguous.",
+            "2": "Compared correctly.",
+            "3": "Compared correctly, and a fusion that loses is reported as losing."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Tuning is disclosed",
+          "weight": 0.4,
+          "levels": {
+            "0": "Weights tuned on the eval set, undisclosed.",
+            "1": "Tuned, unclear where.",
+            "2": "Disclosed.",
+            "3": "Tuned on a held-out split, with the split described."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.3",
+      "for": "M5.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "p50 and p95 latency reported",
+          "blocking": true
+        },
+        {
+          "check": "quality gain recomputes from submitted outputs",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Latency is measured, not estimated",
+          "weight": 0.4,
+          "levels": {
+            "0": "Estimated.",
+            "1": "Single measurement.",
+            "2": "Distribution over a run.",
+            "3": "Distribution, with the candidate-set size it depends on varied."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The break-even point is derived",
+          "weight": 0.6,
+          "levels": {
+            "0": "Not attempted.",
+            "1": "Asserted.",
+            "2": "Derived roughly.",
+            "3": "Derived from the measured curve, with the user-facing latency budget it assumes stated."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.4",
+      "for": "M5.4",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Genuine demotions found",
+          "weight": 0.5,
+          "levels": {
+            "0": "None found, no evidence of looking.",
+            "1": "One.",
+            "2": "Several.",
+            "3": "Several, with the first-stage rank and post-rerank rank shown for each."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "A pattern is identified",
+          "weight": 0.5,
+          "levels": {
+            "0": "Cases listed only.",
+            "1": "Weak pattern.",
+            "2": "Plausible pattern.",
+            "3": "A pattern stated as a prediction that could be tested on new queries."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M6.3",
+      "for": "M6.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "harness runs unattended over both corpora",
+          "blocking": true
+        },
+        {
+          "check": "recall@k, MRR and nDCG all present",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Metrics implemented correctly",
+          "weight": 0.5,
+          "levels": {
+            "0": "At least one is wrong.",
+            "1": "Correct but untested.",
+            "2": "Correct.",
+            "3": "Correct and unit-tested against hand-computed cases."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The dashboard choice is defended",
+          "weight": 0.5,
+          "levels": {
+            "0": "Not chosen.",
+            "1": "Chosen arbitrarily.",
+            "2": "Chosen with reasons.",
+            "3": "Chosen with a specific way each rejected metric would mislead this product's reader."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M6.4",
+      "for": "M6.4",
+      "tier": 1,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Attribution is evidenced",
+          "weight": 0.6,
+          "levels": {
+            "0": "Asserted.",
+            "1": "Plausible.",
+            "2": "Evidenced for most.",
+            "3": "Evidenced for all, by showing what was retrieved alongside what was answered."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Undecidable cases are reported as such",
+          "weight": 0.4,
+          "levels": {
+            "0": "Every case forced into a bucket.",
+            "1": "Some hedging.",
+            "2": "Undecidables marked.",
+            "3": "Undecidables marked, with the instrumentation change that would resolve them."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M7.3",
+      "for": "M7.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "both approaches run on the identical query set",
+          "blocking": true
+        },
+        {
+          "check": "cost per query reported in tokens and currency",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The comparison is fair to long context",
+          "weight": 0.35,
+          "levels": {
+            "0": "Long context handicapped by a poor prompt.",
+            "1": "Unclear.",
+            "2": "Fair.",
+            "3": "Fair, with the long-context prompt iterated as much as the retrieval pipeline was."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The crossover is derived, not guessed",
+          "weight": 0.4,
+          "levels": {
+            "0": "Asserted.",
+            "1": "Rough estimate.",
+            "2": "Derived.",
+            "3": "Derived with arithmetic shown and the assumptions that would move it named."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Answerable to a customer",
+          "weight": 0.25,
+          "levels": {
+            "0": "'It depends'.",
+            "1": "Hedged.",
+            "2": "A recommendation.",
+            "3": "A recommendation with the threshold and the conditions under which it inverts."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M9.1",
+      "for": "M9.1",
+      "tier": 3,
+      "machine_checks": [
+        {
+          "check": "publicly reachable",
+          "blocking": true
+        },
+        {
+          "check": "retrieval config matches what the report recommends",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The design follows the measurements",
+          "weight": 0.6,
+          "levels": {
+            "0": "Defaults, unexamined.",
+            "1": "Partly justified.",
+            "2": "Justified.",
+            "3": "Every component traceable to a specific result, including the ones deliberately left out."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "It survives a stranger",
+          "weight": 0.4,
+          "levels": {
+            "0": "Breaks on unfamiliar queries.",
+            "1": "Fragile.",
+            "2": "Works.",
+            "3": "Works, with a sensible answer when nothing relevant is retrieved."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M9.2",
+      "for": "M9.2",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Negative results are present",
+          "weight": 0.5,
+          "levels": {
+            "0": "Only successes.",
+            "1": "One failure mentioned.",
+            "2": "Failures reported.",
+            "3": "Every technique tried appears with its number, including the ones abandoned."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Numbers are traceable",
+          "weight": 0.5,
+          "levels": {
+            "0": "Unsourced.",
+            "1": "Partially.",
+            "2": "Traceable.",
+            "3": "Traceable to a harness run a reader could repeat."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M9.3",
+      "for": "M9.3",
+      "tier": 3,
+      "machine_checks": [
+        {
+          "check": "stable public URL",
+          "blocking": true
+        },
+        {
+          "check": "eval harness reachable and runnable against a different corpus",
+          "blocking": true
+        },
+        {
+          "check": "published at the same origin as previous chapters, reachable from the log index",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Reusable by a reader",
+          "weight": 0.75,
+          "levels": {
+            "0": "Read-only prose.",
+            "1": "Code shown but not runnable.",
+            "2": "Runnable with effort.",
+            "3": "A reader could point it at their own documents and get numbers."
+          }
+        },
+        {
+          "id": "clog",
+          "criterion": "Connects to the body of work",
+          "weight": 0.25,
+          "levels": {
+            "0": "Standalone post with no relation to earlier chapters.",
+            "1": "Links to an earlier chapter without using it.",
+            "2": "Builds on an earlier result.",
+            "3": "Builds on an earlier result and revises or qualifies it in light of what this course found."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M9.4",
+      "for": "M9.4",
+      "tier": 4,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Answers from the measurements",
+          "weight": 0.4,
+          "levels": {
+            "0": "General RAG opinions.",
+            "1": "Loosely connected.",
+            "2": "Cites own results.",
+            "3": "Cites own results and their limits without being prompted."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Reasons about a case not in the report",
+          "weight": 0.35,
+          "levels": {
+            "0": "Recites.",
+            "1": "Paraphrases.",
+            "2": "Extends.",
+            "3": "Reasons correctly about a corpus unlike either of their own."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Uncertainty is placed correctly",
+          "weight": 0.25,
+          "levels": {
+            "0": "Uniformly confident.",
+            "1": "Uniformly hedged.",
+            "2": "Some calibration.",
+            "3": "Confident where measured, uncertain where extrapolating, and says which is which."
+          }
+        }
+      ],
+      "integrity": "Assessed from the recording and transcript. Long pauses are not penalised; reading from a prepared text is."
+    },
+    {
+      "id": "R-M8.2",
+      "for": "M8.2",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "filtering applied before retrieval results reach the model",
+          "blocking": true
+        },
+        {
+          "check": "a zero-visibility caller retrieves nothing",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Enforcement is at the right layer",
+          "weight": 0.6,
+          "levels": {
+            "0": "The model is asked not to reveal it.",
+            "1": "Post-filtered from the answer.",
+            "2": "Filtered at retrieval.",
+            "3": "Filtered at retrieval, and the index cannot return an unauthorised document to that caller."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The negative case is convincing",
+          "weight": 0.4,
+          "levels": {
+            "0": "Not tested.",
+            "1": "One case.",
+            "2": "Several.",
+            "3": "Includes a document semantically near-identical to one the caller may see."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M8.3",
+      "for": "M8.3",
+      "tier": 1,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "All three mutations handled",
+          "weight": 0.5,
+          "levels": {
+            "0": "Add only.",
+            "1": "Add and update.",
+            "2": "All three.",
+            "3": "All three, with deletion shown to remove the vector rather than merely hide it."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Staleness is faced",
+          "weight": 0.5,
+          "levels": {
+            "0": "Not considered.",
+            "1": "Acknowledged.",
+            "2": "Detected.",
+            "3": "Detected, with what the user sees and how the system signals it."
+          }
+        }
+      ]
+    }
+  ],
+  "completion": {
+    "required": "All assignments and the project submitted. Readings and lectures are tier 0 and are tracked but never counted toward mastery.",
+    "grade_rollup": "Deterministic. Each item's tier sets its weight; panel scores enter as per-criterion values; nothing is rounded up. Computed in TypeScript, never by a model.",
+    "mastery_note": "Sets initial mastery on the six retrieval skills. FSRS then decays them, so the transcript reports what is currently held."
+  },
+  "optional_hours": 1
+}

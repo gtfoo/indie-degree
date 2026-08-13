@@ -1,0 +1,1417 @@
+{
+  "course": "AIE-102",
+  "title": "Evaluation and Measurement",
+  "credits": 4,
+  "est_hours": 66,
+  "spec_version": "0.1",
+  "registered": "2026-08-12",
+  "premise": "You have shipped four LLM products and cannot currently answer, with a number, whether any of them is any good. This course fixes that, using those products as the laboratory. Nothing here is a toy dataset.",
+  "sitting_rule": "Every item is completable in one sitting. Nothing exceeds 180 minutes, and anything over 90 declares its own checkpoints. Pacing is irregular by design, so an item must never require yesterday's working memory to resume.",
+  "panel": {
+    "models": [
+      "claude-opus-5",
+      "gpt-5",
+      "gemini-flash-latest"
+    ],
+    "blind": true,
+    "blind_note": "Judges see the submission and the rubric, never each other's scores, and never the learner's self-assessment.",
+    "rubric_registered_before_submission": true,
+    "disagreement": "Scores are reported per judge and never averaged into a single number when the spread is 2 or more on any criterion. A wide spread is displayed on the transcript as a wide spread — it is information about the assessment's confidence, not noise to be smoothed away.",
+    "conflict_of_interest": "The panel that grades this course is the same mechanism the course teaches the learner to distrust. That is deliberate: assignment A3.2 requires measuring the biases of a judge the learner builds, and A4.2 requires calibrating one against human labels. If the panel here is uncalibrated, the coursework should be able to demonstrate it — and a submission that does so earns credit rather than losing it."
+  },
+  "modules": [
+    {
+      "id": "M1",
+      "title": "What an eval is, and what it is not",
+      "est_minutes": 400,
+      "items": [
+        {
+          "id": "M1.0",
+          "type": "lecture",
+          "title": "Why AI evals are the hottest new skill for product builders",
+          "resource": "yt-evals-hamel-shreya",
+          "est_minutes": 100,
+          "tier": 0,
+          "skills": [
+            "eval-design"
+          ],
+          "brief": "Watch before reading anything. Hamel and Shreya work real examples end to end; the readings that follow are the detail underneath this."
+        },
+        {
+          "id": "M1.1",
+          "type": "reading",
+          "title": "Your AI Product Needs Evals",
+          "resource": "hamel-evals",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "eval-design"
+          ]
+        },
+        {
+          "id": "M1.2",
+          "type": "reading",
+          "title": "Task-Specific LLM Evals that Do & Don't Work",
+          "resource": "eugene-yan-evals",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "eval-design"
+          ]
+        },
+        {
+          "id": "M1.3",
+          "type": "reading",
+          "title": "Evaluation chapters",
+          "resource": "book-ai-engineering",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "eval-design"
+          ],
+          "locator": "The two evaluation chapters — methodology first, then evaluating a system end to end."
+        },
+        {
+          "id": "M1.4",
+          "type": "reading",
+          "title": "Extrinsic Hallucinations in LLMs",
+          "resource": "lilian-weng-hallucination",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-failure-modes"
+          ]
+        },
+        {
+          "id": "M1.5",
+          "type": "assignment",
+          "title": "The question you cannot answer",
+          "est_minutes": 45,
+          "tier": 2,
+          "rubric": "R-M1.5",
+          "skills": [
+            "eval-design"
+          ],
+          "brief": "For each of your four shipped products, state in one paragraph: the single question an eval would answer, why that question matters to a user, and what specifically stops you answering it today. Then rank the four by how much the answer would change what you build next. No code."
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Error analysis and the first eval set",
+      "est_minutes": 540,
+      "items": [
+        {
+          "id": "M2.0",
+          "type": "lecture",
+          "title": "How to Build and Evaluate AI systems in the Age of LLMs",
+          "resource": "yt-hugo-build-evaluate",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "eval-design"
+          ]
+        },
+        {
+          "id": "M2.4",
+          "type": "assignment",
+          "title": "Error analysis on 1 Percent More Fluent",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M2.4",
+          "skills": [
+            "eval-design"
+          ],
+          "brief": "Collect 50 real generations from 1 Percent More Fluent — actual outputs, not ones you produce for this exercise. Open-code every failure you can see without a predefined taxonomy. Then group the codes into a taxonomy and report the frequency of each category. Deliverable: the 50 annotated samples plus a one-page taxonomy with counts.",
+          "checkpoints": [
+            "50 samples collected",
+            "open coding done",
+            "taxonomy built and counted"
+          ]
+        },
+        {
+          "id": "M2.5",
+          "type": "assignment",
+          "title": "A gold eval set for evidence extraction",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.5",
+          "skills": [
+            "eval-datasets"
+          ],
+          "brief": "Build a 30-case gold set for Career Side Quests' evidence-extraction stage. Each case: an input document excerpt, a requirement, and the correct extracted evidence with its verbatim span. Include at least 6 cases where the correct answer is 'no evidence exists' — a set with no negatives measures nothing. Machine-checkable: the harness must run it unattended.",
+          "checkpoints": [
+            "24 positive cases",
+            "6+ negative cases",
+            "harness runs green"
+          ]
+        },
+        {
+          "id": "M2.6",
+          "type": "retention",
+          "title": "Retention: eval vocabulary and error-analysis method",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "eval-design",
+            "eval-datasets"
+          ],
+          "fsrs": true
+        },
+        {
+          "id": "M2.7",
+          "type": "assignment",
+          "title": "What your error analysis missed",
+          "est_minutes": 30,
+          "tier": 2,
+          "rubric": "R-M2.7",
+          "skills": [
+            "eval-design"
+          ],
+          "brief": "Return to M2.4 after building M2.5. Name at least two failure categories your taxonomy missed and explain what blinded you to them. Honesty here is the graded property; a submission claiming nothing was missed must argue the case and will be judged sceptically."
+        },
+        {
+          "id": "M2.8",
+          "type": "reading",
+          "title": "LLM Evals: Everything You Need to Know",
+          "resource": "hamel-evals-faq",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "eval-design",
+            "eval-datasets"
+          ],
+          "brief": "Skim as reference, then return to it whenever a decision in M2.5 feels arbitrary."
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "LLM-as-judge and its pathologies",
+      "est_minutes": 840,
+      "items": [
+        {
+          "id": "M3.0",
+          "type": "lecture",
+          "title": "LLMOps (LLM Bootcamp)",
+          "resource": "fsdl-llmops",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "eval-llm-judge",
+            "eval-regression"
+          ],
+          "brief": "Evaluating and comparing models, prompt management, and test-driven development for LLMs."
+        },
+        {
+          "id": "M3.1",
+          "type": "reading",
+          "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+          "resource": "paper-llm-as-judge",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": [
+            "eval-llm-judge"
+          ]
+        },
+        {
+          "id": "M3.2",
+          "type": "reading",
+          "title": "G-Eval",
+          "resource": "paper-g-eval",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "eval-llm-judge"
+          ]
+        },
+        {
+          "id": "M3.3",
+          "type": "reading",
+          "title": "Creating an LLM-as-a-Judge That Drives Business Results",
+          "resource": "hamel-llm-judge",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "eval-llm-judge"
+          ]
+        },
+        {
+          "id": "M3.4",
+          "type": "reading",
+          "title": "Length-Controlled AlpacaEval",
+          "resource": "paper-length-controlled-alpacaeval",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "eval-llm-judge",
+            "eval-stat"
+          ]
+        },
+        {
+          "id": "M3.5",
+          "type": "reading",
+          "title": "Two judge implementations, read side by side",
+          "resource": "repo-inspect-ai",
+          "est_minutes": 75,
+          "tier": 0,
+          "skills": [
+            "eval-llm-judge"
+          ],
+          "brief": "Read the scorer abstractions in inspect_ai and in deepeval. Note where they disagree about what a judge is.",
+          "locator": "src/inspect_ai/scorer/ — read the scorer protocol before any concrete scorer."
+        },
+        {
+          "id": "M3.7",
+          "type": "assignment",
+          "title": "Build a judge, version one",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M3.7",
+          "skills": [
+            "eval-llm-judge"
+          ],
+          "brief": "Build a judge that scores, for Career Side Quests, whether a cited quote genuinely supports the requirement it was attached to. Run it over your M2.5 gold set and report accuracy against the gold labels. Version one is expected to be mediocre; report the number you actually got.",
+          "checkpoints": [
+            "judge prompt drafted",
+            "runs over gold set",
+            "accuracy computed against gold labels"
+          ]
+        },
+        {
+          "id": "M3.8",
+          "type": "assignment",
+          "title": "Measure your own judge's biases",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M3.8",
+          "skills": [
+            "eval-llm-judge",
+            "eval-stat"
+          ],
+          "brief": "Measure three biases in the judge you just built, each with a controlled experiment and a number: position bias (swap the order of paired candidates), verbosity bias (pad a correct answer with irrelevant but true text), and self-enhancement bias (compare its scoring of output from its own model family against another's). Report effect sizes, not impressions. A finding of 'no measurable bias' requires showing the experiment had the power to detect one.",
+          "checkpoints": [
+            "position experiment run",
+            "verbosity experiment run",
+            "self-enhancement experiment run"
+          ]
+        },
+        {
+          "id": "M3.9",
+          "type": "retention",
+          "title": "Retention: named judge pathologies and their controls",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "eval-llm-judge"
+          ],
+          "fsrs": true
+        },
+        {
+          "id": "M3.10",
+          "type": "reading",
+          "title": "Am I More Pointwise or Pairwise? Revealing Position Bias in Rubric-Based LLM-as-a-Judge",
+          "resource": "paper-position-bias-rubric-judge",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "eval-llm-judge",
+            "eval-stat"
+          ],
+          "brief": "Read immediately before M3.8 — it is the experiment you are about to run, done properly."
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Calibration against human judgement",
+      "est_minutes": 660,
+      "items": [
+        {
+          "id": "M4.0",
+          "type": "reading",
+          "title": "Who Validates the Validators? Aligning LLM-Assisted Evaluation with Human Preferences",
+          "resource": "paper-who-validates-validators",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "eval-llm-judge",
+            "eval-human-calibration"
+          ],
+          "brief": "The criteria you think you want are not the criteria you apply — they drift as you grade. This is the paper the whole module is built on."
+        },
+        {
+          "id": "M4.1",
+          "type": "reading",
+          "title": "Chatbot Arena: human preference at scale",
+          "resource": "paper-chatbot-arena",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "eval-human-calibration"
+          ]
+        },
+        {
+          "id": "M4.2",
+          "type": "reading",
+          "title": "Inter-rater agreement",
+          "resource": "sklearn-cohen-kappa",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "eval-human-calibration",
+            "eval-stat"
+          ],
+          "brief": "Understand why raw agreement percentage is misleading and what kappa corrects for."
+        },
+        {
+          "id": "M4.3",
+          "type": "assignment",
+          "title": "Label fifty cases yourself, blind",
+          "est_minutes": 120,
+          "tier": 3,
+          "rubric": "R-M4.3",
+          "skills": [
+            "eval-human-calibration"
+          ],
+          "brief": "Hand-label 50 cases for the same judgement your M3.7 judge makes. Do this before looking at any judge output — the labels are the reference, and a reference contaminated by the thing it measures is worthless. Record your labelling protocol as you go, including every rule you invent mid-way, because those are where your own inconsistency lives.",
+          "checkpoints": [
+            "protocol written before labelling",
+            "50 labels done",
+            "mid-way rule changes recorded"
+          ]
+        },
+        {
+          "id": "M4.4",
+          "type": "assignment",
+          "title": "Calibrate to threshold, and show the trajectory",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M4.4",
+          "skills": [
+            "eval-human-calibration",
+            "eval-stat"
+          ],
+          "brief": "Compute Cohen's kappa between your judge and your labels. Iterate the judge's rubric until kappa exceeds 0.6, or until you can argue that it cannot be reached and why. Report every iteration's kappa, including the ones that made it worse. The trajectory is the deliverable; the final number alone is not.",
+          "checkpoints": [
+            "kappa computed for v1",
+            "three iterations logged",
+            "threshold reached or argued impossible"
+          ]
+        },
+        {
+          "id": "M4.5",
+          "type": "assignment",
+          "title": "The disagreement that mattered",
+          "est_minutes": 90,
+          "tier": 2,
+          "rubric": "R-M4.5",
+          "skills": [
+            "eval-human-calibration"
+          ],
+          "brief": "Find the case where your judge and you disagreed most sharply. Argue both sides, then say who was right and why. If it was the judge, say so plainly — that is the more interesting outcome and it is graded no lower."
+        },
+        {
+          "id": "M4.6",
+          "type": "retention",
+          "title": "Retention: calibration and agreement statistics",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "eval-human-calibration"
+          ],
+          "fsrs": true
+        },
+        {
+          "id": "M4.7",
+          "type": "assignment",
+          "title": "Re-grade your own advanced standing",
+          "est_minutes": 60,
+          "tier": 2,
+          "rubric": "R-M4.7",
+          "skills": [
+            "eval-design",
+            "eval-human-calibration"
+          ],
+          "brief": "Apply what you now know to the advanced-standing award this programme granted you before you started. Was eval-design at level 2 defensible? Submit a revised assessment with reasoning. Arguing your own credit downward is a valid and fully-credited outcome."
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Is the difference real?",
+      "est_minutes": 510,
+      "items": [
+        {
+          "id": "M5.0",
+          "type": "reading",
+          "title": "Judging the Judges: Bias Mitigation Strategies in LLM-as-a-Judge Pipelines",
+          "resource": "paper-judging-the-judges",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "eval-llm-judge"
+          ]
+        },
+        {
+          "id": "M5.1",
+          "type": "reading",
+          "title": "Bootstrap confidence intervals",
+          "resource": "scipy-bootstrap",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "eval-stat"
+          ]
+        },
+        {
+          "id": "M5.2",
+          "type": "reading",
+          "title": "Self-consistency and sampling variance",
+          "resource": "paper-self-consistency",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "eval-stat"
+          ],
+          "optional": true,
+          "optional_reason": "Self-Consistency is required reading in AIE-101 M2.5. Re-read here only for the sampling-variance angle, which is what M5.3 actually leans on."
+        },
+        {
+          "id": "M5.3",
+          "type": "assignment",
+          "title": "An interval, not a number",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M5.3",
+          "skills": [
+            "eval-stat"
+          ],
+          "brief": "Take two prompt versions of any Career Side Quests stage. Score both on your gold set, bootstrap the difference, and report a 95% confidence interval. Then answer the only question that matters: would you ship version two? Justify the answer from the interval, including the case where the interval straddles zero.",
+          "checkpoints": [
+            "both versions scored",
+            "bootstrap run",
+            "ship decision written"
+          ]
+        },
+        {
+          "id": "M5.4",
+          "type": "assignment",
+          "title": "How many cases do you actually need?",
+          "est_minutes": 90,
+          "tier": 1,
+          "rubric": "R-M5.4",
+          "skills": [
+            "eval-stat"
+          ],
+          "brief": "Determine how many eval cases you need to reliably detect a 5-percentage-point difference at your observed variance. Then state honestly whether your 30-case gold set from M2.5 is large enough, and what you would do about it under a real deadline."
+        },
+        {
+          "id": "M5.5",
+          "type": "retention",
+          "title": "Retention: intervals, power, and variance",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "eval-stat"
+          ],
+          "fsrs": true
+        },
+        {
+          "id": "M5.6",
+          "type": "assignment",
+          "title": "Rerun M3.7 with intervals",
+          "est_minutes": 105,
+          "tier": 1,
+          "rubric": "R-M5.6",
+          "skills": [
+            "eval-stat",
+            "eval-llm-judge"
+          ],
+          "brief": "Return to the accuracy number you reported in M3.7 and restate it as an interval. Then say whether your earlier conclusion survives.",
+          "checkpoints": [
+            "interval computed",
+            "prior conclusion re-examined"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "M6",
+      "title": "Regression testing and CI",
+      "est_minutes": 585,
+      "items": [
+        {
+          "id": "M6.0",
+          "type": "lecture",
+          "title": "Escaping Proof-of-Concept Purgatory: Building Robust LLM Powered Applications",
+          "resource": "yt-hugo-poc-purgatory",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "eval-regression",
+            "eval-observability"
+          ]
+        },
+        {
+          "id": "M6.1",
+          "type": "reading",
+          "title": "promptfoo: configuration and assertions",
+          "resource": "repo-promptfoo",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "eval-regression"
+          ],
+          "locator": "site/docs/configuration/ — the assertion types are the part that matters."
+        },
+        {
+          "id": "M6.2",
+          "type": "reading",
+          "title": "Monitoring and continual learning chapters",
+          "resource": "book-designing-ml-systems",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "eval-regression",
+            "eval-observability"
+          ],
+          "locator": "The monitoring and continual-learning chapters."
+        },
+        {
+          "id": "M6.3",
+          "type": "reading",
+          "title": "Tracing in production",
+          "resource": "repo-langfuse",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "eval-observability"
+          ],
+          "locator": "The tracing quickstart, then the span and generation model."
+        },
+        {
+          "id": "M6.4",
+          "type": "assignment",
+          "title": "Evals in CI",
+          "est_minutes": 180,
+          "tier": 3,
+          "rubric": "R-M6.4",
+          "skills": [
+            "eval-regression"
+          ],
+          "brief": "Wire your gold set into the gtfoo repository as a runnable eval suite, executing in GitHub Actions. It must produce a pass/fail and a report artifact. Cost control is part of the assignment: state what a run costs and how you keep it from running on every commit.",
+          "checkpoints": [
+            "suite runs locally",
+            "runs in Actions",
+            "cost per run documented"
+          ]
+        },
+        {
+          "id": "M6.5",
+          "type": "assignment",
+          "title": "Break it on purpose",
+          "est_minutes": 60,
+          "tier": 1,
+          "rubric": "R-M6.5",
+          "skills": [
+            "eval-regression"
+          ],
+          "brief": "Introduce a deliberate regression into a prompt and prove the build fails. Include the failing run's link. An eval suite that has never failed is untested infrastructure."
+        },
+        {
+          "id": "M6.6",
+          "type": "retention",
+          "title": "Retention: regression and observability practice",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "eval-regression",
+            "eval-observability"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M7",
+      "title": "Course project",
+      "est_minutes": 480,
+      "items": [
+        {
+          "id": "M7.1a",
+          "type": "project",
+          "title": "Evaluation report: methodology and eval sets",
+          "est_minutes": 150,
+          "tier": 2,
+          "rubric": "R-M7.1a",
+          "skills": [
+            "eval-design",
+            "eval-datasets"
+          ],
+          "brief": "Draft the methodology section of a public evaluation report for either Career Side Quests or 1 Percent More Fluent: the questions asked, the eval sets, how they were built, and how the judge was calibrated. Written so a stranger with the repository could rerun it.",
+          "checkpoints": [
+            "questions stated",
+            "eval sets described",
+            "calibration described"
+          ]
+        },
+        {
+          "id": "M7.1b",
+          "type": "project",
+          "title": "Evaluation report: results, intervals, and the unflattering finding",
+          "est_minutes": 150,
+          "tier": 2,
+          "rubric": "R-M7.1b",
+          "skills": [
+            "eval-stat",
+            "eval-llm-judge",
+            "eval-human-calibration"
+          ],
+          "brief": "Compute and write up the results: judge biases measured, kappa against your labels, every comparative claim carrying an interval, and at least one finding unflattering to the product, quantified and not explained away.",
+          "checkpoints": [
+            "results computed",
+            "intervals attached",
+            "unflattering finding written"
+          ]
+        },
+        {
+          "id": "M7.1c",
+          "type": "project",
+          "title": "Evaluation report: publish",
+          "est_minutes": 120,
+          "tier": 3,
+          "rubric": "R-M7.1c",
+          "skills": [
+            "eval-design",
+            "eval-regression"
+          ],
+          "brief": "Publish this as the next chapter of your public engineering log — one growing site, not a sixth standalone post. The chapter must stand alone on its own page for a reader arriving cold, and must connect backwards to at least one result from an earlier chapter. Edit to length, state the limitations you know about, and publish at a stable public URL. A hiring manager must reach the finding and its consequence within the first screen.",
+          "checkpoints": [
+            "limitations written",
+            "edited for length",
+            "published"
+          ]
+        },
+        {
+          "id": "M7.2",
+          "type": "defense",
+          "title": "Oral defense",
+          "est_minutes": 60,
+          "tier": 4,
+          "rubric": "R-M7.2",
+          "skills": [
+            "eval-design",
+            "eval-stat",
+            "eval-llm-judge"
+          ],
+          "brief": "Three unscripted questions on your own report, answered aloud without preparation or notes. Questions are generated from the submitted report at defense time and are not shown in advance. Recorded, transcribed, and assessed on whether you understand what you built — including whether you can say 'I don't know' about the right things.",
+          "sample_question_shapes": [
+            "Your kappa is X. Explain to a customer why that number is or is not good enough to ship on.",
+            "Name the strongest argument that your headline result is an artifact of your eval set rather than a property of the product.",
+            "You reported an unflattering finding. What would you have to see to conclude it was wrong?"
+          ]
+        }
+      ]
+    }
+  ],
+  "rubrics": [
+    {
+      "id": "R-M1.5",
+      "for": "M1.5",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The question is answerable",
+          "weight": 0.4,
+          "levels": {
+            "0": "Vague aspiration ('is it good?').",
+            "1": "A question, but not one an experiment could settle.",
+            "2": "Answerable in principle; the measurement is unclear.",
+            "3": "Answerable, with the shape of the measurement implied."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The obstacle is named specifically",
+          "weight": 0.3,
+          "levels": {
+            "0": "No obstacle stated.",
+            "1": "Generic ('no time').",
+            "2": "A real obstacle, loosely described.",
+            "3": "A specific missing thing — no labels, no ground truth, no logging of the relevant field."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The ranking is justified by consequence",
+          "weight": 0.3,
+          "levels": {
+            "0": "No ranking.",
+            "1": "Ranked by interest.",
+            "2": "Ranked with partial reasoning.",
+            "3": "Ranked by what the answer would change, stated explicitly."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.4",
+      "for": "M2.4",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Samples are real production outputs",
+          "weight": 0.25,
+          "levels": {
+            "0": "Fabricated for the exercise.",
+            "1": "Mixed.",
+            "2": "Real but cherry-picked.",
+            "3": "Real and sampled without selection for interest."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Coding is open, not pre-imposed",
+          "weight": 0.25,
+          "levels": {
+            "0": "Categories chosen before looking.",
+            "1": "Mostly pre-imposed.",
+            "2": "Open coding with some anchoring.",
+            "3": "Genuinely open; taxonomy visibly emerged from the data."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Taxonomy is disjoint and counted",
+          "weight": 0.25,
+          "levels": {
+            "0": "No counts.",
+            "1": "Counted, heavily overlapping.",
+            "2": "Mostly disjoint.",
+            "3": "Disjoint, counted, with an explicit rule for ambiguous cases."
+          }
+        },
+        {
+          "id": "c4",
+          "criterion": "Findings are surprising to the author",
+          "weight": 0.25,
+          "levels": {
+            "0": "Confirms every prior.",
+            "1": "One minor surprise.",
+            "2": "A real surprise, noted.",
+            "3": "A surprise that changes what the author says they will build next."
+          }
+        }
+      ],
+      "anti_gaming": "Volume of annotation is not a criterion. Fifty carefully coded samples beat two hundred skimmed ones, and a longer submission does not score higher."
+    },
+    {
+      "id": "R-M2.5",
+      "for": "M2.5",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "case_count >= 30",
+          "blocking": true
+        },
+        {
+          "check": "negative_case_count >= 6",
+          "blocking": true
+        },
+        {
+          "check": "every gold span is a literal substring of its source document",
+          "blocking": true
+        },
+        {
+          "check": "harness runs to completion unattended",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Cases discriminate",
+          "weight": 0.5,
+          "levels": {
+            "0": "All trivially easy or all impossible.",
+            "1": "Little spread.",
+            "2": "Reasonable spread.",
+            "3": "Spread chosen so a weak and a strong system score visibly differently."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Negatives are genuine traps",
+          "weight": 0.5,
+          "levels": {
+            "0": "Absent.",
+            "1": "Obvious non-matches.",
+            "2": "Plausible non-matches.",
+            "3": "Near-misses that a naive system would confidently get wrong."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.7",
+      "for": "M2.7",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Named misses are real",
+          "weight": 0.5,
+          "levels": {
+            "0": "None named.",
+            "1": "Trivial omissions.",
+            "2": "One substantive miss.",
+            "3": "Two or more substantive misses, each demonstrable in the data."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The blindness is explained",
+          "weight": 0.5,
+          "levels": {
+            "0": "No explanation.",
+            "1": "Restates the miss.",
+            "2": "Plausible cause.",
+            "3": "Identifies the specific method choice that caused it."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.7",
+      "for": "M3.7",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "judge runs over the full gold set unattended",
+          "blocking": true
+        },
+        {
+          "check": "reported accuracy recomputes from the submitted outputs",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The reported number is the number obtained",
+          "weight": 0.6,
+          "levels": {
+            "0": "Unreproducible or inconsistent with outputs.",
+            "1": "Recomputes approximately.",
+            "2": "Recomputes.",
+            "3": "Recomputes, with the run recorded and re-runnable."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Honest about mediocrity",
+          "weight": 0.4,
+          "levels": {
+            "0": "Overclaims.",
+            "1": "Silent on weakness.",
+            "2": "Acknowledges weakness.",
+            "3": "Diagnoses the weakness specifically enough to act on."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.8",
+      "for": "M3.8",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "three controlled experiments present",
+          "blocking": true
+        },
+        {
+          "check": "each reports an effect size, not only a direction",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Controls are valid",
+          "weight": 0.4,
+          "levels": {
+            "0": "Confounded.",
+            "1": "One variable held.",
+            "2": "Mostly controlled.",
+            "3": "Only the bias under test varies; the author names what they held fixed."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Effect sizes are interpretable",
+          "weight": 0.3,
+          "levels": {
+            "0": "None.",
+            "1": "Raw deltas.",
+            "2": "Deltas with scale.",
+            "3": "Deltas with scale and a stated threshold for what would matter."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Null results are defended",
+          "weight": 0.3,
+          "levels": {
+            "0": "Null claimed with no power argument.",
+            "1": "Hand-waved.",
+            "2": "Partial power argument.",
+            "3": "Shows the design could have detected the effect had it existed."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.3",
+      "for": "M4.3",
+      "tier": 3,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Protocol preceded labelling",
+          "weight": 0.4,
+          "levels": {
+            "0": "No protocol.",
+            "1": "Written after.",
+            "2": "Written before, thin.",
+            "3": "Written before, and its mid-way revisions are recorded with timestamps."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Blindness maintained",
+          "weight": 0.3,
+          "levels": {
+            "0": "Labelled with judge output visible.",
+            "1": "Partially contaminated.",
+            "2": "Blind, unverifiable.",
+            "3": "Blind, with the ordering evidenced."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Own inconsistency surfaced",
+          "weight": 0.3,
+          "levels": {
+            "0": "Claims perfect consistency.",
+            "1": "Notes difficulty.",
+            "2": "Identifies inconsistent cases.",
+            "3": "Re-labels a subset and reports self-agreement as a number."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.4",
+      "for": "M4.4",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "kappa recomputes from submitted labels and judge outputs",
+          "blocking": true
+        },
+        {
+          "check": "at least three rubric iterations reported",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The trajectory is complete",
+          "weight": 0.5,
+          "levels": {
+            "0": "Final number only.",
+            "1": "Selected iterations.",
+            "2": "All iterations.",
+            "3": "All iterations including regressions, each with what was changed."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Iteration is reasoned, not random",
+          "weight": 0.5,
+          "levels": {
+            "0": "Undirected fiddling.",
+            "1": "Some rationale.",
+            "2": "Each change motivated.",
+            "3": "Each change motivated by a specific observed disagreement pattern."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.5",
+      "for": "M4.5",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Both sides argued in good faith",
+          "weight": 0.5,
+          "levels": {
+            "0": "One side strawmanned.",
+            "1": "Unbalanced.",
+            "2": "Both argued.",
+            "3": "The side the author rejects is argued at its strongest."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "A verdict is reached",
+          "weight": 0.5,
+          "levels": {
+            "0": "No verdict.",
+            "1": "Hedged.",
+            "2": "Clear verdict.",
+            "3": "Clear verdict with the deciding consideration named."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.7",
+      "for": "M4.7",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Applies the course's own standards",
+          "weight": 0.5,
+          "levels": {
+            "0": "Restates the original award.",
+            "1": "Minor commentary.",
+            "2": "Applies some criteria.",
+            "3": "Applies the calibration and evidence standards learned, explicitly."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Willing to reach an unfavourable conclusion",
+          "weight": 0.5,
+          "levels": {
+            "0": "Argues only upward.",
+            "1": "Neutral.",
+            "2": "Concedes a point.",
+            "3": "Reaches whatever conclusion the evidence supports, including downward, and says so plainly."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.3",
+      "for": "M5.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "interval recomputes from submitted scores",
+          "blocking": true
+        },
+        {
+          "check": "bootstrap iterations >= 1000",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The ship decision follows from the interval",
+          "weight": 0.6,
+          "levels": {
+            "0": "Decision ignores the interval.",
+            "1": "Mentions it.",
+            "2": "Uses it.",
+            "3": "Uses it, and handles the straddles-zero case explicitly."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Assumptions stated",
+          "weight": 0.4,
+          "levels": {
+            "0": "None.",
+            "1": "Implicit.",
+            "2": "Stated.",
+            "3": "Stated, with the one most likely to be violated flagged."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.4",
+      "for": "M5.4",
+      "tier": 1,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Sample size computed, not guessed",
+          "weight": 0.6,
+          "levels": {
+            "0": "Guessed.",
+            "1": "Rule of thumb.",
+            "2": "Computed.",
+            "3": "Computed from the observed variance, with the computation shown."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Honest verdict on the existing set",
+          "weight": 0.4,
+          "levels": {
+            "0": "Avoids the question.",
+            "1": "Vague.",
+            "2": "Clear verdict.",
+            "3": "Clear verdict plus what the author would actually do under deadline."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.6",
+      "for": "M5.6",
+      "tier": 1,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Prior conclusion re-examined",
+          "weight": 1.0,
+          "levels": {
+            "0": "Not revisited.",
+            "1": "Restated.",
+            "2": "Re-examined.",
+            "3": "Re-examined, and the verdict changed or was explicitly upheld with reasoning."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M6.4",
+      "for": "M6.4",
+      "tier": 3,
+      "machine_checks": [
+        {
+          "check": "a public Actions run link is provided and the run is green",
+          "blocking": true
+        },
+        {
+          "check": "the run produces a downloadable report artifact",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Triggers are sensible",
+          "weight": 0.4,
+          "levels": {
+            "0": "Runs on every commit with no cost control.",
+            "1": "Unbounded but cheap.",
+            "2": "Reasonable triggers.",
+            "3": "Triggers justified against cost per run, with the number stated."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Failure is legible",
+          "weight": 0.3,
+          "levels": {
+            "0": "Opaque failure.",
+            "1": "Exit code only.",
+            "2": "Names the failing case.",
+            "3": "Names the failing case and shows the diff against the previous run."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Fits the existing repository conventions",
+          "weight": 0.3,
+          "levels": {
+            "0": "Bolted on.",
+            "1": "Works, inconsistent.",
+            "2": "Consistent.",
+            "3": "Indistinguishable in style from the repository's existing workflows."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M6.5",
+      "for": "M6.5",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "a link to a red run is provided",
+          "blocking": true
+        },
+        {
+          "check": "a link to the subsequent green run is provided",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The regression was detected for the right reason",
+          "weight": 1.0,
+          "levels": {
+            "0": "Failed for an unrelated reason.",
+            "1": "Failed, cause unclear.",
+            "2": "Failed on the intended case.",
+            "3": "Failed on the intended case, and the author predicted which case would catch it before running."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M7.2",
+      "for": "M7.2",
+      "tier": 4,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Answers address the question asked",
+          "weight": 0.3,
+          "levels": {
+            "0": "Evasive or off-topic.",
+            "1": "Partially responsive.",
+            "2": "Responsive.",
+            "3": "Responsive and direct, including where the answer is unwelcome."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Understanding is demonstrated, not recited",
+          "weight": 0.4,
+          "levels": {
+            "0": "Recites the report.",
+            "1": "Paraphrases.",
+            "2": "Reasons beyond the text.",
+            "3": "Reasons about a case the report does not cover."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Uncertainty is placed correctly",
+          "weight": 0.3,
+          "levels": {
+            "0": "Confident throughout, including where wrong.",
+            "1": "Uniformly hedged.",
+            "2": "Some appropriate uncertainty.",
+            "3": "Says 'I don't know' about the things genuinely unknown, and is confident about the things established."
+          }
+        }
+      ],
+      "integrity": "Assessed from the recorded audio and its transcript. Long pauses are not penalised; reading from a prepared text is, and the panel is instructed to flag answers whose register differs markedly from the learner's spontaneous speech elsewhere in the recording."
+    },
+    {
+      "id": "R-M7.1a",
+      "for": "M7.1a",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Methodology is reproducible by a stranger",
+          "weight": 1.0,
+          "levels": {
+            "0": "Not described.",
+            "1": "Sketched.",
+            "2": "Described.",
+            "3": "Described such that a stranger with the repo could rerun it."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M7.1b",
+      "for": "M7.1b",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c2",
+          "criterion": "The unflattering finding is real and prominent",
+          "weight": 0.5,
+          "levels": {
+            "0": "Absent.",
+            "1": "Buried caveat.",
+            "2": "Stated.",
+            "3": "Stated prominently, quantified, and not immediately explained away."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Claims are proportionate to evidence",
+          "weight": 0.5,
+          "levels": {
+            "0": "Overclaims throughout.",
+            "1": "Occasional overclaim.",
+            "2": "Proportionate.",
+            "3": "Proportionate, with intervals attached to every comparative claim."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M7.1c",
+      "for": "M7.1c",
+      "tier": 3,
+      "machine_checks": [
+        {
+          "check": "published at a reachable public URL",
+          "blocking": true
+        },
+        {
+          "check": "every reported number traces to a submitted artifact",
+          "blocking": true
+        },
+        {
+          "check": "published at the same origin as previous chapters, reachable from the log index",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c4",
+          "criterion": "Readable by a hiring manager in ten minutes",
+          "weight": 0.75,
+          "levels": {
+            "0": "Impenetrable.",
+            "1": "Requires expertise.",
+            "2": "Clear.",
+            "3": "Clear, with the finding and its consequence obvious from the first screen."
+          }
+        },
+        {
+          "id": "clog",
+          "criterion": "Connects to the body of work",
+          "weight": 0.25,
+          "levels": {
+            "0": "Standalone post with no relation to earlier chapters.",
+            "1": "Links to an earlier chapter without using it.",
+            "2": "Builds on an earlier result.",
+            "3": "Builds on an earlier result and revises or qualifies it in light of what this course found."
+          }
+        }
+      ],
+      "anti_gaming": "Length is not quality. A report scoring 3 on every criterion can be two pages. Judges are instructed that verbosity is a negative signal where it does not add evidence — this rubric is itself a test case for the verbosity bias measured in M3.8."
+    }
+  ],
+  "completion": {
+    "required": "All assignments and the project submitted. Readings are tier 0 and are tracked but never counted toward mastery.",
+    "grade_rollup": "Deterministic. Each item's tier sets its weight; panel scores enter as per-criterion values; nothing is rounded up. Computed in TypeScript, never by a model.",
+    "mastery_note": "Course completion sets initial mastery on the seven eval skills. FSRS scheduling then decays them, so the transcript reports what is currently held rather than what was once passed."
+  },
+  "reading_note": "Two framework reads were cut from this course on review: five separate eval frameworks is like reading five test frameworks to learn testing. promptfoo stays because you will use it, inspect_ai because it is the best-designed. openai-evals and HELM remain in the course resource list as further reading rather than as items.",
+  "optional_hours": 1
+}

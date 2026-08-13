@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/*
+ * Light only, on purpose. The site is text-forward — a warm off-white page
+ * with near-black ink reads like a document rather than a dashboard.
+ */
+:root {
+  color-scheme: light;
+  --background: #fdfdfc;
+  --foreground: #191917;
+  --muted: #6b6b64;
+  --border: #e7e7e1;
+  --card: #ffffff;
+  --accent: #2f56d9;
+  --accent-foreground: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  /* Slightly larger and looser than default — this is a reading site. */
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Tighten headings against the loose body leading. */
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 22%, transparent);
+}

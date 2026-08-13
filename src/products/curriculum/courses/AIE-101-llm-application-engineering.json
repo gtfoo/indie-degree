@@ -1,0 +1,1130 @@
+{
+  "course": "AIE-101",
+  "title": "LLM Application Engineering",
+  "credits": 3,
+  "est_hours": 45,
+  "spec_version": "0.1",
+  "registered": "2026-08-13",
+  "premise": "You have already shipped four of these. This course is not here to teach you to call an API — it is here to convert what you did by instinct into something you can specify, defend, and repeat. Two of three credits are already awarded, so most of what follows is exemptable; what is not exemptable is the part that closes your actual gap.",
+  "advanced_standing_note": "Advanced standing awarded 2 of 3 credits against this course. Items marked `advanced_standing_exempt` are already evidenced by shipped work and may be skipped with the artifact cited in place of a submission. The two unexempted assignments — M4.4 and M5.4 — are the whole reason the third credit was withheld: model-directed tool selection, and deliberate measurement of a context-management choice.",
+  "sitting_rule": "Every item is completable in one sitting. Nothing exceeds 180 minutes, and anything over 90 declares its own checkpoints.",
+  "panel": {
+    "models": [
+      "claude-opus-5",
+      "gpt-5",
+      "gemini-flash-latest"
+    ],
+    "blind": true,
+    "blind_note": "Judges see the submission and the rubric, never each other's scores, and never the learner's self-assessment.",
+    "rubric_registered_before_submission": true,
+    "disagreement": "Scores are reported per judge and never averaged into a single number when the spread is 2 or more on any criterion.",
+    "exemption_handling": "An exempted item is recorded on the transcript as advanced standing at Tier 3 with its artifact link, never as a completed assignment. The distinction is visible to a reader."
+  },
+  "modules": [
+    {
+      "id": "M1",
+      "title": "What you are actually programming",
+      "est_minutes": 300,
+      "items": [
+        {
+          "id": "M1.1",
+          "type": "lecture",
+          "title": "LLM Foundations (LLM Bootcamp)",
+          "resource": "fsdl-llm-foundations",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-prompting"
+          ],
+          "brief": "The mechanics under the API: tokenisation, the transformer in outline, and why the model behaves as it does. Watch before anything else."
+        },
+        {
+          "id": "M1.2",
+          "type": "lecture",
+          "title": "Intro to Large Language Models",
+          "resource": "karpathy-intro-llms",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-failure-modes"
+          ]
+        },
+        {
+          "id": "M1.3",
+          "type": "reading",
+          "title": "Anthropic API: overview and models",
+          "resource": "anthropic-docs-models",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-prompting",
+            "llm-context"
+          ]
+        },
+        {
+          "id": "M1.4",
+          "type": "reading",
+          "title": "Patterns for Building LLM-based Systems & Products",
+          "resource": "eugene-yan-llm-patterns",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-prompting"
+          ]
+        },
+        {
+          "id": "M1.5",
+          "type": "assignment",
+          "title": "Anatomy of a feature you already shipped",
+          "est_minutes": 60,
+          "tier": 2,
+          "rubric": "R-M1.5",
+          "skills": [
+            "llm-context"
+          ],
+          "brief": "Pick one LLM feature from your own products. Account for it completely: every call made, tokens in and out per call, what is in the context window and why, what the whole thing costs per invocation, and where the latency goes. No improvements yet — just an honest accounting of something you built without measuring."
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Prompting as engineering",
+      "est_minutes": 420,
+      "items": [
+        {
+          "id": "M2.1",
+          "type": "lecture",
+          "title": "Learn to Spell: Prompt Engineering (LLM Bootcamp)",
+          "resource": "fsdl-prompt-engineering",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-prompting"
+          ],
+          "brief": "Two competing framings — models as statistical text predictors, prompts as magic spells — and why only one of them survives contact with production."
+        },
+        {
+          "id": "M2.2",
+          "type": "lecture",
+          "title": "AI prompt engineering: a deep dive",
+          "resource": "anthropic-prompt-deep-dive",
+          "est_minutes": 75,
+          "tier": 0,
+          "skills": [
+            "llm-prompting",
+            "llm-context"
+          ],
+          "brief": "Anthropic's own researchers disagreeing with each other in public about what actually works. Note where they disagree; that is where the field is unsettled."
+        },
+        {
+          "id": "M2.3",
+          "type": "lecture",
+          "title": "Prompting 101",
+          "resource": "anthropic-prompting-101",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-prompting",
+            "llm-structured-output"
+          ]
+        },
+        {
+          "id": "M2.4",
+          "type": "reading",
+          "title": "Chain-of-Thought Prompting",
+          "resource": "paper-cot",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "llm-prompting"
+          ]
+        },
+        {
+          "id": "M2.5",
+          "type": "reading",
+          "title": "Self-Consistency",
+          "resource": "paper-self-consistency",
+          "est_minutes": 30,
+          "tier": 0,
+          "skills": [
+            "llm-prompting"
+          ]
+        },
+        {
+          "id": "M2.6",
+          "type": "assignment",
+          "title": "Anthropic's interactive tutorial, all nine chapters",
+          "resource": "repo-anthropic-prompt-tutorial",
+          "est_minutes": 90,
+          "tier": 1,
+          "rubric": "R-M2.6",
+          "skills": [
+            "llm-prompting",
+            "llm-structured-output"
+          ],
+          "brief": "Work every exercise, including the appendix. Submit your completed notebook with outputs. This is deliberately hands-on rather than a read — the exercises fail visibly when the prompt is wrong, which is the point.",
+          "locator": "All nine chapters and the appendix, in order."
+        },
+        {
+          "id": "M2.7",
+          "type": "assignment",
+          "title": "Version a prompt like code",
+          "est_minutes": 60,
+          "tier": 2,
+          "rubric": "R-M2.7",
+          "skills": [
+            "llm-prompting"
+          ],
+          "brief": "Take one prompt in a shipped product that you have changed at least twice. Reconstruct its history: what each change was meant to fix, and how you decided it worked. Then state what you would need in place to answer that second question with evidence rather than impression. This is the handoff into AIE-102."
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Structured output and schema enforcement",
+      "est_minutes": 330,
+      "items": [
+        {
+          "id": "M3.1",
+          "type": "reading",
+          "title": "Structured outputs and schema enforcement",
+          "resource": "anthropic-docs-structured",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-structured-output"
+          ]
+        },
+        {
+          "id": "M3.2",
+          "type": "reading",
+          "title": "Cookbook: structured output recipes",
+          "resource": "repo-anthropic-cookbook",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-structured-output"
+          ],
+          "locator": "The structured-output and extraction notebooks."
+        },
+        {
+          "id": "M3.3",
+          "type": "assignment",
+          "title": "Make malformed output impossible",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M3.3",
+          "skills": [
+            "llm-structured-output"
+          ],
+          "advanced_standing_exempt": true,
+          "exempt_rationale": "Career Side Quests already enforces Zod schemas with regeneration on failure rather than best-effort parsing. Cite the implementation instead of rebuilding it.",
+          "brief": "Take an LLM call that returns structured data and make an unparseable response impossible rather than unlikely: schema definition, validation at the boundary, regeneration on failure, and a bounded retry that fails loudly rather than silently degrading.",
+          "checkpoints": [
+            "schema defined",
+            "validation at boundary",
+            "regeneration and bounded retry"
+          ]
+        },
+        {
+          "id": "M3.4",
+          "type": "assignment",
+          "title": "Break your own schema",
+          "est_minutes": 45,
+          "tier": 1,
+          "rubric": "R-M3.4",
+          "skills": [
+            "llm-structured-output"
+          ],
+          "brief": "Construct three inputs designed to make the model emit something your schema accepts but your application cannot use — valid shape, wrong meaning. Report which succeeded. A schema that has never been attacked is an assumption."
+        },
+        {
+          "id": "M3.5",
+          "type": "retention",
+          "title": "Retention: schema enforcement patterns",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "llm-structured-output"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Tool use and function calling",
+      "est_minutes": 405,
+      "items": [
+        {
+          "id": "M4.1",
+          "type": "lecture",
+          "title": "Augmented Language Models (LLM Bootcamp)",
+          "resource": "fsdl-augmented-lm",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-tooluse",
+            "llm-context"
+          ],
+          "brief": "The three augmentation patterns — retrieval, chains, tools — and what each is actually for."
+        },
+        {
+          "id": "M4.2",
+          "type": "reading",
+          "title": "Toolformer",
+          "resource": "paper-toolformer",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "llm-tooluse"
+          ]
+        },
+        {
+          "id": "M4.3",
+          "type": "reading",
+          "title": "Cookbook: tool use",
+          "resource": "repo-anthropic-cookbook",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-tooluse"
+          ],
+          "locator": "tool_use/"
+        },
+        {
+          "id": "M4.4",
+          "type": "assignment",
+          "title": "Let the model choose the tool",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M4.4",
+          "skills": [
+            "llm-tooluse"
+          ],
+          "brief": "This is one of the two assignments that advanced standing did not cover, and it closes a named gap: your integrations are hand-wired, so the model has never had to select among tools. Build a feature where it does — at least four tools, overlapping enough that the choice is non-trivial, including one that is usually the wrong answer. Report selection accuracy over at least 20 cases you labelled first.",
+          "checkpoints": [
+            "four tools defined",
+            "20 labelled cases",
+            "selection accuracy reported"
+          ]
+        },
+        {
+          "id": "M4.5",
+          "type": "assignment",
+          "title": "A tool interface the model cannot use",
+          "est_minutes": 45,
+          "tier": 2,
+          "rubric": "R-M4.5",
+          "skills": [
+            "llm-tooluse"
+          ],
+          "brief": "Deliberately design a tool the model consistently misuses, then diagnose why from its actual calls, then fix it. Name the property of the interface that caused the failure — ambiguous parameter names, overlapping scope, an unstated precondition."
+        },
+        {
+          "id": "M4.6",
+          "type": "retention",
+          "title": "Retention: tool interface design",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "llm-tooluse"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Context management",
+      "est_minutes": 375,
+      "items": [
+        {
+          "id": "M5.1",
+          "type": "reading",
+          "title": "Context and cost chapters",
+          "resource": "book-ai-engineering",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-context"
+          ],
+          "locator": "The chapters on context construction and on inference cost."
+        },
+        {
+          "id": "M5.2",
+          "type": "reading",
+          "title": "Lost in the Middle",
+          "resource": "paper-lost-in-middle",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "llm-context"
+          ]
+        },
+        {
+          "id": "M5.3",
+          "type": "reading",
+          "title": "Context windows and caching",
+          "resource": "anthropic-docs-context",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "llm-context"
+          ]
+        },
+        {
+          "id": "M5.4",
+          "type": "assignment",
+          "title": "Measure a context decision you already made",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M5.4",
+          "skills": [
+            "llm-context"
+          ],
+          "brief": "The second gap advanced standing did not cover. Pick a context-management choice inside a shipped product — how much of a document you pass, where you truncate, what you summarise — and measure it rather than assume it. Compare at least three settings on the same inputs and report which is best and by how much. If the answer is that it does not matter, that is a finding; show the numbers that support it.",
+          "checkpoints": [
+            "three settings defined",
+            "same inputs across all three",
+            "result reported with magnitude"
+          ]
+        },
+        {
+          "id": "M5.5",
+          "type": "assignment",
+          "title": "A context budget",
+          "est_minutes": 30,
+          "tier": 2,
+          "rubric": "R-M5.5",
+          "skills": [
+            "llm-context"
+          ],
+          "brief": "Write the one-page budget for that feature: what is allowed in the window, in what priority, and what gets dropped first under pressure. A document a colleague could apply without asking you."
+        },
+        {
+          "id": "M5.6",
+          "type": "retention",
+          "title": "Retention: context strategy and its costs",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "llm-context"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M6",
+      "title": "Failure modes",
+      "est_minutes": 345,
+      "items": [
+        {
+          "id": "M6.1",
+          "type": "lecture",
+          "title": "UX for Language User Interfaces (LLM Bootcamp)",
+          "resource": "fsdl-ux-lui",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-failure-modes"
+          ],
+          "brief": "How to design a product around a component that is wrong sometimes. The most directly transferable lecture in this course for a customer-facing role."
+        },
+        {
+          "id": "M6.2",
+          "type": "reading",
+          "title": "Language Models are Few-Shot Learners",
+          "resource": "paper-gpt3",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-prompting",
+            "llm-failure-modes"
+          ]
+        },
+        {
+          "id": "M6.3",
+          "type": "assignment",
+          "title": "Failure-mode inventory",
+          "est_minutes": 120,
+          "tier": 2,
+          "rubric": "R-M6.3",
+          "skills": [
+            "llm-failure-modes"
+          ],
+          "brief": "For one shipped product, enumerate every way the LLM component can be wrong, what the user sees when it happens, and whether you would currently find out. The third column is the one that matters and is usually empty.",
+          "checkpoints": [
+            "failure modes enumerated",
+            "user-visible consequence per mode",
+            "detection status per mode"
+          ]
+        },
+        {
+          "id": "M6.4",
+          "type": "assignment",
+          "title": "A hallucination guard that fails closed",
+          "est_minutes": 90,
+          "tier": 1,
+          "rubric": "R-M6.4",
+          "skills": [
+            "llm-failure-modes"
+          ],
+          "advanced_standing_exempt": true,
+          "exempt_rationale": "Career Side Quests already checks every cited quote as a literal substring of its source and discards the claim when it is absent. Cite it.",
+          "brief": "Implement a guard that turns a hallucination into a cheap deterministic check — the claim is verified against its source, and an unverifiable claim is discarded rather than shown with a disclaimer. Report how many claims it rejects on real inputs."
+        },
+        {
+          "id": "M6.5",
+          "type": "retention",
+          "title": "Retention: failure modes and their detection",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "llm-failure-modes"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M7",
+      "title": "Course project",
+      "est_minutes": 525,
+      "items": [
+        {
+          "id": "M7.1",
+          "type": "project",
+          "title": "Ship it",
+          "est_minutes": 180,
+          "tier": 3,
+          "rubric": "R-M7.1",
+          "skills": [
+            "llm-structured-output",
+            "llm-tooluse",
+            "llm-context"
+          ],
+          "brief": "Ship one feature, publicly reachable, that exercises the course: enforced structured output, model-directed tool selection across at least three tools, and a context budget you can defend. It may extend an existing product rather than be new.",
+          "checkpoints": [
+            "structured output enforced",
+            "tool selection working",
+            "context budget applied",
+            "deployed"
+          ]
+        },
+        {
+          "id": "M7.2",
+          "type": "project",
+          "title": "Write it up",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M7.2",
+          "skills": [
+            "llm-tooluse",
+            "llm-context",
+            "llm-failure-modes"
+          ],
+          "brief": "Document the three design decisions you are least sure about, the alternative you rejected in each case, and what evidence would change your mind. Include the failure modes you know remain.",
+          "checkpoints": [
+            "three decisions stated",
+            "rejected alternatives given",
+            "residual failure modes listed"
+          ]
+        },
+        {
+          "id": "M7.3",
+          "type": "project",
+          "title": "Publish",
+          "est_minutes": 120,
+          "tier": 3,
+          "rubric": "R-M7.3",
+          "skills": [
+            "llm-failure-modes"
+          ],
+          "brief": "Publish this as the next chapter of your public engineering log — one growing site, not a sixth standalone post. The chapter must stand alone on its own page for a reader arriving cold, and must connect backwards to at least one result from an earlier chapter. Publish at a stable public URL, with the code reachable. Edited so a reader gets the design and its trade-offs within the first screen.",
+          "checkpoints": [
+            "edited for length",
+            "code reachable",
+            "published"
+          ]
+        },
+        {
+          "id": "M7.4",
+          "type": "defense",
+          "title": "Oral defense",
+          "est_minutes": 60,
+          "tier": 4,
+          "rubric": "R-M7.4",
+          "skills": [
+            "llm-tooluse",
+            "llm-context"
+          ],
+          "brief": "Three unscripted questions generated from your submission at defense time, answered aloud without notes. Recorded and transcribed.",
+          "sample_question_shapes": [
+            "A customer says your tool selection will not scale to forty tools. Are they right, and how would you find out?",
+            "Your context budget drops X first. Describe the user for whom that is the wrong choice.",
+            "Which of your three uncertain decisions do you now think you got wrong?"
+          ]
+        }
+      ]
+    }
+  ],
+  "rubrics": [
+    {
+      "id": "R-M1.5",
+      "for": "M1.5",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The accounting is complete",
+          "weight": 0.5,
+          "levels": {
+            "0": "Narrative description, no numbers.",
+            "1": "Some numbers, gaps unacknowledged.",
+            "2": "Complete for tokens and cost.",
+            "3": "Complete for tokens, cost and latency, with gaps named where measurement was not possible."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Something surprised the author",
+          "weight": 0.5,
+          "levels": {
+            "0": "Confirms every prior.",
+            "1": "Minor surprise.",
+            "2": "A real surprise, noted.",
+            "3": "A surprise the author states would change a design decision."
+          }
+        }
+      ],
+      "anti_gaming": "Estimates are acceptable where measurement is impossible, but must be labelled as estimates. An unlabelled estimate presented as a measurement scores 0 on criterion 1."
+    },
+    {
+      "id": "R-M2.6",
+      "for": "M2.6",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "notebook submitted with outputs present for all nine chapters",
+          "blocking": true
+        },
+        {
+          "check": "appendix exercises attempted",
+          "blocking": false
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Exercises actually solved",
+          "weight": 1.0,
+          "levels": {
+            "0": "Outputs absent or copied.",
+            "1": "Under half pass.",
+            "2": "Most pass.",
+            "3": "All pass, including the appendix."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.7",
+      "for": "M2.7",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The history is honest",
+          "weight": 0.5,
+          "levels": {
+            "0": "Reconstructed to look deliberate.",
+            "1": "Tidied.",
+            "2": "Accurate.",
+            "3": "Accurate including the changes made for no good reason."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Names what evidence was missing",
+          "weight": 0.5,
+          "levels": {
+            "0": "Claims the changes were verified.",
+            "1": "Vague.",
+            "2": "Identifies the missing evidence.",
+            "3": "Specifies what would have to exist to answer it, in enough detail to build."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.3",
+      "for": "M3.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "a malformed model response is provably unable to reach application code",
+          "blocking": true
+        },
+        {
+          "check": "retry is bounded",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Failure is loud",
+          "weight": 0.6,
+          "levels": {
+            "0": "Silent degradation.",
+            "1": "Logged only.",
+            "2": "Surfaced.",
+            "3": "Surfaced with the invalid payload retained for diagnosis."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The boundary is single",
+          "weight": 0.4,
+          "levels": {
+            "0": "Validation scattered.",
+            "1": "Two paths.",
+            "2": "Mostly one.",
+            "3": "Exactly one place where unvalidated data becomes validated."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.4",
+      "for": "M3.4",
+      "tier": 1,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Attacks are genuinely valid-but-wrong",
+          "weight": 0.6,
+          "levels": {
+            "0": "Malformed inputs, not the assignment.",
+            "1": "One valid-shape case.",
+            "2": "Two.",
+            "3": "Three, each passing schema validation and breaking application meaning."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Result reported regardless of outcome",
+          "weight": 0.4,
+          "levels": {
+            "0": "Only successes shown.",
+            "1": "Partial.",
+            "2": "All reported.",
+            "3": "All reported, with what the failures reveal about the schema's assumptions."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.4",
+      "for": "M4.4",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "at least four tools with overlapping applicability",
+          "blocking": true
+        },
+        {
+          "check": "at least 20 cases labelled before the model was run",
+          "blocking": true
+        },
+        {
+          "check": "selection accuracy recomputes from submitted outputs",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Selection is genuinely non-trivial",
+          "weight": 0.4,
+          "levels": {
+            "0": "One obvious tool per case.",
+            "1": "Mostly obvious.",
+            "2": "Some ambiguity.",
+            "3": "Cases exist where a reasonable engineer would also hesitate."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The distractor earns its place",
+          "weight": 0.3,
+          "levels": {
+            "0": "Absent.",
+            "1": "Never plausible.",
+            "2": "Occasionally chosen.",
+            "3": "Chosen wrongly often enough to be informative, and the author explains why."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Errors are analysed, not just counted",
+          "weight": 0.3,
+          "levels": {
+            "0": "Accuracy only.",
+            "1": "Errors listed.",
+            "2": "Errors categorised.",
+            "3": "Errors categorised with a stated fix for the largest category."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.5",
+      "for": "M4.5",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The diagnosis comes from evidence",
+          "weight": 0.5,
+          "levels": {
+            "0": "Speculation.",
+            "1": "Plausible story.",
+            "2": "Supported by some calls.",
+            "3": "Supported by the model's actual calls, quoted."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The named property generalises",
+          "weight": 0.5,
+          "levels": {
+            "0": "No property named.",
+            "1": "Restates the bug.",
+            "2": "A property.",
+            "3": "A property that would predict the failure in a different tool."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.4",
+      "for": "M5.4",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "three or more settings compared",
+          "blocking": true
+        },
+        {
+          "check": "identical inputs across settings",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The comparison is fair",
+          "weight": 0.4,
+          "levels": {
+            "0": "Confounded.",
+            "1": "One variable uncontrolled.",
+            "2": "Controlled.",
+            "3": "Controlled, with what was held fixed stated explicitly."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Magnitude is reported, not just direction",
+          "weight": 0.3,
+          "levels": {
+            "0": "Better/worse only.",
+            "1": "Raw numbers.",
+            "2": "Numbers with scale.",
+            "3": "Numbers with scale and a stated threshold for what would matter to a user."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "A null result is handled honestly",
+          "weight": 0.3,
+          "levels": {
+            "0": "A difference is claimed without support.",
+            "1": "Ambiguous.",
+            "2": "Null reported if found.",
+            "3": "Null reported with an argument that the design could have detected a real difference."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.5",
+      "for": "M5.5",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Applicable without the author present",
+          "weight": 0.6,
+          "levels": {
+            "0": "Notes to self.",
+            "1": "Needs interpretation.",
+            "2": "Usable.",
+            "3": "A colleague could apply it to a new case and reach the same decision."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Drop order is justified",
+          "weight": 0.4,
+          "levels": {
+            "0": "Unstated.",
+            "1": "Asserted.",
+            "2": "Reasoned.",
+            "3": "Reasoned from the measurement in M5.4."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M6.3",
+      "for": "M6.3",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Coverage is real",
+          "weight": 0.35,
+          "levels": {
+            "0": "Two or three generic modes.",
+            "1": "Generic list.",
+            "2": "Product-specific.",
+            "3": "Product-specific, including modes only someone who built it would know."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "User-visible consequence stated",
+          "weight": 0.35,
+          "levels": {
+            "0": "Technical description only.",
+            "1": "Partial.",
+            "2": "Stated for most.",
+            "3": "Stated for all, in terms of what the user experiences rather than what the code does."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Detection status is honest",
+          "weight": 0.3,
+          "levels": {
+            "0": "Claims detection that does not exist.",
+            "1": "Optimistic.",
+            "2": "Accurate.",
+            "3": "Accurate, and the count of undetectable modes is stated plainly."
+          }
+        }
+      ],
+      "anti_gaming": "A long inventory is not a better one. Judges are instructed that an inventory padded with modes the author cannot describe concretely scores lower than a shorter honest one."
+    },
+    {
+      "id": "R-M6.4",
+      "for": "M6.4",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "an unverifiable claim is discarded, not annotated",
+          "blocking": true
+        },
+        {
+          "check": "rejection count reported on real inputs",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The check is deterministic",
+          "weight": 0.6,
+          "levels": {
+            "0": "A model judges it.",
+            "1": "Model with heuristics.",
+            "2": "Mostly deterministic.",
+            "3": "Fully deterministic — a string or arithmetic check, no model in the verification path."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Rejection rate is interpreted",
+          "weight": 0.4,
+          "levels": {
+            "0": "Not reported.",
+            "1": "Reported.",
+            "2": "Reported with context.",
+            "3": "Reported, with a judgement on whether the rate indicates a model problem or a guard that is too strict."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M7.1",
+      "for": "M7.1",
+      "tier": 3,
+      "machine_checks": [
+        {
+          "check": "publicly reachable",
+          "blocking": true
+        },
+        {
+          "check": "three or more tools available to the model",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "It works for a stranger",
+          "weight": 0.5,
+          "levels": {
+            "0": "Only works on the author's machine.",
+            "1": "Fragile.",
+            "2": "Works.",
+            "3": "Works, including on inputs the author did not anticipate."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The course's techniques are actually used",
+          "weight": 0.5,
+          "levels": {
+            "0": "Superficial.",
+            "1": "One of three.",
+            "2": "Two of three.",
+            "3": "All three, each load-bearing rather than decorative."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M7.2",
+      "for": "M7.2",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The uncertainty is genuine",
+          "weight": 0.5,
+          "levels": {
+            "0": "Three decisions the author is sure about.",
+            "1": "Mild hedging.",
+            "2": "Real uncertainty.",
+            "3": "Real uncertainty, including one where the author suspects they chose wrong."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Falsifiability",
+          "weight": 0.5,
+          "levels": {
+            "0": "No evidence would change their mind.",
+            "1": "Vague.",
+            "2": "Evidence named.",
+            "3": "Evidence named and obtainable — an experiment they could actually run."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M7.3",
+      "for": "M7.3",
+      "tier": 3,
+      "machine_checks": [
+        {
+          "check": "stable public URL",
+          "blocking": true
+        },
+        {
+          "check": "code reachable from the write-up",
+          "blocking": true
+        },
+        {
+          "check": "published at the same origin as previous chapters, reachable from the log index",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "First screen carries the design",
+          "weight": 0.75,
+          "levels": {
+            "0": "Buried.",
+            "1": "Requires scrolling past preamble.",
+            "2": "Clear early.",
+            "3": "Design and its main trade-off both obvious before scrolling."
+          }
+        },
+        {
+          "id": "clog",
+          "criterion": "Connects to the body of work",
+          "weight": 0.25,
+          "levels": {
+            "0": "Standalone post with no relation to earlier chapters.",
+            "1": "Links to an earlier chapter without using it.",
+            "2": "Builds on an earlier result.",
+            "3": "Builds on an earlier result and revises or qualifies it in light of what this course found."
+          }
+        }
+      ],
+      "anti_gaming": "Length is not quality. A submission scoring 3 can be one page."
+    },
+    {
+      "id": "R-M7.4",
+      "for": "M7.4",
+      "tier": 4,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Answers address the question asked",
+          "weight": 0.3,
+          "levels": {
+            "0": "Evasive.",
+            "1": "Partially responsive.",
+            "2": "Responsive.",
+            "3": "Responsive and direct, including where the answer is unwelcome."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Reasons beyond the submission",
+          "weight": 0.4,
+          "levels": {
+            "0": "Recites the write-up.",
+            "1": "Paraphrases.",
+            "2": "Extends it.",
+            "3": "Reasons correctly about a case the write-up does not cover."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Concedes where the questioner is right",
+          "weight": 0.3,
+          "levels": {
+            "0": "Defends everything.",
+            "1": "Reluctant.",
+            "2": "Concedes.",
+            "3": "Concedes specifically, and says what they would change."
+          }
+        }
+      ],
+      "integrity": "Assessed from the recording and transcript. Long pauses are not penalised; reading from a prepared text is, and the panel is instructed to flag answers whose register differs markedly from the learner's spontaneous speech elsewhere in the recording."
+    }
+  ],
+  "completion": {
+    "required": "All non-exempt assignments and the project submitted. Exempted items are satisfied by citing the existing artifact and are recorded as advanced standing, not as coursework.",
+    "grade_rollup": "Deterministic. Each item's tier sets its weight; panel scores enter as per-criterion values; nothing is rounded up. Computed in TypeScript, never by a model.",
+    "mastery_note": "Sets initial mastery on the five LLM-application skills. FSRS then decays them, so the transcript reports what is currently held."
+  }
+}

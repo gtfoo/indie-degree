@@ -1,0 +1,205 @@
+{
+  "note": "Recognition of prior learning. Credit earned before enrolment, from work that already exists in public. Assessed conservatively on purpose: a transcript that is generous to itself is worth nothing, and the whole premise of this programme is that the evidence has to survive a sceptical reader.",
+  "assessed": "2026-08-12",
+  "assessor": "self-assessed, pending panel review under AIE-102 methodology",
+  "scale": {
+    "1": "touched it — the artifact uses it, but incidentally",
+    "2": "working competence — used deliberately and correctly, but not stress-tested or measured",
+    "3": "evidenced — used deliberately, with a named decision and a visible consequence"
+  },
+  "calibration_note": "This is not the same number as the Career Side Quests read. That assessment scored evidence against one job posting and returned 94%. This one scores evidence against a 45-credit curriculum and returns far less, because a curriculum asks for things no single posting does. Both can be true: close to the bar for the role, early in the programme.",
+  "artifacts": [
+    {
+      "id": "art-csq",
+      "name": "Career Side Quests",
+      "url": "https://gtfoo.com/go/career-side-quests",
+      "tier": 3,
+      "summary": "CV-to-JD assessment. Multi-provider routing across OpenAI, Anthropic and Gemini; every claim carries a verbatim quote checked as a literal substring of its source and discarded if absent; counter-evidence surfaced alongside supporting evidence; all arithmetic in deterministic TypeScript with no model emitting a number; per-run token accounting; column-aware PDF extraction."
+    },
+    {
+      "id": "art-1pmf",
+      "name": "1 Percent More Fluent",
+      "url": "https://gtfoo.com/go/1-percent-more-fluent",
+      "tier": 3,
+      "summary": "Generates target-language reading at a measured difficulty, checks the generated text against a frequency list, and regenerates when it misses. Learner level is a continuous 0–100 value calibrated from observed behaviour rather than self-report."
+    },
+    {
+      "id": "art-ral",
+      "name": "Read Any Language",
+      "tier": 3,
+      "summary": "Chrome MV3 extension. Highlight-to-speech in any language via ElevenLabs, with automatic language detection, live voice and model enumeration, and remaining-quota tracking."
+    },
+    {
+      "id": "art-carpark",
+      "name": "Carpark SG",
+      "url": "https://gtfoo.com/go/carpark-rates",
+      "tier": 3,
+      "summary": "Multi-source integration across OneMap, data.gov.sg, HDB and URA, with an LLM fallback that retrieves and structures official rates when none are on file."
+    },
+    {
+      "id": "art-infra",
+      "name": "Production droplet operations",
+      "tier": 3,
+      "summary": "Five hosts on a 1 GB droplet under Caddy and systemd. GitHub Actions deploys with a shared cross-repo lock, a native-addon ABI guard that runs before the build, fail2ban jails, per-site JSON access logging and a scheduled analytics snapshot capped so a runaway parse dies instead of OOMing the apps."
+    },
+    {
+      "id": "art-learnindo",
+      "name": "LearnIndo",
+      "tier": 3,
+      "summary": "Spaced-repetition language tool using FSRS scheduling, with a speech-to-text path for spoken exercises."
+    }
+  ],
+  "awards": [
+    {
+      "skill": "llm-prompting",
+      "level": 3,
+      "artifacts": [
+        "art-csq",
+        "art-1pmf",
+        "art-carpark"
+      ],
+      "rationale": "Three shipped products where prompt design carries load-bearing product behaviour, including a staged pipeline that routes different stages to different providers by cost.",
+      "counter_evidence": "No systematic prompt versioning or A/B comparison is visible; changes appear to be judged by inspection."
+    },
+    {
+      "skill": "llm-structured-output",
+      "level": 3,
+      "artifacts": [
+        "art-csq",
+        "art-carpark"
+      ],
+      "rationale": "Zod-enforced schemas across both, with regeneration on schema failure rather than best-effort parsing.",
+      "counter_evidence": "None material."
+    },
+    {
+      "skill": "llm-failure-modes",
+      "level": 3,
+      "artifacts": [
+        "art-csq"
+      ],
+      "rationale": "The verbatim-substring check is a genuine anti-hallucination mechanism rather than a disclaimer: an unsupported claim is thrown away and regenerated. The design also names model sycophancy explicitly and forces counter-evidence to be surfaced.",
+      "counter_evidence": "Failure modes are handled where anticipated. There is no evidence of systematically hunting for unanticipated ones."
+    },
+    {
+      "skill": "llm-context",
+      "level": 2,
+      "artifacts": [
+        "art-csq"
+      ],
+      "rationale": "Multi-stage pipeline with deliberate control over what each stage sees.",
+      "counter_evidence": "No evidence of measuring context-length effects or of handling long-context degradation."
+    },
+    {
+      "skill": "llm-tooluse",
+      "level": 2,
+      "artifacts": [
+        "art-carpark"
+      ],
+      "rationale": "Retrieval-and-structure fallback against external data sources.",
+      "counter_evidence": "Integration is hand-wired rather than model-directed tool selection; the model is not choosing among tools."
+    },
+    {
+      "skill": "eng-deployment",
+      "level": 3,
+      "artifacts": [
+        "art-infra"
+      ],
+      "rationale": "Five services in production on constrained hardware, with CI/CD, deploy serialisation across repositories, intrusion banning and a documented restart hazard the operator diagnosed and wrote up. This is operating, not just deploying.",
+      "counter_evidence": "Single-box; no evidence of horizontal scaling, failover or multi-region concerns."
+    },
+    {
+      "skill": "eval-observability",
+      "level": 2,
+      "artifacts": [
+        "art-infra",
+        "art-csq"
+      ],
+      "rationale": "Per-site structured access logging with scheduled aggregation, plus per-run token accounting inside the application.",
+      "counter_evidence": "Observability is infrastructural and financial. There is no tracing of model quality in production — nothing that would surface a silent degradation in output."
+    },
+    {
+      "skill": "infra-tokenomics",
+      "level": 2,
+      "artifacts": [
+        "art-csq"
+      ],
+      "rationale": "Every run carries token accounting, and mechanical stages are deliberately routed to the cheapest capable provider while judgement stages are not.",
+      "counter_evidence": "Cost is measured after the fact. No evidence of modelling cost at volume before building, which is the part that matters in a customer conversation."
+    },
+    {
+      "skill": "speech-tts",
+      "level": 2,
+      "artifacts": [
+        "art-ral",
+        "art-1pmf"
+      ],
+      "rationale": "Two shipped products integrating speech synthesis, including live voice and model enumeration and quota handling.",
+      "counter_evidence": "Integration depth only. No evidence of latency budgeting, streaming synthesis or quality measurement."
+    },
+    {
+      "skill": "speech-asr",
+      "level": 1,
+      "artifacts": [
+        "art-learnindo"
+      ],
+      "rationale": "A speech-to-text path exists and is wired into a scoring flow.",
+      "counter_evidence": "No evidence of ASR quality measurement, of handling accented or code-switched speech, or of streaming recognition."
+    },
+    {
+      "skill": "eval-design",
+      "level": 2,
+      "artifacts": [
+        "art-1pmf",
+        "art-csq"
+      ],
+      "rationale": "1 Percent More Fluent contains a real measurement loop — generate, measure the output against an external frequency reference, reject and regenerate on miss. That is an eval in everything but name, and it closes the loop automatically.",
+      "counter_evidence": "Deliberately capped at 2. The measure is a proxy chosen up front, never validated against human judgement, and there is no held-out set, no regression suite and no record of score movement over time. This gap is precisely why AIE-102 is the first course studied."
+    },
+    {
+      "skill": "eng-python",
+      "level": 1,
+      "artifacts": [
+        "art-infra"
+      ],
+      "rationale": "The corpus verifier and validator for this programme are Python, stdlib-only, with concurrency, host throttling and retry semantics.",
+      "counter_evidence": "Tooling, not numerical work. Nothing yet touches the numeric stack that Block II runs on."
+    }
+  ],
+  "course_credit": [
+    {
+      "course": "AIE-101",
+      "awarded": 2,
+      "of": 3,
+      "rationale": "Four of five course skills are evidenced at level 2 or 3 across three shipped products.",
+      "remaining": "Model-directed tool selection, and deliberate measurement of context-management choices."
+    },
+    {
+      "course": "AIE-102",
+      "awarded": 0,
+      "of": 4,
+      "rationale": "Awarded nothing on purpose. There is one real measurement loop in the portfolio and no eval harness anywhere, no calibration against human labels, and no regression suite. Awarding credit here would be exactly the self-flattery this programme is built to avoid.",
+      "remaining": "The whole course."
+    },
+    {
+      "course": "AIE-105",
+      "awarded": 1,
+      "of": 3,
+      "rationale": "Token economics evidenced by per-run accounting and cost-aware provider routing.",
+      "remaining": "Serving, batching, caching, quantisation, and forward cost modelling — none evidenced."
+    },
+    {
+      "course": "AIE-106",
+      "awarded": 1,
+      "of": 4,
+      "rationale": "Speech synthesis integration across two products; a speech-to-text path in a third.",
+      "remaining": "Recognition quality measurement, streaming transport, latency budgeting, turn-taking."
+    }
+  ],
+  "totals": {
+    "credits_awarded": 4,
+    "credits_total": 51,
+    "skills_with_evidence": 12,
+    "skills_total": 65,
+    "reading": "Starts the programme roughly one course in. The portfolio is strong on shipping LLM applications and operating them, and empty on measuring whether they are any good — which is a precise description of both the gap and the plan."
+  }
+}

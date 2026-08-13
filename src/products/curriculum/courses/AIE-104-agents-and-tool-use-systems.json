@@ -1,0 +1,1419 @@
+{
+  "course": "AIE-104",
+  "title": "Agents and Tool-Use Systems",
+  "credits": 4,
+  "est_hours": 59,
+  "spec_version": "0.1",
+  "registered": "2026-08-13",
+  "premise": "Multi-step reliability is where demos die, and it is an arithmetic problem before it is a prompting problem. A step that succeeds 95% of the time succeeds 60% of the time across ten steps, and no amount of prompt tuning repeals that. This course starts from the arithmetic, spends most of its time on the two things that actually move it — narrower scope and better tool interfaces — and ends by attacking what you built.",
+  "laboratory": "Career Side Quests is the centrepiece, because it is a deterministic multi-stage pipeline that already works. You will rebuild part of it as an autonomous agent and, most likely, make it worse. That is the point: the course's second outcome is choosing between workflow and agent, and the only honest way to learn that is to pay for the wrong choice once, on a system whose correct behaviour you already know.",
+  "scope_note": "The red-teaming module targets systems you own and operate. Every attack in M6 is run against your own agent, on your own infrastructure, with your own data. Nothing in this course authorises testing anyone else's system.",
+  "sitting_rule": "Every item is completable in one sitting. Nothing exceeds 180 minutes, and anything over 90 declares its own checkpoints.",
+  "panel": {
+    "models": [
+      "claude-opus-5",
+      "gpt-5",
+      "gemini-flash-latest"
+    ],
+    "blind": true,
+    "blind_note": "Judges see the submission and the rubric, never each other's scores, and never the learner's self-assessment.",
+    "rubric_registered_before_submission": true,
+    "disagreement": "Scores are reported per judge and never averaged into a single number when the spread is 2 or more on any criterion.",
+    "transcript_warning": "Judges are instructed that an agent transcript reading as competent is not evidence the task was completed. Where a submission offers a transcript as evidence of success, the judge must look for the independent completion check instead, and score the criterion at 0 if there is none. This is the same failure the course teaches the learner to detect."
+  },
+  "modules": [
+    {
+      "id": "M1",
+      "title": "The arithmetic of multi-step",
+      "est_minutes": 330,
+      "items": [
+        {
+          "id": "M1.1",
+          "type": "lecture",
+          "title": "Building more effective AI agents",
+          "resource": "anthropic-agents-video",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "agent-orchestration"
+          ],
+          "brief": "The authors of the Building Effective Agents post on what they left out of it. Watch before reading the post itself."
+        },
+        {
+          "id": "M1.2",
+          "type": "reading",
+          "title": "Building effective agents",
+          "resource": "anthropic-building-effective-agents",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "agent-orchestration"
+          ]
+        },
+        {
+          "id": "M1.3",
+          "type": "lecture",
+          "title": "LLM Agents Overview",
+          "resource": "berkeley-agents-overview",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "agent-planning"
+          ]
+        },
+        {
+          "id": "M1.4",
+          "type": "reading",
+          "title": "LLM Powered Autonomous Agents",
+          "resource": "lilian-weng-agents",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "agent-planning"
+          ]
+        },
+        {
+          "id": "M1.5",
+          "type": "assignment",
+          "title": "Compounding error, on a system you own",
+          "est_minutes": 90,
+          "tier": 1,
+          "rubric": "R-M1.5",
+          "skills": [
+            "agent-reliability"
+          ],
+          "brief": "Career Side Quests is a multi-stage pipeline. Measure the per-stage success rate of each stage independently, on at least 30 real inputs. Then predict the end-to-end success rate from those numbers, and measure the actual end-to-end rate. Report both, and explain the gap in whichever direction it goes — stages are rarely independent, and the direction of the error tells you how they are coupled."
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Workflow or agent",
+      "est_minutes": 405,
+      "items": [
+        {
+          "id": "M2.1",
+          "type": "reading",
+          "title": "ReAct: Synergizing Reasoning and Acting",
+          "resource": "paper-react",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "agent-planning"
+          ]
+        },
+        {
+          "id": "M2.2",
+          "type": "reading",
+          "title": "Reflexion",
+          "resource": "paper-reflexion",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "agent-reliability"
+          ]
+        },
+        {
+          "id": "M2.3",
+          "type": "reading",
+          "title": "Tree of Thoughts",
+          "resource": "paper-tree-of-thoughts",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "agent-planning"
+          ]
+        },
+        {
+          "id": "M2.4",
+          "type": "assignment",
+          "title": "Rebuild a working pipeline as an agent, and lose",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M2.4",
+          "skills": [
+            "agent-orchestration"
+          ],
+          "brief": "Take one stage of Career Side Quests that currently works as deterministic code and rebuild it as an autonomous agent with tools and its own control flow. Evaluate both against the same gold set from AIE-102. Report accuracy, cost and latency for each. The expected result is that the agent is worse, slower and more expensive; if it wins, say so and explain what property of the task made it win.",
+          "checkpoints": [
+            "agent version built",
+            "both evaluated on the same gold set",
+            "accuracy, cost and latency reported for both"
+          ]
+        },
+        {
+          "id": "M2.5",
+          "type": "assignment",
+          "title": "The decision rule",
+          "est_minutes": 90,
+          "tier": 2,
+          "rubric": "R-M2.5",
+          "skills": [
+            "agent-orchestration",
+            "agent-planning"
+          ],
+          "brief": "Write the rule you would give a colleague for choosing between a workflow and an agent, derived from what you just measured rather than from the reading. Then apply it to three tasks in your own products and state the answer for each, including at least one where you expect the rule to be uncomfortable."
+        },
+        {
+          "id": "M2.6",
+          "type": "retention",
+          "title": "Retention: orchestration patterns and their costs",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "agent-orchestration"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Tool interfaces the model can actually use",
+      "est_minutes": 390,
+      "items": [
+        {
+          "id": "M3.1",
+          "type": "reading",
+          "title": "Writing effective tools for AI agents",
+          "resource": "anthropic-writing-tools",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-tooluse",
+            "agent-orchestration"
+          ],
+          "brief": "The tool interface is the lever, not the prompt. Read alongside your own M4.5 result from AIE-101."
+        },
+        {
+          "id": "M3.2",
+          "type": "reading",
+          "title": "Model Context Protocol",
+          "resource": "mcp-docs",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-tooluse",
+            "agent-orchestration"
+          ],
+          "locator": "The specification: transports, then tools, resources and prompts."
+        },
+        {
+          "id": "M3.3",
+          "type": "reading",
+          "title": "SWE-agent: agent-computer interfaces",
+          "resource": "paper-swe-agent",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "agent-orchestration"
+          ],
+          "brief": "The result worth carrying: changing the interface the agent acts through moved performance more than changing the model."
+        },
+        {
+          "id": "M3.4",
+          "type": "assignment",
+          "title": "An agent over your own tools",
+          "est_minutes": 165,
+          "tier": 1,
+          "rubric": "R-M3.4",
+          "skills": [
+            "agent-orchestration"
+          ],
+          "brief": "Build an agent over Carpark SG's real integrations — OneMap, data.gov.sg, HDB and URA rates — that answers compound questions a single lookup cannot, such as cheapest overnight parking within a radius given a stated arrival and departure. At least 15 labelled tasks. Report task completion, not step plausibility.",
+          "checkpoints": [
+            "tools exposed to the agent",
+            "15 labelled compound tasks",
+            "completion rate reported"
+          ]
+        },
+        {
+          "id": "M3.5",
+          "type": "assignment",
+          "title": "Tool documentation is the prompt",
+          "est_minutes": 45,
+          "tier": 2,
+          "rubric": "R-M3.5",
+          "skills": [
+            "agent-orchestration"
+          ],
+          "brief": "Change only the tool descriptions — not the system prompt, not the model, not the code — and measure the effect on completion rate. Report the largest single-word or single-sentence change that moved it."
+        },
+        {
+          "id": "M3.6",
+          "type": "retention",
+          "title": "Retention: tool interface design for agents",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "agent-orchestration"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Reliability under repetition",
+      "est_minutes": 375,
+      "items": [
+        {
+          "id": "M4.1",
+          "type": "reading",
+          "title": "tau-bench: tool-agent-user interaction",
+          "resource": "paper-tau-bench",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "agent-eval",
+            "agent-reliability"
+          ],
+          "brief": "The pass^k metric is the one to take away: run the same task k times and require every run to succeed. It is the metric a customer actually cares about, and it collapses far faster than pass@1 suggests."
+        },
+        {
+          "id": "M4.2",
+          "type": "lecture",
+          "title": "LLM Reasoning",
+          "resource": "berkeley-llm-reasoning",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "agent-planning"
+          ]
+        },
+        {
+          "id": "M4.3",
+          "type": "assignment",
+          "title": "pass^k on your own agent",
+          "est_minutes": 135,
+          "tier": 1,
+          "rubric": "R-M4.3",
+          "skills": [
+            "agent-reliability"
+          ],
+          "brief": "Run every task from M3.4 eight times. Report pass@1 and pass^8 — the fraction of tasks where all eight runs succeeded. Then answer the question a customer will ask: would you put this in front of their users, and at what pass^k would you change your answer?",
+          "checkpoints": [
+            "8 runs per task completed",
+            "pass@1 and pass^8 reported",
+            "ship-or-not answer with a threshold"
+          ]
+        },
+        {
+          "id": "M4.4",
+          "type": "assignment",
+          "title": "Design against the decay",
+          "est_minutes": 105,
+          "tier": 1,
+          "rubric": "R-M4.4",
+          "skills": [
+            "agent-reliability"
+          ],
+          "brief": "Pick the single intervention you expect to most improve pass^8 — fewer steps, a narrower tool, a verification step, a deterministic fallback — and predict the improvement before implementing it. Then implement and measure. Report the prediction alongside the result whether or not you were right.",
+          "checkpoints": [
+            "intervention chosen and improvement predicted in writing",
+            "implemented",
+            "measured against the prediction"
+          ]
+        },
+        {
+          "id": "M4.5",
+          "type": "retention",
+          "title": "Retention: reliability metrics and interventions",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "agent-reliability"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Sandboxing and least privilege",
+      "est_minutes": 525,
+      "items": [
+        {
+          "id": "M5.1",
+          "type": "lecture",
+          "title": "Safe AI Agents and evidence-based AI policy",
+          "resource": "berkeley-agent-safety",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "agent-sandboxing",
+            "safety-redteam"
+          ]
+        },
+        {
+          "id": "M5.2",
+          "type": "reading",
+          "title": "Indirect prompt injection in LLM-integrated applications",
+          "resource": "paper-indirect-prompt-injection",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "safety-redteam",
+            "agent-sandboxing"
+          ],
+          "brief": "Required before M6. Once a model reads untrusted content and can call tools, the content is an instruction channel you did not intend to expose."
+        },
+        {
+          "id": "M5.3",
+          "type": "reading",
+          "title": "OWASP Top 10 for LLM Applications",
+          "resource": "owasp-llm-top10",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "safety-redteam",
+            "agent-sandboxing"
+          ],
+          "locator": "All ten entries once; then re-read the four that apply to a tool-using agent."
+        },
+        {
+          "id": "M5.4",
+          "type": "assignment",
+          "title": "Least privilege, enforced rather than requested",
+          "est_minutes": 165,
+          "tier": 1,
+          "rubric": "R-M5.4",
+          "skills": [
+            "agent-sandboxing"
+          ],
+          "brief": "Your M3.4 agent has tool access. Constrain it so the limits hold even when the model tries to exceed them: scoped credentials, an allowlist enforced outside the model, rate and spend caps, and no destructive capability it does not need. Then demonstrate enforcement by instructing the agent directly to exceed each limit and showing that it cannot.",
+          "checkpoints": [
+            "limits defined per tool",
+            "enforcement outside the model",
+            "each limit demonstrated to hold under direct instruction"
+          ]
+        },
+        {
+          "id": "M5.5",
+          "type": "reading",
+          "title": "Personal data in AI systems, per the local regulator",
+          "resource": "pdpc-ai-guidelines",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "safety-privacy"
+          ],
+          "locator": "The sections on lawful basis for using personal data, and on measures expected when deploying."
+        },
+        {
+          "id": "M5.6",
+          "type": "assignment",
+          "title": "What leaks",
+          "est_minutes": 105,
+          "tier": 1,
+          "rubric": "R-M5.6",
+          "skills": [
+            "safety-privacy"
+          ],
+          "brief": "For one product, trace every piece of personal data that reaches a model: what it is, which provider receives it, whether it leaves Singapore, how long it is retained, and whether a user could ask you to delete it and be told the truth. Then find the leak you did not intend - a system prompt echoed back, another user's data surviving in a shared cache, an error message carrying a payload. Report what you found and what you changed.",
+          "checkpoints": [
+            "data flow traced per provider",
+            "retention and residency stated",
+            "one unintended exposure found and fixed"
+          ]
+        },
+        {
+          "id": "M5.7",
+          "type": "retention",
+          "title": "Retention: privilege boundaries for tool-using models",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "agent-sandboxing"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M6",
+      "title": "Red-teaming your own agent",
+      "est_minutes": 360,
+      "items": [
+        {
+          "id": "M6.1",
+          "type": "reading",
+          "title": "Universal and Transferable Adversarial Attacks on Aligned Language Models",
+          "resource": "paper-gcg-attacks",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "safety-redteam"
+          ]
+        },
+        {
+          "id": "M6.2",
+          "type": "reading",
+          "title": "WebArena",
+          "resource": "paper-webarena",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "agent-eval"
+          ]
+        },
+        {
+          "id": "M6.3",
+          "type": "assignment",
+          "title": "Make it do the thing it must not",
+          "est_minutes": 165,
+          "tier": 1,
+          "rubric": "R-M6.3",
+          "skills": [
+            "safety-redteam"
+          ],
+          "brief": "Against your own agent only. Write down three things it must never do, then try to make it do each. Include at least one indirect injection — content the agent retrieves rather than input you type — because that is the channel your sandboxing in M5.4 was supposed to close. Report every attack attempted, including the ones that failed, and what the successful ones reveal about where trust was misplaced.",
+          "checkpoints": [
+            "three prohibited behaviours stated in advance",
+            "indirect injection attempted",
+            "all attempts reported including failures"
+          ]
+        },
+        {
+          "id": "M6.4",
+          "type": "assignment",
+          "title": "The disclosure",
+          "est_minutes": 90,
+          "tier": 2,
+          "rubric": "R-M6.4",
+          "skills": [
+            "safety-redteam"
+          ],
+          "brief": "Write what you would tell a customer about the residual risk in this agent — the honest version, including what you could not close and what you would need in order to close it. This is the document a solutions engineer actually has to produce, and the one most people cannot write without either alarming or misleading the reader."
+        },
+        {
+          "id": "M6.5",
+          "type": "retention",
+          "title": "Retention: attack surface of a tool-using agent",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "safety-redteam"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M7",
+      "title": "Evaluating agents",
+      "est_minutes": 360,
+      "items": [
+        {
+          "id": "M7.1",
+          "type": "reading",
+          "title": "inspect_ai: agent scorers and solvers",
+          "resource": "repo-inspect-ai",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "agent-eval"
+          ],
+          "locator": "The solver and agent modules. The scorer protocol was read in AIE-102 M3.5 — start from what an agent solver adds on top of it rather than from the beginning."
+        },
+        {
+          "id": "M7.2",
+          "type": "reading",
+          "title": "SWE-bench",
+          "resource": "paper-swe-bench",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "agent-eval"
+          ]
+        },
+        {
+          "id": "M7.3",
+          "type": "assignment",
+          "title": "Task completion, not transcript plausibility",
+          "est_minutes": 165,
+          "tier": 1,
+          "rubric": "R-M7.3",
+          "skills": [
+            "agent-eval"
+          ],
+          "brief": "Build an eval harness for your agent where success is determined by checking world state — the record was created, the number is correct, the file exists — and never by reading the agent's own account of what it did. Run it over the M3.4 tasks and compare the result against what a judge scoring the transcripts alone would have concluded. The gap between those two numbers is the deliverable. Extend the eval suite you already wired into CI in AIE-102 M6.4 rather than standing up a second one — the state checks are new, the harness is not.",
+          "checkpoints": [
+            "state-based checks implemented",
+            "transcript-based scoring run for comparison",
+            "gap between the two reported"
+          ]
+        },
+        {
+          "id": "M7.4",
+          "type": "assignment",
+          "title": "The plausible failure",
+          "est_minutes": 60,
+          "tier": 2,
+          "rubric": "R-M7.4",
+          "skills": [
+            "agent-eval"
+          ],
+          "brief": "Find one run where the transcript reads as a complete success and the task was not completed. Quote the passage that fooled you and explain what made it convincing."
+        },
+        {
+          "id": "M7.5",
+          "type": "retention",
+          "title": "Retention: agent evaluation and state-based scoring",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "agent-eval"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M8",
+      "title": "Multi-agent systems",
+      "est_minutes": 405,
+      "items": [
+        {
+          "id": "M8.1",
+          "type": "reading",
+          "title": "How we built our multi-agent research system",
+          "resource": "anthropic-multi-agent",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "agent-multi"
+          ],
+          "brief": "A production multi-agent system described by the people who shipped it, including the token cost multiple and the tasks where it did not pay."
+        },
+        {
+          "id": "M8.2",
+          "type": "reading",
+          "title": "Why Do Multi-Agent LLM Systems Fail?",
+          "resource": "paper-why-multiagent-fails",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "agent-multi",
+            "agent-reliability"
+          ],
+          "brief": "A failure taxonomy built from real traces. Read before building one, not after."
+        },
+        {
+          "id": "M8.3",
+          "type": "reading",
+          "title": "AutoGen: multi-agent conversation",
+          "resource": "paper-autogen",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "agent-multi"
+          ]
+        },
+        {
+          "id": "M8.4",
+          "type": "reading",
+          "title": "Generative Agents",
+          "resource": "paper-generative-agents",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "agent-planning"
+          ]
+        },
+        {
+          "id": "M8.5",
+          "type": "assignment",
+          "title": "Two agents, and prove it was worth it",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M8.5",
+          "skills": [
+            "agent-multi"
+          ],
+          "brief": "Build a multi-agent version of a task you already solved with one agent - a genuine division of labour, not one agent with a second rubber-stamping it. Evaluate both on the same task set for completion rate, pass^k, token cost and wall-clock. Multi-agent systems routinely cost several times the tokens for no reliability gain; if that is what you measure, that is the finding and it earns full credit. Then classify every failure against the taxonomy from M8.2, and name any failure the taxonomy does not cover.",
+          "checkpoints": [
+            "single-agent baseline re-run on the same set",
+            "multi-agent version evaluated",
+            "token cost multiple reported",
+            "failures classified against the taxonomy"
+          ]
+        },
+        {
+          "id": "M8.6",
+          "type": "retention",
+          "title": "Retention: multi-agent designs and their failure modes",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "agent-multi"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M9",
+      "title": "Course project",
+      "est_minutes": 390,
+      "items": [
+        {
+          "id": "M9.1",
+          "type": "project",
+          "title": "Ship an agent that knows its own limits",
+          "est_minutes": 165,
+          "tier": 3,
+          "rubric": "R-M9.1",
+          "skills": [
+            "agent-orchestration",
+            "agent-reliability",
+            "agent-sandboxing"
+          ],
+          "brief": "Put an agent into one of your live products, publicly reachable, with enforced privilege limits and a deterministic fallback for the cases where it should not be trusted. The scope must be narrow enough that its measured pass^k is defensible.",
+          "checkpoints": [
+            "agent deployed and reachable",
+            "privilege limits enforced",
+            "fallback path demonstrated"
+          ]
+        },
+        {
+          "id": "M9.2",
+          "type": "project",
+          "title": "The reliability report",
+          "est_minutes": 90,
+          "tier": 2,
+          "rubric": "R-M9.2",
+          "skills": [
+            "agent-eval"
+          ],
+          "brief": "Report pass@1 and pass^k, the residual risks from M6, the workflow-versus-agent decision and why it went the way it did, and the tasks you deliberately excluded from scope. The excluded list is the part a reader will trust you for."
+        },
+        {
+          "id": "M9.3",
+          "type": "project",
+          "title": "Publish",
+          "est_minutes": 75,
+          "tier": 3,
+          "rubric": "R-M9.3",
+          "skills": [
+            "agent-eval"
+          ],
+          "brief": "Publish this as the next chapter of your public engineering log — one growing site, not a sixth standalone post. The chapter must stand alone on its own page for a reader arriving cold, and must connect backwards to at least one result from an earlier chapter. Publish at a stable public URL with the eval harness reachable."
+        },
+        {
+          "id": "M9.4",
+          "type": "defense",
+          "title": "Oral defense",
+          "est_minutes": 60,
+          "tier": 4,
+          "rubric": "R-M9.4",
+          "skills": [
+            "agent-eval",
+            "safety-redteam"
+          ],
+          "brief": "Three unscripted questions generated from your report at defense time, answered aloud without notes.",
+          "sample_question_shapes": [
+            "Your pass^8 is X. A customer wants this handling their billing queries. What do you tell them?",
+            "You closed two of three attacks. Talk me through the one you did not.",
+            "Where would this agent fail in a way your eval would not catch?"
+          ]
+        }
+      ]
+    }
+  ],
+  "rubrics": [
+    {
+      "id": "R-M1.5",
+      "for": "M1.5",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "per-stage rates measured on 30 or more real inputs",
+          "blocking": true
+        },
+        {
+          "check": "predicted end-to-end rate recomputes from the per-stage numbers",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Stages measured independently",
+          "weight": 0.4,
+          "levels": {
+            "0": "End-to-end only.",
+            "1": "Some stages.",
+            "2": "All stages.",
+            "3": "All stages, each with a success criterion defined before measuring."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The gap is explained",
+          "weight": 0.6,
+          "levels": {
+            "0": "Gap not noticed.",
+            "1": "Noted.",
+            "2": "Explained plausibly.",
+            "3": "Explained by a named coupling between specific stages, with evidence for it."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.4",
+      "for": "M2.4",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "both versions evaluated on the identical gold set",
+          "blocking": true
+        },
+        {
+          "check": "cost and latency reported for both",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The agent version is built in good faith",
+          "weight": 0.5,
+          "levels": {
+            "0": "Deliberately weak, so the pipeline wins.",
+            "1": "Thin.",
+            "2": "Reasonable.",
+            "3": "Genuinely the best agent the author could build, with the iterations shown."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The loss is reported and explained",
+          "weight": 0.5,
+          "levels": {
+            "0": "Result buried or spun.",
+            "1": "Reported.",
+            "2": "Reported with a reason.",
+            "3": "Reported with the specific property of the task that made determinism the better answer."
+          }
+        }
+      ],
+      "anti_gaming": "A strawman agent invalidates the comparison and the lesson. Judges are instructed to check whether the agent version was iterated at all, and to score criterion 1 at 0 where a single attempt was made and abandoned."
+    },
+    {
+      "id": "R-M2.5",
+      "for": "M2.5",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The rule is decidable",
+          "weight": 0.5,
+          "levels": {
+            "0": "'It depends'.",
+            "1": "Directional.",
+            "2": "Applicable with judgement.",
+            "3": "A colleague could apply it to a new task and reach the same answer."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "It survives an uncomfortable case",
+          "weight": 0.5,
+          "levels": {
+            "0": "Only easy cases.",
+            "1": "Uncomfortable case avoided.",
+            "2": "Applied to a hard case.",
+            "3": "Applied to a case where the rule contradicts the author's preference, and followed anyway or amended explicitly."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.4",
+      "for": "M3.4",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "15 or more labelled compound tasks",
+          "blocking": true
+        },
+        {
+          "check": "completion determined by checking results, not by reading the transcript",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Tasks genuinely require composition",
+          "weight": 0.5,
+          "levels": {
+            "0": "Single lookups.",
+            "1": "Mostly single-step.",
+            "2": "Compound.",
+            "3": "Compound, with at least three requiring a result from one tool to parameterise another."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Completion is checked against reality",
+          "weight": 0.5,
+          "levels": {
+            "0": "Transcript judged.",
+            "1": "Mixed.",
+            "2": "Result checked.",
+            "3": "Result checked against an independently known correct answer."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.5",
+      "for": "M3.5",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Only the descriptions changed",
+          "weight": 0.5,
+          "levels": {
+            "0": "Other variables moved.",
+            "1": "Probably.",
+            "2": "Controlled.",
+            "3": "Controlled, with a diff showing exactly what changed."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The effect is attributed precisely",
+          "weight": 0.5,
+          "levels": {
+            "0": "Aggregate change only.",
+            "1": "A guess at which change mattered.",
+            "2": "Isolated to one description.",
+            "3": "Isolated to specific wording, with the mechanism named."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.3",
+      "for": "M4.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "8 independent runs per task",
+          "blocking": true
+        },
+        {
+          "check": "pass@1 and pass^8 both recompute from submitted run records",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Runs are genuinely independent",
+          "weight": 0.4,
+          "levels": {
+            "0": "Cached or shared state.",
+            "1": "Unclear.",
+            "2": "Independent.",
+            "3": "Independent, with the state reset between runs described."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The ship decision follows from pass^k",
+          "weight": 0.6,
+          "levels": {
+            "0": "Decision ignores the metric.",
+            "1": "Mentions it.",
+            "2": "Uses it.",
+            "3": "Uses it, with a threshold stated and the user harm at that threshold described."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.4",
+      "for": "M4.4",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "the predicted improvement is timestamped before the implementation",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The prediction was real",
+          "weight": 0.5,
+          "levels": {
+            "0": "Written afterwards.",
+            "1": "Vague.",
+            "2": "Specific.",
+            "3": "Specific, numeric, and recorded before any implementation work."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "A wrong prediction is treated as information",
+          "weight": 0.5,
+          "levels": {
+            "0": "Quietly revised.",
+            "1": "Acknowledged.",
+            "2": "Analysed.",
+            "3": "Analysed into a stated correction of the author's model of why the agent fails."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.4",
+      "for": "M5.4",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "each stated limit demonstrated to hold when the agent is directly instructed to exceed it",
+          "blocking": true
+        },
+        {
+          "check": "enforcement is outside the model — a prompt instruction alone does not satisfy this",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Limits are enforced, not requested",
+          "weight": 0.6,
+          "levels": {
+            "0": "System prompt asks the model not to.",
+            "1": "Mixed.",
+            "2": "Enforced in code.",
+            "3": "Enforced in code, and the credential itself cannot perform the excluded action."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The privilege set is minimal",
+          "weight": 0.4,
+          "levels": {
+            "0": "Broad access for convenience.",
+            "1": "Some trimming.",
+            "2": "Scoped.",
+            "3": "Scoped, with each remaining capability justified by a task that needs it."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M6.3",
+      "for": "M6.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "three prohibited behaviours recorded before the attacks",
+          "blocking": true
+        },
+        {
+          "check": "at least one indirect injection attempted via retrieved content",
+          "blocking": true
+        },
+        {
+          "check": "all attempts reported, successful and failed",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The attacks are serious",
+          "weight": 0.4,
+          "levels": {
+            "0": "One naive jailbreak string.",
+            "1": "Surface attempts.",
+            "2": "Varied attempts.",
+            "3": "Varied and escalating, including at least one that required understanding the specific system."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The indirect channel is properly tested",
+          "weight": 0.3,
+          "levels": {
+            "0": "Not attempted.",
+            "1": "Attempted trivially.",
+            "2": "Realistic injection.",
+            "3": "Injection placed where real untrusted content actually enters the system."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Findings are attributed to a trust decision",
+          "weight": 0.3,
+          "levels": {
+            "0": "Listed as bugs.",
+            "1": "Partly explained.",
+            "2": "Explained.",
+            "3": "Each success traced to a specific place where the design trusted something it should not have."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M6.4",
+      "for": "M6.4",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Honest about what remains open",
+          "weight": 0.5,
+          "levels": {
+            "0": "Implies everything is closed.",
+            "1": "Hedged.",
+            "2": "States residual risk.",
+            "3": "States residual risk specifically, including anything found in M6.3 that is still open."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Usable by a non-specialist reader",
+          "weight": 0.5,
+          "levels": {
+            "0": "Either alarming or evasive.",
+            "1": "Jargon-heavy.",
+            "2": "Clear.",
+            "3": "Clear, proportionate, and gives the reader an actual decision to make."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M7.3",
+      "for": "M7.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "success determined by inspecting world state, not agent output",
+          "blocking": true
+        },
+        {
+          "check": "transcript-based scoring also run, for comparison",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "State checks are genuinely independent",
+          "weight": 0.5,
+          "levels": {
+            "0": "Reads the agent's own report.",
+            "1": "Partly derived from it.",
+            "2": "Independent.",
+            "3": "Independent, and would still be correct if the agent lied about everything."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The gap is reported and interpreted",
+          "weight": 0.5,
+          "levels": {
+            "0": "Only one number given.",
+            "1": "Both given.",
+            "2": "Gap noted.",
+            "3": "Gap quantified, with what it implies for anyone evaluating agents by transcript."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M7.4",
+      "for": "M7.4",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "A genuine instance is found",
+          "weight": 0.5,
+          "levels": {
+            "0": "None found, no evidence of looking.",
+            "1": "A weak example.",
+            "2": "A clear instance.",
+            "3": "A clear instance the author admits initially believed."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The mechanism of persuasion is named",
+          "weight": 0.5,
+          "levels": {
+            "0": "Quoted without analysis.",
+            "1": "Described.",
+            "2": "Explained.",
+            "3": "Explained as a pattern that would recur in other transcripts."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M9.1",
+      "for": "M9.1",
+      "tier": 3,
+      "machine_checks": [
+        {
+          "check": "publicly reachable",
+          "blocking": true
+        },
+        {
+          "check": "privilege limits demonstrably enforced outside the model",
+          "blocking": true
+        },
+        {
+          "check": "fallback path exercised and shown",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Scope matches measured reliability",
+          "weight": 0.5,
+          "levels": {
+            "0": "Scope far exceeds what pass^k supports.",
+            "1": "Optimistic.",
+            "2": "Defensible.",
+            "3": "Defensible, with the narrowing decision traced to a specific measurement."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "It degrades rather than fails",
+          "weight": 0.5,
+          "levels": {
+            "0": "Fails opaquely.",
+            "1": "Errors surfaced.",
+            "2": "Falls back.",
+            "3": "Falls back to a deterministic path the user can still get value from, and says it did."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M9.2",
+      "for": "M9.2",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The exclusion list is real",
+          "weight": 0.5,
+          "levels": {
+            "0": "Absent.",
+            "1": "Token mention.",
+            "2": "Listed.",
+            "3": "Listed with why each was excluded and what it would take to include it."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Numbers traceable to the harness",
+          "weight": 0.5,
+          "levels": {
+            "0": "Unsourced.",
+            "1": "Partly.",
+            "2": "Traceable.",
+            "3": "Traceable to runs a reader could repeat."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M9.3",
+      "for": "M9.3",
+      "tier": 3,
+      "machine_checks": [
+        {
+          "check": "stable public URL",
+          "blocking": true
+        },
+        {
+          "check": "eval harness reachable",
+          "blocking": true
+        },
+        {
+          "check": "published at the same origin as previous chapters, reachable from the log index",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "A reader can verify the central claim",
+          "weight": 0.75,
+          "levels": {
+            "0": "Claims only.",
+            "1": "Code shown.",
+            "2": "Runnable with effort.",
+            "3": "A reader could rerun the reliability measurement and get the reported number."
+          }
+        },
+        {
+          "id": "clog",
+          "criterion": "Connects to the body of work",
+          "weight": 0.25,
+          "levels": {
+            "0": "Standalone post with no relation to earlier chapters.",
+            "1": "Links to an earlier chapter without using it.",
+            "2": "Builds on an earlier result.",
+            "3": "Builds on an earlier result and revises or qualifies it in light of what this course found."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M9.4",
+      "for": "M9.4",
+      "tier": 4,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Answers a customer question from own numbers",
+          "weight": 0.4,
+          "levels": {
+            "0": "General agent opinions.",
+            "1": "Loosely connected.",
+            "2": "Cites own results.",
+            "3": "Cites own results and converts them into a recommendation the customer could act on."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Owns the unclosed risk",
+          "weight": 0.35,
+          "levels": {
+            "0": "Minimises it.",
+            "1": "Deflects.",
+            "2": "Describes it.",
+            "3": "Describes it, its likelihood, and what would have to be true to close it."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Identifies a blind spot unprompted",
+          "weight": 0.25,
+          "levels": {
+            "0": "Claims coverage.",
+            "1": "Generic caveat.",
+            "2": "Names a gap.",
+            "3": "Names a failure the eval would not catch, specifically."
+          }
+        }
+      ],
+      "integrity": "Assessed from the recording and transcript. Long pauses are not penalised; reading from a prepared text is."
+    },
+    {
+      "id": "R-M5.6",
+      "for": "M5.6",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "data flow traced for every provider that receives personal data",
+          "blocking": true
+        },
+        {
+          "check": "at least one unintended exposure identified",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The trace is complete",
+          "weight": 0.5,
+          "levels": {
+            "0": "Main path only.",
+            "1": "Most paths.",
+            "2": "All paths.",
+            "3": "All paths including logs, caches and error handlers."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Answers hold up to a regulator's question",
+          "weight": 0.5,
+          "levels": {
+            "0": "Unanswerable.",
+            "1": "Partial.",
+            "2": "Answerable.",
+            "3": "Answerable on residency, retention and deletion, with the mechanism named for each."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M8.5",
+      "for": "M8.5",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "single-agent baseline evaluated on the identical task set",
+          "blocking": true
+        },
+        {
+          "check": "token cost reported for both",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The division of labour is real",
+          "weight": 0.4,
+          "levels": {
+            "0": "One agent with a rubber stamp.",
+            "1": "Nominal split.",
+            "2": "Genuine split.",
+            "3": "Genuine split where each agent holds information or tools the other lacks."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The cost multiple is reported plainly",
+          "weight": 0.3,
+          "levels": {
+            "0": "Omitted.",
+            "1": "Mentioned.",
+            "2": "Reported.",
+            "3": "Reported as a multiple, with the reliability gained per extra token stated."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Failures are classified, not counted",
+          "weight": 0.3,
+          "levels": {
+            "0": "Counted.",
+            "1": "Described.",
+            "2": "Grouped.",
+            "3": "Mapped onto the published taxonomy, with any uncovered failure named."
+          }
+        }
+      ],
+      "anti_gaming": "A result showing multi-agent was not worth it scores full marks. Judges are told the fashionable conclusion is not the graded one, and that a submission reporting a win must show the single-agent baseline was iterated as hard as the multi-agent version."
+    }
+  ],
+  "completion": {
+    "required": "All assignments and the project submitted. Readings and lectures are tier 0 and are tracked but never counted toward mastery.",
+    "grade_rollup": "Deterministic. Each item's tier sets its weight; panel scores enter as per-criterion values; nothing is rounded up. Computed in TypeScript, never by a model.",
+    "mastery_note": "Sets initial mastery on the six agent skills, including red-teaming. FSRS then decays them, so the transcript reports what is currently held."
+  },
+  "multi_agent_note": "Multi-agent arrives last and deliberately. It is the architecture people reach for first and justify least, and the only honest way to evaluate it is against a single-agent baseline you have already measured - which is what the previous seven modules were for.",
+  "optional_hours": 0
+}

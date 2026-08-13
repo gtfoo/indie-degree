@@ -1,0 +1,782 @@
+{
+  "course": "AIE-107",
+  "title": "Architecture and Judgement",
+  "credits": 2,
+  "est_hours": 32,
+  "spec_version": "0.1",
+  "registered": "2026-08-13",
+  "premise": "Every other course in this block teaches you to build one thing well. None of them ever asks whether you should have built it at all. This one does nothing else. A customer says 'can AI do this' and the valuable answer is frequently 'you do not need AI for this, you need a rule and a lookup table' — and being the person who says that, with numbers, is worth more than being the person who can wire up any architecture on request.",
+  "why_here": "Placed third, after evaluation, because the comparison it demands is only honest if you can measure. Placed before retrieval, agents and speech, because it frames all three: each of those courses teaches a technique, and this one teaches when the technique is the wrong answer.",
+  "laboratory": "Career Side Quests has a clean classification problem hiding in it — given a line from a job posting, is it a requirement or is it boilerplate? You can label it yourself in an afternoon, a regular expression will do embarrassingly well on it, and it is currently done by an LLM. That is the whole course in one example.",
+  "sitting_rule": "Every item is completable in one sitting. Nothing exceeds 180 minutes, and anything over 90 declares its own checkpoints.",
+  "panel": {
+    "models": [
+      "claude-opus-5",
+      "gpt-5",
+      "gemini-flash-latest"
+    ],
+    "blind": true,
+    "blind_note": "Judges see the submission and the rubric, never each other's scores, and never the learner's self-assessment.",
+    "rubric_registered_before_submission": true,
+    "disagreement": "Scores are reported per judge and never averaged into a single number when the spread is 2 or more on any criterion.",
+    "bias_warning": "The judges are language models being asked to assess arguments about whether a language model was necessary. They are instructed explicitly that a submission concluding 'no LLM needed' is not thereby weaker, and that the criterion is the quality of the comparison rather than the fashionability of the answer."
+  },
+  "modules": [
+    {
+      "id": "M1",
+      "title": "When not to use an LLM",
+      "est_minutes": 435,
+      "items": [
+        {
+          "id": "M1.1",
+          "type": "reading",
+          "title": "Framing a problem as machine learning",
+          "resource": "google-ml-crash-course",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "ml-eval-classical"
+          ],
+          "locator": "The framing and classification units — how a problem becomes a label, and when it cannot."
+        },
+        {
+          "id": "M1.2",
+          "type": "reading",
+          "title": "An end-to-end classification project",
+          "resource": "book-hands-on-ml",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "ml-supervised",
+            "ml-eval-classical"
+          ],
+          "locator": "The end-to-end project chapter and the classification chapter."
+        },
+        {
+          "id": "M1.3",
+          "type": "reading",
+          "title": "Choosing what to build",
+          "resource": "book-ml-powered-apps",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "arch-routing"
+          ],
+          "locator": "The chapters on framing a product problem as an ML problem and on choosing a baseline."
+        },
+        {
+          "id": "M1.4",
+          "type": "assignment",
+          "title": "Three ways to the same answer",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M1.4",
+          "skills": [
+            "arch-routing",
+            "ml-eval-classical"
+          ],
+          "brief": "Take the requirement-versus-boilerplate classification inside Career Side Quests. Label at least 200 lines yourself. Then solve it three ways: a regular expression or keyword rule, a classical classifier over TF-IDF features, and the LLM you currently use. Measure all three on the same held-out split for accuracy, cost per thousand lines, and latency. Report which you would ship and why. The regular expression will do better than you expect, and noticing that is the point of the course.",
+          "checkpoints": [
+            "200+ lines labelled with a held-out split",
+            "all three implemented",
+            "accuracy, cost and latency reported for each"
+          ]
+        },
+        {
+          "id": "M1.5",
+          "type": "retention",
+          "title": "Retention: approach selection and baselines",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "arch-routing"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Metrics that make the decision honest",
+      "est_minutes": 390,
+      "items": [
+        {
+          "id": "M2.1",
+          "type": "reading",
+          "title": "Metrics and scoring",
+          "resource": "sklearn-model-evaluation",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "ml-eval-classical"
+          ]
+        },
+        {
+          "id": "M2.2",
+          "type": "reading",
+          "title": "Probability calibration",
+          "resource": "sklearn-calibration",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "ml-eval-classical"
+          ]
+        },
+        {
+          "id": "M2.3",
+          "type": "reading",
+          "title": "Selective Classification for Deep Neural Networks",
+          "resource": "paper-selective-prediction",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "ml-eval-classical"
+          ],
+          "brief": "Abstention as a first-class option — a model permitted to say it does not know."
+        },
+        {
+          "id": "M2.4",
+          "type": "assignment",
+          "title": "Precision, recall, and what each error costs",
+          "est_minutes": 120,
+          "tier": 1,
+          "rubric": "R-M2.4",
+          "skills": [
+            "ml-eval-classical"
+          ],
+          "brief": "For your M1.4 classifiers, produce confusion matrices and precision-recall curves. Then do the part everyone skips: assign a cost to a false positive and a false negative in this specific product, in whatever unit is real — user trust, wasted review time, a wrong assessment shown to someone. Pick the operating point from that cost, not from the F1 maximum, and say how the choice changes if the costs are reversed.",
+          "checkpoints": [
+            "confusion matrices and PR curves produced",
+            "error costs assigned with justification",
+            "operating point chosen from cost"
+          ]
+        },
+        {
+          "id": "M2.5",
+          "type": "assignment",
+          "title": "Is your confidence a probability?",
+          "est_minutes": 60,
+          "tier": 1,
+          "rubric": "R-M2.5",
+          "skills": [
+            "ml-eval-classical"
+          ],
+          "brief": "Plot a reliability curve for whichever of your three approaches emits a score. If the LLM's stated confidence is not calibrated — it very likely is not — show that, because the next module routes on exactly that number."
+        },
+        {
+          "id": "M2.6",
+          "type": "retention",
+          "title": "Retention: classification metrics and calibration",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "ml-eval-classical"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Human-in-the-loop",
+      "est_minutes": 420,
+      "items": [
+        {
+          "id": "M3.1",
+          "type": "reading",
+          "title": "A Gentle Introduction to Conformal Prediction",
+          "resource": "paper-conformal-prediction",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": [
+            "eval-stat",
+            "arch-hitl"
+          ],
+          "brief": "The principled way to attach a guarantee to a threshold. Read at least through the classification section; the whole paper is worth it if the maths lands."
+        },
+        {
+          "id": "M3.2",
+          "type": "reading",
+          "title": "Human-in-the-loop and continual learning",
+          "resource": "book-designing-ml-systems",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "arch-hitl"
+          ],
+          "locator": "The sections on human-in-the-loop review and on feedback loops from production."
+        },
+        {
+          "id": "M3.3",
+          "type": "assignment",
+          "title": "Set the threshold from data",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M3.3",
+          "skills": [
+            "arch-hitl"
+          ],
+          "brief": "Design a routing policy for your classifier: above a confidence threshold it acts automatically, below it a human reviews. Set the threshold from your calibration work and the error costs from M2.4, not by feel. Report the resulting automation rate, the expected error rate among auto-actioned cases, and the human review load per thousand items. Then state the threshold at which the human becomes the bottleneck.",
+          "checkpoints": [
+            "policy defined with a derived threshold",
+            "automation rate and residual error reported",
+            "review load quantified"
+          ]
+        },
+        {
+          "id": "M3.4",
+          "type": "assignment",
+          "title": "The escalation policy",
+          "est_minutes": 75,
+          "tier": 2,
+          "rubric": "R-M3.4",
+          "skills": [
+            "arch-hitl"
+          ],
+          "brief": "Write what the reviewing human actually sees, what they are asked to decide, and what happens to their decision afterwards. A review queue that does not feed back into the system is a cost centre, not a loop. Include what happens when the human disagrees with the model repeatedly."
+        },
+        {
+          "id": "M3.5",
+          "type": "retention",
+          "title": "Retention: confidence routing and review design",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "arch-hitl"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Selection, build and buy",
+      "est_minutes": 330,
+      "items": [
+        {
+          "id": "M4.1",
+          "type": "reading",
+          "title": "Model selection and build-versus-buy",
+          "resource": "book-ai-engineering",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "arch-economics"
+          ],
+          "locator": "The chapters on choosing a model and on the build-versus-buy decision."
+        },
+        {
+          "id": "M4.2",
+          "type": "reading",
+          "title": "Models overview",
+          "resource": "anthropic-docs-models",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "arch-economics"
+          ],
+          "optional": true,
+          "optional_reason": "The same page is required reading in AIE-101 M1.3, two courses earlier. Re-read only if the capability columns of your matrix feel guessed."
+        },
+        {
+          "id": "M4.3",
+          "type": "assignment",
+          "title": "A model selection matrix",
+          "est_minutes": 120,
+          "tier": 2,
+          "rubric": "R-M4.3",
+          "skills": [
+            "arch-economics"
+          ],
+          "brief": "Build the matrix you would actually hand a customer: candidate models down one axis, and intelligence, latency, cost, context length, structured output, tool calling, multimodal support and reliability across the other. Populate the cells from your own measurements where you have them and cite the source where you do not. Then apply it to two of your own features and show it producing different answers for each.",
+          "checkpoints": [
+            "matrix built with sourced cells",
+            "applied to two features",
+            "different answers explained"
+          ]
+        },
+        {
+          "id": "M4.4",
+          "type": "assignment",
+          "title": "Build, buy, or call an API",
+          "est_minutes": 90,
+          "tier": 2,
+          "rubric": "R-M4.4",
+          "skills": [
+            "arch-economics"
+          ],
+          "brief": "For one capability in your products, cost four routes over three years: call a frontier API, self-host an open model, fine-tune a small model, or build conventional software with no model at all. Include the costs people leave out — engineering time, on-call, model deprecation, migration when a provider changes terms. State the volume at which the answer changes."
+        },
+        {
+          "id": "M4.5",
+          "type": "retention",
+          "title": "Retention: model selection and total cost",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "arch-economics"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Course project",
+      "est_minutes": 390,
+      "items": [
+        {
+          "id": "M5.1",
+          "type": "project",
+          "title": "Route it",
+          "est_minutes": 165,
+          "tier": 3,
+          "rubric": "R-M5.1",
+          "skills": [
+            "arch-routing",
+            "arch-hitl"
+          ],
+          "brief": "Ship a hybrid path in one of your live products: a cheap deterministic or classical component handling the cases it handles well, an LLM handling the rest, and a confidence-based route to human review where neither is trusted. The measurement from M1.4 must be visible in the design — if the LLM handles everything, the report has to show why the cheaper components lost.",
+          "checkpoints": [
+            "router implemented",
+            "each branch justified by a measurement",
+            "deployed and reachable"
+          ]
+        },
+        {
+          "id": "M5.2",
+          "type": "project",
+          "title": "The architecture decision record",
+          "est_minutes": 90,
+          "tier": 2,
+          "rubric": "R-M5.2",
+          "skills": [
+            "arch-routing",
+            "arch-economics"
+          ],
+          "brief": "Write the decision record: the problem, the options considered, what each measured, the choice, the cost, and the conditions under which you would revisit it. One page. This is the document that gets you taken seriously in a technical review, and almost nobody writes it."
+        },
+        {
+          "id": "M5.3",
+          "type": "project",
+          "title": "Publish",
+          "est_minutes": 75,
+          "tier": 3,
+          "rubric": "R-M5.3",
+          "skills": [
+            "arch-routing"
+          ],
+          "brief": "Publish as the next chapter of your public engineering log. This chapter is the one most likely to be read by a hiring manager, because it is the only one that argues against using the technology they are hiring for."
+        },
+        {
+          "id": "M5.4",
+          "type": "defense",
+          "title": "Oral defense",
+          "est_minutes": 60,
+          "tier": 4,
+          "rubric": "R-M5.4",
+          "skills": [
+            "arch-routing",
+            "arch-economics"
+          ],
+          "brief": "Three unscripted questions generated from your report at defense time, answered aloud without notes.",
+          "sample_question_shapes": [
+            "A customer wants an LLM for something a rule would solve. Talk me out of your own product.",
+            "Your threshold auto-actions 80% of cases. Describe the user harmed by the 20% that slips through.",
+            "Which cell in your selection matrix are you least confident about, and what would you measure to fix it?"
+          ]
+        }
+      ]
+    }
+  ],
+  "rubrics": [
+    {
+      "id": "R-M1.4",
+      "for": "M1.4",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "200 or more hand-labelled lines with a held-out split declared before modelling",
+          "blocking": true
+        },
+        {
+          "check": "all three approaches evaluated on the identical split",
+          "blocking": true
+        },
+        {
+          "check": "cost and latency reported alongside accuracy",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The rule baseline is built in good faith",
+          "weight": 0.4,
+          "levels": {
+            "0": "A token regex built to lose.",
+            "1": "Minimal effort.",
+            "2": "Reasonable.",
+            "3": "Genuinely the best rule the author could write, with the iterations shown."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The verdict follows the measurements",
+          "weight": 0.35,
+          "levels": {
+            "0": "Predetermined.",
+            "1": "Loosely argued.",
+            "2": "Follows the numbers.",
+            "3": "Follows the numbers including where they contradict what the author shipped, and says so."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Cost and latency are weighed, not just accuracy",
+          "weight": 0.25,
+          "levels": {
+            "0": "Accuracy only.",
+            "1": "Mentioned.",
+            "2": "Weighed.",
+            "3": "Weighed at a stated volume, with the accuracy-per-dollar trade made explicit."
+          }
+        }
+      ],
+      "anti_gaming": "A strawman rule baseline invalidates the entire course. Judges are instructed to inspect the rule and to score criterion 1 at 0 where it is a single naive pattern, regardless of how good the rest of the submission is."
+    },
+    {
+      "id": "R-M2.4",
+      "for": "M2.4",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "confusion matrix and precision-recall curve produced per approach",
+          "blocking": true
+        },
+        {
+          "check": "an explicit cost assigned to each error type",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Error costs are concrete",
+          "weight": 0.5,
+          "levels": {
+            "0": "Unstated.",
+            "1": "Asserted as equal.",
+            "2": "Assigned with reasoning.",
+            "3": "Assigned in a real unit with who bears the cost named."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The operating point follows the cost",
+          "weight": 0.5,
+          "levels": {
+            "0": "Default threshold.",
+            "1": "F1 maximum.",
+            "2": "Cost-informed.",
+            "3": "Cost-derived, with the reversed-cost case worked through."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.5",
+      "for": "M2.5",
+      "tier": 1,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Calibration is measured, not assumed",
+          "weight": 1.0,
+          "levels": {
+            "0": "Confidence taken at face value.",
+            "1": "Discussed.",
+            "2": "Reliability curve plotted.",
+            "3": "Plotted, with the miscalibration quantified and its direction stated."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.3",
+      "for": "M3.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "threshold derived from calibration and error costs, not chosen by inspection",
+          "blocking": true
+        },
+        {
+          "check": "automation rate, residual error rate and review load all reported",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The derivation is sound",
+          "weight": 0.5,
+          "levels": {
+            "0": "Threshold picked.",
+            "1": "Loosely justified.",
+            "2": "Derived.",
+            "3": "Derived with the guarantee it does and does not provide stated plainly."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The bottleneck is identified",
+          "weight": 0.5,
+          "levels": {
+            "0": "Not addressed.",
+            "1": "Mentioned.",
+            "2": "Estimated.",
+            "3": "Quantified against a realistic reviewer throughput, with what happens when volume doubles."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.4",
+      "for": "M3.4",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The reviewer's task is designed, not assumed",
+          "weight": 0.5,
+          "levels": {
+            "0": "'A human checks it'.",
+            "1": "Vague.",
+            "2": "Specified.",
+            "3": "Specified down to what is shown, what is asked, and how long it should take."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The loop closes",
+          "weight": 0.5,
+          "levels": {
+            "0": "Decisions discarded.",
+            "1": "Logged.",
+            "2": "Fed back.",
+            "3": "Fed back with the persistent-disagreement case handled explicitly."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.3",
+      "for": "M4.3",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Cells are sourced",
+          "weight": 0.5,
+          "levels": {
+            "0": "Impressions.",
+            "1": "Vendor claims unmarked.",
+            "2": "Sourced.",
+            "3": "Sourced, with the author's own measurements distinguished from published claims."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "It discriminates",
+          "weight": 0.5,
+          "levels": {
+            "0": "One model wins everything.",
+            "1": "Little separation.",
+            "2": "Different answers per feature.",
+            "3": "Different answers per feature, with the deciding attribute named in each case."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.4",
+      "for": "M4.4",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The hidden costs are present",
+          "weight": 0.6,
+          "levels": {
+            "0": "Inference cost only.",
+            "1": "Some engineering time.",
+            "2": "Most costs.",
+            "3": "Includes on-call, deprecation and migration, each with a number or a stated assumption."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The crossover volume is derived",
+          "weight": 0.4,
+          "levels": {
+            "0": "Absent.",
+            "1": "Asserted.",
+            "2": "Estimated.",
+            "3": "Derived with the arithmetic shown."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.1",
+      "for": "M5.1",
+      "tier": 3,
+      "machine_checks": [
+        {
+          "check": "publicly reachable",
+          "blocking": true
+        },
+        {
+          "check": "at least two branches, one of which is not an LLM call",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Each branch is justified by a measurement",
+          "weight": 0.6,
+          "levels": {
+            "0": "Architecture asserted.",
+            "1": "One branch justified.",
+            "2": "Most justified.",
+            "3": "Every branch traceable to a specific result from M1.4 or M2.4."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The human route works",
+          "weight": 0.4,
+          "levels": {
+            "0": "Nominal.",
+            "1": "Exists.",
+            "2": "Functional.",
+            "3": "Functional, and a low-confidence case demonstrably reaches it end to end."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.2",
+      "for": "M5.2",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Rejected options are argued fairly",
+          "weight": 0.5,
+          "levels": {
+            "0": "Strawmanned.",
+            "1": "Listed.",
+            "2": "Argued.",
+            "3": "Argued at their strongest, including the one the author nearly chose."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Revisit conditions are stated",
+          "weight": 0.5,
+          "levels": {
+            "0": "Absent.",
+            "1": "Vague.",
+            "2": "Stated.",
+            "3": "Stated as observable triggers a colleague could monitor for."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.3",
+      "for": "M5.3",
+      "tier": 3,
+      "machine_checks": [
+        {
+          "check": "published at the same origin as previous chapters, reachable from the log index",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The argument survives a sceptical reader",
+          "weight": 0.75,
+          "levels": {
+            "0": "Assertion.",
+            "1": "Partly evidenced.",
+            "2": "Evidenced.",
+            "3": "Evidenced such that a reader who disagrees can check the claim themselves."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Connects to the body of work",
+          "weight": 0.25,
+          "levels": {
+            "0": "Standalone post with no relation to earlier chapters.",
+            "1": "Links to an earlier chapter without using it.",
+            "2": "Builds on an earlier result.",
+            "3": "Builds on an earlier result and revises or qualifies it in light of what this course found."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.4",
+      "for": "M5.4",
+      "tier": 4,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Willing to argue against the technology",
+          "weight": 0.4,
+          "levels": {
+            "0": "Defends the LLM regardless.",
+            "1": "Concedes reluctantly.",
+            "2": "Argues both sides.",
+            "3": "Makes the case against their own architecture better than the questioner does."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Owns the residual harm",
+          "weight": 0.35,
+          "levels": {
+            "0": "Deflects.",
+            "1": "Abstract.",
+            "2": "Describes it.",
+            "3": "Describes a specific person harmed by the automation rate they chose."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Knows which numbers are weak",
+          "weight": 0.25,
+          "levels": {
+            "0": "All presented as solid.",
+            "1": "Generic hedge.",
+            "2": "Names one.",
+            "3": "Names one and says what would firm it up."
+          }
+        }
+      ],
+      "integrity": "Assessed from the recording and transcript. Long pauses are not penalised; reading from a prepared text is."
+    }
+  ],
+  "completion": {
+    "required": "All assignments and the project submitted. Readings are tier 0 and are tracked but never counted toward mastery.",
+    "grade_rollup": "Deterministic. Each item's tier sets its weight; panel scores enter as per-criterion values; nothing is rounded up. Computed in TypeScript, never by a model.",
+    "mastery_note": "Sets initial mastery on the three architecture skills and on classical model evaluation. FSRS then decays them."
+  },
+  "optional_hours": 1
+}

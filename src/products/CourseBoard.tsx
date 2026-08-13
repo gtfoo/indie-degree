@@ -1,0 +1,316 @@
+"use client";
+
+import { useState, useTransition } from "react";
+import type {
+  CourseSpec,
+  Item,
+  ItemProgress,
+  ItemStatus,
+  ProgressPayload,
+} from "./types";
+
+export interface ResourceLink {
+  title: string;
+  url: string | null;
+  channel?: string;
+}
+
+interface Props {
+  courseId: string;
+  spec: CourseSpec;
+  links: Record<string, ResourceLink>;
+  initial: ProgressPayload;
+}
+
+const TIER_LABEL: Record<number, string> = {
+  0: "self-marked",
+  1: "machine-verified",
+  2: "panel-assessed",
+  3: "artifact",
+  4: "defended",
+};
+
+function minutes(n: number): string {
+  if (n < 60) return `${n}m`;
+  const h = Math.floor(n / 60);
+  const m = n % 60;
+  return m ? `${h}h ${m}m` : `${h}h`;
+}
+
+export function CourseBoard({ courseId, spec, links, initial }: Props) {
+  const [progress, setProgress] = useState(initial);
+  const [pending, startTransition] = useTransition();
+  const [open, setOpen] = useState<string | null>(null);
+  const [busy, setBusy] = useState<string | null>(null);
+
+  const key = (itemId: string) => `${courseId}/${itemId}`;
+  const stateOf = (itemId: string): ItemProgress =>
+    progress.items[key(itemId)] ?? {
+      status: "not_started",
+      minutes_logged: 0,
+      checkpoints: [],
+      completed_at: null,
+    };
+
+  async function send(payload: Record<string, unknown>, marker: string) {
+    setBusy(marker);
+    try {
+      const res = await fetch("/api/progress", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ courseId, ...payload }),
+      });
+      if (res.ok) {
+        const next = (await res.json()) as ProgressPayload;
+        startTransition(() => setProgress(next));
+      }
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  const cp = progress.courses[courseId];
+  const pct = cp?.requiredItems
+    ? Math.round((cp.completeItems / cp.requiredItems) * 100)
+    : 0;
+
+  return (
+    <div className={pending ? "opacity-95 transition-opacity" : undefined}>
+      <div className="rounded-lg border border-border bg-card p-5">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <p className="text-sm text-muted">
+            <span className="font-medium text-foreground">
+              {cp?.completeItems ?? 0} of {cp?.requiredItems ?? 0}
+            </span>{" "}
+            required items complete
+          </p>
+          <p className="text-sm text-muted">
+            {minutes(cp?.completeMinutes ?? 0)} of{" "}
+            {minutes(cp?.requiredMinutes ?? 0)}
+          </p>
+        </div>
+        <div className="mt-3 h-2 overflow-hidden rounded-full bg-border">
+          <div
+            className="h-full rounded-full bg-accent transition-all duration-500"
+            style={{ width: `${pct}%` }}
+          />
+        </div>
+        {cp?.earned && (
+          <p className="mt-3 text-sm font-medium text-accent">
+            Course complete — {spec.credits} credits earned.
+          </p>
+        )}
+      </div>
+
+      {spec.modules.map((m) => {
+        const done = m.items.filter(
+          (i) => !i.optional && stateOf(i.id).status === "complete",
+        ).length;
+        const need = m.items.filter((i) => !i.optional).length;
+        return (
+          <section key={m.id} className="mt-10">
+            <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-border pb-2">
+              <h2 className="text-lg font-semibold tracking-tight">
+                {m.id} · {m.title}
+              </h2>
+              <span className="text-xs text-muted">
+                {done}/{need} · {minutes(m.est_minutes)}
+              </span>
+            </div>
+
+            <ul className="mt-3 space-y-1">
+              {m.items.map((item) => (
+                <ItemRow
+                  key={item.id}
+                  item={item}
+                  state={stateOf(item.id)}
+                  link={item.resource ? links[item.resource] : undefined}
+                  expanded={open === item.id}
+                  busy={busy}
+                  onToggleOpen={() =>
+                    setOpen(open === item.id ? null : item.id)
+                  }
+                  onStatus={(status) =>
+                    send({ itemId: item.id, status }, `s:${item.id}`)
+                  }
+                  onCheckpoint={(position) =>
+                    send(
+                      { itemId: item.id, checkpoint: position },
+                      `c:${item.id}:${position}`,
+                    )
+                  }
+                />
+              ))}
+            </ul>
+          </section>
+        );
+      })}
+    </div>
+  );
+}
+
+function ItemRow({
+  item,
+  state,
+  link,
+  expanded,
+  busy,
+  onToggleOpen,
+  onStatus,
+  onCheckpoint,
+}: {
+  item: Item;
+  state: ItemProgress;
+  link?: ResourceLink;
+  expanded: boolean;
+  busy: string | null;
+  onToggleOpen: () => void;
+  onStatus: (s: ItemStatus) => void;
+  onCheckpoint: (position: number) => void;
+}) {
+  const complete = state.status === "complete";
+  const started = state.status === "in_progress";
+  const hasDetail =
+    Boolean(item.brief) ||
+    Boolean(item.checkpoints?.length) ||
+    Boolean(item.locator) ||
+    Boolean(item.optional_reason);
+
+  return (
+    <li className="rounded-md border border-transparent px-2 py-2 transition-colors hover:border-border hover:bg-card">
+      <div className="flex items-start gap-3">
+        <button
+          type="button"
+          aria-label={complete ? "Mark not started" : "Mark complete"}
+          disabled={busy === `s:${item.id}`}
+          onClick={() => onStatus(complete ? "not_started" : "complete")}
+          className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border transition-colors ${
+            complete
+              ? "border-accent bg-accent text-accent-foreground"
+              : "border-border hover:border-accent"
+          } disabled:opacity-50`}
+        >
+          {complete && (
+            <svg viewBox="0 0 16 16" className="h-3 w-3" aria-hidden="true">
+              <path
+                d="M3.5 8.5l3 3 6-7"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
+        </button>
+
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+            <button
+              type="button"
+              onClick={hasDetail ? onToggleOpen : undefined}
+              className={`text-left text-[15px] ${
+                complete ? "text-muted line-through" : "text-foreground"
+              } ${hasDetail ? "hover:text-accent" : "cursor-default"}`}
+            >
+              <span className="font-mono text-xs text-muted">{item.id}</span>{" "}
+              {item.title}
+            </button>
+            {item.optional && (
+              <span className="rounded-full border border-border px-1.5 text-[11px] text-muted">
+                optional
+              </span>
+            )}
+            {item.advanced_standing_exempt && (
+              <span className="rounded-full border border-border px-1.5 text-[11px] text-muted">
+                exemptable
+              </span>
+            )}
+          </div>
+
+          <p className="mt-0.5 text-xs text-muted">
+            {item.type} · {minutes(item.est_minutes)} · tier {item.tier}{" "}
+            {TIER_LABEL[item.tier]}
+            {started && " · in progress"}
+          </p>
+
+          {link && (
+            <p className="mt-1 text-xs">
+              {link.url ? (
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-accent hover:underline"
+                >
+                  {link.title}
+                </a>
+              ) : (
+                <span className="text-muted">{link.title}</span>
+              )}
+              {link.channel && (
+                <span className="text-muted"> — {link.channel}</span>
+              )}
+            </p>
+          )}
+
+          {expanded && (
+            <div className="mt-2 space-y-2 border-l-2 border-border pl-3 text-sm text-muted">
+              {item.locator && (
+                <p>
+                  <span className="font-medium text-foreground">Where: </span>
+                  {item.locator}
+                </p>
+              )}
+              {item.optional_reason && (
+                <p>
+                  <span className="font-medium text-foreground">
+                    Optional because:{" "}
+                  </span>
+                  {item.optional_reason}
+                </p>
+              )}
+              {item.brief && <p>{item.brief}</p>}
+              {item.checkpoints?.length ? (
+                <ul className="space-y-1">
+                  {item.checkpoints.map((c, idx) => {
+                    const hit = state.checkpoints.includes(idx);
+                    return (
+                      <li key={idx}>
+                        <button
+                          type="button"
+                          disabled={busy === `c:${item.id}:${idx}`}
+                          onClick={() => onCheckpoint(idx)}
+                          className="flex items-start gap-2 text-left disabled:opacity-50"
+                        >
+                          <span
+                            className={`mt-1 h-2 w-2 shrink-0 rounded-full ${
+                              hit ? "bg-accent" : "border border-border"
+                            }`}
+                          />
+                          <span className={hit ? "line-through" : undefined}>
+                            {c}
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : null}
+              {!complete && (
+                <button
+                  type="button"
+                  disabled={busy === `s:${item.id}`}
+                  onClick={() => onStatus(started ? "not_started" : "in_progress")}
+                  className="rounded border border-border px-2 py-1 text-xs text-foreground transition-colors hover:border-accent hover:text-accent disabled:opacity-50"
+                >
+                  {started ? "Clear in-progress" : "Mark in progress"}
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </li>
+  );
+}

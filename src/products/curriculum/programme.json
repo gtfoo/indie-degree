@@ -1,0 +1,1389 @@
+{
+  "programme": {
+    "id": "ai-engineering-2026",
+    "title": "AI Engineering",
+    "subtitle": "An indie degree",
+    "learner": "gtfoo",
+    "opened": "2026-08-12",
+    "framing": "transcript",
+    "framing_note": "Degree-rigorous internally — blocks, credits, prerequisites, capstone. The public artifact is a transcript with evidence tiers and linked artifacts, never a diploma. Rendering is a template choice; nothing here depends on it.",
+    "credit_unit": "1 credit ≈ 20 hours of work",
+    "total_credits": 51,
+    "pacing": "irregular",
+    "pacing_note": "Hours vary week to week. Progress is banked and monotonic — no streaks, nothing destroyable by a quiet month. Projected completion is a range derived from logged hours, never from intended hours.",
+    "ordering_principle": "Value-weighted within prerequisite constraints. Stopping at any point should leave the highest-value skills already banked, so an unfinished programme is still a gain.",
+    "total_hours": 944,
+    "public_log": "Every course publishes, but into one growing public engineering log rather than six standalone posts. A reader arrives once and finds a body of work that compounds; six separate write-ups fragment the same effort into things nobody finishes. Each course contributes a chapter that must stand alone on its own page and must also connect backwards to at least one earlier chapter's result.",
+    "total_optional_hours": 5,
+    "optional_note": "Optional items are duplicates of work an earlier course already required. They are kept rather than deleted, because a second pass is sometimes what makes a thing land — but the programme total counts required work only, and completion never waits for them.",
+    "brand_note": "Indie Degree is the platform; this instance is an indie MSc in AI engineering. Indie carries the same meaning it does in film and games — produced outside the institution, deliberately, and judged on the work rather than on who signed it off."
+  },
+  "blocks": [
+    {
+      "id": "block-1",
+      "title": "Applied AI Engineering",
+      "purpose": "The employable core. Closes the distance to applied and field AI roles, where the gap read already puts the learner at 94%.",
+      "credits": 23
+    },
+    {
+      "id": "block-2",
+      "title": "Depth",
+      "purpose": "What makes this a programme rather than a certificate. Builds the models rather than calling them.",
+      "credits": 28
+    }
+  ],
+  "evidence_tiers": {
+    "0": {
+      "name": "Self-marked",
+      "trust": "none",
+      "counts_toward_mastery": false,
+      "example": "Marked a reading as done."
+    },
+    "1": {
+      "name": "Machine-verified",
+      "trust": "objective",
+      "counts_toward_mastery": true,
+      "example": "Tests pass, quiz scored, benchmark number reproduced."
+    },
+    "2": {
+      "name": "Panel-assessed",
+      "trust": "moderate",
+      "counts_toward_mastery": true,
+      "example": "Multiple models score against a rubric registered before submission; disagreement is shown, not averaged."
+    },
+    "3": {
+      "name": "Artifact in the world",
+      "trust": "high",
+      "counts_toward_mastery": true,
+      "example": "Public repo, deployed service, reproducible result, published write-up."
+    },
+    "4": {
+      "name": "Defended",
+      "trust": "highest",
+      "counts_toward_mastery": true,
+      "example": "Unscripted spoken answers to questions about your own submission."
+    }
+  },
+  "skills": [
+    {
+      "id": "eng-python",
+      "name": "Python and the numeric stack",
+      "area": "engineering",
+      "prereqs": [],
+      "note": "Medium of instruction, never a learning objective. Evidenced as a byproduct of coursework."
+    },
+    {
+      "id": "eng-pytorch",
+      "name": "PyTorch",
+      "area": "engineering",
+      "prereqs": [
+        "eng-python"
+      ]
+    },
+    {
+      "id": "eng-deployment",
+      "name": "Deploying and operating services",
+      "area": "engineering",
+      "prereqs": []
+    },
+    {
+      "id": "math-linalg",
+      "name": "Linear algebra",
+      "area": "mathematics",
+      "prereqs": []
+    },
+    {
+      "id": "math-calc",
+      "name": "Calculus and differentiation",
+      "area": "mathematics",
+      "prereqs": []
+    },
+    {
+      "id": "math-prob",
+      "name": "Probability and statistics",
+      "area": "mathematics",
+      "prereqs": []
+    },
+    {
+      "id": "math-optim",
+      "name": "Optimisation",
+      "area": "mathematics",
+      "prereqs": [
+        "math-linalg",
+        "math-calc"
+      ]
+    },
+    {
+      "id": "ml-supervised",
+      "name": "Supervised learning",
+      "area": "machine-learning",
+      "prereqs": [
+        "math-linalg",
+        "math-prob"
+      ]
+    },
+    {
+      "id": "ml-unsupervised",
+      "name": "Unsupervised learning",
+      "area": "machine-learning",
+      "prereqs": [
+        "math-linalg"
+      ]
+    },
+    {
+      "id": "ml-featureeng",
+      "name": "Feature engineering",
+      "area": "machine-learning",
+      "prereqs": [
+        "ml-supervised"
+      ]
+    },
+    {
+      "id": "ml-eval-classical",
+      "name": "Classical model evaluation",
+      "area": "machine-learning",
+      "prereqs": [
+        "math-prob"
+      ]
+    },
+    {
+      "id": "dl-backprop",
+      "name": "Backpropagation and autodiff",
+      "area": "deep-learning",
+      "prereqs": [
+        "math-calc",
+        "math-linalg"
+      ]
+    },
+    {
+      "id": "dl-architectures",
+      "name": "Network architectures",
+      "area": "deep-learning",
+      "prereqs": [
+        "dl-backprop"
+      ]
+    },
+    {
+      "id": "dl-training",
+      "name": "Training dynamics",
+      "area": "deep-learning",
+      "prereqs": [
+        "dl-backprop",
+        "math-optim"
+      ]
+    },
+    {
+      "id": "dl-regularisation",
+      "name": "Regularisation and generalisation",
+      "area": "deep-learning",
+      "prereqs": [
+        "dl-training"
+      ]
+    },
+    {
+      "id": "nlp-tokenisation",
+      "name": "Tokenisation",
+      "area": "nlp",
+      "prereqs": []
+    },
+    {
+      "id": "nlp-embeddings",
+      "name": "Embeddings and vector semantics",
+      "area": "nlp",
+      "prereqs": [
+        "math-linalg"
+      ]
+    },
+    {
+      "id": "transformers-attention",
+      "name": "Attention",
+      "area": "transformers",
+      "prereqs": [
+        "math-linalg",
+        "dl-backprop"
+      ]
+    },
+    {
+      "id": "transformers-arch",
+      "name": "Transformer architecture",
+      "area": "transformers",
+      "prereqs": [
+        "transformers-attention",
+        "dl-architectures"
+      ]
+    },
+    {
+      "id": "transformers-implementation",
+      "name": "Implementing a transformer from scratch",
+      "area": "transformers",
+      "prereqs": [
+        "transformers-arch",
+        "eng-pytorch"
+      ]
+    },
+    {
+      "id": "llm-prompting",
+      "name": "Prompting as engineering",
+      "area": "llm-application",
+      "prereqs": []
+    },
+    {
+      "id": "llm-structured-output",
+      "name": "Structured output and schema enforcement",
+      "area": "llm-application",
+      "prereqs": [
+        "llm-prompting"
+      ]
+    },
+    {
+      "id": "llm-tooluse",
+      "name": "Tool use and function calling",
+      "area": "llm-application",
+      "prereqs": [
+        "llm-structured-output"
+      ]
+    },
+    {
+      "id": "llm-context",
+      "name": "Context management",
+      "area": "llm-application",
+      "prereqs": [
+        "llm-prompting"
+      ]
+    },
+    {
+      "id": "llm-failure-modes",
+      "name": "Failure modes and hallucination",
+      "area": "llm-application",
+      "prereqs": [
+        "llm-prompting"
+      ]
+    },
+    {
+      "id": "eval-design",
+      "name": "Eval design",
+      "area": "evaluation",
+      "prereqs": [
+        "llm-failure-modes"
+      ]
+    },
+    {
+      "id": "eval-datasets",
+      "name": "Building eval datasets",
+      "area": "evaluation",
+      "prereqs": [
+        "eval-design"
+      ]
+    },
+    {
+      "id": "eval-llm-judge",
+      "name": "LLM-as-judge and its pathologies",
+      "area": "evaluation",
+      "prereqs": [
+        "eval-design"
+      ]
+    },
+    {
+      "id": "eval-stat",
+      "name": "Statistical significance in evals",
+      "area": "evaluation",
+      "prereqs": [
+        "math-prob",
+        "eval-design"
+      ]
+    },
+    {
+      "id": "eval-human-calibration",
+      "name": "Calibrating automated scores to human judgement",
+      "area": "evaluation",
+      "prereqs": [
+        "eval-llm-judge",
+        "eval-stat"
+      ]
+    },
+    {
+      "id": "eval-regression",
+      "name": "Regression testing and CI for models",
+      "area": "evaluation",
+      "prereqs": [
+        "eval-datasets"
+      ]
+    },
+    {
+      "id": "eval-observability",
+      "name": "Tracing and production observability",
+      "area": "evaluation",
+      "prereqs": [
+        "eval-design",
+        "eng-deployment"
+      ]
+    },
+    {
+      "id": "rag-embeddings",
+      "name": "Embedding retrieval",
+      "area": "retrieval",
+      "prereqs": [
+        "nlp-embeddings"
+      ]
+    },
+    {
+      "id": "rag-chunking",
+      "name": "Chunking strategy",
+      "area": "retrieval",
+      "prereqs": [
+        "rag-embeddings"
+      ]
+    },
+    {
+      "id": "rag-hybrid-search",
+      "name": "Hybrid and lexical search",
+      "area": "retrieval",
+      "prereqs": [
+        "rag-embeddings"
+      ]
+    },
+    {
+      "id": "rag-reranking",
+      "name": "Reranking",
+      "area": "retrieval",
+      "prereqs": [
+        "rag-hybrid-search"
+      ]
+    },
+    {
+      "id": "rag-eval",
+      "name": "Evaluating retrieval",
+      "area": "retrieval",
+      "prereqs": [
+        "rag-embeddings",
+        "eval-design"
+      ]
+    },
+    {
+      "id": "agent-planning",
+      "name": "Planning and decomposition",
+      "area": "agents",
+      "prereqs": [
+        "llm-tooluse"
+      ]
+    },
+    {
+      "id": "agent-orchestration",
+      "name": "Orchestration patterns",
+      "area": "agents",
+      "prereqs": [
+        "agent-planning"
+      ]
+    },
+    {
+      "id": "agent-reliability",
+      "name": "Multi-step reliability",
+      "area": "agents",
+      "prereqs": [
+        "agent-orchestration",
+        "eval-design"
+      ]
+    },
+    {
+      "id": "agent-sandboxing",
+      "name": "Sandboxing and least privilege",
+      "area": "agents",
+      "prereqs": [
+        "agent-orchestration"
+      ]
+    },
+    {
+      "id": "agent-eval",
+      "name": "Evaluating agents",
+      "area": "agents",
+      "prereqs": [
+        "agent-reliability",
+        "eval-datasets"
+      ]
+    },
+    {
+      "id": "infra-tokenomics",
+      "name": "Token economics",
+      "area": "inference",
+      "prereqs": [
+        "nlp-tokenisation"
+      ]
+    },
+    {
+      "id": "infra-caching",
+      "name": "Prompt and result caching",
+      "area": "inference",
+      "prereqs": [
+        "infra-tokenomics"
+      ]
+    },
+    {
+      "id": "infra-batching",
+      "name": "Batching and throughput",
+      "area": "inference",
+      "prereqs": [
+        "infra-serving"
+      ]
+    },
+    {
+      "id": "infra-serving",
+      "name": "Model serving",
+      "area": "inference",
+      "prereqs": [
+        "eng-deployment"
+      ]
+    },
+    {
+      "id": "infra-latency",
+      "name": "Latency budgets and streaming",
+      "area": "inference",
+      "prereqs": [
+        "infra-serving"
+      ]
+    },
+    {
+      "id": "infra-quantisation",
+      "name": "Quantisation and compression",
+      "area": "inference",
+      "prereqs": [
+        "dl-training"
+      ]
+    },
+    {
+      "id": "infra-gpu",
+      "name": "GPU execution model",
+      "area": "inference",
+      "prereqs": [
+        "eng-pytorch"
+      ]
+    },
+    {
+      "id": "infra-distributed",
+      "name": "Distributed training",
+      "area": "inference",
+      "prereqs": [
+        "infra-gpu",
+        "dl-training"
+      ]
+    },
+    {
+      "id": "speech-asr",
+      "name": "Speech recognition",
+      "area": "speech",
+      "prereqs": [
+        "dl-architectures"
+      ]
+    },
+    {
+      "id": "speech-tts",
+      "name": "Speech synthesis",
+      "area": "speech",
+      "prereqs": [
+        "dl-architectures"
+      ]
+    },
+    {
+      "id": "speech-streaming",
+      "name": "Streaming audio transport",
+      "area": "speech",
+      "prereqs": [
+        "infra-latency"
+      ]
+    },
+    {
+      "id": "speech-latency",
+      "name": "Conversational latency budgets",
+      "area": "speech",
+      "prereqs": [
+        "speech-streaming"
+      ]
+    },
+    {
+      "id": "speech-agents",
+      "name": "Voice agents",
+      "area": "speech",
+      "prereqs": [
+        "speech-asr",
+        "speech-tts",
+        "speech-latency",
+        "agent-orchestration"
+      ]
+    },
+    {
+      "id": "ft-data",
+      "name": "Training data curation",
+      "area": "fine-tuning",
+      "prereqs": [
+        "eval-datasets"
+      ]
+    },
+    {
+      "id": "ft-sft",
+      "name": "Supervised fine-tuning",
+      "area": "fine-tuning",
+      "prereqs": [
+        "transformers-arch",
+        "ft-data"
+      ]
+    },
+    {
+      "id": "ft-lora",
+      "name": "Parameter-efficient fine-tuning",
+      "area": "fine-tuning",
+      "prereqs": [
+        "ft-sft"
+      ]
+    },
+    {
+      "id": "ft-preference",
+      "name": "Preference optimisation",
+      "area": "fine-tuning",
+      "prereqs": [
+        "ft-sft"
+      ]
+    },
+    {
+      "id": "rl-mdp",
+      "name": "Markov decision processes",
+      "area": "reinforcement-learning",
+      "prereqs": [
+        "math-prob"
+      ]
+    },
+    {
+      "id": "rl-valuemethods",
+      "name": "Value-based methods",
+      "area": "reinforcement-learning",
+      "prereqs": [
+        "rl-mdp"
+      ]
+    },
+    {
+      "id": "rl-policygradient",
+      "name": "Policy gradient methods",
+      "area": "reinforcement-learning",
+      "prereqs": [
+        "rl-mdp",
+        "math-optim"
+      ]
+    },
+    {
+      "id": "rl-rlhf",
+      "name": "RLHF",
+      "area": "reinforcement-learning",
+      "prereqs": [
+        "rl-policygradient",
+        "ft-preference"
+      ]
+    },
+    {
+      "id": "safety-alignment",
+      "name": "Alignment techniques",
+      "area": "safety",
+      "prereqs": [
+        "ft-preference"
+      ]
+    },
+    {
+      "id": "safety-redteam",
+      "name": "Red-teaming and adversarial testing",
+      "area": "safety",
+      "prereqs": [
+        "eval-design",
+        "llm-failure-modes"
+      ]
+    },
+    {
+      "id": "mm-vlm",
+      "name": "Vision-language models",
+      "area": "multimodal",
+      "prereqs": [
+        "dl-architectures"
+      ]
+    },
+    {
+      "id": "mm-document",
+      "name": "Document understanding",
+      "area": "multimodal",
+      "prereqs": [
+        "mm-vlm",
+        "llm-structured-output"
+      ]
+    },
+    {
+      "id": "arch-routing",
+      "name": "Choosing an AI approach",
+      "area": "architecture",
+      "prereqs": [
+        "llm-failure-modes",
+        "eval-design"
+      ]
+    },
+    {
+      "id": "arch-hitl",
+      "name": "Human-in-the-loop design",
+      "area": "architecture",
+      "prereqs": [
+        "arch-routing",
+        "ml-eval-classical"
+      ]
+    },
+    {
+      "id": "arch-economics",
+      "name": "AI economics and build-versus-buy",
+      "area": "architecture",
+      "prereqs": [
+        "infra-tokenomics"
+      ]
+    },
+    {
+      "id": "rag-access",
+      "name": "Access-controlled retrieval",
+      "area": "retrieval",
+      "prereqs": [
+        "rag-embeddings"
+      ]
+    },
+    {
+      "id": "rag-ingestion",
+      "name": "Ingestion and freshness",
+      "area": "retrieval",
+      "prereqs": [
+        "rag-chunking"
+      ]
+    },
+    {
+      "id": "safety-privacy",
+      "name": "Privacy and data handling",
+      "area": "safety",
+      "prereqs": [
+        "llm-context"
+      ]
+    },
+    {
+      "id": "agent-multi",
+      "name": "Multi-agent systems",
+      "area": "agents",
+      "prereqs": [
+        "agent-orchestration",
+        "agent-eval"
+      ]
+    },
+    {
+      "id": "infra-reliability",
+      "name": "Reliability patterns",
+      "area": "inference",
+      "prereqs": [
+        "eng-deployment"
+      ]
+    }
+  ],
+  "courses": [
+    {
+      "id": "AIE-101",
+      "title": "LLM Application Engineering",
+      "block": "block-1",
+      "credits": 3,
+      "value_rank": 1,
+      "est_hours": 45,
+      "prereq_courses": [],
+      "advanced_standing": "substantial",
+      "why": "Everything else in Block I assumes you can get reliable, structured, tool-using behaviour out of a model. Four shipped products already evidence most of this.",
+      "outcomes": [
+        "Specify and enforce structured output such that malformed responses are impossible rather than unlikely",
+        "Design tool interfaces a model can actually use, and explain why a given interface fails",
+        "Name and detect the specific failure modes of a deployed LLM feature",
+        "Manage context deliberately — what goes in, what gets dropped, and what that costs"
+      ],
+      "skills_taught": [
+        "llm-prompting",
+        "llm-structured-output",
+        "llm-tooluse",
+        "llm-context",
+        "llm-failure-modes"
+      ],
+      "resources": [
+        "anthropic-docs",
+        "openai-cookbook",
+        "eugene-yan-llm-patterns",
+        "lilian-weng-hallucination",
+        "book-ai-engineering",
+        "paper-cot",
+        "paper-gpt3",
+        "karpathy-intro-llms",
+        "paper-self-consistency",
+        "fsdl-llm-bootcamp",
+        "fsdl-llm-foundations",
+        "fsdl-prompt-engineering",
+        "fsdl-augmented-lm",
+        "fsdl-ux-lui",
+        "anthropic-prompt-deep-dive",
+        "anthropic-prompting-101",
+        "repo-anthropic-prompt-tutorial",
+        "repo-anthropic-cookbook",
+        "paper-lost-in-middle",
+        "paper-toolformer",
+        "anthropic-docs-models",
+        "anthropic-docs-structured",
+        "anthropic-docs-context",
+        "anthropic-docs-tooluse"
+      ],
+      "spec": "courses/AIE-101-llm-application-engineering.json"
+    },
+    {
+      "id": "AIE-102",
+      "title": "Evaluation and Measurement",
+      "block": "block-1",
+      "credits": 4,
+      "value_rank": 2,
+      "est_hours": 66,
+      "prereq_courses": [
+        "AIE-101"
+      ],
+      "advanced_standing": "none",
+      "why": "The highest-value and least-practised skill in applied AI, and the one that makes every later claim in this programme defensible. It is also the course that makes Indie Degree's own grading panel credible — you cannot honestly grade with a judge you have not calibrated.",
+      "outcomes": [
+        "Build an eval set from production failures rather than from imagination",
+        "Name and measure the known pathologies of LLM judges — position, verbosity, self-enhancement bias",
+        "Calibrate an automated judge against your own labels and report the agreement, not just the score",
+        "Decide whether a difference between two systems is real, with an interval rather than a vibe",
+        "Wire evals into CI so a regression fails a build"
+      ],
+      "skills_taught": [
+        "eval-design",
+        "eval-datasets",
+        "eval-llm-judge",
+        "eval-stat",
+        "eval-human-calibration",
+        "eval-regression",
+        "eval-observability"
+      ],
+      "resources": [
+        "hamel-evals",
+        "hamel-llm-judge",
+        "eugene-yan-evals",
+        "paper-llm-as-judge",
+        "paper-g-eval",
+        "paper-length-controlled-alpacaeval",
+        "paper-chatbot-arena",
+        "paper-helm",
+        "repo-promptfoo",
+        "repo-inspect-ai",
+        "repo-openai-evals",
+        "repo-lm-eval-harness",
+        "repo-langfuse",
+        "book-ai-engineering",
+        "book-designing-ml-systems",
+        "repo-deepeval",
+        "repo-helm",
+        "sklearn-cohen-kappa",
+        "scipy-bootstrap",
+        "yt-evals-hamel-shreya",
+        "yt-hugo-build-evaluate",
+        "yt-hugo-poc-purgatory",
+        "fsdl-llmops",
+        "hamel-evals-faq",
+        "paper-who-validates-validators",
+        "paper-judging-the-judges",
+        "paper-position-bias-rubric-judge"
+      ],
+      "spec": "courses/AIE-102-evaluation-and-measurement.json",
+      "build_priority": 1,
+      "optional_hours": 1
+    },
+    {
+      "id": "AIE-103",
+      "title": "Retrieval and Context Systems",
+      "block": "block-1",
+      "credits": 3,
+      "value_rank": 5,
+      "est_hours": 50,
+      "prereq_courses": [
+        "AIE-101"
+      ],
+      "advanced_standing": "none",
+      "why": "Retrieval is the default answer to most enterprise AI questions and is wrong about a third of the time. Knowing when not to use it is the differentiator.",
+      "outcomes": [
+        "Build hybrid retrieval and show where lexical beats dense, with numbers",
+        "Choose a chunking strategy from measured retrieval quality rather than from a blog post",
+        "Evaluate retrieval separately from generation, and locate which half is failing",
+        "Articulate when long context replaces retrieval and when it does not",
+        "Enforce document-level access control through a retrieval pipeline, and prove it holds"
+      ],
+      "skills_taught": [
+        "rag-embeddings",
+        "rag-chunking",
+        "rag-hybrid-search",
+        "rag-reranking",
+        "rag-eval",
+        "nlp-embeddings",
+        "rag-access",
+        "rag-ingestion"
+      ],
+      "resources": [
+        "paper-rag",
+        "paper-lost-in-middle",
+        "paper-ragas",
+        "bm25-rank-fusion",
+        "sbert-docs",
+        "pinecone-learn-vector-search",
+        "repo-ragas",
+        "repo-phoenix",
+        "book-ai-engineering",
+        "yt-ben-clavie-rag",
+        "cmu-anlp-retrieval",
+        "cmu-anlp-playlist",
+        "paper-dpr",
+        "paper-beir",
+        "paper-colbert",
+        "paper-hyde",
+        "paper-rag-best-practices",
+        "paper-rag-vs-longcontext",
+        "anthropic-contextual-retrieval",
+        "sbert-bi-encoders",
+        "sbert-cross-encoders",
+        "owasp-llm-top10"
+      ],
+      "spec": "courses/AIE-103-retrieval-and-context-systems.json",
+      "advanced_standing_note": "Nothing carries over. Carpark SG integrates external data sources but does no embedding retrieval, and none of the four products rank or evaluate retrieved results.",
+      "optional_hours": 1
+    },
+    {
+      "id": "AIE-104",
+      "title": "Agents and Tool-Use Systems",
+      "block": "block-1",
+      "credits": 4,
+      "value_rank": 6,
+      "est_hours": 59,
+      "prereq_courses": [
+        "AIE-101",
+        "AIE-102"
+      ],
+      "advanced_standing": "none",
+      "why": "Multi-step reliability is where demos die. Compounding per-step error is an arithmetic problem before it is a prompting one.",
+      "outcomes": [
+        "Derive the reliability of an n-step agent from its per-step success rate, and design against it",
+        "Choose between workflow and agent for a given task and defend the choice",
+        "Sandbox tool access to least privilege",
+        "Evaluate an agent on task completion rather than on transcript plausibility",
+        "Red-team your own agent and report what you got it to do that it should not",
+        "Justify a multi-agent design against a single-agent baseline, or decline to build one",
+        "State what personal data enters a model, where it goes, and what the local regulator expects"
+      ],
+      "skills_taught": [
+        "agent-planning",
+        "agent-orchestration",
+        "agent-reliability",
+        "agent-sandboxing",
+        "agent-eval",
+        "safety-redteam",
+        "agent-multi",
+        "safety-privacy"
+      ],
+      "resources": [
+        "anthropic-building-effective-agents",
+        "lilian-weng-agents",
+        "paper-react",
+        "paper-toolformer",
+        "paper-swe-bench",
+        "hf-agents-course",
+        "repo-inspect-ai",
+        "berkeley-llm-agents-mooc",
+        "berkeley-agentic-ai-mooc",
+        "berkeley-agents-overview",
+        "berkeley-llm-reasoning",
+        "berkeley-agent-safety",
+        "anthropic-agents-video",
+        "anthropic-writing-tools",
+        "paper-reflexion",
+        "paper-tree-of-thoughts",
+        "paper-tau-bench",
+        "paper-webarena",
+        "paper-swe-agent",
+        "paper-indirect-prompt-injection",
+        "paper-gcg-attacks",
+        "owasp-llm-top10",
+        "mcp-docs",
+        "anthropic-multi-agent",
+        "paper-why-multiagent-fails",
+        "paper-autogen",
+        "paper-metagpt",
+        "paper-generative-agents",
+        "pdpc-ai-guidelines"
+      ],
+      "spec": "courses/AIE-104-agents-and-tool-use-systems.json"
+    },
+    {
+      "id": "AIE-105",
+      "title": "Inference, Cost and Latency Engineering",
+      "block": "block-1",
+      "credits": 3,
+      "value_rank": 4,
+      "est_hours": 50,
+      "prereq_courses": [
+        "AIE-101"
+      ],
+      "advanced_standing": "partial",
+      "why": "The questions a field engineer is actually asked in the room: what will this cost at our volume, and how fast will it feel. Very few candidates can answer either with a number.",
+      "outcomes": [
+        "Model the token cost of a feature at a given volume, before building it",
+        "Explain the prefill/decode split and what each implies for latency",
+        "Apply caching, batching and streaming, and measure what each bought",
+        "Read a serving stack — paged attention, continuous batching, quantisation — and reason about its trade-offs",
+        "Degrade a model-backed feature gracefully rather than failing it"
+      ],
+      "skills_taught": [
+        "infra-tokenomics",
+        "infra-caching",
+        "infra-serving",
+        "infra-batching",
+        "infra-latency",
+        "infra-quantisation",
+        "infra-reliability"
+      ],
+      "resources": [
+        "paper-vllm",
+        "paper-speculative-decoding",
+        "paper-gptq",
+        "repo-vllm",
+        "repo-llama-cpp",
+        "repo-litellm",
+        "mit-efficientml",
+        "book-ddia",
+        "kipply-inference-arithmetic",
+        "horace-brrr",
+        "stanford-cs336",
+        "anthropic-docs",
+        "paper-efficiently-scaling-inference",
+        "paper-sarathi-serve",
+        "paper-awq",
+        "paper-llm-int8",
+        "paper-smoothquant",
+        "paper-medusa",
+        "repo-cs336-lectures",
+        "anthropic-docs-caching",
+        "anthropic-docs-streaming",
+        "book-release-it"
+      ],
+      "spec": "courses/AIE-105-inference-cost-and-latency.json",
+      "optional_hours": 2
+    },
+    {
+      "id": "AIE-106",
+      "title": "Speech and Multimodal Systems",
+      "block": "block-1",
+      "credits": 4,
+      "value_rank": 7,
+      "est_hours": 62,
+      "prereq_courses": [
+        "AIE-101",
+        "AIE-105"
+      ],
+      "advanced_standing": "partial",
+      "why": "Domain depth for voice AI specifically, where existing shipped work already provides a foundation and the target employers live.",
+      "outcomes": [
+        "Build a full ASR → reasoning → TTS loop and account for every millisecond in the budget",
+        "Explain why transport choice dominates perceived latency in voice agents",
+        "Measure ASR quality properly, including on accented and code-switched speech",
+        "Handle barge-in, turn-taking and partial results",
+        "Decide whether a document problem needs vision at all, and show the measurement behind the answer"
+      ],
+      "skills_taught": [
+        "speech-asr",
+        "speech-tts",
+        "speech-streaming",
+        "speech-latency",
+        "speech-agents",
+        "mm-vlm",
+        "mm-document"
+      ],
+      "resources": [
+        "paper-whisper",
+        "paper-conformer",
+        "repo-whisper",
+        "hf-audio-course",
+        "webrtc-for-the-curious",
+        "elevenlabs-docs",
+        "slp3",
+        "cs224s-llm-speech",
+        "livekit-agent-latency",
+        "paper-wav2vec2",
+        "paper-hubert",
+        "paper-moshi",
+        "paper-vall-e",
+        "paper-fastspeech2",
+        "paper-seamlessm4t",
+        "paper-whisperx",
+        "paper-common-voice",
+        "paper-codeswitch-seame",
+        "paper-cs-dialogue",
+        "paper-clip",
+        "paper-llava",
+        "paper-qwen2vl",
+        "paper-donut",
+        "paper-layoutlmv3",
+        "paper-nougat",
+        "paper-docvqa",
+        "paper-flamingo",
+        "hf-audio-eval",
+        "elevenlabs-streaming",
+        "elevenlabs-latency",
+        "anthropic-docs-vision"
+      ],
+      "spec": "courses/AIE-106-speech-and-multimodal-systems.json"
+    },
+    {
+      "id": "AIE-201",
+      "title": "Mathematics for Machine Learning",
+      "block": "block-2",
+      "credits": 3,
+      "value_rank": 8,
+      "est_hours": 70,
+      "prereq_courses": [],
+      "advanced_standing": "none",
+      "why": "Targeted, not an undergraduate sequence. Only what is needed to read the papers and understand what training is doing.",
+      "outcomes": [
+        "Manipulate matrices, eigendecompositions and projections fluently enough to read architecture papers",
+        "Differentiate through a computational graph by hand",
+        "Reason about distributions, expectation and variance in a loss function",
+        "Explain gradient descent and its common variants from the mathematics, not the metaphor"
+      ],
+      "skills_taught": [
+        "math-linalg",
+        "math-calc",
+        "math-prob",
+        "math-optim"
+      ],
+      "resources": [
+        "book-math-for-ml",
+        "3b1b-linear-algebra",
+        "3b1b-calculus",
+        "mit-1806-strang",
+        "mit-ocw-1806"
+      ]
+    },
+    {
+      "id": "AIE-202",
+      "title": "Machine Learning Foundations",
+      "block": "block-2",
+      "credits": 3,
+      "value_rank": 9,
+      "est_hours": 60,
+      "prereq_courses": [
+        "AIE-201"
+      ],
+      "advanced_standing": "none",
+      "why": "The classical grounding that makes deep learning legible rather than magical, and the source of most evaluation intuition.",
+      "outcomes": [
+        "Implement linear and logistic regression, and a tree ensemble, from scratch",
+        "Diagnose bias and variance from learning curves",
+        "Choose and justify a metric for an imbalanced problem",
+        "Explain what a model is fitting, and to what"
+      ],
+      "skills_taught": [
+        "ml-supervised",
+        "ml-unsupervised",
+        "ml-featureeng",
+        "ml-eval-classical"
+      ],
+      "resources": [
+        "stanford-cs229-playlist",
+        "book-hands-on-ml",
+        "google-ml-crash-course",
+        "book-ml-powered-apps"
+      ]
+    },
+    {
+      "id": "AIE-203",
+      "title": "Deep Learning",
+      "block": "block-2",
+      "credits": 3,
+      "value_rank": 10,
+      "est_hours": 65,
+      "prereq_courses": [
+        "AIE-202"
+      ],
+      "advanced_standing": "none",
+      "why": "Backpropagation built by hand, then the training dynamics that decide whether a network learns anything.",
+      "outcomes": [
+        "Implement reverse-mode autodiff from scratch and use it to train a network",
+        "Debug a training run from its loss curve",
+        "Apply and justify normalisation, initialisation and regularisation choices",
+        "Read an architecture diagram and implement it"
+      ],
+      "skills_taught": [
+        "dl-backprop",
+        "dl-architectures",
+        "dl-training",
+        "dl-regularisation",
+        "eng-pytorch",
+        "eng-python"
+      ],
+      "resources": [
+        "karpathy-zero-to-hero",
+        "3b1b-neural-networks",
+        "fastai-part1",
+        "d2l",
+        "stanford-cs231n",
+        "mit-6s191",
+        "book-deep-learning-goodfellow",
+        "pytorch-tutorials",
+        "python-numpy-for-ts-devs",
+        "colah-lstm"
+      ]
+    },
+    {
+      "id": "AIE-204",
+      "title": "Transformers and LLMs from Scratch",
+      "block": "block-2",
+      "credits": 4,
+      "value_rank": 11,
+      "est_hours": 80,
+      "prereq_courses": [
+        "AIE-203"
+      ],
+      "advanced_standing": "none",
+      "why": "The flagship of Block II. Ends with a working GPT you can explain line by line — the single most legible artifact in the programme.",
+      "outcomes": [
+        "Implement multi-head self-attention from scratch, without reference",
+        "Train a small GPT end to end, from tokeniser to sampling",
+        "Explain every architectural choice in a modern decoder and what it is buying",
+        "Reproduce a published result and account for the gap where you fail to"
+      ],
+      "skills_taught": [
+        "transformers-attention",
+        "transformers-arch",
+        "transformers-implementation",
+        "nlp-tokenisation"
+      ],
+      "resources": [
+        "karpathy-build-gpt",
+        "karpathy-reproduce-gpt2",
+        "stanford-cs336",
+        "repo-nanogpt",
+        "repo-mingpt",
+        "paper-attention",
+        "annotated-transformer",
+        "jay-alammar-transformer",
+        "distill-attention",
+        "book-build-llm-scratch",
+        "stanford-cs224n",
+        "stanford-cs25",
+        "paper-scaling-laws",
+        "paper-chinchilla"
+      ]
+    },
+    {
+      "id": "AIE-205",
+      "title": "Fine-tuning and Post-training",
+      "block": "block-2",
+      "credits": 3,
+      "value_rank": 12,
+      "est_hours": 60,
+      "prereq_courses": [
+        "AIE-204",
+        "AIE-102"
+      ],
+      "advanced_standing": "none",
+      "why": "Where a base model becomes a product, and where evaluation discipline from AIE-102 stops being optional.",
+      "outcomes": [
+        "Curate a fine-tuning dataset and defend every inclusion rule",
+        "Run LoRA fine-tuning and measure whether it actually helped",
+        "Explain preference optimisation and implement DPO",
+        "Detect and report regression on capabilities you did not intend to change"
+      ],
+      "skills_taught": [
+        "ft-data",
+        "ft-sft",
+        "ft-lora",
+        "ft-preference",
+        "safety-alignment"
+      ],
+      "resources": [
+        "paper-lora",
+        "paper-dpo",
+        "paper-instructgpt",
+        "paper-llama2",
+        "paper-constitutional-ai",
+        "repo-trl",
+        "repo-peft",
+        "repo-transformers",
+        "hf-nlp-course",
+        "karpathy-deep-dive-llms",
+        "book-build-llm-scratch"
+      ]
+    },
+    {
+      "id": "AIE-206",
+      "title": "Reinforcement Learning",
+      "block": "block-2",
+      "credits": 3,
+      "value_rank": 14,
+      "est_hours": 65,
+      "prereq_courses": [
+        "AIE-201",
+        "AIE-203"
+      ],
+      "advanced_standing": "none",
+      "why": "Lowest immediate employability of the deep track, and the necessary grounding for RLHF and for reasoning-model training. Placed late on purpose.",
+      "outcomes": [
+        "Formalise a problem as an MDP",
+        "Implement a value-based and a policy-gradient agent",
+        "Explain the credit assignment problem and how RLHF inherits it",
+        "Connect policy optimisation to preference optimisation from AIE-205"
+      ],
+      "skills_taught": [
+        "rl-mdp",
+        "rl-valuemethods",
+        "rl-policygradient",
+        "rl-rlhf"
+      ],
+      "resources": [
+        "book-sutton-barto",
+        "spinning-up",
+        "repo-spinningup",
+        "hf-deep-rl-course"
+      ]
+    },
+    {
+      "id": "AIE-207",
+      "title": "Systems for Machine Learning",
+      "block": "block-2",
+      "credits": 3,
+      "value_rank": 13,
+      "est_hours": 60,
+      "prereq_courses": [
+        "AIE-204"
+      ],
+      "advanced_standing": "none",
+      "why": "The hardware reality underneath everything above. Explains why architectures look the way they do.",
+      "outcomes": [
+        "Explain the memory hierarchy of a GPU and why attention is IO-bound",
+        "Profile a training step and identify the bottleneck",
+        "Describe data, tensor and pipeline parallelism and when each applies",
+        "Reason about the arithmetic intensity of an operation"
+      ],
+      "skills_taught": [
+        "infra-gpu",
+        "infra-distributed"
+      ],
+      "resources": [
+        "paper-flashattention",
+        "paper-switch-transformer",
+        "repo-llm-c",
+        "mit-efficientml",
+        "repo-pytorch",
+        "stanford-cs336"
+      ]
+    },
+    {
+      "id": "AIE-300",
+      "title": "Capstone",
+      "block": "block-2",
+      "credits": 6,
+      "value_rank": 15,
+      "est_hours": 120,
+      "prereq_courses": [
+        "AIE-102",
+        "AIE-103",
+        "AIE-104",
+        "AIE-105",
+        "AIE-106",
+        "AIE-204",
+        "AIE-107"
+      ],
+      "advanced_standing": "none",
+      "why": "One substantial system that exercises the whole programme, shipped publicly and defended aloud. This is the artifact the transcript is built around.",
+      "outcomes": [
+        "Ship a system that a stranger can use, with published evaluation results",
+        "Report honestly on what did not work and what the numbers actually say",
+        "Defend the design under unscripted questioning",
+        "Write it up so a hiring manager can assess it in ten minutes"
+      ],
+      "skills_taught": [],
+      "required_evidence_tiers": [
+        3,
+        4
+      ],
+      "resources": []
+    },
+    {
+      "id": "AIE-107",
+      "title": "Architecture and Judgement",
+      "block": "block-1",
+      "credits": 2,
+      "value_rank": 3,
+      "est_hours": 32,
+      "prereq_courses": [
+        "AIE-101",
+        "AIE-102"
+      ],
+      "advanced_standing": "none",
+      "why": "Every other Block I course teaches you to build one thing well; none asks whether you should have built it. This one does nothing else — rules versus classical ML versus an LLM, decided with measurements, and the human-in-the-loop routing that follows from it.",
+      "outcomes": [
+        "Decide between rules, a classical model and an LLM for a stated problem, and defend it with numbers",
+        "Produce and read the classification metrics that decision rests on, including calibration",
+        "Set a confidence threshold for human review from data rather than by feel, and state what it costs",
+        "Build a model selection matrix, and a build-versus-buy case a finance-literate reader would accept"
+      ],
+      "skills_taught": [
+        "arch-routing",
+        "arch-hitl",
+        "arch-economics",
+        "ml-eval-classical"
+      ],
+      "resources": [
+        "google-ml-crash-course",
+        "book-hands-on-ml",
+        "book-ml-powered-apps",
+        "sklearn-model-evaluation",
+        "sklearn-calibration",
+        "paper-selective-prediction",
+        "paper-conformal-prediction",
+        "book-designing-ml-systems",
+        "book-ai-engineering",
+        "anthropic-docs-models",
+        "stanford-cs229-playlist"
+      ],
+      "spec": "courses/AIE-107-architecture-and-judgement.json",
+      "optional_hours": 1
+    }
+  ],
+  "accepted_inversions": {
+    "rationale": "Applied-first ordering means some skills are used before they are derived. Deliberate: you learn to measure a judge before you can prove the statistics, and to call attention before you can differentiate it. Each pair below is an accepted, recorded exception; anything not listed here is a genuine ordering bug.",
+    "pairs": [
+      {
+        "skill": "nlp-embeddings",
+        "prereq": "math-linalg"
+      },
+      {
+        "skill": "eval-stat",
+        "prereq": "math-prob"
+      },
+      {
+        "skill": "infra-tokenomics",
+        "prereq": "nlp-tokenisation"
+      },
+      {
+        "skill": "infra-quantisation",
+        "prereq": "dl-training"
+      },
+      {
+        "skill": "speech-asr",
+        "prereq": "dl-architectures"
+      },
+      {
+        "skill": "speech-tts",
+        "prereq": "dl-architectures"
+      },
+      {
+        "skill": "mm-vlm",
+        "prereq": "dl-architectures"
+      },
+      {
+        "skill": "ml-eval-classical",
+        "prereq": "math-prob"
+      }
+    ]
+  }
+}

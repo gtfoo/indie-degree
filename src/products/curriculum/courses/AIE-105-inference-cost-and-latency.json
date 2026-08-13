@@ -1,0 +1,1287 @@
+{
+  "course": "AIE-105",
+  "title": "Inference, Cost and Latency Engineering",
+  "credits": 3,
+  "est_hours": 50,
+  "spec_version": "0.1",
+  "registered": "2026-08-13",
+  "premise": "The two questions a field engineer is actually asked in the room are what this will cost at our volume and how fast it will feel. Very few candidates can answer either with a number, and the ones who can are visibly different in the meeting. This course exists to make you one of them.",
+  "advanced_standing_note": "Advanced standing awarded 1 of 3 credits, for token economics: Career Side Quests already carries per-run token accounting and routes mechanical stages to the cheapest capable provider. That covers measuring cost after the fact. It does not cover modelling cost before building, which is the half that matters in a customer conversation and is not exemptable here. Serving, batching, caching and quantisation carried over nothing.",
+  "hardware_note": "Modules 4 and 5 need a GPU. The droplet cannot serve models — it is 1 GB running five services, and the analytics unit is already memory-capped to stop a parse from taking the apps down. The realistic options are a few rented GPU hours, or llama.cpp locally, which is enough for the quantisation work and for measuring the throughput-latency curve at small scale. Where an assignment can only be done at small scale, say so and state what you would expect to change at production scale — that judgement is itself assessed.",
+  "laboratory": "Your own products, and one of them is unusually well suited: 1 Percent More Fluent streams both text and audio, so it has a real time-to-first-token problem with a real user on the other end. Career Side Quests is the cost case — a multi-stage pipeline with per-run accounting already in place.",
+  "sitting_rule": "Every item is completable in one sitting. Nothing exceeds 180 minutes, and anything over 90 declares its own checkpoints.",
+  "panel": {
+    "models": [
+      "claude-opus-5",
+      "gpt-5",
+      "gemini-flash-latest"
+    ],
+    "blind": true,
+    "blind_note": "Judges see the submission and the rubric, never each other's scores, and never the learner's self-assessment.",
+    "rubric_registered_before_submission": true,
+    "disagreement": "Scores are reported per judge and never averaged into a single number when the spread is 2 or more on any criterion.",
+    "measurement_note": "Latency claims must come with a distribution, not a single number. A submission reporting only a mean fails the blocking check before any judge reads it — the tail is the user experience.",
+    "exemption_handling": "An exempted item is recorded on the transcript as advanced standing at Tier 3 with its artifact link, never as completed coursework."
+  },
+  "modules": [
+    {
+      "id": "M1",
+      "title": "The arithmetic of cost",
+      "est_minutes": 525,
+      "items": [
+        {
+          "id": "M1.1",
+          "type": "reading",
+          "title": "Transformer Inference Arithmetic",
+          "resource": "kipply-inference-arithmetic",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "infra-tokenomics",
+            "infra-latency"
+          ],
+          "brief": "Read this first and read it properly. It is first-principles arithmetic with no experiments and no hard maths, and it is the thing that lets you answer a costing question in the room rather than promising to follow up."
+        },
+        {
+          "id": "M1.2",
+          "type": "lecture",
+          "title": "Inference (CS336 Lecture 10)",
+          "resource": "stanford-cs336",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "infra-serving",
+            "infra-latency"
+          ],
+          "brief": "The inference lecture from the playlist. Prefill and decode, the KV cache, batching and speculative decoding, all derived rather than asserted.",
+          "locator": "Lecture 10, Inference."
+        },
+        {
+          "id": "M1.3",
+          "type": "reading",
+          "title": "Cost and inference chapters",
+          "resource": "book-ai-engineering",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "infra-tokenomics"
+          ],
+          "locator": "The inference-optimisation chapter."
+        },
+        {
+          "id": "M1.4",
+          "type": "assignment",
+          "title": "Instrument every call",
+          "est_minutes": 60,
+          "tier": 1,
+          "rubric": "R-M1.4",
+          "skills": [
+            "infra-tokenomics"
+          ],
+          "advanced_standing_exempt": true,
+          "exempt_rationale": "Career Side Quests already carries per-run token accounting across every stage, and routes mechanical stages to the cheapest capable provider. Cite the implementation and its cost readout rather than rebuilding it.",
+          "brief": "Make every model call in one product report its input tokens, output tokens and cost, aggregated per user-visible operation rather than per API call."
+        },
+        {
+          "id": "M1.5",
+          "type": "assignment",
+          "title": "Cost model before you build",
+          "est_minutes": 120,
+          "tier": 1,
+          "rubric": "R-M1.5",
+          "skills": [
+            "infra-tokenomics"
+          ],
+          "brief": "This is the unexempted half. Pick a feature you have not built. Before writing any of it, produce a cost model: tokens per operation, operations per user per month, cost at 100, 10,000 and 1,000,000 users, and the single assumption the whole model is most sensitive to. Then build a thin version and compare the actual cost against your prediction. Report the error and where it came from.",
+          "checkpoints": [
+            "model written and timestamped before implementation",
+            "thin version built",
+            "predicted versus actual reported with the error explained"
+          ]
+        },
+        {
+          "id": "M1.6",
+          "type": "assignment",
+          "title": "The fine-tune decision",
+          "est_minutes": 105,
+          "tier": 2,
+          "rubric": "R-M1.6",
+          "skills": [
+            "infra-tokenomics"
+          ],
+          "brief": "Should we fine-tune? is a top-three customer question and the honest answer is an arithmetic one. Take a real capability gap in one of your products and cost three routes to closing it: better prompting, retrieval, and fine-tuning. For each, state the engineering cost, the per-request cost at volume, the expected quality gain and how you would measure it, and what has to be true for it to be the right answer. You are not fine-tuning anything here — AIE-205 does that. You are learning to answer the question before the work, which is the part of it a field engineer actually owns.",
+          "checkpoints": [
+            "gap defined",
+            "three routes costed",
+            "decision with its falsifying condition"
+          ],
+          "optional": true,
+          "optional_reason": "AIE-107 M4.4 costs four routes over three years — frontier API, self-hosted open model, fine-tuned small model, and no model at all — and AIE-107 is studied first. This item costs three of those four and adds nothing AIE-107 does not already demand. Kept as an elective for the case where a specific capability gap is worth costing on its own; it is assessed if submitted, and completion does not wait for it."
+        },
+        {
+          "id": "M1.7",
+          "type": "retention",
+          "title": "Retention: token economics and cost modelling",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "infra-tokenomics"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Prefill and decode",
+      "est_minutes": 405,
+      "items": [
+        {
+          "id": "M2.1",
+          "type": "reading",
+          "title": "Efficiently Scaling Transformer Inference",
+          "resource": "paper-efficiently-scaling-inference",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "infra-serving",
+            "infra-latency"
+          ]
+        },
+        {
+          "id": "M2.2",
+          "type": "reading",
+          "title": "Making Deep Learning Go Brrrr From First Principles",
+          "resource": "horace-brrr",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "infra-gpu",
+            "infra-latency"
+          ],
+          "brief": "Compute, memory bandwidth, overhead. The three-way split that explains why an optimisation helped, or did nothing at all."
+        },
+        {
+          "id": "M2.3",
+          "type": "assignment",
+          "title": "Measure the split",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M2.3",
+          "skills": [
+            "infra-latency"
+          ],
+          "brief": "For one real feature, measure time to first token and inter-token latency separately across at least 100 requests, at three different input lengths. Show that prefill scales with input and decode does not, or explain why your data says otherwise. Report distributions — p50, p95, p99 — never a mean alone.",
+          "checkpoints": [
+            "100+ requests at three input lengths",
+            "TTFT and ITL separated",
+            "distributions reported"
+          ]
+        },
+        {
+          "id": "M2.4",
+          "type": "assignment",
+          "title": "The latency budget",
+          "est_minutes": 90,
+          "tier": 2,
+          "rubric": "R-M2.4",
+          "skills": [
+            "infra-latency"
+          ],
+          "brief": "Write the end-to-end budget for one user-visible operation: every hop, its measured contribution, and which hop you would attack first. Include the parts that are not the model — network, cold start, your own code — because they are frequently the majority and are always the first thing a customer's engineer will ask about."
+        },
+        {
+          "id": "M2.5",
+          "type": "retention",
+          "title": "Retention: prefill, decode and latency structure",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "infra-latency"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Caching",
+      "est_minutes": 330,
+      "items": [
+        {
+          "id": "M3.1",
+          "type": "reading",
+          "title": "Prompt caching",
+          "resource": "anthropic-docs-caching",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "infra-caching"
+          ]
+        },
+        {
+          "id": "M3.2",
+          "type": "reading",
+          "title": "litellm: routing, fallbacks and caching",
+          "resource": "repo-litellm",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "infra-caching",
+            "infra-tokenomics"
+          ],
+          "locator": "litellm/router.py — the routing, fallback and caching paths."
+        },
+        {
+          "id": "M3.3",
+          "type": "assignment",
+          "title": "Cache what actually repeats",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M3.3",
+          "skills": [
+            "infra-caching"
+          ],
+          "brief": "Find the repeated prefix in one of your products — a system prompt, a rubric, a document read on every request — and cache it. Report hit rate, cost saved and latency saved separately, over real traffic rather than a synthetic loop. Then state the traffic pattern at which the cache stops paying for itself.",
+          "checkpoints": [
+            "repeated prefix identified from real traffic",
+            "hit rate measured",
+            "cost and latency savings reported separately"
+          ]
+        },
+        {
+          "id": "M3.4",
+          "type": "assignment",
+          "title": "When the cache is wrong",
+          "est_minutes": 60,
+          "tier": 2,
+          "rubric": "R-M3.4",
+          "skills": [
+            "infra-caching"
+          ],
+          "brief": "Describe the case where your cache serves something it should not have, how a user would notice, and what invalidates it. Every cache has one. A submission claiming otherwise must argue it."
+        },
+        {
+          "id": "M3.5",
+          "type": "retention",
+          "title": "Retention: caching strategy and invalidation",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "infra-caching"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Batching and serving",
+      "est_minutes": 450,
+      "items": [
+        {
+          "id": "M4.1",
+          "type": "reading",
+          "title": "PagedAttention and vLLM",
+          "resource": "paper-vllm",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "infra-serving",
+            "infra-batching"
+          ]
+        },
+        {
+          "id": "M4.2",
+          "type": "reading",
+          "title": "Sarathi-Serve: taming the throughput-latency tradeoff",
+          "resource": "paper-sarathi-serve",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "infra-batching",
+            "infra-latency"
+          ],
+          "brief": "Chunked prefill. This paper names the trade directly, and the trade is what a customer is really asking about when they ask how fast it is."
+        },
+        {
+          "id": "M4.3",
+          "type": "reading",
+          "title": "vLLM: scheduler and engine",
+          "resource": "repo-vllm",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "infra-serving"
+          ],
+          "locator": "The engine and scheduler under vllm/ — start at the LLMEngine entry point and follow a request through."
+        },
+        {
+          "id": "M4.4",
+          "type": "assignment",
+          "title": "Throughput versus latency, measured",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M4.4",
+          "skills": [
+            "infra-batching",
+            "infra-serving"
+          ],
+          "brief": "Serve an open model yourself — rented GPU or llama.cpp locally — and produce the curve: requests per second against p95 latency, as concurrency rises. Find the knee. If you can only run this at small scale, say so explicitly and state what you expect to change at production scale and why.",
+          "checkpoints": [
+            "model served locally or on rented hardware",
+            "concurrency swept",
+            "curve plotted with the knee identified"
+          ]
+        },
+        {
+          "id": "M4.5",
+          "type": "assignment",
+          "title": "The curve a customer asks for",
+          "est_minutes": 75,
+          "tier": 2,
+          "rubric": "R-M4.5",
+          "skills": [
+            "infra-serving"
+          ],
+          "brief": "Convert that curve into the answer to 'we have 500 concurrent users, what do we need?' — hardware, expected p95, monthly cost, and the assumption most likely to make you wrong."
+        },
+        {
+          "id": "M4.6",
+          "type": "retention",
+          "title": "Retention: batching, scheduling and the serving stack",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "infra-batching"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Quantisation",
+      "est_minutes": 390,
+      "items": [
+        {
+          "id": "M5.1",
+          "type": "reading",
+          "title": "LLM.int8()",
+          "resource": "paper-llm-int8",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "infra-quantisation"
+          ]
+        },
+        {
+          "id": "M5.2",
+          "type": "reading",
+          "title": "GPTQ",
+          "resource": "paper-gptq",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "infra-quantisation"
+          ]
+        },
+        {
+          "id": "M5.3",
+          "type": "reading",
+          "title": "AWQ",
+          "resource": "paper-awq",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "infra-quantisation"
+          ]
+        },
+        {
+          "id": "M5.4",
+          "type": "reading",
+          "title": "SmoothQuant",
+          "resource": "paper-smoothquant",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "infra-quantisation"
+          ]
+        },
+        {
+          "id": "M5.5",
+          "type": "reading",
+          "title": "llama.cpp: quantisation formats in practice",
+          "resource": "repo-llama-cpp",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "infra-quantisation"
+          ],
+          "locator": "tools/quantize/ and the quantisation format table in the README."
+        },
+        {
+          "id": "M5.6",
+          "type": "assignment",
+          "title": "Quantise, and find what it cost you",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M5.6",
+          "skills": [
+            "infra-quantisation"
+          ],
+          "brief": "Take one model at two or more quantisation levels and measure three things on the same task: memory, speed, and quality against an eval set from AIE-102. The quality number is the one people skip and it is the only one that decides whether you can ship it. Report where the quality falls off a cliff rather than where it declines gently.",
+          "checkpoints": [
+            "two or more quantisation levels run",
+            "memory and speed measured",
+            "quality measured against a real eval set"
+          ]
+        },
+        {
+          "id": "M5.7",
+          "type": "retention",
+          "title": "Retention: quantisation methods and their costs",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "infra-quantisation"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M6",
+      "title": "Streaming and perceived latency",
+      "est_minutes": 330,
+      "items": [
+        {
+          "id": "M6.1",
+          "type": "reading",
+          "title": "Fast Inference from Transformers via Speculative Decoding",
+          "resource": "paper-speculative-decoding",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "infra-latency"
+          ]
+        },
+        {
+          "id": "M6.2",
+          "type": "reading",
+          "title": "Medusa: multiple decoding heads",
+          "resource": "paper-medusa",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "infra-latency"
+          ]
+        },
+        {
+          "id": "M6.3",
+          "type": "assignment",
+          "title": "Time to first token, on the text path",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M6.3",
+          "skills": [
+            "infra-latency"
+          ],
+          "brief": "1 Percent More Fluent streams text to a person who is waiting. Measure time to first token as the user experiences it — from their action, not from your API call — then make one change and measure again. Report the distribution before and after, and the cost of the change. Scope this to the text path only: the audio path is measured in AIE-106 M4.6, and measuring them together hides which one you actually improved.",
+          "checkpoints": [
+            "TTFT measured from user action",
+            "one change implemented",
+            "before and after distributions reported"
+          ]
+        },
+        {
+          "id": "M6.4",
+          "type": "assignment",
+          "title": "Perceived versus measured",
+          "est_minutes": 75,
+          "tier": 2,
+          "rubric": "R-M6.4",
+          "skills": [
+            "infra-latency"
+          ],
+          "brief": "Identify one change that made the product feel faster without making it faster, and one that made it faster without feeling faster. Explain the mechanism in each case. This distinction is most of what a good demo is made of, and being able to name it is what separates an engineer from a salesperson in the room."
+        },
+        {
+          "id": "M6.5",
+          "type": "retention",
+          "title": "Retention: streaming, speculation and perceived speed",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "infra-latency"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M7",
+      "title": "Reliability",
+      "est_minutes": 285,
+      "items": [
+        {
+          "id": "M7.1",
+          "type": "reading",
+          "title": "Stability patterns",
+          "resource": "book-release-it",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": [
+            "infra-reliability"
+          ],
+          "locator": "The stability patterns and antipatterns - timeouts, circuit breakers, bulkheads, fail fast."
+        },
+        {
+          "id": "M7.2",
+          "type": "reading",
+          "title": "Fallbacks, retries and routing",
+          "resource": "repo-litellm",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "infra-reliability"
+          ],
+          "locator": "The fallback and retry configuration, and the router's health-check behaviour."
+        },
+        {
+          "id": "M7.3",
+          "type": "assignment",
+          "title": "Fail well",
+          "est_minutes": 135,
+          "tier": 1,
+          "rubric": "R-M7.3",
+          "skills": [
+            "infra-reliability"
+          ],
+          "brief": "Take a model-backed feature and make it degrade instead of breaking: a timeout that fires before the user gives up, a fallback to a different provider, a circuit breaker that stops hammering a failing endpoint, and a final deterministic answer that is still worth something. Prove it by breaking the primary provider deliberately and showing what the user sees at each stage. You have done this for payments; the difference here is that the fallback can be worse rather than merely slower, and the report has to say how much worse.",
+          "checkpoints": [
+            "timeout, fallback and breaker implemented",
+            "primary provider failure simulated",
+            "quality of the degraded path measured, not assumed"
+          ]
+        },
+        {
+          "id": "M7.4",
+          "type": "retention",
+          "title": "Retention: stability patterns for model-backed services",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": [
+            "infra-reliability"
+          ],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M8",
+      "title": "Course project",
+      "est_minutes": 405,
+      "items": [
+        {
+          "id": "M8.1",
+          "type": "project",
+          "title": "Ship a measured improvement",
+          "est_minutes": 165,
+          "tier": 3,
+          "rubric": "R-M8.1",
+          "skills": [
+            "infra-latency",
+            "infra-caching",
+            "infra-serving"
+          ],
+          "brief": "Make one of your live products materially cheaper or faster, with the improvement measured on real traffic before and after. Materially means you would mention the number to a customer without embarrassment.",
+          "checkpoints": [
+            "baseline measured on real traffic",
+            "change deployed",
+            "post-change measurement over comparable traffic"
+          ]
+        },
+        {
+          "id": "M8.2",
+          "type": "project",
+          "title": "The economics report",
+          "est_minutes": 105,
+          "tier": 2,
+          "rubric": "R-M8.2",
+          "skills": [
+            "infra-tokenomics"
+          ],
+          "brief": "Write the document you would hand a customer evaluating this feature: what it costs per operation, what it costs at their volume, the p50 and p95 latency, what you tried that did not help, and the volume at which the architecture would have to change. Add the commercial frame a buyer actually uses: cost per interaction set against the value of that interaction, and the gross margin the feature leaves at their volume. A cost with no value beside it cannot be acted on.",
+          "checkpoints": [
+            "cost per operation and at volume",
+            "latency distributions",
+            "failed optimisations included",
+            "cost per interaction set against value and margin"
+          ]
+        },
+        {
+          "id": "M8.3",
+          "type": "project",
+          "title": "Publish",
+          "est_minutes": 75,
+          "tier": 3,
+          "rubric": "R-M8.3",
+          "skills": [
+            "infra-tokenomics"
+          ],
+          "brief": "Publish this as the next chapter of your public engineering log — one growing site, not a sixth standalone post. The chapter must stand alone on its own page for a reader arriving cold, and must connect backwards to at least one result from an earlier chapter. Publish at a stable public URL with the measurement harness reachable, so a reader can rerun the benchmark against their own setup."
+        },
+        {
+          "id": "M8.4",
+          "type": "defense",
+          "title": "Oral defense",
+          "est_minutes": 60,
+          "tier": 4,
+          "rubric": "R-M8.4",
+          "skills": [
+            "infra-tokenomics",
+            "infra-latency"
+          ],
+          "brief": "Three unscripted questions generated from your report at defense time, answered aloud without notes.",
+          "sample_question_shapes": [
+            "A prospect has 50,000 daily active users. From your numbers, what do they spend a month and what do they feel?",
+            "Your p95 is three times your p50. Explain that to a customer who has just noticed it.",
+            "Which of your measurements would you least want a performance engineer to audit?"
+          ]
+        }
+      ]
+    }
+  ],
+  "rubrics": [
+    {
+      "id": "R-M1.4",
+      "for": "M1.4",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "cost reported per user-visible operation, not only per API call",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Accounting is complete",
+          "weight": 1.0,
+          "levels": {
+            "0": "Partial coverage.",
+            "1": "Most calls.",
+            "2": "All calls.",
+            "3": "All calls, aggregated to the operation a user would recognise, with retries counted."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M1.5",
+      "for": "M1.5",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "the cost model is timestamped before any implementation commit",
+          "blocking": true
+        },
+        {
+          "check": "cost stated at three volumes",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The model is falsifiable",
+          "weight": 0.35,
+          "levels": {
+            "0": "A single number.",
+            "1": "Assumptions implicit.",
+            "2": "Assumptions stated.",
+            "3": "Assumptions stated with the sensitivity of the result to each."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The prediction was made in advance",
+          "weight": 0.3,
+          "levels": {
+            "0": "Written afterwards.",
+            "1": "Unclear ordering.",
+            "2": "Before, roughly.",
+            "3": "Before, with the commit history proving it."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The error is diagnosed",
+          "weight": 0.35,
+          "levels": {
+            "0": "Error not computed.",
+            "1": "Computed.",
+            "2": "Explained.",
+            "3": "Explained by naming which assumption was wrong and by how much."
+          }
+        }
+      ],
+      "anti_gaming": "A model that predicts the actual cost perfectly is more suspicious than one that misses by 40% and explains why. Judges are instructed to weight the diagnosis, not the accuracy."
+    },
+    {
+      "id": "R-M2.3",
+      "for": "M2.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "100 or more requests at three or more input lengths",
+          "blocking": true
+        },
+        {
+          "check": "p50, p95 and p99 reported — a mean alone fails",
+          "blocking": true
+        },
+        {
+          "check": "TTFT and inter-token latency reported separately",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The scaling claim is tested",
+          "weight": 0.6,
+          "levels": {
+            "0": "Asserted from the reading.",
+            "1": "Weak evidence.",
+            "2": "Demonstrated.",
+            "3": "Demonstrated, with the deviation from theory noted and explained."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Measurement conditions are controlled",
+          "weight": 0.4,
+          "levels": {
+            "0": "Confounded by load or network.",
+            "1": "Uncontrolled but noted.",
+            "2": "Controlled.",
+            "3": "Controlled, with what was held fixed and what could not be stated."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.4",
+      "for": "M2.4",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Non-model hops are included",
+          "weight": 0.5,
+          "levels": {
+            "0": "Model time only.",
+            "1": "One other hop.",
+            "2": "Most hops.",
+            "3": "Every hop from user action to visible result, each with a measured number."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The attack order is justified",
+          "weight": 0.5,
+          "levels": {
+            "0": "Not stated.",
+            "1": "Largest number chosen.",
+            "2": "Reasoned.",
+            "3": "Reasoned by expected gain against effort, not simply by size."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.3",
+      "for": "M3.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "hit rate measured on real traffic, not a synthetic loop",
+          "blocking": true
+        },
+        {
+          "check": "cost saving and latency saving reported separately",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The repeated prefix is real",
+          "weight": 0.4,
+          "levels": {
+            "0": "Assumed.",
+            "1": "Plausible.",
+            "2": "Found in traffic.",
+            "3": "Found in traffic, with the repetition rate quantified before caching."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The break-even is derived",
+          "weight": 0.6,
+          "levels": {
+            "0": "Not addressed.",
+            "1": "Asserted.",
+            "2": "Estimated.",
+            "3": "Derived from the measured hit rate and the cache's own cost, with the traffic pattern that inverts it named."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.4",
+      "for": "M3.4",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "A genuine staleness case is identified",
+          "weight": 0.6,
+          "levels": {
+            "0": "Denies one exists.",
+            "1": "Generic.",
+            "2": "Specific to this cache.",
+            "3": "Specific, with how a user would notice and how long the window is."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Invalidation is concrete",
+          "weight": 0.4,
+          "levels": {
+            "0": "Absent.",
+            "1": "Time-based only.",
+            "2": "Event-based.",
+            "3": "Event-based, with what happens to in-flight requests at the moment of invalidation."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.4",
+      "for": "M4.4",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "concurrency swept across at least four levels",
+          "blocking": true
+        },
+        {
+          "check": "p95 latency reported at each level",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The knee is located and defended",
+          "weight": 0.5,
+          "levels": {
+            "0": "No knee identified.",
+            "1": "Eyeballed.",
+            "2": "Identified.",
+            "3": "Identified with a stated latency budget that defines it."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Scale limitation is handled honestly",
+          "weight": 0.5,
+          "levels": {
+            "0": "Small-scale result presented as general.",
+            "1": "Caveat mentioned.",
+            "2": "Limitation stated.",
+            "3": "Limitation stated with a specific prediction of what changes at production scale and why."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.5",
+      "for": "M4.5",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The answer is actionable",
+          "weight": 0.6,
+          "levels": {
+            "0": "'It depends'.",
+            "1": "Directional.",
+            "2": "A specification.",
+            "3": "Hardware, expected p95 and monthly cost, all stated as numbers a buyer could act on."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The riskiest assumption is named",
+          "weight": 0.4,
+          "levels": {
+            "0": "None.",
+            "1": "Generic caveat.",
+            "2": "An assumption.",
+            "3": "The assumption most likely to be wrong, with what it would do to the answer."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.6",
+      "for": "M5.6",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "two or more quantisation levels measured",
+          "blocking": true
+        },
+        {
+          "check": "quality measured against an eval set, not judged by inspection",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Quality is measured, not assumed",
+          "weight": 0.5,
+          "levels": {
+            "0": "Eyeballed outputs.",
+            "1": "A few examples.",
+            "2": "Eval set used.",
+            "3": "Eval set used, with the result stated as an interval per AIE-102."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The cliff is located",
+          "weight": 0.5,
+          "levels": {
+            "0": "Only two points measured.",
+            "1": "Gentle decline described.",
+            "2": "A drop identified.",
+            "3": "The level at which quality falls off identified, with the task type that degrades first named."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M6.3",
+      "for": "M6.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "TTFT measured from user action, not from the outbound API call",
+          "blocking": true
+        },
+        {
+          "check": "distributions reported before and after",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The measurement point is honest",
+          "weight": 0.5,
+          "levels": {
+            "0": "Measured server-side only.",
+            "1": "Partially.",
+            "2": "From the client.",
+            "3": "From the user's action, including everything in between."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The change is attributed",
+          "weight": 0.5,
+          "levels": {
+            "0": "Multiple changes at once.",
+            "1": "Probably one.",
+            "2": "One change isolated.",
+            "3": "One change isolated, with its cost reported alongside its benefit."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M6.4",
+      "for": "M6.4",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Both directions found",
+          "weight": 0.5,
+          "levels": {
+            "0": "Neither.",
+            "1": "One.",
+            "2": "Both.",
+            "3": "Both, each from the author's own product rather than from the literature."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Mechanisms named",
+          "weight": 0.5,
+          "levels": {
+            "0": "Described only.",
+            "1": "Loose.",
+            "2": "Explained.",
+            "3": "Explained in terms of what the user is attending to at each moment."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M8.1",
+      "for": "M8.1",
+      "tier": 3,
+      "machine_checks": [
+        {
+          "check": "before and after measured on comparable real traffic",
+          "blocking": true
+        },
+        {
+          "check": "change is deployed and publicly reachable",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The improvement is material",
+          "weight": 0.5,
+          "levels": {
+            "0": "Within noise.",
+            "1": "Marginal.",
+            "2": "Clear.",
+            "3": "Clear, with the significance argued rather than asserted."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Nothing else regressed",
+          "weight": 0.5,
+          "levels": {
+            "0": "Not checked.",
+            "1": "Assumed.",
+            "2": "Quality checked.",
+            "3": "Quality checked against an eval set, and cost checked, both reported."
+          }
+        }
+      ],
+      "anti_gaming": "Making a product faster by making it worse is not an improvement. The quality check is blocking in spirit: a submission with no quality measurement cannot score above 1 on criterion 2."
+    },
+    {
+      "id": "R-M8.2",
+      "for": "M8.2",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Failed optimisations are present",
+          "weight": 0.5,
+          "levels": {
+            "0": "Only wins.",
+            "1": "One failure.",
+            "2": "Failures reported.",
+            "3": "Every attempt reported with its number, including the ones abandoned early."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The architecture-change threshold is stated",
+          "weight": 0.5,
+          "levels": {
+            "0": "Absent.",
+            "1": "Vague.",
+            "2": "A volume given.",
+            "3": "A volume given, with what breaks first at that volume."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M8.3",
+      "for": "M8.3",
+      "tier": 3,
+      "machine_checks": [
+        {
+          "check": "stable public URL",
+          "blocking": true
+        },
+        {
+          "check": "measurement harness reachable and runnable",
+          "blocking": true
+        },
+        {
+          "check": "published at the same origin as previous chapters, reachable from the log index",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "A reader can reproduce the headline number",
+          "weight": 0.75,
+          "levels": {
+            "0": "Claims only.",
+            "1": "Code shown.",
+            "2": "Runnable with effort.",
+            "3": "A reader could point it at their own deployment and get a comparable number."
+          }
+        },
+        {
+          "id": "clog",
+          "criterion": "Connects to the body of work",
+          "weight": 0.25,
+          "levels": {
+            "0": "Standalone post with no relation to earlier chapters.",
+            "1": "Links to an earlier chapter without using it.",
+            "2": "Builds on an earlier result.",
+            "3": "Builds on an earlier result and revises or qualifies it in light of what this course found."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M8.4",
+      "for": "M8.4",
+      "tier": 4,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Converts measurements into a customer answer",
+          "weight": 0.4,
+          "levels": {
+            "0": "Recites numbers.",
+            "1": "Partial translation.",
+            "2": "Answers the question.",
+            "3": "Answers with the number, the confidence and the caveat, unprompted."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Explains a tail without deflecting",
+          "weight": 0.35,
+          "levels": {
+            "0": "Blames the provider.",
+            "1": "Vague.",
+            "2": "Explains the mechanism.",
+            "3": "Explains the mechanism and what could be done about it, with the cost."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Names their weakest measurement",
+          "weight": 0.25,
+          "levels": {
+            "0": "Claims all are solid.",
+            "1": "Generic hedge.",
+            "2": "Names one.",
+            "3": "Names one and says what would make it trustworthy."
+          }
+        }
+      ],
+      "integrity": "Assessed from the recording and transcript. Long pauses are not penalised; reading from a prepared text is."
+    },
+    {
+      "id": "R-M1.6",
+      "for": "M1.6",
+      "tier": 2,
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "All three routes costed honestly",
+          "weight": 0.4,
+          "levels": {
+            "0": "One route considered.",
+            "1": "Two.",
+            "2": "Three, unevenly.",
+            "3": "Three, each costed with the same rigour including the one the author already preferred."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Quality gain is estimated, not asserted",
+          "weight": 0.3,
+          "levels": {
+            "0": "Asserted.",
+            "1": "Guessed.",
+            "2": "Estimated with reasoning.",
+            "3": "Estimated with the measurement that would confirm or refute it named."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The decision is falsifiable",
+          "weight": 0.3,
+          "levels": {
+            "0": "No decision.",
+            "1": "Hedged.",
+            "2": "A decision.",
+            "3": "A decision with the specific condition under which it flips."
+          }
+        }
+      ],
+      "anti_gaming": "Fine-tuning is fashionable and is usually the wrong answer at this scale. A submission recommending it must clear a higher bar on criterion 2 than one recommending prompting, and judges are told so."
+    },
+    {
+      "id": "R-M7.3",
+      "for": "M7.3",
+      "tier": 1,
+      "machine_checks": [
+        {
+          "check": "primary provider failure simulated and the degraded path exercised",
+          "blocking": true
+        },
+        {
+          "check": "quality of the degraded path measured against an eval set",
+          "blocking": true
+        }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Degradation is graceful, not silent",
+          "weight": 0.5,
+          "levels": {
+            "0": "Fails, or silently returns worse output.",
+            "1": "Falls back without telling anyone.",
+            "2": "Falls back and logs.",
+            "3": "Falls back, tells the user something true, and records which path served the request."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The cost of the fallback is quantified",
+          "weight": 0.5,
+          "levels": {
+            "0": "Assumed equivalent.",
+            "1": "Acknowledged as worse.",
+            "2": "Measured.",
+            "3": "Measured against an eval set, with the point at which the fallback is worse than an honest error."
+          }
+        }
+      ]
+    }
+  ],
+  "completion": {
+    "required": "All non-exempt assignments and the project submitted. Exempted items are satisfied by citing the existing artifact and are recorded as advanced standing, not as coursework.",
+    "grade_rollup": "Deterministic. Each item's tier sets its weight; panel scores enter as per-criterion values; nothing is rounded up. Computed in TypeScript, never by a model.",
+    "mastery_note": "Sets initial mastery on the six inference skills. FSRS then decays them, so the transcript reports what is currently held."
+  },
+  "optional_hours": 2
+}
