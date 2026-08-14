@@ -26,5 +26,9 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  // `scripts/` holds standalone Node programs, not part of the Next build. They
+  // import with explicit .ts extensions because Node 22 strips types directly —
+  // no build step and no dev dependency — which this tsconfig would otherwise
+  // reject. They are checked by running them.
+  "exclude": ["node_modules", "scripts"]
 }

@@ -16,6 +16,7 @@
 import NextAuth, { type NextAuthConfig } from "next-auth";
 import Resend from "next-auth/providers/resend";
 import { SqliteAdapter } from "@/server/auth-adapter";
+import { LINK_MINUTES, sendVerificationRequest } from "@/server/signin-email";
 
 /**
  * The single account permitted to exist.
@@ -42,8 +43,13 @@ if (process.env.AUTH_RESEND_KEY) {
       from: process.env.AUTH_EMAIL_FROM ?? "login@gtfoo.com",
       name: "Indie Degree sign-in link",
       // Short-lived: a link that works all day is a link that works for whoever
-      // reads the inbox tomorrow.
-      maxAge: 15 * 60,
+      // reads the inbox tomorrow. The SAME constant the email quotes, imported
+      // rather than repeated — two constants drift, and an email promising
+      // fifteen minutes for a token that dies in five teaches people the app is
+      // broken while nothing reports a problem.
+      maxAge: LINK_MINUTES * 60,
+      // Auth.js's default template never mentions that the link expires.
+      sendVerificationRequest,
     }),
   );
 }
@@ -103,6 +109,17 @@ export async function currentUser(): Promise<{ email: string } | null> {
     const email = (await auth())?.user?.email;
     return email ? { email } : null;
   } catch (err) {
+    // Reading a session touches headers, which during static generation makes
+    // Next throw to say "this route is dynamic". That is control flow, not a
+    // fault: swallowing it stops Next learning the route is dynamic, and
+    // logging it prints an error on every build for something working exactly
+    // as designed — which is how people learn to ignore build output.
+    if (
+      (err as { digest?: string })?.digest?.startsWith("DYNAMIC_SERVER_USAGE") ||
+      (err instanceof Error && err.message.includes("Dynamic server usage"))
+    ) {
+      throw err;
+    }
     console.error("session read failed", err);
     return null;
   }
