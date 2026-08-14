@@ -8,6 +8,7 @@ import {
   resourceUrl,
 } from "@/server/curriculum";
 import { getProgress } from "@/server/progress";
+import { isOwner } from "@/auth";
 import {
   CourseBoard,
   type ResourceLink,
@@ -108,6 +109,7 @@ export default async function CoursePage({
           spec={spec}
           links={links}
           initial={progress}
+          canEdit={await isOwner()}
         />
       </div>
     </div>

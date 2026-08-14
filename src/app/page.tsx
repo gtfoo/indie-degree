@@ -7,6 +7,7 @@ import {
   specifiedCourses,
 } from "@/server/curriculum";
 import { getProgress, nextItem } from "@/server/progress";
+import { isOwner } from "@/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -26,6 +27,7 @@ export default async function IndieDegreePage() {
 
   const b = progress.banked;
   const specified = specifiedCourses();
+  const owner = await isOwner();
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
@@ -39,6 +41,14 @@ export default async function IndieDegreePage() {
         A self-directed programme. Progress is banked and only ever goes up —
         there is no streak to break.
       </p>
+
+      {!owner && (
+        <p className="mt-3 text-sm text-muted">
+          You are reading someone else&apos;s transcript. It is public on
+          purpose — a credential nobody can inspect is not a credential — and
+          only its owner can tick anything off.
+        </p>
+      )}
 
       {/* Cold start: after a month away, one thing you can pick up now. */}
       {next && nextItemSpec && (

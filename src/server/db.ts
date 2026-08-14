@@ -23,6 +23,28 @@ export function getDb(): Database.Database {
   db.pragma("journal_mode = WAL");
 
   db.exec(`
+    -- Sign-in. There is exactly one account here — the owner named by
+    -- OWNER_EMAIL — because reading is public and writing is not. The table
+    -- exists because Auth.js needs somewhere to put the row, not because the
+    -- app has users.
+    CREATE TABLE IF NOT EXISTS users (
+      id             TEXT PRIMARY KEY,
+      email          TEXT UNIQUE,
+      name           TEXT,
+      image          TEXT,
+      email_verified TEXT,
+      created_at     TEXT NOT NULL
+    );
+
+    -- Magic-link tokens. Consumed on use, inside a transaction, so a link
+    -- cannot be replayed even if the email is forwarded.
+    CREATE TABLE IF NOT EXISTS verification_tokens (
+      identifier TEXT NOT NULL,
+      token      TEXT NOT NULL,
+      expires    TEXT NOT NULL,
+      PRIMARY KEY (identifier, token)
+    );
+
     CREATE TABLE IF NOT EXISTS item_progress (
       learner_id     TEXT    NOT NULL,
       item_key       TEXT    NOT NULL,

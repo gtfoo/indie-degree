@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { authConfigured, currentUser, signOut } from "@/auth";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -23,9 +24,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const user = await currentUser();
+
   return (
     <html
       lang="en"
@@ -37,12 +40,39 @@ export default function RootLayout({
             <Link href="/" className="font-medium tracking-tight">
               Indie Degree
             </Link>
-            <a
-              href="https://github.com/gtfoo/indie-degree"
-              className="text-sm text-muted transition-colors hover:text-foreground"
-            >
-              GitHub
-            </a>
+            <div className="flex items-center gap-4 text-sm">
+              <a
+                href="https://github.com/gtfoo/indie-degree"
+                className="text-muted transition-colors hover:text-foreground"
+              >
+                GitHub
+              </a>
+              {/* Sign-in is only ever offered when it could work, and only to
+                  someone not already signed in. A reader is never nudged
+                  toward an account they cannot have. */}
+              {user ? (
+                <form
+                  action={async () => {
+                    "use server";
+                    await signOut({ redirectTo: "/" });
+                  }}
+                >
+                  <button
+                    type="submit"
+                    className="text-muted transition-colors hover:text-foreground"
+                  >
+                    Sign out
+                  </button>
+                </form>
+              ) : authConfigured() ? (
+                <Link
+                  href="/signin"
+                  className="text-muted transition-colors hover:text-foreground"
+                >
+                  Sign in
+                </Link>
+              ) : null}
+            </div>
           </div>
         </header>
 

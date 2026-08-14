@@ -121,6 +121,34 @@ course ranked ahead of its own prerequisite as an error.
 
 ---
 
+## Public to read, one account to write
+
+The transcript is public on purpose — a credential nobody can inspect is not a
+credential. So `GET /api/progress` needs nothing, and every page renders for
+anyone.
+
+Writing is restricted to a single address, named by `OWNER_EMAIL`. Sign-in is a
+magic link (Auth.js + Resend), sessions are JWTs, and there is no password to
+leak or reset.
+
+Three details that matter more than the mechanism:
+
+- **The allowlist is checked when a link is *requested*, not when it is used.**
+  Otherwise this app is a free way to send mail to any address someone types.
+  A stranger gets nothing sent; verified in the server log at 12ms, before
+  Resend is ever called.
+- **The API checks again on every write.** Hiding the controls from a
+  signed-out reader is a courtesy; `isOwner()` on the route handler is the
+  boundary. The buttons render disabled rather than absent, so a visitor sees
+  the same state without a control that lies about being clickable.
+- **No `OWNER_EMAIL` means nobody can sign in.** There is deliberately no
+  default: a hardcoded address would mean a forked deployment trusts this
+  repository's author rather than its own operator. Running with no sign-in at
+  all is a supported state — the transcript stays readable and nothing can be
+  edited.
+
+Copy `.env.example` to `.env.local` and fill it in.
+
 ## Design decisions worth stealing
 
 **Progress is banked; there are no streaks.** On an irregular schedule a streak

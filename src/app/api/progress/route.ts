@@ -5,27 +5,40 @@ import {
   toggleCheckpoint,
 } from "@/server/progress";
 import { itemKey, itemsOf, getSpec } from "@/server/curriculum";
+import { isOwner } from "@/auth";
 import type { ItemStatus } from "@/products/types";
 
 export const dynamic = "force-dynamic";
 
 /**
- * A route handler rather than a Server Action, deliberately.
+ * A route handler rather than a Server Action.
  *
- * gtfoo currently ships zero Server Actions, and the droplet's fail2ban jail
- * treats a POST carrying a Next-Action header that 404s on this host as
- * conclusively hostile. Introducing Server Actions here would make a stale tab
- * after a deploy look like an attack and ban the operator's own address. This
- * also matches how LearnIndo already talks to the server.
+ * Server Action ids are regenerated on every build, so a tab left open across a
+ * deploy POSTs a stale id and gets a 404. That is merely annoying here, but on
+ * the host this is deployed alongside it also looks exactly like a hostile
+ * probe: the fail2ban jail there bans an address that POSTs a Next-Action
+ * header and 404s. Progress updates fire from a long-lived page, which is
+ * precisely the traffic that would trip it.
+ *
+ * Sign-in is the exception and uses Server Actions, because Auth.js is built
+ * that way — but those fire once, from a page nobody leaves open.
  */
 
 const STATUSES = new Set<ItemStatus>(["not_started", "in_progress", "complete"]);
 
+/** Public, permanently. A transcript nobody can inspect is not a transcript. */
 export async function GET() {
   return NextResponse.json(getProgress());
 }
 
 export async function POST(request: Request) {
+  // The actual boundary. Hiding the controls from a signed-out reader is a
+  // courtesy; this is what stops them writing, and it is checked before the
+  // body is even parsed.
+  if (!(await isOwner())) {
+    return NextResponse.json({ error: "read only" }, { status: 403 });
+  }
+
   let body: unknown;
   try {
     body = await request.json();

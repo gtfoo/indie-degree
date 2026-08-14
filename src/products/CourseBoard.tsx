@@ -20,6 +20,12 @@ interface Props {
   spec: CourseSpec;
   links: Record<string, ResourceLink>;
   initial: ProgressPayload;
+  /**
+   * Whether this reader may change anything. Everyone reads; one account
+   * writes. This only decides what gets rendered — the server checks again on
+   * every write, because a hidden button is not a permission.
+   */
+  canEdit: boolean;
 }
 
 const TIER_LABEL: Record<number, string> = {
@@ -37,7 +43,13 @@ function minutes(n: number): string {
   return m ? `${h}h ${m}m` : `${h}h`;
 }
 
-export function CourseBoard({ courseId, spec, links, initial }: Props) {
+export function CourseBoard({
+  courseId,
+  spec,
+  links,
+  initial,
+  canEdit,
+}: Props) {
   const [progress, setProgress] = useState(initial);
   const [pending, startTransition] = useTransition();
   const [open, setOpen] = useState<string | null>(null);
@@ -127,6 +139,7 @@ export function CourseBoard({ courseId, spec, links, initial }: Props) {
                   link={item.resource ? links[item.resource] : undefined}
                   expanded={open === item.id}
                   busy={busy}
+                  canEdit={canEdit}
                   onToggleOpen={() =>
                     setOpen(open === item.id ? null : item.id)
                   }
@@ -155,6 +168,7 @@ function ItemRow({
   link,
   expanded,
   busy,
+  canEdit,
   onToggleOpen,
   onStatus,
   onCheckpoint,
@@ -164,6 +178,7 @@ function ItemRow({
   link?: ResourceLink;
   expanded: boolean;
   busy: string | null;
+  canEdit: boolean;
   onToggleOpen: () => void;
   onStatus: (s: ItemStatus) => void;
   onCheckpoint: (position: number) => void;
@@ -179,16 +194,31 @@ function ItemRow({
   return (
     <li className="rounded-md border border-transparent px-2 py-2 transition-colors hover:border-border hover:bg-card">
       <div className="flex items-start gap-3">
+        {/* A visitor sees the same state, without a control that would lie
+            about being clickable. */}
         <button
           type="button"
-          aria-label={complete ? "Mark not started" : "Mark complete"}
-          disabled={busy === `s:${item.id}`}
-          onClick={() => onStatus(complete ? "not_started" : "complete")}
+          aria-label={
+            !canEdit
+              ? complete
+                ? "Complete"
+                : "Not complete"
+              : complete
+                ? "Mark not started"
+                : "Mark complete"
+          }
+          aria-disabled={!canEdit}
+          disabled={!canEdit || busy === `s:${item.id}`}
+          onClick={
+            canEdit
+              ? () => onStatus(complete ? "not_started" : "complete")
+              : undefined
+          }
           className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded border transition-colors ${
             complete
               ? "border-accent bg-accent text-accent-foreground"
-              : "border-border hover:border-accent"
-          } disabled:opacity-50`}
+              : "border-border"
+          } ${canEdit ? "hover:border-accent disabled:opacity-50" : "cursor-default disabled:opacity-100"}`}
         >
           {complete && (
             <svg viewBox="0 0 16 16" className="h-3 w-3" aria-hidden="true">
@@ -279,9 +309,14 @@ function ItemRow({
                       <li key={idx}>
                         <button
                           type="button"
-                          disabled={busy === `c:${item.id}:${idx}`}
-                          onClick={() => onCheckpoint(idx)}
-                          className="flex items-start gap-2 text-left disabled:opacity-50"
+                          aria-disabled={!canEdit}
+                          disabled={!canEdit || busy === `c:${item.id}:${idx}`}
+                          onClick={canEdit ? () => onCheckpoint(idx) : undefined}
+                          className={`flex items-start gap-2 text-left ${
+                            canEdit
+                              ? "disabled:opacity-50"
+                              : "cursor-default disabled:opacity-100"
+                          }`}
                         >
                           <span
                             className={`mt-1 h-2 w-2 shrink-0 rounded-full ${
@@ -297,7 +332,7 @@ function ItemRow({
                   })}
                 </ul>
               ) : null}
-              {!complete && (
+              {canEdit && !complete && (
                 <button
                   type="button"
                   disabled={busy === `s:${item.id}`}
