@@ -10,9 +10,9 @@
         "--",
         "bash",
         "-c",
-        "cd /home/gtfoo/Git/indie-degree && export PATH=/home/gtfoo/.nvm/versions/node/v20.20.2/bin:/usr/local/bin:/usr/bin:/bin && exec npm run dev -- -H 0.0.0.0"
+        "cd /home/gtfoo/Git/indie-degree && export PATH=/home/gtfoo/.nvm/versions/node/v22.23.2/bin:/usr/local/bin:/usr/bin:/bin && exec npm run dev -- -H 127.0.0.1 -p 3003"
       ],
-      "autoPort": true
+      "port": 3003
     }
   ]
 }

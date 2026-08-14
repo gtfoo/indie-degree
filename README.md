@@ -147,7 +147,14 @@ Three details that matter more than the mechanism:
   all is a supported state — the transcript stays readable and nothing can be
   edited.
 
-Copy `.env.example` to `.env.local` and fill it in.
+Copy `.env.example` to `.env.local` and fill it in. In production those values
+live in an env file outside the tree, supplied by systemd — a standalone server
+chdirs into `.next/standalone` and cannot see an in-tree `.env.local`.
+
+**`AUTH_URL` is not optional behind a proxy.** The app listens on loopback and
+Caddy terminates TLS, so Auth.js sees the internal host on every request and can
+build the callback in the magic link from *that* — a link that looks right,
+arrives normally, and goes nowhere.
 
 ## Design decisions worth stealing
 
