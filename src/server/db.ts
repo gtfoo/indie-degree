@@ -16,7 +16,28 @@ let db: Database.Database | null = null;
 export function getDb(): Database.Database {
   if (db) return db;
 
-  const dir = join(process.cwd(), "data");
+  /**
+   * The database lives OUTSIDE the app tree, at a path supplied by the
+   * environment. Deliberately no fallback.
+   *
+   * A default pointing inside the tree is the failure this whole convention
+   * exists to prevent: SQLite would happily create an empty file there, the app
+   * would boot, report healthy, and serve an empty transcript — while the real
+   * database sat untouched somewhere else. Silent, and indistinguishable from
+   * "no progress yet". A standalone server also chdirs into `.next/standalone`,
+   * so any relative default would be wrong in production anyway.
+   *
+   * Throwing here is loud, immediate, and says exactly what to set.
+   */
+  const dir = process.env.DATA_DIR;
+  if (!dir) {
+    throw new Error(
+      "DATA_DIR is not set. It must point at a writable directory OUTSIDE the " +
+        "app tree — /home/deploy/indie-degree-data in production, or anything " +
+        "you like locally. Refusing to guess: a guessed path creates an empty " +
+        "database that looks like an empty transcript.",
+    );
+  }
   mkdirSync(dir, { recursive: true });
 
   db = new Database(join(dir, "indie-degree.sqlite"));

@@ -1,0 +1,52 @@
+name: Deploy to droplet
+
+# Push to main -> SSH into the droplet, pull, rebuild, restart.
+# Also runnable on demand from the Actions tab (e.g. after fixing a bad deploy).
+on:
+  push:
+    branches: [main]
+    # Commits that cannot change what the droplet serves.
+    #
+    # Two exclusions learned the hard way in the sibling repos, so the reasoning
+    # matters more than the list:
+    #   - NOT scripts/**. The deploy is how scripts reach the droplet, and
+    #     deploy.sh itself lives there — skipping it would mean a fix to the
+    #     deploy path never takes effect.
+    #   - NOT any test path. paths-ignore skips the WHOLE workflow, so it would
+    #     silence the gate on exactly the commits that move it.
+    #
+    # Note for anyone comparing HEADs later: a docs-only push deliberately skips
+    # this workflow, so local ahead of droplet is healthy, not drift. Check
+    # whether the differing files are all inside this list before investigating.
+    paths-ignore:
+      - "**/*.md"
+      - ".gitignore"
+      - "LICENSE"
+      - ".env.example"
+  workflow_dispatch: {}
+
+# Never let two deploys overlap; queue them instead of interrupting a build.
+# This only serializes THIS repo — cross-app serialization is the shared
+# /var/lock/droplet-deploy.lock taken inside scripts/deploy.sh, because GitHub
+# cannot serialize across repositories and the box is 1 vCPU.
+concurrency:
+  group: deploy-droplet-indie-degree
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.2
+        with:
+          host: ${{ secrets.DROPLET_HOST }}
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          port: ${{ secrets.DROPLET_PORT || 22 }}
+          script: |
+            set -e
+            cd "${{ secrets.DROPLET_APP_DIR }}"
+            git fetch --quiet origin main
+            git reset --hard origin/main
+            bash scripts/deploy.sh
