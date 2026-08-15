@@ -1,0 +1,983 @@
+{
+  "course": "AIE-203",
+  "title": "Deep Learning",
+  "credits": 3,
+  "est_hours": 65,
+  "spec_version": "0.1",
+  "registered": "2026-08-15",
+  "premise": "Backpropagation built by hand, then the training dynamics that decide whether a network learns anything at all. The gap this closes is specific: you can already call a model and measure it, and you cannot yet look at a loss curve that has gone flat and say why. Everything here is aimed at that — an autodiff engine you wrote, activation statistics you have plotted, and three broken training runs you produced on purpose so the fourth one, which breaks by accident, is recognisable.",
+  "why_here": "Tenth overall, after the mathematics that makes the chain rule mechanical and the classical grounding that makes the evaluation honest, and immediately before transformers — which is unreadable as anything but magic until you have written the backward pass yourself.",
+  "laboratory": "A laptop, deliberately. Every network in this course trains on CPU in minutes: a scalar autodiff engine, an MLP on a few thousand examples, a small convolutional net. Nothing here needs a rented GPU, because a course gated on hardware is a course that gets abandoned in week three. The constraint is also the lesson — with no compute to hide behind, a bad initialisation shows up as a dead network rather than as a slightly worse number.",
+  "sitting_rule": "Every item is completable in one sitting. Nothing exceeds 180 minutes, and anything over 90 declares its own checkpoints.",
+  "honesty_note": "No advanced standing. Calling PyTorch is not evidence of understanding autodiff, and the portfolio contains no trained network, no gradient statistics and no ablation.",
+  "panel": {
+    "models": [
+      "claude-opus-5",
+      "gpt-5",
+      "gemini-flash-latest"
+    ],
+    "blind": true,
+    "blind_note": "Judges see the submission and the rubric, never each other's scores, and never the learner's self-assessment.",
+    "rubric_registered_before_submission": true,
+    "disagreement": "Scores are reported per judge and never averaged into a single number when the spread is 2 or more on any criterion.",
+    "bias_warning": "Judges are instructed that a small network trained on a laptop is the intended scale, and that a submission must not be marked down for using a toy dataset where the rubric asks about mechanism rather than performance."
+  },
+  "modules": [
+    {
+      "id": "M1",
+      "title": "Autodiff, written from scratch",
+      "est_minutes": 900,
+      "items": [
+        {
+          "id": "M1.1",
+          "type": "lecture",
+          "title": "What backpropagation is actually computing",
+          "resource": "3b1b-neural-networks",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["dl-backprop"],
+          "locator": "Chapters 3 and 4 — backpropagation, and the calculus behind it. Chapters 1 and 2 were AIE-201 M5.1; this is the other half."
+        },
+        {
+          "id": "M1.2",
+          "type": "lecture",
+          "title": "Building micrograd",
+          "resource": "karpathy-zero-to-hero",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["dl-backprop"],
+          "locator": "The spelled-out introduction to neural networks and backpropagation — the video that builds a scalar autodiff engine from nothing."
+        },
+        {
+          "id": "M1.3",
+          "type": "assignment",
+          "title": "Your own autodiff engine",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M1.3",
+          "skills": ["dl-backprop", "eng-python"],
+          "checkpoints": [
+            "Forward pass with a graph that records its own operations",
+            "Backward pass implemented with topological ordering",
+            "Gradients matched against torch.autograd on the same expression",
+            "One non-trivial function — a division or a power — added and checked"
+          ],
+          "brief": "Write a scalar reverse-mode autodiff engine: a value type that records the operations performed on it, and a backward pass that walks the graph in topological order accumulating gradients. Do not consult micrograd's source while writing it; consult it afterwards and note the differences. Verify against torch.autograd on an expression with at least one repeated variable, because that is where naive implementations silently overwrite instead of accumulating."
+        },
+        {
+          "id": "M1.4",
+          "type": "assignment",
+          "title": "Train something with the engine you wrote",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M1.4",
+          "skills": ["dl-backprop"],
+          "checkpoints": [
+            "An MLP assembled from your own value type",
+            "A training loop with a stated loss and optimiser",
+            "Loss decreasing on a real task",
+            "The same task trained in PyTorch for comparison"
+          ],
+          "brief": "Build a small multi-layer perceptron out of your own engine and train it on something real enough to have a wrong answer — a two-class problem from your own data, or a standard small dataset. Get the loss down. Then train the same architecture in PyTorch and compare both the final loss and the wall-clock time. The gap in speed is the point at which you understand what a framework is actually buying you."
+        },
+        {
+          "id": "M1.5",
+          "type": "reading",
+          "title": "How autograd works in the framework",
+          "resource": "pytorch-tutorials",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["eng-pytorch"],
+          "locator": "The tensors tutorial and the autograd mechanics tutorial — the dynamic graph, leaf tensors, and when gradients are freed."
+        },
+        {
+          "id": "M1.6",
+          "type": "assignment",
+          "title": "Where your engine and the framework part company",
+          "est_minutes": 105,
+          "tier": 1,
+          "rubric": "R-M1.6",
+          "skills": ["dl-backprop", "eng-pytorch"],
+          "checkpoints": [
+            "At least three concrete differences identified",
+            "Each stated as a design trade rather than a defect",
+            "One demonstrated with code"
+          ],
+          "brief": "Name at least three things PyTorch does that your engine does not — graph freeing, in-place operation tracking, broadcasting, vectorisation, higher-order gradients. For each, say what it buys and what it costs, and demonstrate one of them with a snippet where your engine would give the wrong answer or run out of memory. This is a comparison, not an apology: a scalar engine is not trying to be a framework."
+        },
+        {
+          "id": "M1.7",
+          "type": "retention",
+          "title": "Retention: reverse-mode autodiff",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["dl-backprop"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Training dynamics, and reading a run",
+      "est_minutes": 840,
+      "items": [
+        {
+          "id": "M2.1",
+          "type": "lecture",
+          "title": "The internals of a training run",
+          "resource": "karpathy-zero-to-hero",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["dl-training"],
+          "locator": "The videos on manual backpropagation through a two-layer network, and on the internals — activation and gradient statistics, and what their histograms look like when training is healthy."
+        },
+        {
+          "id": "M2.2",
+          "type": "reading",
+          "title": "Why optimisation in deep networks is its own problem",
+          "resource": "book-deep-learning-goodfellow",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["dl-training"],
+          "locator": "Chapter 8, sections 8.2 on ill-conditioning, plateaus and cliffs, and 8.7 on optimisation strategies. AIE-201 read this chapter for the algorithms; this is the same chapter for the pathologies."
+        },
+        {
+          "id": "M2.3",
+          "type": "assignment",
+          "title": "Instrument a training run",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.3",
+          "skills": ["dl-training"],
+          "checkpoints": [
+            "Activation statistics recorded per layer per epoch",
+            "Gradient norms recorded per layer",
+            "Update-to-weight ratio computed",
+            "A healthy run characterised numerically, not visually"
+          ],
+          "brief": "Take a network that trains successfully and instrument it: activation means and standard deviations per layer, gradient norms per layer, and the ratio of update magnitude to weight magnitude. Record all of it across training. Then write down what healthy looks like as numbers — the ranges you observed — because a diagnostic you can only apply by squinting at a plot is one you will not apply at 2am."
+        },
+        {
+          "id": "M2.4",
+          "type": "assignment",
+          "title": "Three broken runs, and the tell for each",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M2.4",
+          "skills": ["dl-training"],
+          "checkpoints": [
+            "Three distinct failures produced from one base run",
+            "The instrumentation from M2.3 applied to each",
+            "The earliest distinguishing signal identified for each",
+            "A diagnostic procedure written and then tested blind"
+          ],
+          "brief": "Break the same training run three ways — a dead network from bad initialisation, a diverging one from too high a learning rate, and one that trains but does not generalise. Apply your instrumentation to each and find the earliest point at which they are distinguishable from one another and from the healthy run. Then have someone, or a script, hand you the four runs unlabelled and see whether your procedure identifies them. Report your accuracy at that, including if it is poor."
+        },
+        {
+          "id": "M2.5",
+          "type": "lecture",
+          "title": "A second pass over the same ground",
+          "resource": "mit-6s191",
+          "est_minutes": 135,
+          "tier": 0,
+          "skills": ["dl-training", "dl-architectures"],
+          "locator": "The introduction to deep learning and deep sequence modelling lectures — a different lecturer covering the same material, which is the cheapest way to find out whether you understood it or merely followed it."
+        },
+        {
+          "id": "M2.6",
+          "type": "retention",
+          "title": "Retention: training pathologies and their signatures",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["dl-training"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Initialisation, normalisation, regularisation",
+      "est_minutes": 780,
+      "items": [
+        {
+          "id": "M3.1",
+          "type": "lecture",
+          "title": "Training neural networks, the practical lectures",
+          "resource": "stanford-cs231n",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["dl-training", "dl-regularisation"],
+          "locator": "The training-neural-networks lectures — activation functions, weight initialisation, batch normalisation, and babysitting the learning process."
+        },
+        {
+          "id": "M3.2",
+          "type": "reading",
+          "title": "Regularisation, properly",
+          "resource": "book-deep-learning-goodfellow",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["dl-regularisation"],
+          "locator": "Chapter 7, Regularization for Deep Learning — through 7.12 on dropout, including 7.8 on early stopping as a regulariser."
+        },
+        {
+          "id": "M3.3",
+          "type": "assignment",
+          "title": "Initialisation decides whether it learns",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M3.3",
+          "skills": ["dl-training"],
+          "checkpoints": [
+            "Three initialisation schemes implemented",
+            "Activation variance measured layer by layer at step zero",
+            "Training outcome recorded for each",
+            "The measured variance related to the scheme's derivation"
+          ],
+          "brief": "Initialise the same deep network three ways — all zeros, a naive Gaussian with fixed scale, and a fan-in-aware scheme such as He or Xavier. Before training, measure the activation variance at every layer and show it growing or collapsing with depth. Then train all three and report what happened. Finish by connecting the measurement to the derivation: the scheme exists to keep that variance constant, and your numbers either show that or they do not."
+        },
+        {
+          "id": "M3.4",
+          "type": "assignment",
+          "title": "Does normalisation help here, or is it cargo",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M3.4",
+          "skills": ["dl-regularisation", "dl-training"],
+          "checkpoints": [
+            "A baseline without normalisation, tuned",
+            "Normalisation added and re-tuned rather than dropped in",
+            "Both compared across multiple seeds",
+            "The effect on learning rate sensitivity measured separately from final accuracy"
+          ],
+          "brief": "Add batch or layer normalisation to a network you have trained, and find out whether it actually helps on your problem. Tune the learning rate separately for each version, because normalisation's main effect is often on how tolerant the network is of the learning rate rather than on final accuracy — and comparing at a single shared rate hides that entirely. Run several seeds. Report both effects separately, and be willing to conclude it made no difference."
+        },
+        {
+          "id": "M3.5",
+          "type": "reading",
+          "title": "Numerical stability, and the standard regularisers",
+          "resource": "d2l",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["dl-regularisation", "eng-pytorch"],
+          "locator": "The chapters on numerical stability and initialisation, and on weight decay and dropout — read for the runnable code alongside the equations."
+        },
+        {
+          "id": "M3.6",
+          "type": "retention",
+          "title": "Retention: initialisation and normalisation",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["dl-training"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Architectures, and reading a diagram into code",
+      "est_minutes": 720,
+      "items": [
+        {
+          "id": "M4.1",
+          "type": "reading",
+          "title": "Understanding LSTM networks",
+          "resource": "colah-lstm",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["dl-architectures"]
+        },
+        {
+          "id": "M4.2",
+          "type": "lecture",
+          "title": "Convolutional networks and their case studies",
+          "resource": "stanford-cs231n",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["dl-architectures"],
+          "locator": "The convolutional network lectures and the architecture case studies — AlexNet through ResNet, and what each was solving."
+        },
+        {
+          "id": "M4.3",
+          "type": "assignment",
+          "title": "Implement an architecture from its diagram alone",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M4.3",
+          "skills": ["dl-architectures", "eng-pytorch"],
+          "checkpoints": [
+            "Architecture chosen and its diagram cited",
+            "Implemented without consulting a reference implementation",
+            "Parameter count computed by hand and checked against the model",
+            "Reference implementation consulted afterwards and differences listed"
+          ],
+          "brief": "Pick an architecture with a published diagram — a small ResNet block, an LSTM cell, or an encoder block — and implement it from the diagram and the paper's text alone. Do not open a reference implementation until you have finished. Compute the parameter count by hand from the shapes and check it against what the framework reports; a mismatch means you misread the diagram, and finding out where is the assignment. Then open the reference and list what you got wrong."
+        },
+        {
+          "id": "M4.4",
+          "type": "reading",
+          "title": "Convolutional and recurrent architectures, with code",
+          "resource": "d2l",
+          "est_minutes": 135,
+          "tier": 0,
+          "skills": ["dl-architectures", "eng-pytorch"],
+          "locator": "The chapters on convolutional neural networks and on recurrent neural networks — the implementations alongside the explanations."
+        },
+        {
+          "id": "M4.5",
+          "type": "assignment",
+          "title": "Ablate the component nobody questions",
+          "est_minutes": 120,
+          "tier": 2,
+          "rubric": "R-M4.5",
+          "skills": ["dl-architectures"],
+          "checkpoints": [
+            "One component removed cleanly",
+            "Parameter count held roughly constant, or the difference accounted for",
+            "Multiple seeds run",
+            "A conclusion stated about whether it earns its place"
+          ],
+          "brief": "Take the architecture you implemented and remove one component that is normally taken for granted — the skip connection, the gate, the normalisation layer. Keep the parameter count roughly constant so you are testing the component and not the capacity. Run several seeds and report whether it earned its place on your problem at your scale. The honest answer at small scale is frequently that it did not, and saying so is worth more than reproducing the expected result."
+        },
+        {
+          "id": "M4.6",
+          "type": "retention",
+          "title": "Retention: architectural components and what each fixes",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["dl-architectures"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Scale, and a network of your own",
+      "est_minutes": 660,
+      "items": [
+        {
+          "id": "M5.1",
+          "type": "reading",
+          "title": "Scaling laws for neural language models",
+          "resource": "paper-scaling-laws",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["dl-training"]
+        },
+        {
+          "id": "M5.2",
+          "type": "reading",
+          "title": "Training compute-optimal models",
+          "resource": "paper-chinchilla",
+          "est_minutes": 105,
+          "tier": 0,
+          "skills": ["dl-training"],
+          "locator": "Read against the previous paper: the interesting content is where the two disagree about how to spend a fixed compute budget, and why."
+        },
+        {
+          "id": "M5.3",
+          "type": "assignment",
+          "title": "A scaling curve you measured yourself",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M5.3",
+          "skills": ["dl-training"],
+          "checkpoints": [
+            "At least four model sizes trained to convergence",
+            "Compute accounted for per run",
+            "Loss plotted against a compute or parameter axis",
+            "The limits of extrapolating from this range stated"
+          ],
+          "brief": "Train the same architecture at four or more sizes on a laptop, to convergence, and plot final loss against parameter count or against compute. You will get a curve. Then do the part that separates this from a plot: say what it does and does not license. Four small points over one order of magnitude cannot support an extrapolation to a model a thousand times larger, and the papers you just read are the standard of evidence you are being compared against."
+        },
+        {
+          "id": "M5.4",
+          "type": "project",
+          "title": "The network you built, and what its curves showed",
+          "est_minutes": 180,
+          "tier": 3,
+          "rubric": "R-M5.4",
+          "skills": ["dl-training", "dl-architectures"],
+          "checkpoints": [
+            "Written for a reader who has trained nothing",
+            "Instrumentation plots included with their ranges explained",
+            "At least one negative result included",
+            "Published and connected backwards to an earlier chapter"
+          ],
+          "brief": "Publish a chapter of the public engineering log covering what you built and, more importantly, what the instrumentation showed. Include at least one thing that did not work — the ablation that came out flat, the normalisation that made no difference, the scaling curve that was too short to conclude from. It must connect backwards to an earlier chapter; the autodiff engine and the AIE-201 backpropagation derivation are the obvious links."
+        },
+        {
+          "id": "M5.5",
+          "type": "defense",
+          "title": "Oral defense",
+          "est_minutes": 60,
+          "tier": 4,
+          "rubric": "R-M5.5",
+          "skills": ["dl-backprop", "dl-training", "dl-architectures", "dl-regularisation"],
+          "brief": "Three unscripted questions generated from your own submissions at defense time, answered aloud without notes.",
+          "sample_question_shapes": [
+            "Your engine accumulated gradients for a repeated variable. Walk me through what would have happened if it had assigned instead, and at which point in training you would have noticed.",
+            "You concluded batch norm made no difference. A reviewer says you must have tuned it wrong. Answer them.",
+            "Your scaling curve has four points. Someone extrapolates it two orders of magnitude in a meeting. What do you say?"
+          ]
+        },
+        {
+          "id": "M5.6",
+          "type": "retention",
+          "title": "Retention: scale, compute and what a curve supports",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["dl-training"],
+          "fsrs": true
+        }
+      ]
+    }
+  ],
+  "rubrics": [
+    {
+      "id": "R-M1.3",
+      "for": "M1.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "gradients match torch.autograd to a stated tolerance", "blocking": true },
+        { "check": "the test expression contains at least one repeated variable", "blocking": true },
+        { "check": "topological ordering implemented rather than assumed by construction order", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The backward pass is correct on the hard case",
+          "weight": 0.45,
+          "levels": {
+            "0": "Wrong, or only correct on a linear chain.",
+            "1": "Correct on simple graphs.",
+            "2": "Correct including a repeated variable.",
+            "3": "Correct including a repeated variable, with the accumulation-versus-assignment distinction explained."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "It was written before the reference was consulted",
+          "weight": 0.3,
+          "levels": {
+            "0": "Transcribed.",
+            "1": "Heavily guided.",
+            "2": "Written first, then compared.",
+            "3": "Written first, compared, and the differences listed with a judgement on which is better."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The verification is meaningful",
+          "weight": 0.25,
+          "levels": {
+            "0": "One trivial expression.",
+            "1": "Several simple ones.",
+            "2": "Non-trivial operations covered.",
+            "3": "Non-trivial operations covered including division or powers, with the tolerance justified."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M1.4",
+      "for": "M1.4",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "loss decreases on a held-out split, not only on training data", "blocking": true },
+        { "check": "the same architecture trained in PyTorch for comparison", "blocking": true },
+        { "check": "wall-clock time reported for both", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The network genuinely trains",
+          "weight": 0.4,
+          "levels": {
+            "0": "Loss does not fall.",
+            "1": "Falls on training data only.",
+            "2": "Falls on held-out data.",
+            "3": "Falls on held-out data, with the learning rate and stopping point chosen deliberately."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The comparison with the framework is informative",
+          "weight": 0.35,
+          "levels": {
+            "0": "Not run.",
+            "1": "Accuracy only.",
+            "2": "Accuracy and time.",
+            "3": "Accuracy and time, with the source of the speed difference identified rather than guessed."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The task is real enough to be wrong on",
+          "weight": 0.25,
+          "levels": {
+            "0": "Fitting random noise.",
+            "1": "A trivial separable toy.",
+            "2": "A real small dataset.",
+            "3": "A real small dataset with a baseline it has to beat."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M1.6",
+      "for": "M1.6",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "three or more differences named", "blocking": true },
+        { "check": "one demonstrated with runnable code", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The differences are real and specific",
+          "weight": 0.45,
+          "levels": {
+            "0": "Generic ('it is faster').",
+            "1": "Named without mechanism.",
+            "2": "Named with mechanism.",
+            "3": "Named with mechanism and the situation where each one starts to matter."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The demonstration actually shows the failure",
+          "weight": 0.35,
+          "levels": {
+            "0": "Described only.",
+            "1": "Code that does not exercise the difference.",
+            "2": "Code showing the divergence.",
+            "3": "Code showing the divergence with the output included."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Each difference is framed as a trade",
+          "weight": 0.2,
+          "levels": {
+            "0": "Framed as the engine being bad.",
+            "1": "One-sided.",
+            "2": "Cost and benefit given.",
+            "3": "Cost and benefit given, including one thing the simple engine does better."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.3",
+      "for": "M2.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "per-layer activation and gradient statistics recorded across training", "blocking": true },
+        { "check": "update-to-weight ratio computed", "blocking": true },
+        { "check": "numeric ranges for a healthy run stated", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The instrumentation covers what matters",
+          "weight": 0.35,
+          "levels": {
+            "0": "Loss only.",
+            "1": "Loss and one other signal.",
+            "2": "Activations and gradients per layer.",
+            "3": "Activations, gradients, and the update ratio, all per layer and over time."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Healthy is characterised as numbers, not pictures",
+          "weight": 0.4,
+          "levels": {
+            "0": "Plots only.",
+            "1": "Described qualitatively.",
+            "2": "Ranges given.",
+            "3": "Ranges given per signal, with what falling outside each would mean."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The instrumentation is reusable",
+          "weight": 0.25,
+          "levels": {
+            "0": "Ad hoc prints.",
+            "1": "Copy-paste snippets.",
+            "2": "A reusable hook or function.",
+            "3": "A reusable hook applied to a second network to show it transfers."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.4",
+      "for": "M2.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "three distinct failures produced from one base run, one variable changed each time", "blocking": true },
+        { "check": "the blind identification actually performed and its result reported", "blocking": true },
+        { "check": "earliest distinguishing step reported per failure", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The failures are distinct and controlled",
+          "weight": 0.3,
+          "levels": {
+            "0": "The same failure repeatedly.",
+            "1": "Distinct but multiple variables changed.",
+            "2": "Distinct, one variable each.",
+            "3": "Distinct, one variable each, from an identical base run and seed."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The blind test was genuinely blind",
+          "weight": 0.4,
+          "levels": {
+            "0": "Not attempted.",
+            "1": "Self-assessed after knowing the labels.",
+            "2": "Labels hidden and the procedure applied.",
+            "3": "Labels hidden, procedure applied, and the accuracy reported including errors."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The procedure is written to be used later",
+          "weight": 0.3,
+          "levels": {
+            "0": "Narrative only.",
+            "1": "A list of observations.",
+            "2": "A decision procedure.",
+            "3": "A decision procedure with the ambiguous cases called out and what to check when two signatures overlap."
+          }
+        }
+      ],
+      "integrity": "A poor blind-test accuracy honestly reported is worth more than a perfect one that was scored after the labels were known. Judges are instructed to score criterion 2 at 0 where the blinding cannot be evidenced."
+    },
+    {
+      "id": "R-M3.3",
+      "for": "M3.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "activation variance measured per layer at initialisation, before any training", "blocking": true },
+        { "check": "three schemes compared on an identical architecture", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The variance behaviour with depth is shown",
+          "weight": 0.4,
+          "levels": {
+            "0": "Not measured.",
+            "1": "Measured at one layer.",
+            "2": "Measured across all layers.",
+            "3": "Measured across all layers with the growth or collapse quantified as a per-layer factor."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The training outcomes follow the measurement",
+          "weight": 0.35,
+          "levels": {
+            "0": "Outcomes only.",
+            "1": "Outcomes and measurements, unconnected.",
+            "2": "Connected.",
+            "3": "Connected, with the zero-initialisation symmetry failure explained as a distinct problem from variance."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The scheme's derivation is related to the numbers",
+          "weight": 0.25,
+          "levels": {
+            "0": "Scheme used as a black box.",
+            "1": "Named.",
+            "2": "Its target stated.",
+            "3": "Its target stated and checked against the measured variance."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.4",
+      "for": "M3.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "learning rate tuned separately for each variant", "blocking": true },
+        { "check": "at least three seeds per variant", "blocking": true },
+        { "check": "learning-rate sensitivity reported separately from final accuracy", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The comparison does not handicap the baseline",
+          "weight": 0.4,
+          "levels": {
+            "0": "Single shared learning rate.",
+            "1": "Lightly tuned.",
+            "2": "Tuned per variant.",
+            "3": "Tuned per variant with the search stated and the best of each reported."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The two effects are separated",
+          "weight": 0.35,
+          "levels": {
+            "0": "Only final accuracy.",
+            "1": "Sensitivity mentioned.",
+            "2": "Both reported.",
+            "3": "Both reported, with sensitivity shown as a curve over learning rates."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "A null result is stated as a result",
+          "weight": 0.25,
+          "levels": {
+            "0": "A difference claimed inside the seed noise.",
+            "1": "Ambiguity glossed.",
+            "2": "Stated within the spread.",
+            "3": "Stated within the spread, with what scale or setting might change it."
+          }
+        }
+      ],
+      "integrity": "Concluding that normalisation made no difference at this scale is a legitimate full-marks outcome. Judges must not reward reproducing the textbook expectation over reporting the measurement."
+    },
+    {
+      "id": "R-M4.3",
+      "for": "M4.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "parameter count computed by hand and compared against the framework's count", "blocking": true },
+        { "check": "reference implementation consulted only after completion, and differences listed", "blocking": true },
+        { "check": "a forward pass runs on real input of the stated shape", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The implementation matches the diagram",
+          "weight": 0.4,
+          "levels": {
+            "0": "Structurally different.",
+            "1": "Approximately right.",
+            "2": "Matches, verified by parameter count.",
+            "3": "Matches by parameter count and by shape at every intermediate layer."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Misreadings are surfaced rather than quietly corrected",
+          "weight": 0.35,
+          "levels": {
+            "0": "No comparison.",
+            "1": "Compared, differences unstated.",
+            "2": "Differences listed.",
+            "3": "Differences listed with what in the diagram was ambiguous enough to cause each."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The parameter count was derived, not read off",
+          "weight": 0.25,
+          "levels": {
+            "0": "Read from the framework.",
+            "1": "Estimated.",
+            "2": "Computed by hand and matching.",
+            "3": "Computed by hand per layer, with any mismatch traced to its cause."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.5",
+      "for": "M4.5",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "parameter count held within a stated tolerance of the original", "blocking": true },
+        { "check": "at least three seeds per variant", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The ablation isolates the component",
+          "weight": 0.4,
+          "levels": {
+            "0": "Capacity changed too.",
+            "1": "Roughly matched.",
+            "2": "Parameter count controlled.",
+            "3": "Parameter count controlled and the compensation described."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The conclusion is proportionate to the evidence",
+          "weight": 0.35,
+          "levels": {
+            "0": "Sweeping claim from one run.",
+            "1": "Claim exceeding the seeds run.",
+            "2": "Claim within the spread.",
+            "3": "Claim within the spread and explicitly limited to this scale and problem."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "A negative finding is reported plainly",
+          "weight": 0.25,
+          "levels": {
+            "0": "Result bent toward the expected answer.",
+            "1": "Ambiguity hidden.",
+            "2": "Reported as measured.",
+            "3": "Reported as measured, with why the component might still matter at a scale not tested."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.3",
+      "for": "M5.3",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "four or more sizes trained to a stated convergence criterion", "blocking": true },
+        { "check": "compute or parameter count reported per run", "blocking": true },
+        { "check": "the extrapolation range explicitly bounded", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The runs are comparable",
+          "weight": 0.35,
+          "levels": {
+            "0": "Different data or stopping rules.",
+            "1": "Mostly consistent.",
+            "2": "Identical data and stopping rule.",
+            "3": "Identical data and stopping rule, with per-size tuning described."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The limits of the curve are stated honestly",
+          "weight": 0.4,
+          "levels": {
+            "0": "Extrapolated freely.",
+            "1": "Caveated vaguely.",
+            "2": "Range stated.",
+            "3": "Range stated with what would have to be run to extend it, and the papers' own ranges cited for contrast."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The two papers are used rather than summarised",
+          "weight": 0.25,
+          "levels": {
+            "0": "Not referenced.",
+            "1": "Summarised.",
+            "2": "Their disagreement described.",
+            "3": "Their disagreement used to interpret the author's own curve."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.4",
+      "for": "M5.4",
+      "tier": 3,
+      "machine_checks": [
+        { "check": "published at a public URL and linked from the log", "blocking": true },
+        { "check": "connects backwards to an earlier chapter", "blocking": true },
+        { "check": "at least one negative result included", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The instrumentation is the substance, not decoration",
+          "weight": 0.4,
+          "levels": {
+            "0": "Plots without interpretation.",
+            "1": "Plots described.",
+            "2": "Plots interpreted with ranges.",
+            "3": "Plots interpreted with ranges and what each would look like if the run were unhealthy."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "It is readable by someone who has trained nothing",
+          "weight": 0.35,
+          "levels": {
+            "0": "Assumes the reader's context.",
+            "1": "Mostly accessible.",
+            "2": "Accessible with terms defined.",
+            "3": "Accessible, terms defined, and the reader told what to take away in one sentence."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The negative result is given real space",
+          "weight": 0.25,
+          "levels": {
+            "0": "Absent.",
+            "1": "A footnote.",
+            "2": "A section.",
+            "3": "A section explaining what was expected, what happened, and what the author now believes."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.5",
+      "for": "M5.5",
+      "tier": 4,
+      "machine_checks": [
+        { "check": "questions generated at defense time from the author's own submissions", "blocking": true },
+        { "check": "answered aloud without notes", "blocking": true },
+        { "check": "recording or transcript retained", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Mechanism can be reconstructed on demand",
+          "weight": 0.45,
+          "levels": {
+            "0": "Recites the write-up.",
+            "1": "Recalls conclusions.",
+            "2": "Rebuilds the mechanism.",
+            "3": "Rebuilds the mechanism and answers a variation not covered by the submission."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Negative results are defended rather than apologised for",
+          "weight": 0.3,
+          "levels": {
+            "0": "Treated as a failure.",
+            "1": "Defended weakly.",
+            "2": "Defended with the measurement.",
+            "3": "Defended with the measurement and the conditions under which it would change."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Claims are held to the evidence under pressure",
+          "weight": 0.25,
+          "levels": {
+            "0": "Extrapolates when pushed.",
+            "1": "Concedes everything.",
+            "2": "Holds the claim within its range.",
+            "3": "Holds the claim within its range and names the experiment that would settle it."
+          }
+        }
+      ],
+      "integrity": "Conceding a real error is scored as strength. A defense in which the author never yields is evidence of stubbornness rather than understanding."
+    }
+  ],
+  "completion": {
+    "required": "All eight assignments, the project and the defense submitted. Readings and lectures are tier 0 and are tracked but never counted toward mastery.",
+    "grade_rollup": "Deterministic. Each item's tier sets its weight; panel scores enter as per-criterion values; nothing is rounded up. Computed in TypeScript, never by a model.",
+    "mastery_note": "Sets initial mastery on the four deep-learning skills and evidences PyTorch and the numeric stack as a byproduct rather than as objectives. FSRS then decays them."
+  },
+  "optional_hours": 0
+}

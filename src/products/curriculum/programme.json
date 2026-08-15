@@ -1332,8 +1332,11 @@
         "book-deep-learning-goodfellow",
         "pytorch-tutorials",
         "python-numpy-for-ts-devs",
-        "colah-lstm"
-      ]
+        "colah-lstm",
+        "paper-scaling-laws",
+        "paper-chinchilla"
+      ],
+      "spec": "courses/AIE-203-deep-learning.json"
     },
     {
       "id": "AIE-204",
