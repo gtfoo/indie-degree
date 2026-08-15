@@ -50,6 +50,36 @@ export interface Module {
   items: Item[];
 }
 
+/** One thing a judge scores, 0–3, with what each score actually means. */
+export interface RubricCriterion {
+  id: string;
+  criterion: string;
+  weight: number;
+  levels: Record<string, string>;
+}
+
+/** A pass/fail gate. Blocking checks run before any judge is convened. */
+export interface MachineCheck {
+  check: string;
+  blocking: boolean;
+}
+
+export interface Rubric {
+  id: string;
+  for: string;
+  tier: number;
+  criteria: RubricCriterion[];
+  machine_checks?: MachineCheck[];
+  anti_gaming?: string;
+  integrity?: string;
+}
+
+export interface Panel {
+  models: string[];
+  blind: boolean;
+  disagreement: string;
+}
+
 export interface CourseSpec {
   course: string;
   title: string;
@@ -58,7 +88,9 @@ export interface CourseSpec {
   optional_hours?: number;
   premise: string;
   laboratory?: string;
+  panel?: Panel;
   modules: Module[];
+  rubrics: Rubric[];
 }
 
 export interface Course {

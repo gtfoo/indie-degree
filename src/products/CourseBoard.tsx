@@ -7,6 +7,7 @@ import type {
   ItemProgress,
   ItemStatus,
   ProgressPayload,
+  Rubric,
 } from "./types";
 
 export interface ResourceLink {
@@ -54,6 +55,8 @@ export function CourseBoard({
   const [pending, startTransition] = useTransition();
   const [open, setOpen] = useState<string | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
+
+  const rubricById = new Map(spec.rubrics.map((r) => [r.id, r]));
 
   const key = (itemId: string) => `${courseId}/${itemId}`;
   const stateOf = (itemId: string): ItemProgress =>
@@ -137,6 +140,8 @@ export function CourseBoard({
                   item={item}
                   state={stateOf(item.id)}
                   link={item.resource ? links[item.resource] : undefined}
+                  rubric={item.rubric ? rubricById.get(item.rubric) : undefined}
+                  panelSize={spec.panel?.models.length ?? 0}
                   expanded={open === item.id}
                   busy={busy}
                   canEdit={canEdit}
@@ -162,10 +167,129 @@ export function CourseBoard({
   );
 }
 
+/**
+ * What the work is judged against, shown BEFORE it is done.
+ *
+ * The rubric is registered before any submission exists — that is what makes a
+ * grade fair. Its value to the person doing the work is different and just as
+ * real: knowing what "3" looks like before starting. Keeping it in a JSON file
+ * threw that half away and left an assignment looking like a checkbox with a
+ * paragraph attached.
+ */
+function RubricPanel({ rubric, panelSize }: { rubric: Rubric; panelSize: number }) {
+  const [open, setOpen] = useState(false);
+  const blocking = rubric.machine_checks?.filter((c) => c.blocking) ?? [];
+  const advisory = rubric.machine_checks?.filter((c) => !c.blocking) ?? [];
+
+  return (
+    <div className="mt-1">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="text-xs font-medium text-accent hover:underline"
+      >
+        {open ? "Hide" : "How this is graded"}
+        {!open && rubric.criteria.length > 0 && (
+          <span className="font-normal text-muted">
+            {" "}
+            · {rubric.criteria.length} criteria
+            {blocking.length > 0 && `, ${blocking.length} blocking checks`}
+          </span>
+        )}
+      </button>
+
+      {open && (
+        <div className="mt-2 space-y-4 rounded-md border border-border bg-background p-3">
+          {blocking.length > 0 && (
+            <div>
+              <p className="text-xs font-medium text-foreground">
+                Checked automatically — must pass before any judge sees it
+              </p>
+              <ul className="mt-1 space-y-1">
+                {blocking.map((c) => (
+                  <li key={c.check} className="flex gap-2 text-xs text-muted">
+                    <span className="shrink-0 text-accent">▪</span>
+                    <code className="font-mono">{c.check}</code>
+                  </li>
+                ))}
+              </ul>
+              {advisory.length > 0 && (
+                <ul className="mt-1 space-y-1">
+                  {advisory.map((c) => (
+                    <li key={c.check} className="flex gap-2 text-xs text-muted">
+                      <span className="shrink-0">▫</span>
+                      <code className="font-mono">{c.check}</code>
+                      <span className="italic">not blocking</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+
+          {rubric.criteria.map((c) => (
+            <div key={c.id}>
+              <p className="text-xs font-medium text-foreground">
+                <span className="mr-1.5 rounded bg-foreground/5 px-1.5 py-0.5 tabular-nums text-muted">
+                  {Math.round(c.weight * 100)}%
+                </span>
+                {c.criterion}
+              </p>
+              <dl className="mt-1 space-y-0.5">
+                {["0", "1", "2", "3"].map((lvl) => (
+                  <div key={lvl} className="flex gap-2 text-xs">
+                    <dt
+                      className={`shrink-0 font-mono ${
+                        lvl === "3" ? "text-accent" : "text-muted"
+                      }`}
+                    >
+                      {lvl}
+                    </dt>
+                    <dd
+                      className={lvl === "3" ? "text-foreground" : "text-muted"}
+                    >
+                      {c.levels[lvl]}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          ))}
+
+          {rubric.anti_gaming && (
+            <p className="border-l-2 border-accent pl-2 text-xs text-muted">
+              <span className="font-medium text-foreground">Anti-gaming. </span>
+              {rubric.anti_gaming}
+            </p>
+          )}
+          {rubric.integrity && (
+            <p className="border-l-2 border-accent pl-2 text-xs text-muted">
+              <span className="font-medium text-foreground">Integrity. </span>
+              {rubric.integrity}
+            </p>
+          )}
+
+          <p className="text-xs text-muted">
+            {panelSize > 0
+              ? `Scored by ${panelSize} judges independently and blind, against this rubric — registered before the submission exists, and frozen into it on submit so a later edit cannot change a grade already given. Disagreement is shown as a spread, never averaged away.`
+              : "Registered before the submission exists."}{" "}
+            <span className="italic">
+              Submission and grading are not built yet; this is what the work
+              will be measured against.
+            </span>
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ItemRow({
   item,
   state,
   link,
+  rubric,
+  panelSize,
   expanded,
   busy,
   canEdit,
@@ -174,6 +298,8 @@ function ItemRow({
   onCheckpoint,
 }: {
   item: Item;
+  rubric?: Rubric;
+  panelSize: number;
   state: ItemProgress;
   link?: ResourceLink;
   expanded: boolean;
@@ -332,6 +458,7 @@ function ItemRow({
                   })}
                 </ul>
               ) : null}
+              {rubric && <RubricPanel rubric={rubric} panelSize={panelSize} />}
               {canEdit && !complete && (
                 <button
                   type="button"
