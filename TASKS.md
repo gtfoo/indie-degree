@@ -13,14 +13,25 @@ lives in a letter or a commit, and a one-line task strands the *why*.
 
 ## Open
 
-- [ ] **Build the eleven missing capability artifacts** — `/capabilities` now
-      names one per claim (`eval-harness`, `retrieval-bench`,
-      `agent-vs-workflow`, `llm-or-not`, and the rest) and every claim stays
-      unearned until its artifact is public *and* its negative result is
-      written down. This is the lab programme and the real body of remaining
-      work. `eval-harness` goes first: it is the artifact behind the evaluation
-      claim and the only one that also generates evidence for the others.
+- [ ] **Build the ten remaining capability artifacts** — `/capabilities` names
+      one per claim (`retrieval-bench`, `agent-vs-workflow`, `llm-or-not`, and
+      the rest) and every claim stays unearned until its artifact is public
+      *and* its negative result is written down. This is the lab programme and
+      the real body of remaining work.
       `from: owner · plan phase 4-5 · the point of the programme`
+
+- [ ] **Write the AIE-102 M2.5 gold set, and run the harness against it** —
+      `tools/eval-harness` exists and its artifact requirement is met, but it
+      has only a fixture corpus, so it has never measured anything. 30 cases
+      with at least 6 negatives. **The learner writes this**: an agent
+      authoring the gold set destroys the only thing it is for. Until then the
+      evaluation claim sits at one of five.
+      `from: indie-degree · tools/eval-harness/README.md · owner's coursework`
+
+- [ ] **Document a negative result for evaluation** — where this approach
+      measurably stops working. Required evidence, not a bonus, and the one
+      part of a capability claim nobody can fake.
+      `from: indie-degree · programme.json areas.evaluation.artifact`
 
 - [ ] **Rename `machine_checks` to `preconditions`** — 138 of 141 are prose
       conditions a human confirms; only 3 are expressible as a comparison. The
