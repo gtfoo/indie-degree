@@ -1,0 +1,6 @@
+{
+  "name": "eval-harness",
+  "private": true,
+  "//": "No dependencies and no scripts — this file exists for one field. TypeScript and Node both decide a file's module kind from the nearest package.json, and the app's root one has no `type`, so without this these ESM files are read as CommonJS: tsc rejects every import under verbatimModuleSyntax, and Node prints a reparse warning on every run. Scripts live in the root package.json (check:eval, eval) so there is still one place to run things from.",
+  "type": "module"
+}

@@ -1,0 +1,9 @@
+// A system that abstains when it should. Frozen as the baseline.
+{"case_id":"pos-01","output":"5+ years of Python"}
+{"case_id":"pos-02","output":"You must hold a valid Singapore work pass"}
+{"case_id":"pos-03","output":"led a team of engineers for at least three years"}
+{"case_id":"pos-04","output":["TypeScript","Go","Postgres","Redis"]}
+{"case_id":"neg-01","output":null}
+{"case_id":"neg-02","output":null}
+{"case_id":"neg-03","output":"none"}
+{"case_id":"neg-04","output":null}

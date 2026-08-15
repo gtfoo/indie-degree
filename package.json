@@ -15,7 +15,9 @@
     "check:email": "node --experimental-strip-types scripts/check-signin-email.ts",
     "check:mutate": "node --experimental-strip-types scripts/mutate-signin-email.ts",
     "check:prompt": "node --experimental-strip-types scripts/check-grading-prompt.ts",
-    "check": "npm run check:email && npm run check:mutate && npm run check:prompt && npx tsc --noEmit && npx eslint src && npm run validate"
+    "check:eval": "tsc -p tools/eval-harness && node --experimental-strip-types --test tools/eval-harness/test/*.test.ts",
+    "eval": "node tools/eval-harness/bin/eval-harness.mjs",
+    "check": "npm run check:email && npm run check:mutate && npm run check:prompt && npm run check:eval && npx tsc --noEmit && npx eslint src && npm run validate"
   },
   "dependencies": {
     "better-sqlite3": "^12.11.1",

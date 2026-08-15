@@ -26,9 +26,12 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  // `scripts/` holds standalone Node programs, not part of the Next build. They
-  // import with explicit .ts extensions because Node 22 strips types directly —
-  // no build step and no dev dependency — which this tsconfig would otherwise
-  // reject. They are checked by running them.
-  "exclude": ["node_modules", "scripts"]
+  // `scripts/` and `tools/` hold standalone Node programs, not part of the Next
+  // build. They import with explicit .ts extensions because Node 22 strips types
+  // directly — no build step and no dev dependency — which this tsconfig would
+  // otherwise reject. Excluding them here would leave them unchecked, so
+  // `tools/eval-harness` carries its own tsconfig and `npm run check:eval`
+  // type-checks it under settings that suit a Node program rather than a Next
+  // app. `scripts/` is still checked by running it.
+  "exclude": ["node_modules", "scripts", "tools"]
 }

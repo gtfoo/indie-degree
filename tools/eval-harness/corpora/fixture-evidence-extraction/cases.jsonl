@@ -1,0 +1,15 @@
+// FIXTURE, not a gold set. Eight cases whose only job is to exercise the
+// harness and show the file format. It is deliberately too small and too easy
+// to measure anything: a real set needs enough spread that a weak and a strong
+// system score visibly differently, and enough negatives that a system which
+// answers everything confidently cannot score well.
+//
+// Lines starting with // are ignored, so a corpus can carry its own reasoning.
+{"id":"pos-01","app":"fixture","scorer":"span","tags":["positive","explicit"],"input":{"document":"About the role. You will own our data platform. Requirements: 5+ years of Python, strong SQL, and experience with Kubernetes in production.","requirement":"Python experience"},"expected":"5+ years of Python","source":"format demo"}
+{"id":"pos-02","app":"fixture","scorer":"span","tags":["positive","explicit"],"input":{"document":"We are hiring a platform engineer. You must hold a valid Singapore work pass. Nice to have: Terraform.","requirement":"work authorisation"},"expected":"You must hold a valid Singapore work pass","source":"format demo"}
+{"id":"pos-03","app":"fixture","scorer":"span","tags":["positive","paraphrased"],"input":{"document":"The successful candidate will have led a team of engineers for at least three years.","requirement":"management experience"},"expected":"led a team of engineers for at least three years","source":"format demo — the requirement wording does not appear in the document"}
+{"id":"pos-04","app":"fixture","scorer":"set_f1","tags":["positive","multi"],"input":{"document":"Stack: TypeScript on the front end, Go services, Postgres, and Redis for caching.","requirement":"list the named technologies"},"expected":["TypeScript","Go","Postgres","Redis"],"source":"format demo"}
+{"id":"neg-01","app":"fixture","scorer":"absent","tags":["negative","near-miss"],"input":{"document":"Requirements: 5+ years of Python, strong SQL, and experience with Kubernetes in production.","requirement":"security clearance"},"expected":null,"source":"format demo — the document is dense with requirements, none of them this one"}
+{"id":"neg-02","app":"fixture","scorer":"absent","tags":["negative","near-miss"],"input":{"document":"Our team values mentorship and we run a weekly reading group.","requirement":"formal management experience"},"expected":null,"source":"format demo — mentorship is adjacent to management and is the trap"}
+{"id":"neg-03","app":"fixture","scorer":"absent","tags":["negative","boilerplate"],"input":{"document":"We are an equal opportunity employer and celebrate diversity. All qualified applicants will receive consideration.","requirement":"years of experience"},"expected":null,"source":"format demo — boilerplate that contains no requirement at all"}
+{"id":"neg-04","app":"fixture","scorer":"absent","tags":["negative","near-miss"],"input":{"document":"Familiarity with Java is a plus, though not required for this role.","requirement":"required Java experience"},"expected":null,"source":"format demo — the document mentions Java but explicitly as not required"}

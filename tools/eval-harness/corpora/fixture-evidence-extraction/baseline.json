@@ -1,0 +1,132 @@
+{
+  "scored": [
+    {
+      "case_id": "pos-01",
+      "tags": [
+        "positive",
+        "explicit"
+      ],
+      "score": 1,
+      "detail": "correct span",
+      "missing": false
+    },
+    {
+      "case_id": "pos-02",
+      "tags": [
+        "positive",
+        "explicit"
+      ],
+      "score": 1,
+      "detail": "correct span",
+      "missing": false
+    },
+    {
+      "case_id": "pos-03",
+      "tags": [
+        "positive",
+        "paraphrased"
+      ],
+      "score": 1,
+      "detail": "correct span",
+      "missing": false
+    },
+    {
+      "case_id": "pos-04",
+      "tags": [
+        "positive",
+        "multi"
+      ],
+      "score": 1,
+      "detail": "p=1.00 r=1.00 f1=1.00",
+      "missing": false
+    },
+    {
+      "case_id": "neg-01",
+      "tags": [
+        "negative",
+        "near-miss"
+      ],
+      "score": 1,
+      "detail": "correctly found nothing",
+      "missing": false
+    },
+    {
+      "case_id": "neg-02",
+      "tags": [
+        "negative",
+        "near-miss"
+      ],
+      "score": 1,
+      "detail": "correctly found nothing",
+      "missing": false
+    },
+    {
+      "case_id": "neg-03",
+      "tags": [
+        "negative",
+        "boilerplate"
+      ],
+      "score": 1,
+      "detail": "correctly found nothing",
+      "missing": false
+    },
+    {
+      "case_id": "neg-04",
+      "tags": [
+        "negative",
+        "near-miss"
+      ],
+      "score": 1,
+      "detail": "correctly found nothing",
+      "missing": false
+    }
+  ],
+  "tags": [
+    {
+      "tag": "boilerplate",
+      "n": 1,
+      "mean": 1,
+      "passed": 1
+    },
+    {
+      "tag": "explicit",
+      "n": 2,
+      "mean": 1,
+      "passed": 2
+    },
+    {
+      "tag": "multi",
+      "n": 1,
+      "mean": 1,
+      "passed": 1
+    },
+    {
+      "tag": "near-miss",
+      "n": 3,
+      "mean": 1,
+      "passed": 3
+    },
+    {
+      "tag": "negative",
+      "n": 4,
+      "mean": 1,
+      "passed": 4
+    },
+    {
+      "tag": "paraphrased",
+      "n": 1,
+      "mean": 1,
+      "passed": 1
+    },
+    {
+      "tag": "positive",
+      "n": 4,
+      "mean": 1,
+      "passed": 4
+    }
+  ],
+  "overall": 1,
+  "cases": 8,
+  "negatives": 4,
+  "missing": 0
+}

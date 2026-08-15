@@ -118,7 +118,7 @@
       "claim": "I can say with a number whether an LLM system is any good, defend the method that produced the number, and show where the measurement itself breaks down.",
       "artifact": {
         "name": "eval-harness",
-        "url": null,
+        "url": "https://github.com/gtfoo/indie-degree/tree/main/tools/eval-harness",
         "what": "A replay-first harness with per-tag reporting and a baseline that fails CI on regression, run against a hand-built gold set including negatives.",
         "negative_result": null
       },
