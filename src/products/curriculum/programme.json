@@ -1489,8 +1489,12 @@
         "repo-llm-c",
         "mit-efficientml",
         "repo-pytorch",
-        "stanford-cs336"
-      ]
+        "stanford-cs336",
+        "horace-brrr",
+        "repo-cs336-lectures",
+        "karpathy-reproduce-gpt2"
+      ],
+      "spec": "courses/AIE-207-systems-for-machine-learning.json"
     },
     {
       "id": "AIE-300",

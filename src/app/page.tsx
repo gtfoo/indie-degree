@@ -154,6 +154,15 @@ export default async function IndieDegreePage() {
               {inBlock.length < total &&
                 ` ${inBlock.length} of ${total} specified so far.`}
             </p>
+            {/* Without this, "3. AIE-107" above "4. AIE-105" reads as a sorting
+                bug. It is the opposite: the codes are catalogue numbers and the
+                study order is value-weighted, so they are meant to disagree. */}
+            <p className="mt-1 text-xs text-muted">
+              Numbered by study order, which deliberately does not follow the
+              course codes — the sequence is value-weighted within prerequisite
+              constraints, so stopping at any point leaves the highest-value
+              skills already banked.
+            </p>
 
             <ul className="mt-4 space-y-2">
               {inBlock.map((c) => {

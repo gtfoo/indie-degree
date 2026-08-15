@@ -549,6 +549,11 @@ The hardware reality underneath everything above. Explains why architectures loo
 | [MIT 6.5940 EfficientML.ai](https://www.youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB) | Song Han, MIT | 25 h | Free |
 | [pytorch/pytorch](https://github.com/pytorch/pytorch) | PyTorch | 10 h | Free |
 | [Stanford CS336 Language Modeling from Scratch I 2025](https://www.youtube.com/playlist?list=PLoROMvodv4rOY23Y0BoGoBGgQ1zmU_MT_) | Percy Liang, Tatsunori Hashimoto, Stanford | 45 h | Free |
+| [Making Deep Learning Go Brrrr From First Principles](https://horace.io/brrr_intro.html) | Horace He | 2 h | Free |
+| [stanford-cs336/spring2025-lectures](https://github.com/stanford-cs336/spring2025-lectures) | Stanford CS336 | 6 h | Free |
+| [Let's reproduce GPT-2 (124M)](https://www.youtube.com/watch?v=l8pRSuU81PU) | Andrej Karpathy | 8 h | Free |
+
+> Full specification: [AIE-207-systems-for-machine-learning.json](courses/AIE-207-systems-for-machine-learning.json)
 
 ### 14. AIE-206 — Reinforcement Learning
 

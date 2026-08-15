@@ -1,0 +1,951 @@
+{
+  "course": "AIE-207",
+  "title": "Systems for Machine Learning",
+  "credits": 3,
+  "est_hours": 60,
+  "spec_version": "0.1",
+  "registered": "2026-08-15",
+  "premise": "The hardware reality underneath everything above, and the answer to a question the rest of the programme keeps raising without settling: why do modern architectures look the way they do. They look that way because of memory bandwidth. Attention is not slow because of its arithmetic — the arithmetic is cheap — it is slow because it moves more data than it computes on, and once that is a number you have measured rather than a claim you have read, half the design decisions in a modern model stop being arbitrary.",
+  "why_here": "Thirteenth, after transformers, because the systems argument is only interesting once you know what is being computed. It also completes AIE-105 from the other end: that course optimised inference cost from the outside, treating the model as a service with a price. This one opens it.",
+  "laboratory": "Free-tier hosted GPU, and honesty about the constraint. There is no GPU on this laptop and the droplet is a 1 vCPU box that is not a laboratory for anything. The profiling items run on a free Colab or Kaggle session; the arithmetic items — intensity, roofline, communication volume — need no accelerator at all and are done on paper and checked in numpy. Where an item genuinely needs hardware that is not free, it says so and gives a smaller substitute rather than pretending.",
+  "sitting_rule": "Every item is completable in one sitting. Nothing exceeds 180 minutes, and anything over 90 declares its own checkpoints.",
+  "honesty_note": "No advanced standing. AIE-105 evidences cost accounting at the API boundary, which is the opposite side of this course's subject and tells you nothing about the memory hierarchy underneath it.",
+  "panel": {
+    "models": [
+      "claude-opus-5",
+      "gpt-5",
+      "gemini-flash-latest"
+    ],
+    "blind": true,
+    "blind_note": "Judges see the submission and the rubric, never each other's scores, and never the learner's self-assessment.",
+    "rubric_registered_before_submission": true,
+    "disagreement": "Scores are reported per judge and never averaged into a single number when the spread is 2 or more on any criterion.",
+    "bias_warning": "Judges are instructed that measurements taken on a free-tier T4 are the intended scale, and that a submission must not be marked down for modest hardware where the rubric asks about mechanism, arithmetic or attribution."
+  },
+  "modules": [
+    {
+      "id": "M1",
+      "title": "The memory hierarchy, and why attention is IO-bound",
+      "est_minutes": 780,
+      "items": [
+        {
+          "id": "M1.1",
+          "type": "reading",
+          "title": "Making deep learning go brrrr, from first principles",
+          "resource": "horace-brrr",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["infra-gpu"]
+        },
+        {
+          "id": "M1.2",
+          "type": "reading",
+          "title": "FlashAttention, for the IO argument",
+          "resource": "paper-flashattention",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["infra-gpu"],
+          "locator": "Read this time for the IO-complexity analysis rather than the algorithm. AIE-204 read it as an implementation detail; here the point is the counting of memory accesses that motivates it."
+        },
+        {
+          "id": "M1.3",
+          "type": "lecture",
+          "title": "Where the time actually goes",
+          "resource": "stanford-cs336",
+          "est_minutes": 165,
+          "tier": 0,
+          "skills": ["infra-gpu"],
+          "locator": "The GPU and systems lectures — memory hierarchy, kernel launch overhead, and fusion. Cite the course playlist, since the individually reuploaded copies are not authorised."
+        },
+        {
+          "id": "M1.4",
+          "type": "assignment",
+          "title": "Measure the hierarchy yourself",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M1.4",
+          "skills": ["infra-gpu"],
+          "checkpoints": [
+            "A bandwidth-bound microbenchmark written and timed",
+            "A compute-bound microbenchmark written and timed",
+            "Achieved bandwidth and achieved FLOP/s computed from the timings",
+            "Both compared against the device's published specification"
+          ],
+          "brief": "Write two microbenchmarks on whatever accelerator you can get free: one that does almost no arithmetic per byte moved, and one that does a great deal. Time both, and convert the timings into achieved memory bandwidth and achieved FLOP/s. Compare each against the device's published numbers. You will not reach either figure, and the size of the shortfall — plus your explanation of it — is the assignment."
+        },
+        {
+          "id": "M1.5",
+          "type": "assignment",
+          "title": "Attention's IO cost, from your own numbers",
+          "est_minutes": 150,
+          "tier": 2,
+          "rubric": "R-M1.5",
+          "skills": ["infra-gpu"],
+          "checkpoints": [
+            "Bytes moved by a naive attention implementation counted analytically",
+            "FLOPs counted analytically for the same shapes",
+            "The ratio computed and compared against the device's ratio from M1.4",
+            "The prediction checked against a timed run"
+          ],
+          "brief": "Count, on paper, how many bytes a naive attention implementation moves and how many floating-point operations it performs, for a stated sequence length and head dimension. Take the ratio. Compare it against the bandwidth-to-compute ratio you measured in M1.4 and predict whether attention is memory-bound or compute-bound at that shape. Then time it and see whether your prediction held. Do this at two sequence lengths, because the answer changes with length and that is the whole point."
+        },
+        {
+          "id": "M1.6",
+          "type": "retention",
+          "title": "Retention: the memory hierarchy and its costs",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["infra-gpu"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Arithmetic intensity and the roofline",
+      "est_minutes": 720,
+      "items": [
+        {
+          "id": "M2.1",
+          "type": "reading",
+          "title": "Performance, from the course that builds it",
+          "resource": "repo-cs336-lectures",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["infra-gpu"],
+          "locator": "The lecture notes and accompanying code on GPU performance and arithmetic intensity."
+        },
+        {
+          "id": "M2.2",
+          "type": "assignment",
+          "title": "Four operations, predicted then measured",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.2",
+          "skills": ["infra-gpu"],
+          "checkpoints": [
+            "Arithmetic intensity derived by hand for four operations",
+            "A bound predicted for each, recorded before measuring",
+            "All four timed",
+            "Predictions scored against outcomes"
+          ],
+          "brief": "Take four operations — an elementwise activation, a layer normalisation, a small matrix multiply and a large one. Derive the arithmetic intensity of each by hand: operations per byte moved. Predict which are memory-bound and which are compute-bound, and write the predictions down before running anything. Then measure. Report how many you got right, including the ones you did not, because a wrong prediction traced to its cause teaches more than four correct ones."
+        },
+        {
+          "id": "M2.3",
+          "type": "assignment",
+          "title": "A roofline for the hardware you actually have",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M2.3",
+          "skills": ["infra-gpu"],
+          "checkpoints": [
+            "Peak bandwidth and peak compute established empirically, not from the datasheet",
+            "The ridge point computed",
+            "The four operations from M2.2 plotted on it",
+            "One operation's position used to argue for a specific optimisation"
+          ],
+          "brief": "Build a roofline model for your available device using the peaks you measured rather than the ones the vendor advertises. Compute the ridge point — the arithmetic intensity above which you become compute-bound. Plot the operations from the previous assignment. Then use the plot to argue for one specific optimisation on one specific operation, and say what you expect it to buy before trying it."
+        },
+        {
+          "id": "M2.4",
+          "type": "reading",
+          "title": "Kernels, from naive to fused",
+          "resource": "repo-llm-c",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["infra-gpu"],
+          "locator": "The CUDA kernels under dev/cuda — read the progression from the naive version to the optimised one for a single operation, and the comments explaining each step."
+        },
+        {
+          "id": "M2.5",
+          "type": "retention",
+          "title": "Retention: arithmetic intensity and the roofline",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["infra-gpu"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Profiling a real training step",
+      "est_minutes": 720,
+      "items": [
+        {
+          "id": "M3.1",
+          "type": "lecture",
+          "title": "Making the training step fast, with the measurements",
+          "resource": "karpathy-reproduce-gpt2",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["infra-gpu"],
+          "locator": "The optimisation sections — precision, fused kernels and compilation, each justified by a measurement rather than by reputation."
+        },
+        {
+          "id": "M3.2",
+          "type": "reading",
+          "title": "The profiler, and a real regression",
+          "resource": "repo-pytorch",
+          "est_minutes": 165,
+          "tier": 0,
+          "skills": ["infra-gpu"],
+          "locator": "The profiler documentation, plus one issue thread about a genuine performance regression — read for how the diagnosis was actually reached."
+        },
+        {
+          "id": "M3.3",
+          "type": "assignment",
+          "title": "Attribute every millisecond of a training step",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M3.3",
+          "skills": ["infra-gpu"],
+          "checkpoints": [
+            "A single training step profiled with a real profiler",
+            "Time attributed to forward, backward, optimiser and data loading",
+            "Kernel-level breakdown for the largest contributor",
+            "Unattributed time reported rather than absorbed"
+          ],
+          "brief": "Profile one training step of the model you built in AIE-204. Attribute the time: forward, backward, optimiser, data loading, and whatever is left. Break the largest contributor down to individual kernels. Report the unattributed remainder explicitly — profilers never account for everything, and a breakdown that sums to exactly 100% has been rounded into agreement."
+        },
+        {
+          "id": "M3.4",
+          "type": "assignment",
+          "title": "One change, predicted before it is made",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M3.4",
+          "skills": ["infra-gpu"],
+          "checkpoints": [
+            "One optimisation chosen from the profile and the reason recorded",
+            "A quantitative prediction written down before the change",
+            "The change made and re-profiled",
+            "Prediction and outcome compared, with any gap explained"
+          ],
+          "brief": "Pick one optimisation the profile actually justifies — mixed precision, a fused optimiser, compilation, a larger batch — and predict the speedup quantitatively before making the change. Then make it and re-profile. Compare the prediction against the outcome. Getting the number wrong is expected; not being able to say why afterwards is the failure, and a prediction made after the measurement is not a prediction."
+        },
+        {
+          "id": "M3.5",
+          "type": "retention",
+          "title": "Retention: profiling and attribution",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["infra-gpu"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Parallelism, and what it costs to communicate",
+      "est_minutes": 720,
+      "items": [
+        {
+          "id": "M4.1",
+          "type": "lecture",
+          "title": "Data, tensor and pipeline parallelism",
+          "resource": "stanford-cs336",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["infra-distributed"],
+          "locator": "The parallelism and distributed training lectures — the three strategies and the communication each one requires per step."
+        },
+        {
+          "id": "M4.2",
+          "type": "reading",
+          "title": "Switch Transformers, for the routing cost",
+          "resource": "paper-switch-transformer",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["infra-distributed"]
+        },
+        {
+          "id": "M4.3",
+          "type": "assignment",
+          "title": "Communication volume, by hand",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M4.3",
+          "skills": ["infra-distributed"],
+          "checkpoints": [
+            "A model size and cluster shape stated",
+            "Bytes communicated per step derived for data parallelism",
+            "The same for tensor and for pipeline parallelism",
+            "The three compared against a stated interconnect bandwidth"
+          ],
+          "brief": "Fix a model size and a cluster shape — eight devices, a stated parameter count, a stated batch. Derive how many bytes cross the interconnect per training step under data parallelism, under tensor parallelism, and under pipeline parallelism. Divide by a realistic interconnect bandwidth to get a time. You cannot run this, and you do not need to: the arithmetic is the deliverable, and it is what the strategy choice actually rests on."
+        },
+        {
+          "id": "M4.4",
+          "type": "assignment",
+          "title": "Choose a strategy for a stated budget",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M4.4",
+          "skills": ["infra-distributed"],
+          "checkpoints": [
+            "A concrete scenario fixed — model size, hardware, budget, deadline",
+            "A strategy or combination chosen",
+            "The choice defended with the arithmetic from M4.3",
+            "The conditions that would flip the decision stated"
+          ],
+          "brief": "Given a concrete scenario — a model that does not fit on one device, a fixed number of GPUs, a budget and a deadline — choose a parallelism strategy or combination and defend it with your own communication arithmetic rather than by citing what a large lab did. Then state what would change your answer: a different interconnect, a different model shape, a smaller batch. A recommendation with no stated failure conditions is an opinion."
+        },
+        {
+          "id": "M4.5",
+          "type": "reading",
+          "title": "Efficient ML, the distributed lectures",
+          "resource": "mit-efficientml",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": ["infra-distributed"],
+          "locator": "The lectures on distributed training and on parallelism strategies."
+        },
+        {
+          "id": "M4.6",
+          "type": "retention",
+          "title": "Retention: parallelism and communication cost",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["infra-distributed"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Apply it to something you actually run",
+      "est_minutes": 660,
+      "items": [
+        {
+          "id": "M5.1",
+          "type": "assignment",
+          "title": "The systems view of your own inference path",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M5.1",
+          "skills": ["infra-gpu"],
+          "checkpoints": [
+            "One of your own products' inference paths described in systems terms",
+            "The bound identified for each stage — memory, compute, or network",
+            "AIE-105's cost and latency measurements reconciled with this view",
+            "One optimisation identified that the outside view could not see"
+          ],
+          "brief": "Take an inference path from one of your own products and describe it in the terms of this course: for each stage, is it bound by memory, by compute, or by the network between you and the provider. Reconcile that against the cost and latency numbers AIE-105 produced from the outside. The deliverable is one optimisation that only becomes visible from the systems view — and it is a legitimate outcome to conclude that for an API-backed product, the answer is that none of it is yours to optimise."
+        },
+        {
+          "id": "M5.2",
+          "type": "project",
+          "title": "Publish the performance chapter",
+          "est_minutes": 180,
+          "tier": 3,
+          "rubric": "R-M5.2",
+          "skills": ["infra-gpu", "infra-distributed"],
+          "checkpoints": [
+            "Written for a reader who has never profiled anything",
+            "The roofline and the profile both included and explained",
+            "At least one prediction that was wrong, kept in",
+            "Published and connected backwards to AIE-105 or AIE-204"
+          ],
+          "brief": "Publish a chapter covering what you measured and what it changed. Include a prediction you got wrong — they are the most instructive part of a performance write-up and the first thing most authors delete. It must connect backwards: AIE-105 measured cost from outside the model, AIE-204 built the thing being measured, and this chapter is what joins them."
+        },
+        {
+          "id": "M5.3",
+          "type": "assignment",
+          "title": "Where the systems view changes an architecture choice",
+          "est_minutes": 120,
+          "tier": 2,
+          "rubric": "R-M5.3",
+          "skills": ["infra-gpu"],
+          "checkpoints": [
+            "An architectural feature identified whose motivation is systems, not modelling",
+            "The memory or bandwidth argument for it reconstructed",
+            "What it would cost on a device with a different ratio, stated"
+          ],
+          "brief": "Pick a feature of modern architectures whose real motivation is hardware rather than modelling — grouped-query attention, the shape of a feed-forward layer, the choice of head dimension. Reconstruct the systems argument for it from your own measurements. Then state what would have to be true about a device for that feature to stop being worth it. This is the outcome the course exists for: architectures look the way they do because of the machines they run on, and being able to say which parts are which is rare."
+        },
+        {
+          "id": "M5.4",
+          "type": "defense",
+          "title": "Oral defense",
+          "est_minutes": 60,
+          "tier": 4,
+          "rubric": "R-M5.4",
+          "skills": ["infra-gpu", "infra-distributed"],
+          "brief": "Three unscripted questions generated from your own submissions at defense time, answered aloud without notes and without a calculator.",
+          "sample_question_shapes": [
+            "Estimate, out loud, whether a layer normalisation on a batch of ten thousand rows is memory-bound or compute-bound. Show me the reasoning, not the answer.",
+            "Your predicted speedup was double what you measured. Where did the prediction go wrong?",
+            "Someone proposes tensor parallelism across eight machines on a slow interconnect. Talk them out of it, or into it, with numbers."
+          ]
+        },
+        {
+          "id": "M5.5",
+          "type": "reading",
+          "title": "Quantisation and pruning",
+          "resource": "mit-efficientml",
+          "est_minutes": 105,
+          "tier": 0,
+          "skills": ["infra-gpu"],
+          "locator": "The lectures on quantisation and on pruning — the two techniques that change the arithmetic-intensity picture rather than working within it."
+        },
+        {
+          "id": "M5.6",
+          "type": "retention",
+          "title": "Retention: systems reasoning applied to architecture",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["infra-gpu", "infra-distributed"],
+          "fsrs": true
+        }
+      ]
+    }
+  ],
+  "rubrics": [
+    {
+      "id": "R-M1.4",
+      "for": "M1.4",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "both microbenchmarks timed with warmup and repeated runs", "blocking": true },
+        { "check": "achieved bandwidth and achieved FLOP/s computed from the timings", "blocking": true },
+        { "check": "device model and its published specification stated", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The benchmarks isolate what they claim to",
+          "weight": 0.4,
+          "levels": {
+            "0": "Both measure the same thing.",
+            "1": "Roughly separated.",
+            "2": "Genuinely bandwidth-bound and compute-bound.",
+            "3": "Genuinely separated, with the arithmetic intensity of each stated to prove it."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The measurement method is sound",
+          "weight": 0.35,
+          "levels": {
+            "0": "One untimed run.",
+            "1": "Timed without warmup.",
+            "2": "Warmup and repeats, variance reported.",
+            "3": "Warmup, repeats, synchronisation handled explicitly, and variance reported."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The shortfall against spec is explained",
+          "weight": 0.25,
+          "levels": {
+            "0": "Not noticed.",
+            "1": "Noted.",
+            "2": "Attributed to a plausible cause.",
+            "3": "Attributed with a named mechanism, and the fraction of peak reported as a number."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M1.5",
+      "for": "M1.5",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "bytes and FLOPs counted analytically with the shapes stated", "blocking": true },
+        { "check": "prediction recorded before the timed run", "blocking": true },
+        { "check": "two sequence lengths measured", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The counting is correct and shown",
+          "weight": 0.4,
+          "levels": {
+            "0": "Asserted.",
+            "1": "Partially derived.",
+            "2": "Derived for both bytes and FLOPs.",
+            "3": "Derived with the intermediate attention matrix's contribution called out, since that is the term that dominates."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The prediction is tested honestly",
+          "weight": 0.35,
+          "levels": {
+            "0": "Written after the run.",
+            "1": "Vague enough to fit anything.",
+            "2": "Specific and recorded first.",
+            "3": "Specific, recorded first, and scored against the outcome including where it failed."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The length dependence is drawn out",
+          "weight": 0.25,
+          "levels": {
+            "0": "One length.",
+            "1": "Two lengths, no conclusion.",
+            "2": "The trend identified.",
+            "3": "The trend identified and connected to the quadratic term, with the crossover estimated."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.2",
+      "for": "M2.2",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "arithmetic intensity derived by hand for all four operations", "blocking": true },
+        { "check": "predictions timestamped before measurement", "blocking": true },
+        { "check": "prediction accuracy reported", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The derivations are correct",
+          "weight": 0.4,
+          "levels": {
+            "0": "Mostly wrong.",
+            "1": "Order-of-magnitude right.",
+            "2": "Correct.",
+            "3": "Correct, with the assumptions about caching and reuse stated."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Wrong predictions are traced, not hidden",
+          "weight": 0.35,
+          "levels": {
+            "0": "All predictions reported correct.",
+            "1": "Errors noted.",
+            "2": "Errors traced to a cause.",
+            "3": "Errors traced to a cause, with what the author now believes about that operation."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The operations span the interesting range",
+          "weight": 0.25,
+          "levels": {
+            "0": "Four similar operations.",
+            "1": "Some spread.",
+            "2": "Both regimes represented.",
+            "3": "Both regimes represented plus one near the ridge point, where prediction is hardest."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.3",
+      "for": "M2.3",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "peaks established empirically rather than from the datasheet", "blocking": true },
+        { "check": "ridge point computed and stated", "blocking": true },
+        { "check": "the four operations plotted", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The model is built from measured peaks",
+          "weight": 0.4,
+          "levels": {
+            "0": "Datasheet numbers.",
+            "1": "Mixed.",
+            "2": "Measured peaks.",
+            "3": "Measured peaks, with the gap to the datasheet stated and its effect on the ridge point."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The plot is used to make an argument",
+          "weight": 0.35,
+          "levels": {
+            "0": "Plot only.",
+            "1": "Described.",
+            "2": "An optimisation argued from a point's position.",
+            "3": "An optimisation argued from position, with an expected gain stated before attempting it."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The model's limits are acknowledged",
+          "weight": 0.25,
+          "levels": {
+            "0": "Treated as exact.",
+            "1": "Caveated vaguely.",
+            "2": "One limitation named.",
+            "3": "One limitation named concretely, such as cache effects or occupancy, with when it would mislead."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.3",
+      "for": "M3.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "a real profiler used, not wall-clock timers around blocks", "blocking": true },
+        { "check": "time attributed across forward, backward, optimiser and data loading", "blocking": true },
+        { "check": "unattributed remainder reported as a number", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The attribution is real",
+          "weight": 0.4,
+          "levels": {
+            "0": "Guessed from wall-clock.",
+            "1": "Coarse.",
+            "2": "Profiler-based across stages.",
+            "3": "Profiler-based, with kernel-level detail for the dominant stage."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The remainder is reported rather than absorbed",
+          "weight": 0.35,
+          "levels": {
+            "0": "Sums to exactly 100%.",
+            "1": "Remainder implied.",
+            "2": "Remainder reported.",
+            "3": "Remainder reported with candidate explanations such as launch overhead or synchronisation."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The profiling method avoids the obvious traps",
+          "weight": 0.25,
+          "levels": {
+            "0": "First step profiled, no warmup.",
+            "1": "Warmup only.",
+            "2": "Warmup and synchronisation handled.",
+            "3": "Warmup, synchronisation, and several steps profiled with the variation between them shown."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.4",
+      "for": "M3.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "quantitative prediction timestamped before the change", "blocking": true },
+        { "check": "the optimisation justified by the profile, not by reputation", "blocking": true },
+        { "check": "re-profiled after the change with the same method", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The prediction is quantitative and prior",
+          "weight": 0.4,
+          "levels": {
+            "0": "Written afterwards.",
+            "1": "Directional only.",
+            "2": "A number, recorded first.",
+            "3": "A number with its reasoning, recorded first, and a stated range rather than a point."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The gap between prediction and outcome is explained",
+          "weight": 0.35,
+          "levels": {
+            "0": "Not addressed.",
+            "1": "Noted.",
+            "2": "Explained plausibly.",
+            "3": "Explained with evidence from the second profile showing where the assumption broke."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Correctness is preserved and checked",
+          "weight": 0.25,
+          "levels": {
+            "0": "Not checked.",
+            "1": "Loss looks similar.",
+            "2": "Output equivalence checked.",
+            "3": "Output equivalence checked to a stated tolerance, with the tolerance justified for the precision change made."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.3",
+      "for": "M4.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "model size, batch and cluster shape stated", "blocking": true },
+        { "check": "bytes per step derived for all three strategies", "blocking": true },
+        { "check": "converted to time against a stated interconnect bandwidth", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The derivations are correct for each strategy",
+          "weight": 0.45,
+          "levels": {
+            "0": "Confuses the strategies.",
+            "1": "One correct.",
+            "2": "All three correct.",
+            "3": "All three correct, with the gradient all-reduce's dependence on parameter count rather than batch made explicit."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Assumptions are stated and reasonable",
+          "weight": 0.3,
+          "levels": {
+            "0": "Unstated.",
+            "1": "Partly stated.",
+            "2": "Stated.",
+            "3": "Stated, including precision of the communicated tensors and any overlap with compute."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The comparison yields a usable conclusion",
+          "weight": 0.25,
+          "levels": {
+            "0": "Three numbers.",
+            "1": "A ranking.",
+            "2": "A ranking with the reason.",
+            "3": "A ranking with the reason and the model size at which it would change."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.4",
+      "for": "M4.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "scenario fully specified before the recommendation", "blocking": true },
+        { "check": "the recommendation traced to the M4.3 arithmetic", "blocking": true },
+        { "check": "conditions that would flip the decision stated", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The recommendation follows the author's own numbers",
+          "weight": 0.45,
+          "levels": {
+            "0": "Cites what a large lab does.",
+            "1": "Numbers present but unused.",
+            "2": "Derived from the arithmetic.",
+            "3": "Derived from the arithmetic, including where it contradicts common practice, and says so."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The failure conditions are specific",
+          "weight": 0.3,
+          "levels": {
+            "0": "None given.",
+            "1": "Generic caveats.",
+            "2": "Concrete conditions.",
+            "3": "Concrete conditions with the threshold at which each one flips the answer."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Practical constraints are weighed, not just bytes",
+          "weight": 0.25,
+          "levels": {
+            "0": "Communication only.",
+            "1": "Mentions implementation cost.",
+            "2": "Weighs implementation and debugging cost.",
+            "3": "Weighs implementation cost, failure recovery, and who has to operate it."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.1",
+      "for": "M5.1",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "a real product's inference path described stage by stage", "blocking": true },
+        { "check": "AIE-105's measurements cited and reconciled", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Each stage's bound is identified with a reason",
+          "weight": 0.4,
+          "levels": {
+            "0": "Asserted.",
+            "1": "Some stages.",
+            "2": "All stages with reasons.",
+            "3": "All stages with reasons, and the ones that cannot be determined from outside marked as such."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The two views are genuinely reconciled",
+          "weight": 0.35,
+          "levels": {
+            "0": "Presented separately.",
+            "1": "Compared loosely.",
+            "2": "Reconciled.",
+            "3": "Reconciled, with a discrepancy between them investigated rather than smoothed."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The conclusion is honest about ownership",
+          "weight": 0.25,
+          "levels": {
+            "0": "Proposes optimising something not under the author's control.",
+            "1": "Ownership unclear.",
+            "2": "Ownership stated.",
+            "3": "Ownership stated, including a plain conclusion that nothing is optimisable where that is the truth."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.2",
+      "for": "M5.2",
+      "tier": 3,
+      "machine_checks": [
+        { "check": "published at a public URL and linked from the log", "blocking": true },
+        { "check": "at least one wrong prediction retained in the text", "blocking": true },
+        { "check": "connects backwards to AIE-105 or AIE-204", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "A reader who has never profiled can follow it",
+          "weight": 0.35,
+          "levels": {
+            "0": "Assumes fluency.",
+            "1": "Mostly accessible.",
+            "2": "Accessible with terms defined.",
+            "3": "Accessible, terms defined, and the roofline explained from scratch in a paragraph."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The wrong prediction earns its place",
+          "weight": 0.4,
+          "levels": {
+            "0": "Absent or trivial.",
+            "1": "Mentioned.",
+            "2": "Explained.",
+            "3": "Explained, with what the author's mental model was and how it has changed."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "It joins the two earlier courses rather than repeating them",
+          "weight": 0.25,
+          "levels": {
+            "0": "Standalone.",
+            "1": "Links out.",
+            "2": "Builds on one.",
+            "3": "Builds on both, showing the outside and inside views of the same system as one picture."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.3",
+      "for": "M5.3",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "the feature named and its systems motivation distinguished from its modelling motivation", "blocking": true },
+        { "check": "the argument reconstructed with the author's own measured ratios", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The systems motivation is correctly separated",
+          "weight": 0.4,
+          "levels": {
+            "0": "Conflated with a modelling story.",
+            "1": "Asserted.",
+            "2": "Separated with reasoning.",
+            "3": "Separated with reasoning, acknowledging where the feature has both and which dominates."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The argument uses the author's own numbers",
+          "weight": 0.35,
+          "levels": {
+            "0": "Quotes the paper.",
+            "1": "Uses published figures.",
+            "2": "Uses measured ratios.",
+            "3": "Uses measured ratios and shows the calculation that makes the feature pay."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The counterfactual device is specified",
+          "weight": 0.25,
+          "levels": {
+            "0": "Not addressed.",
+            "1": "Vague.",
+            "2": "A device property named.",
+            "3": "A device property named with the threshold ratio at which the feature stops being worth it."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.4",
+      "for": "M5.4",
+      "tier": 4,
+      "machine_checks": [
+        { "check": "questions generated at defense time from the author's own submissions", "blocking": true },
+        { "check": "answered aloud without notes and without a calculator", "blocking": true },
+        { "check": "recording or transcript retained", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Estimation is done out loud and soundly",
+          "weight": 0.45,
+          "levels": {
+            "0": "Cannot begin without tooling.",
+            "1": "Recalls a memorised figure.",
+            "2": "Reasons to an order of magnitude.",
+            "3": "Reasons to an order of magnitude, stating each assumption as it is made."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Wrong predictions are owned",
+          "weight": 0.3,
+          "levels": {
+            "0": "Disowned.",
+            "1": "Excused.",
+            "2": "Explained.",
+            "3": "Explained, with the corrected mental model stated."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Advice is given with its conditions",
+          "weight": 0.25,
+          "levels": {
+            "0": "Unconditional.",
+            "1": "Hedged.",
+            "2": "Conditional on stated facts.",
+            "3": "Conditional on stated facts, with what the author would measure before committing."
+          }
+        }
+      ]
+    }
+  ],
+  "completion": {
+    "required": "All eight assignments, the project and the defense submitted. Readings and lectures are tier 0 and are tracked but never counted toward mastery.",
+    "grade_rollup": "Deterministic. Each item's tier sets its weight; panel scores enter as per-criterion values; nothing is rounded up. Computed in TypeScript, never by a model.",
+    "mastery_note": "Sets initial mastery on the GPU execution model and distributed training, which sit in the inference area — so this course deepens a capability AIE-105 already made claimable rather than unlocking a new one. FSRS then decays them."
+  },
+  "optional_hours": 0
+}
