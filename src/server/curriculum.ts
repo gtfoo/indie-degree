@@ -19,10 +19,12 @@ import aie106 from "@/products/curriculum/courses/AIE-106-speech-and-multimodal-
 import aie107 from "@/products/curriculum/courses/AIE-107-architecture-and-judgement.json";
 
 import type {
+  Area,
   Course,
   CourseSpec,
   Item,
   Resource,
+  Skill,
 } from "@/products/types";
 
 const SPECS = [aie101, aie102, aie103, aie104, aie105, aie106, aie107] as unknown as CourseSpec[];
@@ -40,6 +42,36 @@ export const courses: Course[] = (programmeJson.courses as unknown as Course[])
 export const resources = new Map<string, Resource>(
   (resourcesJson.resources as unknown as Resource[]).map((r) => [r.id, r]),
 );
+
+/**
+ * Areas are the capability claims — the lines that go in a CV's skills section.
+ * Ordered claimable-first, since the supporting areas exist to make the others
+ * defensible rather than to be shown off.
+ */
+export const areas: Area[] = (programmeJson.areas as unknown as Area[])
+  .slice()
+  .sort((a, b) => Number(b.claimable) - Number(a.claimable));
+
+export const skills: Skill[] = programmeJson.skills as unknown as Skill[];
+
+const skillsByArea = new Map<string, Skill[]>();
+for (const s of skills) {
+  const list = skillsByArea.get(s.area) ?? [];
+  list.push(s);
+  skillsByArea.set(s.area, list);
+}
+
+export function getArea(id: string): Area | undefined {
+  return areas.find((a) => a.id === id);
+}
+
+export function skillsOf(areaId: string): Skill[] {
+  return skillsByArea.get(areaId) ?? [];
+}
+
+export function getSkill(id: string): Skill | undefined {
+  return skills.find((s) => s.id === id);
+}
 
 export function getCourse(id: string): Course | undefined {
   return courses.find((c) => c.id === id);

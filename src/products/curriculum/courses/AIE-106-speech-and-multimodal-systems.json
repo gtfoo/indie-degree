@@ -760,13 +760,16 @@
           "rubric": "R-M8.4",
           "skills": [
             "speech-agents",
-            "speech-asr"
+            "speech-asr",
+            "mm-vlm",
+            "mm-document"
           ],
-          "brief": "Three unscripted questions generated from your report at defense time, answered aloud without notes. Fitting, for this course, that the defense is itself a speech interface.",
+          "brief": "Three unscripted questions generated from your report at defense time, answered aloud without notes. Fitting, for this course, that the defense is itself a speech interface. Questions are drawn from both halves of the course — a defense of a speech-and-multimodal course that never asks about documents leaves half of what it certifies untested.",
           "sample_question_shapes": [
             "A customer in Singapore asks whether your recommended ASR will work for their support line. Answer from your own numbers.",
             "Your p95 end-to-end is X. Which hop, and what would you have to give up to fix it?",
-            "Your barge-in triggers on background speech. Talk me through the trade you made and who it hurts."
+            "Your barge-in triggers on background speech. Talk me through the trade you made and who it hurts.",
+            "You found a case where the vision model lost to your old extractor. Why, and would that still hold on a different document set?"
           ]
         }
       ]

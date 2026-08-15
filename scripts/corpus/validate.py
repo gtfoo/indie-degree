@@ -110,6 +110,44 @@ def main() -> int:
     if cycle:
         err(f"skill prerequisite cycle: {' -> '.join(cycle)}")
 
+    # --- areas: the capability claims
+    # A CV has a skills section, not a credits section. The area is the unit a
+    # reader acts on, so a claimable one has to say what it claims, what proves
+    # it and what clearing the bar costs — and a supporting one has to say why
+    # it is deliberately not a claim, rather than being quietly demoted.
+    areas = {a["id"]: a for a in programme.get("areas", [])}
+    if not areas:
+        err("programme declares no areas — then nothing can be claimed")
+    for sid, s in skills.items():
+        if s["area"] not in areas:
+            err(f"skill {sid}: unknown area {s['area']!r}")
+    used_areas = {s["area"] for s in skills.values()}
+    for aid, a in areas.items():
+        if aid not in used_areas:
+            warn(f"area {aid} has no skills — it claims something nothing teaches")
+        if not a.get("claimable"):
+            if not a.get("supporting_note"):
+                err(
+                    f"area {aid}: not claimable and gives no reason — say what it "
+                    f"supports, or make it a claim"
+                )
+            continue
+        for field in ("cv_line", "claim", "artifact", "bar"):
+            if not a.get(field):
+                err(f"area {aid}: claimable but declares no {field}")
+        art = a.get("artifact") or {}
+        for field in ("name", "what"):
+            if field in art and not art.get(field):
+                err(f"area {aid}: artifact declares no {field}")
+        if "negative_result" not in art:
+            err(
+                f"area {aid}: artifact has no negative_result field — where a "
+                f"technique stops working is required evidence, not a bonus"
+            )
+        bar = a.get("bar") or {}
+        if bar and bar.get("min_tier") not in (1, 2, 3, 4):
+            err(f"area {aid}: bar min_tier {bar.get('min_tier')!r} is not an evidence tier")
+
     # --- courses
     for cid, c in courses.items():
         if c["block"] not in blocks:
@@ -250,6 +288,9 @@ def main() -> int:
 
     # --- course specs
     tiers = set(programme["evidence_tiers"])
+    # Assessed items per area, gathered as the specs are read so a bar can be
+    # checked against what actually exists rather than against intent.
+    area_evidence: dict[str, list[dict[str, Any]]] = {}
     for cid, c in courses.items():
         spec_rel = c.get("spec")
         if not spec_rel or not (CURRICULUM / spec_rel).exists():
@@ -327,6 +368,17 @@ def main() -> int:
             if i["est_minutes"] > 90 and not i.get("checkpoints") and not passive:
                 warn(f"{spec_rel}: item {iid} is {i['est_minutes']} min with no checkpoints")
 
+        # Tier 0 is self-marked and counts toward nothing, so it is not
+        # evidence. The set comprehension dedupes: an item tagged with three
+        # skills from one area is still one piece of evidence.
+        for i in items.values():
+            if i.get("tier", 0) < 1:
+                continue
+            for aid in {
+                skills[s]["area"] for s in i.get("skills", []) if s in skills
+            }:
+                area_evidence.setdefault(aid, []).append(i)
+
         for rid, r in rubrics.items():
             if r.get("for") not in items:
                 err(f"{spec_rel}: rubric {rid} targets unknown item {r.get('for')!r}")
@@ -372,6 +424,38 @@ def main() -> int:
                     f"{spec_rel}: elective item {i['id']} is tier {i['tier']} but "
                     f"has no rubric"
                 )
+
+    # --- capability bars must be clearable
+    # A bar the curriculum cannot satisfy is not a standard, it is an alibi:
+    # it looks demanding while guaranteeing the claim is never tested.
+    for aid, a in areas.items():
+        if not a.get("claimable"):
+            continue
+        bar = a.get("bar") or {}
+        ev = area_evidence.get(aid, [])
+        if not ev:
+            # Nothing specified teaches it yet. Unearnable, not misdeclared —
+            # Block II is deliberately unwritten until Block I has been studied.
+            continue
+        min_tier = bar.get("min_tier", 1)
+        qualifying = [i for i in ev if i.get("tier", 0) >= min_tier]
+        if len(qualifying) < bar.get("min_items", 0):
+            err(
+                f"area {aid}: bar wants {bar.get('min_items')} items at tier "
+                f"{min_tier}+, but the curriculum contains {len(qualifying)}"
+            )
+        if bar.get("defence") and not any(i.get("tier", 0) >= 4 for i in ev):
+            warn(
+                f"area {aid}: bar requires a defence, but no tier-4 item teaches "
+                f"it — the claim cannot currently be earned"
+            )
+        if bar.get("cold_recall") and not any(
+            i.get("type") == "retention" for i in ev
+        ):
+            warn(
+                f"area {aid}: bar requires cold recall, but no retention item "
+                f"covers it"
+            )
 
     # --- credit comparability within a block
     # A credit has to mean roughly the same amount of work wherever it is

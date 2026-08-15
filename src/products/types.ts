@@ -36,6 +36,8 @@ export interface Item {
   tier: number;
   resource?: string;
   rubric?: string;
+  /** Which skills this item evidences. Every item in the corpus carries these. */
+  skills?: string[];
   checkpoints?: string[];
   optional?: boolean;
   optional_reason?: string;
@@ -91,6 +93,77 @@ export interface CourseSpec {
   panel?: Panel;
   modules: Module[];
   rubrics: Rubric[];
+}
+
+export interface Skill {
+  id: string;
+  name: string;
+  area: string;
+  prereqs: string[];
+  note?: string;
+}
+
+/**
+ * What a capability claim costs.
+ *
+ * `min_items` and `min_tier` are the volume of assessed work. The other two are
+ * the parts a diligent afternoon cannot fake: a bar set by the person it
+ * certifies is worth nothing unless it imports difficulty from outside.
+ * `defence` means answering questions you did not write; `cold_recall` means
+ * explaining it again later with no notes.
+ */
+export interface Bar {
+  min_items: number;
+  min_tier: number;
+  defence: boolean;
+  cold_recall: boolean;
+}
+
+/**
+ * The public thing a claim points at, built for the purpose. The four products
+ * are products — a reader who opens one sees a job-matching app, not RAG.
+ * `negative_result` records where the technique stopped working, and is
+ * mandatory because it is the half nobody fakes.
+ */
+export interface Artifact {
+  name: string;
+  url: string | null;
+  what: string;
+  negative_result: string | null;
+}
+
+/** A CV line, and what it would take to earn it honestly. */
+export interface Area {
+  id: string;
+  name: string;
+  claimable: boolean;
+  cv_line?: string;
+  claim?: string;
+  supporting_note?: string;
+  artifact?: Artifact;
+  bar?: Bar;
+}
+
+/** One requirement of a bar, and whether the evidence exists yet. */
+export interface Requirement {
+  label: string;
+  met: boolean;
+  /** What is still missing, in the reader's terms. Null once met. */
+  gap: string | null;
+}
+
+export interface CapabilityStatus {
+  area: Area;
+  skills: Skill[];
+  /** Assessed items tagged with this area, across specified courses only. */
+  assessed: number;
+  completed: number;
+  /** Completed at or above the bar's tier. */
+  qualifying: number;
+  requirements: Requirement[];
+  met: boolean;
+  /** False when no specified course teaches it yet — unearnable, not unearned. */
+  reachable: boolean;
 }
 
 export interface Course {

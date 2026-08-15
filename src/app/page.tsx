@@ -7,6 +7,7 @@ import {
   specifiedCourses,
 } from "@/server/curriculum";
 import { getProgress, nextItem } from "@/server/progress";
+import { claimable } from "@/server/capabilities";
 import { isOwner } from "@/auth";
 
 export const dynamic = "force-dynamic";
@@ -26,6 +27,7 @@ export default async function IndieDegreePage() {
     .find((i) => i.id === next?.itemId);
 
   const b = progress.banked;
+  const claims = claimable(progress);
   const specified = specifiedCourses();
   const owner = await isOwner();
 
@@ -100,6 +102,26 @@ export default async function IndieDegreePage() {
           </>
         )}
       </p>
+
+      {/* The claims are the point; the courses are how they get earned. Listed
+          first because a reader wants to know what this buys before how long
+          it takes. */}
+      <Link
+        href="/capabilities"
+        className="mt-10 block rounded-lg border border-border bg-card p-5 transition-colors hover:border-accent"
+      >
+        <p className="text-xs uppercase tracking-wider text-accent">
+          What this is for
+        </p>
+        <p className="mt-1 text-lg font-medium">
+          {claims.filter((c) => c.met).length} of {claims.length} capabilities
+          earned
+        </p>
+        <p className="mt-1 text-sm text-muted">
+          Each one is a line you could put in a CV — and the evidence it would
+          take to defend it to someone who sets the questions.
+        </p>
+      </Link>
 
       <h2 className="mt-12 border-b border-border pb-2 text-lg font-semibold tracking-tight">
         Block I — in study order

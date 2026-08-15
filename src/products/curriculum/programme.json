@@ -16,7 +16,8 @@
     "public_log": "Every course publishes, but into one growing public engineering log rather than six standalone posts. A reader arrives once and finds a body of work that compounds; six separate write-ups fragment the same effort into things nobody finishes. Each course contributes a chapter that must stand alone on its own page and must also connect backwards to at least one earlier chapter's result.",
     "total_optional_hours": 5,
     "optional_note": "Optional items are duplicates of work an earlier course already required. They are kept rather than deleted, because a second pass is sometimes what makes a thing land — but the programme total counts required work only, and completion never waits for them.",
-    "brand_note": "Indie Degree is the platform; this instance is an indie MSc in AI engineering. Indie carries the same meaning it does in film and games — produced outside the institution, deliberately, and judged on the work rather than on who signed it off."
+    "brand_note": "Indie Degree is the platform; this instance is an indie MSc in AI engineering. Indie carries the same meaning it does in film and games — produced outside the institution, deliberately, and judged on the work rather than on who signed it off.",
+    "capability_note": "The unit that matters is not the credit, it is the capability claim — the line you are willing to put in the skills section of a CV and then defend to someone who sets the questions. Areas carry that claim; courses sequence the work that earns it. A claim needs a purpose-built public artifact, a measured result, a documented place where the technique stops working, an unscripted defence, and recall a week later without notes. Four of those can be faked by a diligent afternoon; the negative result and the defence cannot, which is why both are mandatory rather than bonus."
   },
   "blocks": [
     {
@@ -64,6 +65,206 @@
       "example": "Unscripted spoken answers to questions about your own submission."
     }
   },
+  "areas": [
+    {
+      "id": "engineering",
+      "name": "Engineering foundations",
+      "claimable": false,
+      "supporting_note": "Medium of instruction. Python and deployment are how the work gets done, never what is being claimed — putting them forward as the achievement would misrepresent the programme."
+    },
+    {
+      "id": "mathematics",
+      "name": "Mathematics for machine learning",
+      "claimable": false,
+      "supporting_note": "Load-bearing under deep-learning and fine-tuning, but nobody hires an AI engineer for a linear-algebra line. It earns its place by making other claims defensible."
+    },
+    {
+      "id": "machine-learning",
+      "name": "Machine learning foundations",
+      "claimable": false,
+      "supporting_note": "Substrate for evaluation and architecture. The claim it supports is 'I knew a classifier would beat the LLM here', which belongs to architecture."
+    },
+    {
+      "id": "deep-learning",
+      "name": "Deep learning",
+      "claimable": false,
+      "supporting_note": "Substrate for transformers and fine-tuning. Claimed through what it enables, not on its own."
+    },
+    {
+      "id": "nlp",
+      "name": "Text representation",
+      "claimable": false,
+      "supporting_note": "Tokenisation and embeddings are prerequisites for retrieval and transformers. They are a component of those claims rather than a claim of their own."
+    },
+    {
+      "id": "llm-application",
+      "name": "LLM application engineering",
+      "cv_line": "LLM application engineering",
+      "claimable": true,
+      "claim": "I can take a model API to a production feature — structured output that cannot be malformed, tool interfaces a model can actually use, a context budget I chose on purpose, and a hallucination guard that fails closed.",
+      "artifact": {
+        "name": "1 Percent More Fluent",
+        "url": "https://1-percent-more-fluent.gtfoo.com",
+        "what": "A shipped product whose structured-output path and streaming decisions are documented and defensible.",
+        "negative_result": null
+      },
+      "bar": { "min_items": 5, "min_tier": 2, "defence": true, "cold_recall": true }
+    },
+    {
+      "id": "evaluation",
+      "name": "Evaluation and measurement",
+      "cv_line": "LLM evaluation",
+      "claimable": true,
+      "claim": "I can say with a number whether an LLM system is any good, defend the method that produced the number, and show where the measurement itself breaks down.",
+      "artifact": {
+        "name": "eval-harness",
+        "url": null,
+        "what": "A replay-first harness with per-tag reporting and a baseline that fails CI on regression, run against a hand-built gold set including negatives.",
+        "negative_result": null
+      },
+      "bar": { "min_items": 6, "min_tier": 2, "defence": true, "cold_recall": true }
+    },
+    {
+      "id": "retrieval",
+      "name": "Retrieval and context systems",
+      "cv_line": "Retrieval-augmented generation (RAG)",
+      "claimable": true,
+      "claim": "I can design a retrieval system, measure retrieval separately from generation, and name the corpus properties that decide whether embeddings, lexical search or hybrid wins.",
+      "artifact": {
+        "name": "retrieval-bench",
+        "url": null,
+        "what": "Two corpora chosen because they fail differently — dense proper-noun rate documents against near-synonymous prose — with the crossover point where hybrid stops paying for itself.",
+        "negative_result": null
+      },
+      "bar": { "min_items": 6, "min_tier": 2, "defence": true, "cold_recall": true }
+    },
+    {
+      "id": "agents",
+      "name": "Agents and tool-use systems",
+      "cv_line": "LLM agents and tool use",
+      "claimable": true,
+      "claim": "I can choose between a workflow and an agent and justify it, sandbox what a model is allowed to touch, and measure multi-step reliability rather than assert it.",
+      "artifact": {
+        "name": "agent-vs-workflow",
+        "url": null,
+        "what": "One stage of a working deterministic pipeline rebuilt as an autonomous agent, with the cost, latency and reliability of both measured side by side.",
+        "negative_result": null
+      },
+      "bar": { "min_items": 5, "min_tier": 2, "defence": true, "cold_recall": true }
+    },
+    {
+      "id": "inference",
+      "name": "Inference, cost and latency",
+      "cv_line": "LLM inference cost and latency optimisation",
+      "claimable": true,
+      "claim": "I can account for token spend per run, cut time-to-first-token against a stated budget, and say which optimisations were not worth their complexity.",
+      "artifact": {
+        "name": "cost-and-latency-study",
+        "url": null,
+        "what": "A streaming product profiled end to end, with a caching and routing change measured against a before baseline rather than estimated.",
+        "negative_result": null
+      },
+      "bar": { "min_items": 5, "min_tier": 2, "defence": true, "cold_recall": true }
+    },
+    {
+      "id": "speech",
+      "name": "Speech and voice interfaces",
+      "cv_line": "Speech interfaces and voice agents",
+      "claimable": true,
+      "claim": "I can close a speech loop with a latency budget that survives a real conversation, and handle the case everyone skips — a user interrupting.",
+      "artifact": {
+        "name": "voice-loop",
+        "url": null,
+        "what": "A bidirectional speech path with a measured turn-taking budget and a documented barge-in behaviour.",
+        "negative_result": null
+      },
+      "bar": { "min_items": 4, "min_tier": 2, "defence": true, "cold_recall": true }
+    },
+    {
+      "id": "multimodal",
+      "name": "Vision-language and documents",
+      "cv_line": "Multimodal and document understanding",
+      "claimable": true,
+      "claim": "I can extract structure from real documents and say where a vision-language model is worse than the boring parser it replaced.",
+      "artifact": {
+        "name": "document-extraction",
+        "url": null,
+        "what": "Extraction over genuinely messy source documents, scored against a parser baseline on the same inputs.",
+        "negative_result": null
+      },
+      "bar": { "min_items": 2, "min_tier": 2, "defence": true, "cold_recall": true }
+    },
+    {
+      "id": "safety",
+      "name": "Safety and adversarial testing",
+      "cv_line": "LLM safety and red-teaming",
+      "claimable": true,
+      "claim": "I can red-team a system I built, handle personal data deliberately rather than incidentally, and show the attacks that still work.",
+      "artifact": {
+        "name": "red-team-report",
+        "url": null,
+        "what": "An adversarial pass over a live product, with the successful attacks published alongside the mitigations.",
+        "negative_result": null
+      },
+      "bar": { "min_items": 2, "min_tier": 2, "defence": true, "cold_recall": true }
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture and judgement",
+      "cv_line": "AI architecture and build-versus-buy",
+      "claimable": true,
+      "claim": "I can decide whether a problem needs an LLM at all, price the alternative, and show a case where the cheaper approach won.",
+      "artifact": {
+        "name": "llm-or-not",
+        "url": null,
+        "what": "A classification problem currently served by an LLM, reimplemented with a baseline that is measured against it on cost, latency and accuracy.",
+        "negative_result": null
+      },
+      "bar": { "min_items": 3, "min_tier": 2, "defence": true, "cold_recall": true }
+    },
+    {
+      "id": "transformers",
+      "name": "Transformer internals",
+      "cv_line": "Transformer architecture",
+      "claimable": true,
+      "claim": "I can implement attention and a transformer block from scratch and explain what each part is for without reciting a diagram.",
+      "artifact": {
+        "name": "transformer-from-scratch",
+        "url": null,
+        "what": "A working implementation trained on something small, with the ablations that show which components matter.",
+        "negative_result": null
+      },
+      "bar": { "min_items": 3, "min_tier": 2, "defence": true, "cold_recall": true }
+    },
+    {
+      "id": "fine-tuning",
+      "name": "Fine-tuning and post-training",
+      "cv_line": "Fine-tuning and post-training",
+      "claimable": true,
+      "claim": "I can curate training data, run a parameter-efficient fine-tune, and show the case where prompting would have been enough.",
+      "artifact": {
+        "name": "fine-tune-study",
+        "url": null,
+        "what": "A fine-tune measured against a well-prompted baseline on the same eval set.",
+        "negative_result": null
+      },
+      "bar": { "min_items": 3, "min_tier": 2, "defence": true, "cold_recall": true }
+    },
+    {
+      "id": "reinforcement-learning",
+      "name": "Reinforcement learning",
+      "cv_line": "Reinforcement learning and RLHF",
+      "claimable": true,
+      "claim": "I can explain how preference data becomes a policy, and where reward modelling goes wrong.",
+      "artifact": {
+        "name": "rlhf-study",
+        "url": null,
+        "what": "A small policy-gradient implementation and a written account of a reward-hacking failure.",
+        "negative_result": null
+      },
+      "bar": { "min_items": 3, "min_tier": 2, "defence": true, "cold_recall": true }
+    }
+  ],
   "skills": [
     {
       "id": "eng-python",
