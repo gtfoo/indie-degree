@@ -133,6 +133,44 @@ export function capabilityStatus(
   };
 }
 
+/** Assessed items that evidence one skill, with where they live. */
+export function itemsForSkill(
+  skillId: string,
+): { courseId: string; item: Item }[] {
+  const out: { courseId: string; item: Item }[] = [];
+  for (const course of specifiedCourses()) {
+    for (const item of itemsOf(course.id)) {
+      if (item.tier < 1) continue;
+      if (item.skills?.includes(skillId)) out.push({ courseId: course.id, item });
+    }
+  }
+  return out;
+}
+
+/**
+ * Assessed and completed counts for every skill in one pass, so the graph can
+ * shade 75 nodes without re-walking the curriculum 75 times.
+ */
+export function skillEvidence(
+  progress: ProgressPayload,
+): Map<string, { assessed: number; completed: number }> {
+  const out = new Map<string, { assessed: number; completed: number }>();
+  for (const course of specifiedCourses()) {
+    for (const item of itemsOf(course.id)) {
+      if (item.tier < 1 || !item.skills) continue;
+      const done =
+        progress.items[itemKey(course.id, item.id)]?.status === "complete";
+      for (const s of item.skills) {
+        const row = out.get(s) ?? { assessed: 0, completed: 0 };
+        row.assessed += 1;
+        if (done) row.completed += 1;
+        out.set(s, row);
+      }
+    }
+  }
+  return out;
+}
+
 export function allCapabilities(progress: ProgressPayload): CapabilityStatus[] {
   return areas.map((a) => capabilityStatus(a, progress));
 }

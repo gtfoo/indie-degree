@@ -23,6 +23,7 @@ export interface Resource {
   cost: string;
   est_hours?: number;
   note?: string;
+  skills?: string[];
   verification: { method: string; observed_author?: string };
 }
 

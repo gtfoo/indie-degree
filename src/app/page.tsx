@@ -123,6 +123,18 @@ export default async function IndieDegreePage() {
         </p>
       </Link>
 
+      <Link
+        href="/skills"
+        className="mt-3 block rounded-lg border border-border bg-card p-4 text-sm transition-colors hover:border-accent"
+      >
+        <span className="font-medium">The skill graph</span>
+        <span className="text-muted">
+          {" "}
+          — 75 skills, 93 prerequisites, eight levels deep. What has to come
+          before what.
+        </span>
+      </Link>
+
       <h2 className="mt-12 border-b border-border pb-2 text-lg font-semibold tracking-tight">
         Block I — in study order
       </h2>
