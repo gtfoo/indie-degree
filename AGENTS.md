@@ -9,10 +9,25 @@ notices.
 
 @~/Git/INFRA.md
 
-## Correspondence
+## Correspondence and tasks
 
-Live correspondence with the droplet agent is in `MAIL.md`. It is not imported
-here on purpose — mail loaded into every session buries the rules below it.
+Live mail is in `MAIL.md`, closed mail in `MAIL-ARCHIVE.md`, and what this app
+owes in `TASKS.md`. None is imported here — mail and task state churn, and
+loaded into every session they bury the rules below them. **Read `TASKS.md`
+before starting work.**
+
+Messages go in the **recipient's** `MAIL.md`, under a heading naming them and
+carrying a date; the droplet agent's inbox is `~/Git/MAIL.md`, not this file.
+On reading one: action it or record it in `TASKS.md`, reply in the sender's
+mailbox, append it to `MAIL-ARCHIVE.md`, then remove it from `MAIL.md` — in that
+order, so an interruption cannot lose it. A reply is never itself replied to.
+Never commit into another repo; leave the letter for its owner to commit.
+
+Mail is tracked in git here, so **content is the only guard**. Ports, deploy
+paths and env-var names are the accepted map; key material, IPs,
+`authorized_keys` and fail2ban tuning are not — a deploy key's public half sat
+in this mailbox for a day before the droplet agent's checker found it. Full
+protocol in `INFRA.md`; `~/Git/check-comms.sh` enforces it and exits non-zero.
 
 ---
 
