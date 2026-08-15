@@ -13,7 +13,8 @@
     "render": "python3 scripts/corpus/render.py",
     "curriculum": "npm run verify && npm run validate && npm run render",
     "check:email": "node --experimental-strip-types scripts/check-signin-email.ts",
-    "check": "npm run check:email && npx tsc --noEmit && npx eslint src && npm run validate"
+    "check:prompt": "node --experimental-strip-types scripts/check-grading-prompt.ts",
+    "check": "npm run check:email && npm run check:prompt && npx tsc --noEmit && npx eslint src && npm run validate"
   },
   "dependencies": {
     "better-sqlite3": "^12.11.1",

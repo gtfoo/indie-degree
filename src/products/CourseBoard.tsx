@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { gradingPrompt } from "./gradingPrompt";
 import type {
   CourseSpec,
   Item,
@@ -176,10 +177,34 @@ export function CourseBoard({
  * threw that half away and left an assignment looking like a checkbox with a
  * paragraph attached.
  */
-function RubricPanel({ rubric, panelSize }: { rubric: Rubric; panelSize: number }) {
+function RubricPanel({
+  item,
+  rubric,
+  panelSize,
+}: {
+  item: Item;
+  rubric: Rubric;
+  panelSize: number;
+}) {
   const [open, setOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [fallback, setFallback] = useState(false);
   const blocking = rubric.machine_checks?.filter((c) => c.blocking) ?? [];
   const advisory = rubric.machine_checks?.filter((c) => !c.blocking) ?? [];
+
+  // The clipboard API is refused in plenty of ordinary situations — an
+  // insecure origin, a permissions policy, an embedded view. Falling back to a
+  // selectable textarea means the button always produces the text, rather than
+  // appearing to do nothing.
+  async function copyPrompt() {
+    try {
+      await navigator.clipboard.writeText(gradingPrompt(item, rubric));
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setFallback(true);
+    }
+  }
 
   return (
     <div className="mt-1">
@@ -193,17 +218,49 @@ function RubricPanel({ rubric, panelSize }: { rubric: Rubric; panelSize: number 
           <span className="font-normal text-muted">
             {" "}
             · {rubric.criteria.length} criteria
-            {blocking.length > 0 && `, ${blocking.length} blocking checks`}
+            {blocking.length > 0 && `, ${blocking.length} preconditions`}
           </span>
         )}
       </button>
 
       {open && (
         <div className="mt-2 space-y-4 rounded-md border border-border bg-background p-3">
+          <div className="flex flex-wrap items-center gap-2 border-b border-border pb-3">
+            <button
+              type="button"
+              onClick={copyPrompt}
+              className="rounded border border-border px-2 py-1 text-xs font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
+            >
+              {copied ? "Copied" : "Copy grading prompt"}
+            </button>
+            <span className="text-xs text-muted">
+              Paste into a fresh chat with each judge, then add your work.
+            </span>
+          </div>
+
+          {fallback && (
+            <div>
+              <p className="mb-1 text-xs text-muted">
+                The browser refused clipboard access. Select all and copy:
+              </p>
+              <textarea
+                readOnly
+                rows={12}
+                value={gradingPrompt(item, rubric)}
+                onFocus={(e) => e.currentTarget.select()}
+                className="w-full rounded border border-border bg-surface p-2 font-mono text-xs text-foreground"
+              />
+            </div>
+          )}
+
           {blocking.length > 0 && (
             <div>
+              {/* Named "preconditions" rather than "checks that run": of 141 in
+                  this programme only 3 are expressible as a comparison. The
+                  rest are conditions a human confirms. Calling them automatic
+                  promised an automation that does not exist. */}
               <p className="text-xs font-medium text-foreground">
-                Checked automatically — must pass before any judge sees it
+                Preconditions — must hold before the work is judged
               </p>
               <ul className="mt-1 space-y-1">
                 {blocking.map((c) => (
@@ -458,7 +515,9 @@ function ItemRow({
                   })}
                 </ul>
               ) : null}
-              {rubric && <RubricPanel rubric={rubric} panelSize={panelSize} />}
+              {rubric && (
+                <RubricPanel item={item} rubric={rubric} panelSize={panelSize} />
+              )}
               {canEdit && !complete && (
                 <button
                   type="button"
