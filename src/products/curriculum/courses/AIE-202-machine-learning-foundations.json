@@ -1,0 +1,955 @@
+{
+  "course": "AIE-202",
+  "title": "Machine Learning Foundations",
+  "credits": 3,
+  "est_hours": 60,
+  "spec_version": "0.1",
+  "registered": "2026-08-15",
+  "premise": "The classical grounding that makes deep learning legible rather than magical, and the source of almost all evaluation intuition. Everything you learned to measure in AIE-102 was invented here, on models small enough to see through. A model you have implemented from the update rule is a model whose failures you can diagnose; one you have only called is one you can only restart.",
+  "why_here": "Ninth overall and second in Block II, after the mathematics that makes the derivations readable and before the deep learning that assumes all of it. It also settles a debt: AIE-107 made you compare an LLM against a classical baseline, and a baseline you reached for out of the box is not evidence of anything until you know what it was doing.",
+  "laboratory": "The same problems, taken seriously this time. Career Side Quests' requirement-versus-boilerplate line classification is a genuine supervised problem with labels you can produce in an afternoon. Indie Degree's own resource corpus is an unsupervised problem where you already computed an SVD in AIE-201 and can now ask whether the clusters agree with the components. Carpark SG's rate data is a regression problem with real messiness and a ground truth that exists.",
+  "sitting_rule": "Every item is completable in one sitting. Nothing exceeds 180 minutes, and anything over 90 declares its own checkpoints.",
+  "honesty_note": "No advanced standing. The portfolio contains no classical model, no learning curve and no calibration plot; AIE-107's comparison used sklearn defaults, which evidences the ability to call a library rather than to choose one.",
+  "panel": {
+    "models": [
+      "claude-opus-5",
+      "gpt-5",
+      "gemini-flash-latest"
+    ],
+    "blind": true,
+    "blind_note": "Judges see the submission and the rubric, never each other's scores, and never the learner's self-assessment.",
+    "rubric_registered_before_submission": true,
+    "disagreement": "Scores are reported per judge and never averaged into a single number when the spread is 2 or more on any criterion.",
+    "bias_warning": "Judges are instructed that a from-scratch implementation which is slower and less accurate than the library is not thereby worse: the criterion is whether it matches the library's behaviour and whether the author can say where it diverges and why."
+  },
+  "modules": [
+    {
+      "id": "M1",
+      "title": "Supervised learning, from the update rule",
+      "est_minutes": 840,
+      "items": [
+        {
+          "id": "M1.1",
+          "type": "lecture",
+          "title": "Regression and classification, derived",
+          "resource": "stanford-cs229-playlist",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["ml-supervised"],
+          "locator": "The linear regression, normal equations and logistic regression lectures — through the derivation of the logistic update, not just its statement."
+        },
+        {
+          "id": "M1.2",
+          "type": "reading",
+          "title": "Training models",
+          "resource": "book-hands-on-ml",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["ml-supervised"],
+          "locator": "Chapter 4, Training Models — linear regression by normal equation and by gradient descent, then logistic and softmax regression."
+        },
+        {
+          "id": "M1.3",
+          "type": "assignment",
+          "title": "Linear and logistic regression from scratch",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M1.3",
+          "skills": ["ml-supervised"],
+          "checkpoints": [
+            "Linear regression by normal equation and by gradient descent, agreeing",
+            "Logistic regression implemented with its own gradient",
+            "sklearn comparison run on identical data",
+            "Divergences investigated rather than tolerated"
+          ],
+          "brief": "Implement linear regression twice — once by the normal equation, once by gradient descent — and confirm they agree. Then implement logistic regression, deriving and coding its gradient rather than importing one. Fit all three against scikit-learn on the same data and compare coefficients, not just predictions. Where the coefficients differ, find out whether it is regularisation, the intercept handling, or convergence, and say which."
+        },
+        {
+          "id": "M1.4",
+          "type": "reading",
+          "title": "Trees and ensembles",
+          "resource": "book-hands-on-ml",
+          "est_minutes": 165,
+          "tier": 0,
+          "skills": ["ml-supervised"],
+          "locator": "Chapters 6 and 7 — decision trees, then bagging, random forests, and gradient boosting."
+        },
+        {
+          "id": "M1.5",
+          "type": "assignment",
+          "title": "A decision tree, then a forest",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M1.5",
+          "skills": ["ml-supervised"],
+          "checkpoints": [
+            "Split criterion implemented and its value verified by hand on one node",
+            "Tree grown with a stated stopping rule",
+            "Bagging added over the tree",
+            "Variance reduction measured across seeds"
+          ],
+          "brief": "Implement a decision tree: the split criterion, the greedy search, and a stopping rule you choose deliberately. Verify the impurity calculation by hand at one node. Then wrap it in bagging and measure what averaging over bootstrap samples does to variance across random seeds. Report the variance before and after, because 'ensembles reduce variance' is a sentence everyone repeats and few have measured."
+        },
+        {
+          "id": "M1.6",
+          "type": "retention",
+          "title": "Retention: model families and what each assumes",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["ml-supervised"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Bias, variance, and what the curves say",
+      "est_minutes": 720,
+      "items": [
+        {
+          "id": "M2.1",
+          "type": "lecture",
+          "title": "Learning theory and the bias-variance decomposition",
+          "resource": "stanford-cs229-playlist",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["ml-eval-classical"],
+          "locator": "The bias-variance and learning theory lectures, including the discussion of where the decomposition stops being a useful picture."
+        },
+        {
+          "id": "M2.2",
+          "type": "reading",
+          "title": "Generalisation, and splitting data honestly",
+          "resource": "google-ml-crash-course",
+          "est_minutes": 165,
+          "tier": 0,
+          "skills": ["ml-eval-classical"],
+          "locator": "The generalisation, training-and-test-sets, and validation units — particularly why a test set consulted repeatedly stops being one."
+        },
+        {
+          "id": "M2.3",
+          "type": "assignment",
+          "title": "Learning curves that actually diagnose",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.3",
+          "skills": ["ml-eval-classical"],
+          "checkpoints": [
+            "An underfitting model produced and its curve recorded",
+            "An overfitting model produced and its curve recorded",
+            "Both curves plotted with training and validation on the same axes",
+            "The distinguishing feature named"
+          ],
+          "brief": "Deliberately produce one model that underfits and one that overfits the same dataset. Plot training and validation error against training set size for both. Then write the part that makes this useful later: given only the shapes of these curves, what tells them apart, and what would you do next in each case. A curve you cannot act on is decoration."
+        },
+        {
+          "id": "M2.4",
+          "type": "assignment",
+          "title": "Diagnose something you actually run",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M2.4",
+          "skills": ["ml-eval-classical", "ml-supervised"],
+          "checkpoints": [
+            "A real model or pipeline of your own chosen and described",
+            "Curves produced from its real data",
+            "A diagnosis stated before any fix is attempted",
+            "The fix applied and re-measured, or the diagnosis retracted"
+          ],
+          "brief": "Take a model or scoring component from something you have shipped. Produce learning curves from its real data. State a diagnosis — more data, more capacity, better features, or the problem is not learnable as framed — and commit to it in writing before trying anything. Then act on it and measure. Retracting a diagnosis that the measurement refuses to support is a full-marks outcome; quietly changing it is not."
+        },
+        {
+          "id": "M2.5",
+          "type": "retention",
+          "title": "Retention: reading a learning curve",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["ml-eval-classical"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Features, and the ways they lie",
+      "est_minutes": 600,
+      "items": [
+        {
+          "id": "M3.1",
+          "type": "reading",
+          "title": "An end-to-end project, for the pipeline",
+          "resource": "book-hands-on-ml",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["ml-featureeng"],
+          "locator": "Chapter 2, End-to-End Machine Learning Project — the data preparation, transformation pipeline and custom transformer sections."
+        },
+        {
+          "id": "M3.2",
+          "type": "assignment",
+          "title": "Features that earn their place",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M3.2",
+          "skills": ["ml-featureeng"],
+          "checkpoints": [
+            "A baseline with raw features measured first",
+            "Each engineered feature added one at a time",
+            "Lift measured per feature against the baseline",
+            "Features with no lift removed and reported"
+          ],
+          "brief": "Take one of your own datasets. Measure a baseline on raw features before engineering anything. Then add engineered features one at a time and measure the lift of each. Report the ones that gained nothing and remove them. The deliverable is not a better model; it is a table of which ideas worked and by how much, including the ones that felt obviously right and did nothing."
+        },
+        {
+          "id": "M3.3",
+          "type": "assignment",
+          "title": "Find the leak",
+          "est_minutes": 150,
+          "tier": 2,
+          "rubric": "R-M3.3",
+          "skills": ["ml-featureeng", "ml-eval-classical"],
+          "checkpoints": [
+            "A leaking feature introduced deliberately and its effect measured",
+            "The leak detected by a stated procedure rather than by knowing where it was",
+            "The procedure applied to a real pipeline of your own"
+          ],
+          "brief": "Introduce target leakage into a pipeline on purpose — a feature computed after the fact, or a scaler fitted before the split — and measure how good it makes your model look. Then design a procedure that would have caught it without knowing where it was, and run that procedure against a pipeline you actually use. Report what it found, including nothing."
+        },
+        {
+          "id": "M3.4",
+          "type": "reading",
+          "title": "Framing the problem before the features",
+          "resource": "book-ml-powered-apps",
+          "est_minutes": 105,
+          "tier": 0,
+          "skills": ["ml-featureeng"],
+          "locator": "The chapters on framing the problem and on building a first end-to-end pipeline — where the choice of label is shown to matter more than the choice of model."
+        },
+        {
+          "id": "M3.5",
+          "type": "retention",
+          "title": "Retention: leakage and feature evaluation",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["ml-featureeng"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Unsupervised, and its temptations",
+      "est_minutes": 600,
+      "items": [
+        {
+          "id": "M4.1",
+          "type": "reading",
+          "title": "Dimensionality reduction and clustering",
+          "resource": "book-hands-on-ml",
+          "est_minutes": 165,
+          "tier": 0,
+          "skills": ["ml-unsupervised"],
+          "locator": "Chapters 8 and 9 — PCA and its variants, then k-means, DBSCAN and Gaussian mixtures."
+        },
+        {
+          "id": "M4.2",
+          "type": "assignment",
+          "title": "Cluster the corpus you already decomposed",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M4.2",
+          "skills": ["ml-unsupervised"],
+          "checkpoints": [
+            "The same corpus and matrix used as in AIE-201 M1.5",
+            "k chosen by a stated method before inspecting the clusters",
+            "Clusters compared against the SVD components from the earlier assignment",
+            "Agreement or disagreement reported with examples"
+          ],
+          "brief": "Reuse the term-document matrix you built for AIE-201's decomposition assignment. Cluster it, choosing k by a method you state in advance rather than by looking. Then do the thing that makes this worth doing: compare the clusters against the singular vectors you already interpreted. If they agree, say what that tells you. If they disagree, say which one you believe and why — that is the interesting outcome and it is the one people quietly drop."
+        },
+        {
+          "id": "M4.3",
+          "type": "assignment",
+          "title": "Where clustering told you nothing",
+          "est_minutes": 150,
+          "tier": 2,
+          "rubric": "R-M4.3",
+          "skills": ["ml-unsupervised", "ml-eval-classical"],
+          "checkpoints": [
+            "Clustering run on data with no real cluster structure",
+            "The algorithm's output shown to be confident anyway",
+            "A validity measure applied and reported",
+            "A rule written for when not to trust a clustering"
+          ],
+          "brief": "Run k-means on data you know has no cluster structure — uniform noise will do — and show that it returns clusters anyway, with a plausible-looking plot. Apply a validity measure such as silhouette and report what it says. Then write the rule you will actually use: what would have to be true before you present a clustering to anyone as a finding."
+        },
+        {
+          "id": "M4.4",
+          "type": "lecture",
+          "title": "k-means, EM and PCA, derived",
+          "resource": "stanford-cs229-playlist",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": ["ml-unsupervised"],
+          "locator": "The k-means, mixture-of-Gaussians with EM, and PCA lectures."
+        },
+        {
+          "id": "M4.5",
+          "type": "retention",
+          "title": "Retention: unsupervised methods and their failure to abstain",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["ml-unsupervised"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Metrics, imbalance, and being believed",
+      "est_minutes": 840,
+      "items": [
+        {
+          "id": "M5.1",
+          "type": "reading",
+          "title": "Metrics and scoring",
+          "resource": "sklearn-model-evaluation",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["ml-eval-classical"]
+        },
+        {
+          "id": "M5.2",
+          "type": "reading",
+          "title": "Probability calibration",
+          "resource": "sklearn-calibration",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["ml-eval-classical"]
+        },
+        {
+          "id": "M5.3",
+          "type": "assignment",
+          "title": "A metric chosen for a reason",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M5.3",
+          "skills": ["ml-eval-classical"],
+          "checkpoints": [
+            "An imbalanced problem taken or constructed, with the base rate stated",
+            "A majority-class baseline scored under every candidate metric",
+            "The chosen metric justified against the cost of each error type",
+            "The model compared against the baseline under that metric"
+          ],
+          "brief": "Take an imbalanced problem and state its base rate. Score a majority-class baseline under accuracy, precision, recall, F1, ROC-AUC and average precision, and show which of those the baseline can win. Then choose the metric you would report, justifying it by what a false positive and a false negative actually cost in that setting — not by which is conventional."
+        },
+        {
+          "id": "M5.4",
+          "type": "assignment",
+          "title": "Calibrate, and show the reliability diagram",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M5.4",
+          "skills": ["ml-eval-classical"],
+          "checkpoints": [
+            "Reliability diagram produced before calibration",
+            "A calibration method applied on held-out data",
+            "Diagram reproduced after, with a calibration error reported",
+            "The effect on the ranking metric checked"
+          ],
+          "brief": "Produce a reliability diagram for a classifier of yours and report its calibration error. Apply Platt scaling or isotonic regression on data the model has not seen, and reproduce the diagram. Then check what calibration did to your ranking metric — it is usually close to nothing, and knowing that calibration and discrimination are separate properties is the point of the assignment."
+        },
+        {
+          "id": "M5.5",
+          "type": "project",
+          "title": "The baseline that should have been there",
+          "est_minutes": 180,
+          "tier": 3,
+          "rubric": "R-M5.5",
+          "skills": ["ml-supervised", "ml-eval-classical"],
+          "checkpoints": [
+            "The AIE-107 comparison revisited with a properly built classical model",
+            "Tuning, features and metric choice documented",
+            "The verdict restated, whether or not it changes",
+            "Published and connected backwards to the earlier chapter"
+          ],
+          "brief": "Go back to the requirement-versus-boilerplate comparison from AIE-107, where the classical model was whatever scikit-learn offered by default. Rebuild it properly: chosen features, tuned hyperparameters, a metric justified for the imbalance, and calibration if it matters. Publish the result as a chapter of the public log, connected back to the original. State plainly whether the verdict changes. If a well-built classical model now beats the LLM you shipped, that is the most valuable sentence in the programme so far and it must be written down."
+        },
+        {
+          "id": "M5.6",
+          "type": "defense",
+          "title": "Oral defense",
+          "est_minutes": 60,
+          "tier": 4,
+          "rubric": "R-M5.6",
+          "skills": ["ml-supervised", "ml-unsupervised", "ml-featureeng", "ml-eval-classical"],
+          "brief": "Three unscripted questions generated from your own submissions at defense time, answered aloud without notes.",
+          "sample_question_shapes": [
+            "Your bagged trees reduced variance. By how much, and how would you know if the reduction were noise?",
+            "You reported average precision rather than ROC-AUC. Someone senior says AUC is standard. Answer them.",
+            "Your clusters disagreed with the SVD components. Which did you believe, and what would change your mind?"
+          ]
+        },
+        {
+          "id": "M5.7",
+          "type": "retention",
+          "title": "Retention: metric selection and calibration",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["ml-eval-classical"],
+          "fsrs": true
+        }
+      ]
+    }
+  ],
+  "rubrics": [
+    {
+      "id": "R-M1.3",
+      "for": "M1.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "both linear implementations produce coefficients agreeing to a stated tolerance", "blocking": true },
+        { "check": "logistic gradient derived in the submission, not only coded", "blocking": true },
+        { "check": "sklearn comparison on identical data and split", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The implementations are genuinely from scratch",
+          "weight": 0.4,
+          "levels": {
+            "0": "Library calls with a wrapper.",
+            "1": "Partly implemented.",
+            "2": "Implemented from the update rules.",
+            "3": "Implemented from the update rules, with the derivation shown beside the code."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The comparison is on coefficients, not just predictions",
+          "weight": 0.35,
+          "levels": {
+            "0": "Predictions only.",
+            "1": "Coefficients shown, not compared.",
+            "2": "Coefficients compared.",
+            "3": "Coefficients compared with differences attributed to a named cause — regularisation, intercept handling or convergence."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Convergence is understood rather than assumed",
+          "weight": 0.25,
+          "levels": {
+            "0": "Ran until it stopped.",
+            "1": "Fixed iterations.",
+            "2": "A stated stopping criterion.",
+            "3": "A stated criterion with the learning rate's effect on the result shown."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M1.5",
+      "for": "M1.5",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "impurity verified by hand at one node and shown", "blocking": true },
+        { "check": "stopping rule stated before results", "blocking": true },
+        { "check": "variance measured across at least five seeds, before and after bagging", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The tree is built rather than configured",
+          "weight": 0.35,
+          "levels": {
+            "0": "A library tree.",
+            "1": "Partial implementation.",
+            "2": "Split search and criterion implemented.",
+            "3": "Implemented, with the hand-verified node included as evidence."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Variance reduction is measured, not asserted",
+          "weight": 0.4,
+          "levels": {
+            "0": "Asserted.",
+            "1": "One seed.",
+            "2": "Measured across seeds.",
+            "3": "Measured across seeds with the spread reported before and after, and the number of seeds justified."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The cost of the ensemble is acknowledged",
+          "weight": 0.25,
+          "levels": {
+            "0": "Not mentioned.",
+            "1": "Mentioned.",
+            "2": "Training and inference cost reported.",
+            "3": "Cost reported with a statement of when the variance reduction would not be worth it."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.3",
+      "for": "M2.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "both curves plotted with training and validation on shared axes", "blocking": true },
+        { "check": "the same dataset used for both models", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The two regimes are genuinely produced",
+          "weight": 0.35,
+          "levels": {
+            "0": "One regime, or neither clearly.",
+            "1": "Both claimed, curves ambiguous.",
+            "2": "Both visible in the curves.",
+            "3": "Both visible, with the single change that moved the model between them isolated."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The reading rule is usable by someone else",
+          "weight": 0.4,
+          "levels": {
+            "0": "Restates the definitions.",
+            "1": "Describes the plots.",
+            "2": "Gives a rule from shape to diagnosis.",
+            "3": "Gives a rule from shape to diagnosis to next action, including how the two are told apart when the gap is small."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The limits of the picture are acknowledged",
+          "weight": 0.25,
+          "levels": {
+            "0": "Presented as universal.",
+            "1": "Hedged.",
+            "2": "A limitation named.",
+            "3": "A named case where the decomposition stops being the right picture."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.4",
+      "for": "M2.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "the diagnosis recorded with a timestamp before any fix", "blocking": true },
+        { "check": "curves produced from real data, with its size stated", "blocking": true },
+        { "check": "post-fix measurement on the same axes", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The diagnosis is committed to before the fix",
+          "weight": 0.4,
+          "levels": {
+            "0": "Written afterwards.",
+            "1": "Vague enough to fit any outcome.",
+            "2": "Specific and recorded first.",
+            "3": "Specific, recorded first, and stating what result would falsify it."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The measurement is allowed to overrule the diagnosis",
+          "weight": 0.35,
+          "levels": {
+            "0": "Diagnosis retrofitted to the outcome.",
+            "1": "Outcome reported, tension ignored.",
+            "2": "Outcome reported honestly.",
+            "3": "Outcome reported honestly including a retraction where the data refused to support the call."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The system is real and described well enough to check",
+          "weight": 0.25,
+          "levels": {
+            "0": "A toy dataset.",
+            "1": "Real but unspecified.",
+            "2": "Real and described.",
+            "3": "Real, described, with the data volume and how it was split stated."
+          }
+        }
+      ],
+      "integrity": "A retracted diagnosis is a full-marks outcome. Judges are instructed that a submission which predicted wrongly and said so is stronger than one that predicted safely."
+    },
+    {
+      "id": "R-M3.2",
+      "for": "M3.2",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "raw-feature baseline measured before any engineering", "blocking": true },
+        { "check": "each feature's lift measured individually", "blocking": true },
+        { "check": "the same split used throughout", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The baseline comes first and is honest",
+          "weight": 0.3,
+          "levels": {
+            "0": "No baseline.",
+            "1": "A weak baseline.",
+            "2": "A fair baseline, measured first.",
+            "3": "A fair baseline measured first, with its own tuning so it is not a straw man."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Failures are reported alongside successes",
+          "weight": 0.45,
+          "levels": {
+            "0": "Only the winners.",
+            "1": "Failures mentioned.",
+            "2": "Failures tabulated.",
+            "3": "Failures tabulated including at least one the author expected to work, with a guess at why it did not."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Lift is attributable to the feature",
+          "weight": 0.25,
+          "levels": {
+            "0": "Everything changed at once.",
+            "1": "Mostly isolated.",
+            "2": "One at a time.",
+            "3": "One at a time with repeated splits, so the lift is distinguishable from split noise."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.3",
+      "for": "M3.3",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "the leak's effect on the metric quantified", "blocking": true },
+        { "check": "a detection procedure stated independently of knowing the answer", "blocking": true },
+        { "check": "the procedure run against a real pipeline", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The planted leak is realistic",
+          "weight": 0.3,
+          "levels": {
+            "0": "Copying the label.",
+            "1": "Obvious.",
+            "2": "Plausible.",
+            "3": "The kind that has actually shipped — a scaler fitted before the split, or a feature computed after the outcome."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The detection procedure would work without prior knowledge",
+          "weight": 0.45,
+          "levels": {
+            "0": "Looks where the leak was planted.",
+            "1": "General advice.",
+            "2": "A procedure that generalises.",
+            "3": "A procedure that generalises, with its false-positive behaviour acknowledged."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "It was run for real and the result reported either way",
+          "weight": 0.25,
+          "levels": {
+            "0": "Not run.",
+            "1": "Run, result vague.",
+            "2": "Run and reported.",
+            "3": "Run and reported including a clean result, stated as a clean result rather than padded."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.2",
+      "for": "M4.2",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "same matrix as AIE-201 M1.5, and stated as such", "blocking": true },
+        { "check": "k chosen by a method declared before inspecting clusters", "blocking": true },
+        { "check": "cluster membership compared against the earlier components", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "k is chosen by a method rather than by eye",
+          "weight": 0.3,
+          "levels": {
+            "0": "Picked.",
+            "1": "An elbow, read loosely.",
+            "2": "A stated method applied.",
+            "3": "A stated method applied, with sensitivity shown at k either side."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The comparison with the decomposition is substantive",
+          "weight": 0.45,
+          "levels": {
+            "0": "Not compared.",
+            "1": "Compared loosely.",
+            "2": "Compared with examples.",
+            "3": "Compared with examples and a stated position on which to believe where they differ."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Clusters are described against real documents",
+          "weight": 0.25,
+          "levels": {
+            "0": "Numbered only.",
+            "1": "Labelled generically.",
+            "2": "Labelled with members cited.",
+            "3": "Labelled with members cited, including any cluster the author declines to name."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.3",
+      "for": "M4.3",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "clustering run on data with no cluster structure", "blocking": true },
+        { "check": "a validity measure computed and reported", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The false structure is demonstrated convincingly",
+          "weight": 0.35,
+          "levels": {
+            "0": "Asserted.",
+            "1": "Shown once.",
+            "2": "Shown with the plot that would fool a reader.",
+            "3": "Shown with that plot and the validity measure that contradicts it side by side."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The rule for trusting a clustering is operational",
+          "weight": 0.4,
+          "levels": {
+            "0": "Absent.",
+            "1": "Be careful.",
+            "2": "A checkable condition.",
+            "3": "A checkable condition with a threshold and what to do when it is not met."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The limits of the validity measure are stated",
+          "weight": 0.25,
+          "levels": {
+            "0": "Treated as truth.",
+            "1": "Reported.",
+            "2": "Reported with a caveat.",
+            "3": "Reported with a case where the measure itself would mislead."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.3",
+      "for": "M5.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "base rate stated", "blocking": true },
+        { "check": "majority-class baseline scored under every candidate metric", "blocking": true },
+        { "check": "error costs stated for the specific setting", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The baseline exposes which metrics are uninformative",
+          "weight": 0.35,
+          "levels": {
+            "0": "No baseline.",
+            "1": "Baseline under one metric.",
+            "2": "Baseline under all candidates.",
+            "3": "Baseline under all candidates, with the ones it wins called out explicitly."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The metric is justified by cost, not convention",
+          "weight": 0.4,
+          "levels": {
+            "0": "Chosen because it is standard.",
+            "1": "Justified vaguely.",
+            "2": "Justified by error costs.",
+            "3": "Justified by error costs stated concretely for this setting, including who bears each."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The comparison against the model is fair",
+          "weight": 0.25,
+          "levels": {
+            "0": "Different data.",
+            "1": "Same data, different split.",
+            "2": "Identical evaluation.",
+            "3": "Identical evaluation with an interval around the difference."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.4",
+      "for": "M5.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "reliability diagrams before and after, with bin counts stated", "blocking": true },
+        { "check": "calibration fitted on data held out from both training and test", "blocking": true },
+        { "check": "ranking metric reported before and after", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Calibration is fitted without contaminating the evaluation",
+          "weight": 0.4,
+          "levels": {
+            "0": "Fitted on the test set.",
+            "1": "Fitted on training data.",
+            "2": "Fitted on a held-out split.",
+            "3": "Fitted on a held-out split with the three-way split described."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The separation of calibration and discrimination is understood",
+          "weight": 0.35,
+          "levels": {
+            "0": "Treated as the same thing.",
+            "1": "Ranking metric not checked.",
+            "2": "Ranking metric checked and reported.",
+            "3": "Checked, reported, and the near-invariance explained from what a monotone transform does to a ranking."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The diagrams are readable and honestly binned",
+          "weight": 0.25,
+          "levels": {
+            "0": "No bin count.",
+            "1": "Bins unstated.",
+            "2": "Bins stated.",
+            "3": "Bins stated with counts per bin, so sparse bins are visible rather than smoothed away."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.5",
+      "for": "M5.5",
+      "tier": 3,
+      "machine_checks": [
+        { "check": "published at a public URL and linked from the log", "blocking": true },
+        { "check": "connected backwards to the AIE-107 chapter", "blocking": true },
+        { "check": "tuning procedure and search space documented", "blocking": true },
+        { "check": "evaluated on the same held-out split as the original comparison", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The classical model is built properly this time",
+          "weight": 0.4,
+          "levels": {
+            "0": "Defaults again.",
+            "1": "Lightly tuned.",
+            "2": "Tuned, with features chosen deliberately.",
+            "3": "Tuned with a documented search, deliberate features, and a metric justified for the imbalance."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The verdict is stated plainly, whichever way it falls",
+          "weight": 0.35,
+          "levels": {
+            "0": "Avoided.",
+            "1": "Hedged.",
+            "2": "Stated.",
+            "3": "Stated with what it implies for the system as shipped, including the cost of changing it."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "It reads as one chapter of a body of work",
+          "weight": 0.25,
+          "levels": {
+            "0": "Standalone.",
+            "1": "Links back.",
+            "2": "Builds on the earlier result.",
+            "3": "Builds on and revises the earlier result, saying what the first attempt got wrong."
+          }
+        }
+      ],
+      "integrity": "If the rebuilt classical model beats the shipped LLM, that finding must be published rather than buried. Judges are instructed that a submission reaching it scores higher, not lower, and that omitting an unfavourable result is the failure this rubric exists to catch."
+    },
+    {
+      "id": "R-M5.6",
+      "for": "M5.6",
+      "tier": 4,
+      "machine_checks": [
+        { "check": "questions generated at defense time from the author's own submissions", "blocking": true },
+        { "check": "answered aloud without notes", "blocking": true },
+        { "check": "recording or transcript retained", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Claims are defended with the measurement behind them",
+          "weight": 0.45,
+          "levels": {
+            "0": "Repeats the claim.",
+            "1": "Recalls the number.",
+            "2": "Explains how it was measured.",
+            "3": "Explains how it was measured and what would have made it wrong."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Statistical care survives being pushed",
+          "weight": 0.3,
+          "levels": {
+            "0": "Overclaims under pressure.",
+            "1": "Retreats entirely.",
+            "2": "Holds the claim within its interval.",
+            "3": "Holds the claim within its interval and says what sample would settle it."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Disagreement is handled on the merits",
+          "weight": 0.25,
+          "levels": {
+            "0": "Defers to seniority.",
+            "1": "Asserts.",
+            "2": "Argues from the setting.",
+            "3": "Argues from the setting and concedes where the questioner is right."
+          }
+        }
+      ],
+      "integrity": "Conceding a real error is scored as strength. A defense in which the author never yields is evidence of stubbornness rather than understanding."
+    }
+  ],
+  "completion": {
+    "required": "All nine assignments, the project and the defense submitted. Readings and lectures are tier 0 and are tracked but never counted toward mastery.",
+    "grade_rollup": "Deterministic. Each item's tier sets its weight; panel scores enter as per-criterion values; nothing is rounded up. Computed in TypeScript, never by a model.",
+    "mastery_note": "Sets initial mastery on all four machine-learning skills, and is the course that makes AIE-102's evaluation vocabulary mean something mechanical rather than borrowed. FSRS then decays them."
+  },
+  "optional_hours": 0
+}

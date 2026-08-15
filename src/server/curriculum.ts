@@ -18,6 +18,7 @@ import aie105 from "@/products/curriculum/courses/AIE-105-inference-cost-and-lat
 import aie106 from "@/products/curriculum/courses/AIE-106-speech-and-multimodal-systems.json";
 import aie107 from "@/products/curriculum/courses/AIE-107-architecture-and-judgement.json";
 import aie201 from "@/products/curriculum/courses/AIE-201-mathematics-for-machine-learning.json";
+import aie202 from "@/products/curriculum/courses/AIE-202-machine-learning-foundations.json";
 
 import type {
   Area,
@@ -37,6 +38,7 @@ const SPECS = [
   aie106,
   aie107,
   aie201,
+  aie202,
 ] as unknown as CourseSpec[];
 
 const specByCourse = new Map<string, CourseSpec>(

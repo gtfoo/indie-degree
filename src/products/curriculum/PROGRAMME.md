@@ -419,6 +419,8 @@ The classical grounding that makes deep learning legible rather than magical, an
 | [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course) | Google | 20 h | Free |
 | [Building Machine Learning Powered Applications](https://openlibrary.org/isbn/9781492045113) | Emmanuel Ameisen | 20 h | Paid |
 
+> Full specification: [AIE-202-machine-learning-foundations.json](courses/AIE-202-machine-learning-foundations.json)
+
 ### 10. AIE-203 — Deep Learning
 
 **3 credits · 65 hours** · prerequisites: AIE-202

@@ -1293,7 +1293,8 @@
         "book-hands-on-ml",
         "google-ml-crash-course",
         "book-ml-powered-apps"
-      ]
+      ],
+      "spec": "courses/AIE-202-machine-learning-foundations.json"
     },
     {
       "id": "AIE-203",
