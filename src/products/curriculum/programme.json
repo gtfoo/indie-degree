@@ -1422,8 +1422,12 @@
         "repo-transformers",
         "hf-nlp-course",
         "karpathy-deep-dive-llms",
-        "book-build-llm-scratch"
-      ]
+        "book-build-llm-scratch",
+        "book-ai-engineering",
+        "karpathy-intro-llms",
+        "stanford-cs336"
+      ],
+      "spec": "courses/AIE-205-fine-tuning-and-post-training.json"
     },
     {
       "id": "AIE-206",

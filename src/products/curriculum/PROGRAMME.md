@@ -520,6 +520,11 @@ Where a base model becomes a product, and where evaluation discipline from AIE-1
 | [Introduction - Hugging Face NLP Course](https://huggingface.co/learn/nlp-course/chapter1/1) | Hugging Face | 20 h | Free |
 | [Deep Dive into LLMs like ChatGPT](https://www.youtube.com/watch?v=7xTGNNLPyMI) | Andrej Karpathy | 4 h | Free |
 | [Build a Large Language Model (From Scratch)](https://openlibrary.org/isbn/9781633437166) | Sebastian Raschka | 40 h | Paid |
+| [AI Engineering](https://openlibrary.org/isbn/9781098166304) | Chip Huyen | 30 h | Paid |
+| [Intro to Large Language Models](https://www.youtube.com/watch?v=zjkBMFhNj_g) | Andrej Karpathy | 1 h | Free |
+| [Stanford CS336 Language Modeling from Scratch I 2025](https://www.youtube.com/playlist?list=PLoROMvodv4rOY23Y0BoGoBGgQ1zmU_MT_) | Percy Liang, Tatsunori Hashimoto, Stanford | 45 h | Free |
+
+> Full specification: [AIE-205-fine-tuning-and-post-training.json](courses/AIE-205-fine-tuning-and-post-training.json)
 
 ### 13. AIE-207 — Systems for Machine Learning
 

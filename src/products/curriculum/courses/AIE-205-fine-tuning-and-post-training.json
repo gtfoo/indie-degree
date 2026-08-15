@@ -1,0 +1,973 @@
+{
+  "course": "AIE-205",
+  "title": "Fine-tuning and Post-training",
+  "credits": 3,
+  "est_hours": 60,
+  "spec_version": "0.1",
+  "registered": "2026-08-15",
+  "premise": "Where a base model becomes a product, and where the evaluation discipline from AIE-102 stops being optional. The single question this course exists to answer honestly is the one most fine-tuning write-ups avoid: did it beat a well-prompted baseline on the same eval set? Frequently it does not, and a course that cannot produce that answer has taught a technique rather than a judgement.",
+  "why_here": "Twelfth overall, after transformers because a fine-tune you cannot picture as a change to specific weights is a black box with a price tag, and after evaluation because the entire value here is a comparison. It is the first course with two prerequisites, and both are load-bearing.",
+  "laboratory": "Career Side Quests' evidence extraction, because the eval already exists. You built a 30-case gold set for it in AIE-102 and the harness that runs it in tools/eval-harness — which means the measurement predates the model. That is the correct order and almost never how it happens in practice, and having it means every claim in this course is checkable rather than asserted.",
+  "compute_note": "Everything here runs on a small open model of a few hundred million parameters, with LoRA, on free-tier hosted compute or CPU where it fits. Paid API fine-tuning is explicitly not required: it hides the mechanism behind a service, and a course that costs money to attempt is a course that gets skipped. Where an item needs more compute than that, it says so and offers a smaller substitute.",
+  "sitting_rule": "Every item is completable in one sitting. Nothing exceeds 180 minutes, and anything over 90 declares its own checkpoints.",
+  "honesty_note": "No advanced standing. The portfolio contains no fine-tune, no curated training set and no preference data, and prompt engineering at scale is not evidence about weight updates.",
+  "panel": {
+    "models": [
+      "claude-opus-5",
+      "gpt-5",
+      "gemini-flash-latest"
+    ],
+    "blind": true,
+    "blind_note": "Judges see the submission and the rubric, never each other's scores, and never the learner's self-assessment.",
+    "rubric_registered_before_submission": true,
+    "disagreement": "Scores are reported per judge and never averaged into a single number when the spread is 2 or more on any criterion.",
+    "bias_warning": "Judges are instructed that a submission concluding the fine-tune did not beat the prompted baseline is not thereby weaker. The criterion throughout is the quality of the comparison, not whether the fashionable technique won."
+  },
+  "modules": [
+    {
+      "id": "M1",
+      "title": "The dataset is the model",
+      "est_minutes": 780,
+      "items": [
+        {
+          "id": "M1.1",
+          "type": "lecture",
+          "title": "The post-training pipeline, end to end",
+          "resource": "karpathy-deep-dive-llms",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["ft-sft", "ft-preference"]
+        },
+        {
+          "id": "M1.2",
+          "type": "reading",
+          "title": "Training language models to follow instructions",
+          "resource": "paper-instructgpt",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["ft-preference", "ft-data"]
+        },
+        {
+          "id": "M1.3",
+          "type": "assignment",
+          "title": "Inclusion rules, written before the data",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M1.3",
+          "skills": ["ft-data"],
+          "checkpoints": [
+            "Inclusion and exclusion rules written before any example is collected",
+            "At least 100 candidate examples assembled",
+            "Every example accepted or rejected against the written rules",
+            "Rejections counted by rule, and the rules revised once with the revision logged"
+          ],
+          "brief": "Write the inclusion and exclusion rules for a fine-tuning dataset before you look at any candidate data, then collect at least a hundred candidates and judge every one against the rules. Count the rejections by rule. You will find at least one rule that rejects nothing, which means it was decoration, and at least one that turns out to be ambiguous in practice. Revise once and log what changed. The dataset is the model, and rules invented while filtering are rules fitted to the data you happened to have."
+        },
+        {
+          "id": "M1.4",
+          "type": "assignment",
+          "title": "How ambiguous are your own rules",
+          "est_minutes": 150,
+          "tier": 2,
+          "rubric": "R-M1.4",
+          "skills": ["ft-data"],
+          "checkpoints": [
+            "A sample re-judged after a gap of at least a day",
+            "Self-agreement measured on identical items",
+            "Disagreements traced to specific rules",
+            "Rules rewritten where the disagreement was linguistic rather than substantive"
+          ],
+          "brief": "Take fifty examples you already judged, wait at least a day, and judge them again without looking at your earlier answers. Measure how often you agree with yourself. Anything below near-total agreement is a measurement of how ambiguous your rules are, not of your concentration — and it puts a ceiling on what any model trained on this data can learn. Trace each disagreement to a rule and rewrite the rules that caused them."
+        },
+        {
+          "id": "M1.5",
+          "type": "reading",
+          "title": "Dataset engineering, and when not to fine-tune",
+          "resource": "book-ai-engineering",
+          "est_minutes": 105,
+          "tier": 0,
+          "skills": ["ft-data", "ft-sft"],
+          "locator": "The chapters on dataset engineering and on the decision of whether to fine-tune at all — read the second one first."
+        },
+        {
+          "id": "M1.6",
+          "type": "retention",
+          "title": "Retention: data curation and its ceiling",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["ft-data"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Supervised fine-tuning, and the baseline that must beat it",
+      "est_minutes": 720,
+      "items": [
+        {
+          "id": "M2.1",
+          "type": "reading",
+          "title": "Fine-tuning, implemented",
+          "resource": "book-build-llm-scratch",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["ft-sft"],
+          "locator": "The chapters on fine-tuning for classification and on instruction fine-tuning — including the loss masking, which is the detail most implementations get wrong silently."
+        },
+        {
+          "id": "M2.2",
+          "type": "reading",
+          "title": "Llama 2, for the post-training section",
+          "resource": "paper-llama2",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["ft-sft", "ft-preference"]
+        },
+        {
+          "id": "M2.3",
+          "type": "assignment",
+          "title": "Run a supervised fine-tune",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.3",
+          "skills": ["ft-sft"],
+          "checkpoints": [
+            "A small open model chosen and its size stated",
+            "Loss masked so only completion tokens contribute",
+            "Training and validation loss recorded",
+            "Evaluated on the AIE-102 gold set through the harness"
+          ],
+          "brief": "Fine-tune a small open model on the dataset you curated. Mask the loss so that only the completion tokens contribute — verify this by checking that the prompt tokens' gradients are zero, because getting it wrong produces a model that trains without error and learns to predict its own prompts. Evaluate through the harness on the gold set that already existed, not on a metric invented afterwards."
+        },
+        {
+          "id": "M2.4",
+          "type": "assignment",
+          "title": "The prompted baseline that has to lose first",
+          "est_minutes": 150,
+          "tier": 2,
+          "rubric": "R-M2.4",
+          "skills": ["ft-sft"],
+          "checkpoints": [
+            "A genuine prompt-engineering effort on the base model, time-boxed and logged",
+            "Few-shot examples drawn from the same training data",
+            "Evaluated on the identical gold set",
+            "The comparison stated with an interval, not a point"
+          ],
+          "brief": "Spend real effort prompting the base model to do the same task — few-shot examples drawn from the same data your fine-tune saw, a time-box you state in advance, and the iterations logged. Evaluate on the identical gold set through the same harness. Then state the comparison with an interval rather than two bare numbers. If the prompted baseline wins, that is the finding, and it is the most commercially useful sentence in this course."
+        },
+        {
+          "id": "M2.5",
+          "type": "lecture",
+          "title": "Post-training in a from-scratch course",
+          "resource": "stanford-cs336",
+          "est_minutes": 75,
+          "tier": 0,
+          "skills": ["ft-sft"],
+          "locator": "The post-training and alignment lectures — cite the course playlist, since the individually reuploaded copies are not authorised."
+        },
+        {
+          "id": "M2.6",
+          "type": "retention",
+          "title": "Retention: SFT mechanics and loss masking",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["ft-sft"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Parameter-efficient methods",
+      "est_minutes": 720,
+      "items": [
+        {
+          "id": "M3.1",
+          "type": "reading",
+          "title": "LoRA",
+          "resource": "paper-lora",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["ft-lora"]
+        },
+        {
+          "id": "M3.2",
+          "type": "reading",
+          "title": "The configuration that actually matters",
+          "resource": "repo-peft",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["ft-lora"],
+          "locator": "The conceptual guides on LoRA — rank, alpha, and which modules to target, which is the choice with the largest effect and the least discussion."
+        },
+        {
+          "id": "M3.3",
+          "type": "assignment",
+          "title": "Rank is a dial with a cost",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M3.3",
+          "skills": ["ft-lora"],
+          "checkpoints": [
+            "Three ranks trained on identical data and schedule",
+            "Trainable parameter count reported per rank",
+            "Gold-set score reported per rank",
+            "Training time and memory recorded per rank"
+          ],
+          "brief": "Train the same fine-tune at three LoRA ranks. Report trainable parameters, gold-set score, wall-clock and peak memory for each. Plot score against trainable parameters. The interesting region is where the curve flattens, because that is the rank above which you are paying for nothing — and it is usually lower than the defaults suggest."
+        },
+        {
+          "id": "M3.4",
+          "type": "assignment",
+          "title": "Where the low-rank assumption runs out",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M3.4",
+          "skills": ["ft-lora", "ft-sft"],
+          "checkpoints": [
+            "A task chosen where LoRA is expected to struggle, with the reason stated first",
+            "LoRA and full fine-tuning both run where compute allows",
+            "The gap measured, or the substitute experiment justified",
+            "The low-rank assumption stated in terms of what it constrains"
+          ],
+          "brief": "LoRA constrains the update to a low-rank subspace, which is an assumption about how much the weights need to move. Construct or choose a task where you expect that assumption to bind — a large domain shift rather than a format change — and predict the outcome before running it. Compare against full fine-tuning if compute allows; if it does not, say so and substitute a smaller model where it does. State the assumption in mechanical terms: what kind of change can a rank-r update not express."
+        },
+        {
+          "id": "M3.5",
+          "type": "reading",
+          "title": "What the Trainer does on your behalf",
+          "resource": "repo-transformers",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["ft-sft"],
+          "locator": "The Trainer documentation and one example fine-tuning script — read specifically for the defaults it applies without asking, since those are the settings you will be blamed for."
+        },
+        {
+          "id": "M3.6",
+          "type": "retention",
+          "title": "Retention: LoRA mechanics and rank selection",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["ft-lora"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Preference optimisation",
+      "est_minutes": 720,
+      "items": [
+        {
+          "id": "M4.1",
+          "type": "reading",
+          "title": "Direct preference optimisation",
+          "resource": "paper-dpo",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["ft-preference"]
+        },
+        {
+          "id": "M4.2",
+          "type": "reading",
+          "title": "The DPO trainer, against the paper",
+          "resource": "repo-trl",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["ft-preference"],
+          "locator": "The DPO trainer documentation and its example, read alongside the paper's objective so the implementation's extra terms are visible as choices."
+        },
+        {
+          "id": "M4.3",
+          "type": "assignment",
+          "title": "The DPO loss, from the equation",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M4.3",
+          "skills": ["ft-preference"],
+          "checkpoints": [
+            "The loss implemented directly from the paper's equation",
+            "Reference-model log-probabilities handled explicitly",
+            "Verified against the library implementation on identical inputs",
+            "The role of beta demonstrated at two values"
+          ],
+          "brief": "Implement the DPO loss from the equation in the paper, not from the library. Handle the reference model explicitly — the frozen policy's log-probabilities are where implementations diverge quietly. Verify against the library on identical inputs and weights. Then show what beta does by running two values and describing the behaviour, since it controls how far the policy is allowed to move and is the parameter people set by copying."
+        },
+        {
+          "id": "M4.4",
+          "type": "assignment",
+          "title": "Run DPO, and find what else moved",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M4.4",
+          "skills": ["ft-preference"],
+          "checkpoints": [
+            "A small preference set built with the preference criterion stated",
+            "DPO run from an SFT checkpoint",
+            "The targeted behaviour measured before and after",
+            "At least two untargeted capabilities measured before and after"
+          ],
+          "brief": "Build a small preference dataset — pairs where you can state why one response is preferred — and run DPO from your SFT checkpoint. Measure the behaviour you targeted. Then measure at least two things you did not target and did not want to change. Preference optimisation moves the whole policy, and the untargeted measurements are the point of the assignment."
+        },
+        {
+          "id": "M4.5",
+          "type": "reading",
+          "title": "Constitutional AI",
+          "resource": "paper-constitutional-ai",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": ["safety-alignment", "ft-preference"]
+        },
+        {
+          "id": "M4.6",
+          "type": "retention",
+          "title": "Retention: preference optimisation",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["ft-preference"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Did it help, and what did it cost",
+      "est_minutes": 660,
+      "items": [
+        {
+          "id": "M5.1",
+          "type": "assignment",
+          "title": "Regression sweep on what you did not intend to change",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M5.1",
+          "skills": ["ft-sft", "ft-preference"],
+          "checkpoints": [
+            "A capability set defined before fine-tuning, covering behaviours not being targeted",
+            "Base model scored on all of them",
+            "Fine-tuned model scored on the identical set",
+            "Regressions reported individually rather than as an average"
+          ],
+          "brief": "Define a set of capabilities you are not trying to change — instruction following on unrelated tasks, formatting, refusal behaviour, another language — and score the base model on all of them before fine-tuning. Score the fine-tuned model on the identical set afterwards. Report each individually. Averaging hides exactly the failure this exists to find, which is a large regression in one capability concealed by small gains in several."
+        },
+        {
+          "id": "M5.2",
+          "type": "project",
+          "title": "fine-tune-study, published",
+          "est_minutes": 180,
+          "tier": 3,
+          "rubric": "R-M5.2",
+          "skills": ["ft-sft", "ft-lora", "ft-data"],
+          "checkpoints": [
+            "Public write-up with the dataset rules, the training configuration and the eval",
+            "The prompted baseline comparison stated prominently rather than buried",
+            "A negative result included",
+            "Connected backwards to the AIE-102 gold set and the harness"
+          ],
+          "brief": "Publish the study that the fine-tuning capability claim points at: the curation rules, what the data looked like, the training configuration, and the comparison against a well-prompted baseline on a gold set that predated the model. The comparison goes near the top, not in a discussion section at the end. It must connect backwards to AIE-102's gold set and to the harness that ran it, because the fact that the measurement existed first is the strongest thing about this piece of work."
+        },
+        {
+          "id": "M5.3",
+          "type": "assignment",
+          "title": "The alignment tax, measured on your own model",
+          "est_minutes": 120,
+          "tier": 2,
+          "rubric": "R-M5.3",
+          "skills": ["safety-alignment", "ft-preference"],
+          "checkpoints": [
+            "A refusal or safety behaviour identified in the base model",
+            "Measured before and after both SFT and DPO stages",
+            "Any change reported including a loosening",
+            "The mechanism suggested rather than asserted"
+          ],
+          "brief": "Pick a safety behaviour the base model exhibits and measure it before your SFT, after your SFT, and after DPO. Fine-tuning on narrow task data routinely erodes behaviours nobody intended to touch, and reporting a loosening in your own model is the honest outcome here. Suggest a mechanism for what you observe, and mark it as a suggestion rather than a finding."
+        },
+        {
+          "id": "M5.4",
+          "type": "defense",
+          "title": "Oral defense",
+          "est_minutes": 60,
+          "tier": 4,
+          "rubric": "R-M5.4",
+          "skills": ["ft-data", "ft-sft", "ft-lora", "ft-preference", "safety-alignment"],
+          "brief": "Three unscripted questions generated from your own submissions at defense time, answered aloud without notes. This defense carries the fine-tuning capability claim.",
+          "sample_question_shapes": [
+            "Your self-agreement on the labels was below ceiling. What does that put a limit on, and how would you have raised it?",
+            "You chose rank 16. Talk me through what a rank-4 update cannot express that a rank-16 one can, without using the word 'capacity'.",
+            "Your prompted baseline beat the fine-tune. A stakeholder has already told the client you are fine-tuning. What do you say to them?"
+          ]
+        },
+        {
+          "id": "M5.5",
+          "type": "lecture",
+          "title": "The whole pipeline, briefly, from the outside",
+          "resource": "karpathy-intro-llms",
+          "est_minutes": 105,
+          "tier": 0,
+          "skills": ["ft-sft"]
+        },
+        {
+          "id": "M5.6",
+          "type": "retention",
+          "title": "Retention: the post-training pipeline and its costs",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["ft-data", "ft-preference"],
+          "fsrs": true
+        }
+      ]
+    }
+  ],
+  "rubrics": [
+    {
+      "id": "R-M1.3",
+      "for": "M1.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "rules timestamped before the first candidate was collected", "blocking": true },
+        { "check": "100 or more candidates judged individually", "blocking": true },
+        { "check": "rejections counted per rule", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The rules preceded the data",
+          "weight": 0.4,
+          "levels": {
+            "0": "Written while filtering.",
+            "1": "Partly in advance.",
+            "2": "Written in advance and applied.",
+            "3": "Written in advance, applied, with the one revision logged and justified."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The rejection accounting is informative",
+          "weight": 0.35,
+          "levels": {
+            "0": "A count only.",
+            "1": "Counts per rule.",
+            "2": "Counts per rule with the dead rules identified.",
+            "3": "Counts per rule, dead rules identified, and the ambiguous rule named with an example of the ambiguity."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The dataset is described well enough to be criticised",
+          "weight": 0.25,
+          "levels": {
+            "0": "Size only.",
+            "1": "Size and source.",
+            "2": "Size, source and distribution.",
+            "3": "Size, source, distribution, and what it is unrepresentative of."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M1.4",
+      "for": "M1.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "at least a day between the two judging passes", "blocking": true },
+        { "check": "second pass performed without access to the first", "blocking": true },
+        { "check": "agreement reported as a number", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The re-judging was genuinely blind",
+          "weight": 0.35,
+          "levels": {
+            "0": "First answers visible.",
+            "1": "Recalled from memory.",
+            "2": "Blind with a real gap.",
+            "3": "Blind, with a real gap and the sample order shuffled."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The consequence for the model is drawn",
+          "weight": 0.4,
+          "levels": {
+            "0": "A number with no interpretation.",
+            "1": "Described as noise.",
+            "2": "Identified as a ceiling on learnable signal.",
+            "3": "Identified as a ceiling, quantified, and related to the eval's own headroom."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The rules were actually improved",
+          "weight": 0.25,
+          "levels": {
+            "0": "No change.",
+            "1": "Cosmetic edits.",
+            "2": "Rules rewritten where disagreements clustered.",
+            "3": "Rules rewritten and the affected items re-judged to confirm the fix."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.3",
+      "for": "M2.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "loss masking verified — prompt-token gradients are zero", "blocking": true },
+        { "check": "training and validation loss both recorded", "blocking": true },
+        { "check": "evaluated through the harness on the pre-existing gold set", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Loss masking is proven, not assumed",
+          "weight": 0.4,
+          "levels": {
+            "0": "Not addressed.",
+            "1": "Claimed.",
+            "2": "Verified by inspection.",
+            "3": "Verified by a check that would fail if the mask were removed, with the output shown."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The run is documented enough to repeat",
+          "weight": 0.35,
+          "levels": {
+            "0": "Result only.",
+            "1": "Partial configuration.",
+            "2": "Full configuration and data.",
+            "3": "Full configuration, data, seeds and hardware, with wall-clock and cost."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The evaluation predates the model",
+          "weight": 0.25,
+          "levels": {
+            "0": "A metric chosen after seeing results.",
+            "1": "A standard metric picked late.",
+            "2": "The pre-existing gold set used.",
+            "3": "The pre-existing gold set used through the same harness, with per-tag results reported."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.4",
+      "for": "M2.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "prompt iterations logged with a stated time-box", "blocking": true },
+        { "check": "few-shot examples drawn from the training split, not the gold set", "blocking": true },
+        { "check": "identical gold set and harness used for both", "blocking": true },
+        { "check": "comparison reported with an interval", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The baseline is built in good faith",
+          "weight": 0.45,
+          "levels": {
+            "0": "A single naive prompt.",
+            "1": "Minimal iteration.",
+            "2": "Genuine effort, logged.",
+            "3": "Genuine effort, logged, with the best prompt included verbatim and its iterations visible."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The comparison is statistically honest",
+          "weight": 0.35,
+          "levels": {
+            "0": "Two bare numbers.",
+            "1": "Difference asserted.",
+            "2": "Interval reported.",
+            "3": "Interval reported, with a difference inside it stated as no difference."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Contamination is avoided and shown to be",
+          "weight": 0.2,
+          "levels": {
+            "0": "Gold-set examples used in the prompt.",
+            "1": "Provenance unclear.",
+            "2": "Drawn from the training split.",
+            "3": "Drawn from the training split, with the separation demonstrated."
+          }
+        }
+      ],
+      "anti_gaming": "A strawman prompted baseline invalidates the whole course, which is built on this one comparison. Judges are instructed to inspect the prompt and to score criterion 1 at 0 where it shows no iteration, regardless of the quality of the rest of the submission."
+    },
+    {
+      "id": "R-M3.3",
+      "for": "M3.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "three ranks trained on identical data and schedule", "blocking": true },
+        { "check": "trainable parameter count reported per rank", "blocking": true },
+        { "check": "time and peak memory recorded per rank", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Only the rank varies",
+          "weight": 0.35,
+          "levels": {
+            "0": "Several settings differ.",
+            "1": "Mostly controlled.",
+            "2": "Only rank varies.",
+            "3": "Only rank varies, with alpha's coupling to rank handled explicitly."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The saturation point is identified",
+          "weight": 0.4,
+          "levels": {
+            "0": "Three numbers, no reading.",
+            "1": "A best rank named.",
+            "2": "The flattening identified.",
+            "3": "The flattening identified against the seed spread, so it is distinguishable from noise."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The cost side is real",
+          "weight": 0.25,
+          "levels": {
+            "0": "Not reported.",
+            "1": "Parameters only.",
+            "2": "Parameters, time and memory.",
+            "3": "Parameters, time and memory, with the rank the author would ship and why."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.4",
+      "for": "M3.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "prediction recorded before the experiment", "blocking": true },
+        { "check": "a full fine-tune comparison run, or its substitution justified with a smaller model", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The task genuinely stresses the assumption",
+          "weight": 0.4,
+          "levels": {
+            "0": "A format change.",
+            "1": "A mild shift.",
+            "2": "A real domain shift.",
+            "3": "A real domain shift with the reason it should bind stated mechanically in advance."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The low-rank constraint is explained, not named",
+          "weight": 0.35,
+          "levels": {
+            "0": "Restates 'fewer parameters'.",
+            "1": "Describes the decomposition.",
+            "2": "States what a rank-r update constrains.",
+            "3": "States what it constrains and gives an example of a change it cannot express."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The compute limitation is handled honestly",
+          "weight": 0.25,
+          "levels": {
+            "0": "Comparison skipped silently.",
+            "1": "Skipped with an excuse.",
+            "2": "Substituted with a smaller model, stated.",
+            "3": "Substituted and stated, with what the substitution costs the conclusion."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.3",
+      "for": "M4.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "loss implemented from the paper's equation, with the equation reproduced", "blocking": true },
+        { "check": "matches the library implementation on identical inputs to a stated tolerance", "blocking": true },
+        { "check": "two beta values run and their effect described", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The reference model is handled correctly",
+          "weight": 0.4,
+          "levels": {
+            "0": "Omitted.",
+            "1": "Present but not frozen.",
+            "2": "Frozen and used correctly.",
+            "3": "Frozen, used correctly, with what happens to the objective without it explained."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The verification is meaningful",
+          "weight": 0.35,
+          "levels": {
+            "0": "Not compared.",
+            "1": "Compared loosely.",
+            "2": "Matches on identical inputs.",
+            "3": "Matches on identical inputs and weights, with any library-specific extra term identified."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Beta is understood as a constraint",
+          "weight": 0.25,
+          "levels": {
+            "0": "Copied.",
+            "1": "Varied without interpretation.",
+            "2": "Its effect described.",
+            "3": "Its effect described as the strength of the pull toward the reference policy, and shown."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.4",
+      "for": "M4.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "preference criterion stated before pairs were built", "blocking": true },
+        { "check": "run from an SFT checkpoint, not a base model", "blocking": true },
+        { "check": "two or more untargeted capabilities measured before and after", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The preference criterion is explicit and consistent",
+          "weight": 0.3,
+          "levels": {
+            "0": "Vibes.",
+            "1": "Stated loosely.",
+            "2": "Stated and applied.",
+            "3": "Stated, applied, and self-agreement spot-checked as in M1.4."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Untargeted effects are measured, not speculated",
+          "weight": 0.45,
+          "levels": {
+            "0": "Not measured.",
+            "1": "One capability.",
+            "2": "Two or more, before and after.",
+            "3": "Two or more, before and after, chosen because they were plausible casualties rather than because they were easy."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The targeted change is quantified",
+          "weight": 0.25,
+          "levels": {
+            "0": "Asserted from samples.",
+            "1": "A qualitative read.",
+            "2": "Measured.",
+            "3": "Measured with an interval, on data not used to build the preference pairs."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.1",
+      "for": "M5.1",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "capability set defined before fine-tuning", "blocking": true },
+        { "check": "base and fine-tuned models scored on the identical set", "blocking": true },
+        { "check": "results reported per capability, not aggregated", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The capability set was chosen in advance and covers real risk",
+          "weight": 0.4,
+          "levels": {
+            "0": "Chosen afterwards.",
+            "1": "Generic benchmarks.",
+            "2": "Chosen in advance.",
+            "3": "Chosen in advance and argued as the behaviours most likely to be collateral damage."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Reporting resists aggregation",
+          "weight": 0.35,
+          "levels": {
+            "0": "A single average.",
+            "1": "Average plus a note.",
+            "2": "Per capability.",
+            "3": "Per capability, with the largest regression named in the summary rather than the mean."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Regressions are investigated rather than noted",
+          "weight": 0.25,
+          "levels": {
+            "0": "Listed.",
+            "1": "Acknowledged.",
+            "2": "One investigated.",
+            "3": "One investigated with examples of the changed behaviour shown side by side."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.2",
+      "for": "M5.2",
+      "tier": 3,
+      "machine_checks": [
+        { "check": "published at a public URL and linked from the log", "blocking": true },
+        { "check": "the baseline comparison appears before any discussion section", "blocking": true },
+        { "check": "connects backwards to the AIE-102 gold set and the harness", "blocking": true },
+        { "check": "at least one negative result included", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The comparison is the headline, not the caveat",
+          "weight": 0.4,
+          "levels": {
+            "0": "Buried or absent.",
+            "1": "Present late.",
+            "2": "Prominent.",
+            "3": "Prominent, with the interval, and stated in the first screen of the document."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The measurement's independence is made visible",
+          "weight": 0.35,
+          "levels": {
+            "0": "Eval not described.",
+            "1": "Eval described.",
+            "2": "Its prior existence noted.",
+            "3": "Its prior existence evidenced by date or commit, which is the strongest claim in the piece."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "It is reproducible by a reader",
+          "weight": 0.25,
+          "levels": {
+            "0": "Narrative only.",
+            "1": "Configuration described.",
+            "2": "Configuration and data described.",
+            "3": "Configuration, data and code linked, with the compute needed stated up front."
+          }
+        }
+      ],
+      "integrity": "If the prompted baseline beat the fine-tune, that must be the headline. Judges are instructed to score criterion 1 at 0 where an unfavourable comparison has been moved below a discussion section or softened into a limitation."
+    },
+    {
+      "id": "R-M5.3",
+      "for": "M5.3",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "the behaviour measured at three points — base, post-SFT, post-DPO", "blocking": true },
+        { "check": "the probe set fixed before the first measurement", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The measurement is comparable across stages",
+          "weight": 0.4,
+          "levels": {
+            "0": "Different probes per stage.",
+            "1": "Mostly consistent.",
+            "2": "Identical probes and scoring.",
+            "3": "Identical probes and scoring, with the scoring procedure stated well enough to rerun."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "A loosening is reported plainly if it occurred",
+          "weight": 0.35,
+          "levels": {
+            "0": "Omitted or softened.",
+            "1": "Mentioned vaguely.",
+            "2": "Reported.",
+            "3": "Reported with examples, and with what it would mean if this model were shipped."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Mechanism is offered as a hypothesis",
+          "weight": 0.25,
+          "levels": {
+            "0": "Asserted as fact.",
+            "1": "None offered.",
+            "2": "Offered and marked as a suggestion.",
+            "3": "Offered, marked as a suggestion, with an experiment that would test it."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.4",
+      "for": "M5.4",
+      "tier": 4,
+      "machine_checks": [
+        { "check": "questions generated at defense time from the author's own submissions", "blocking": true },
+        { "check": "answered aloud without notes", "blocking": true },
+        { "check": "recording or transcript retained", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The comparison can be defended under pressure",
+          "weight": 0.45,
+          "levels": {
+            "0": "Retreats to 'fine-tuning is better'.",
+            "1": "Recalls the numbers.",
+            "2": "Defends the method that produced them.",
+            "3": "Defends the method and names what would have made the result go the other way."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Mechanism is reconstructed rather than recalled",
+          "weight": 0.3,
+          "levels": {
+            "0": "Recites the write-up.",
+            "1": "Recalls conclusions.",
+            "2": "Rebuilds the mechanism.",
+            "3": "Rebuilds the mechanism and answers a variation not in the submission."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Commercial pressure is handled honestly",
+          "weight": 0.25,
+          "levels": {
+            "0": "Agrees to overstate.",
+            "1": "Evades.",
+            "2": "Holds the finding.",
+            "3": "Holds the finding and offers the stakeholder a route that is both honest and useful."
+          }
+        }
+      ],
+      "integrity": "This defense carries the fine-tuning capability claim. A candidate who concedes that the prompted baseline won, and can say precisely why, scores higher than one who defends the fine-tune past the evidence."
+    }
+  ],
+  "completion": {
+    "required": "All nine assignments, the project and the defense submitted. Readings and lectures are tier 0 and are tracked but never counted toward mastery.",
+    "grade_rollup": "Deterministic. Each item's tier sets its weight; panel scores enter as per-criterion values; nothing is rounded up. Computed in TypeScript, never by a model.",
+    "mastery_note": "Sets initial mastery on all four fine-tuning skills and contributes to alignment techniques, making the Fine-tuning and post-training capability claimable. FSRS then decays them."
+  },
+  "optional_hours": 0
+}
