@@ -52,7 +52,7 @@ lives in a letter or a commit, and a one-line task strands the *why*.
 
 ## Declined
 
-- [ ] ~~**An LLM that emits the final grade**~~ — declined as specified.
+- ~~**An LLM that emits the final grade**~~ — declined as specified.
       Aggregating three judges is arithmetic; a model doing it reintroduces the
       single-model opinion the panel exists to avoid, with a laundering step
       that makes it look more rigorous. The counter-proposal — a fourth model
@@ -60,12 +60,12 @@ lives in a letter or a commit, and a one-line task strands the *why*.
       deterministic — is open, not declined.
       `from: owner · 2026-08-15`
 
-- [ ] ~~**A second analytics collector**~~ — standing agreement with the
+- ~~**A second analytics collector**~~ — standing agreement with the
       droplet agent: collection is shared across all sites and app agents build
       views on the same files.
       `from: droplet · INFRA.md#interface-contract`
 
-- [ ] ~~**Emitting `/var/lib/usage` rows**~~ — this app makes no runtime model
+- ~~**Emitting `/var/lib/usage` rows**~~ — this app makes no runtime model
       calls, so there is nothing to meter. Per `INFRA.md` that is likely the
       permanent and correct answer here, not a deferral.
       `from: droplet · INFRA.md#usage-emission`
