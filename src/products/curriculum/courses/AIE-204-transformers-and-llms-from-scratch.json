@@ -1,0 +1,1158 @@
+{
+  "course": "AIE-204",
+  "title": "Transformers and LLMs from Scratch",
+  "credits": 4,
+  "est_hours": 80,
+  "spec_version": "0.1",
+  "registered": "2026-08-15",
+  "premise": "The flagship of Block II, and the largest course in the programme. It ends with a working GPT you can explain line by line — from the byte-pair tokeniser you wrote through to the sampler — which is the single most legible artifact this degree produces. The thing being bought is not the ability to build one; nanoGPT already exists. It is that after this, every architectural claim in a paper or a vendor's release notes is checkable against something you have implemented rather than taken on trust.",
+  "why_here": "Eleventh overall, and the first course in the programme where the prerequisite chain is genuinely load-bearing: it needs the chain rule from AIE-201, the evaluation discipline from AIE-202, and the autodiff engine and training instrumentation from AIE-203. It is also the course that makes a capability claimable — until it is done, 'Transformer architecture' is not a line this transcript can support.",
+  "laboratory": "1 Percent More Fluent, for the half of this course nobody expects. It carries text in several languages, and the same sentence costs wildly different numbers of tokens depending on which — a real, measurable cost and latency problem sitting inside a product you already run. The tokeniser module is not an academic exercise there; it is the explanation for a bill.",
+  "sitting_rule": "Every item is completable in one sitting. Nothing exceeds 180 minutes, and anything over 90 declares its own checkpoints.",
+  "honesty_note": "No advanced standing. Using an LLM API daily for two years evidences nothing about attention, and the portfolio contains no implementation of any component of one.",
+  "panel": {
+    "models": [
+      "claude-opus-5",
+      "gpt-5",
+      "gemini-flash-latest"
+    ],
+    "blind": true,
+    "blind_note": "Judges see the submission and the rubric, never each other's scores, and never the learner's self-assessment.",
+    "rubric_registered_before_submission": true,
+    "disagreement": "Scores are reported per judge and never averaged into a single number when the spread is 2 or more on any criterion.",
+    "bias_warning": "The judges are transformers being asked to assess an implementation of a transformer, and they have memorised nanoGPT. They are instructed to score against the rubric and the submitted code rather than against how closely it resembles the reference, and to treat a deliberate, explained divergence as evidence of understanding rather than as an error."
+  },
+  "modules": [
+    {
+      "id": "M1",
+      "title": "Tokenisation, which is where the bill comes from",
+      "est_minutes": 720,
+      "items": [
+        {
+          "id": "M1.1",
+          "type": "lecture",
+          "title": "Building a byte-pair encoder",
+          "resource": "karpathy-zero-to-hero",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["nlp-tokenisation"],
+          "locator": "The tokenizer video — building BPE from scratch, and the section on why so many model failures are really tokeniser failures."
+        },
+        {
+          "id": "M1.2",
+          "type": "reading",
+          "title": "The three tokenisation algorithms in use",
+          "resource": "hf-nlp-course",
+          "est_minutes": 165,
+          "tier": 0,
+          "skills": ["nlp-tokenisation"],
+          "locator": "The tokenizers chapters — byte-pair encoding, WordPiece and Unigram, and the section on training a new tokeniser from an old one."
+        },
+        {
+          "id": "M1.3",
+          "type": "assignment",
+          "title": "Byte-pair encoding from scratch",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M1.3",
+          "skills": ["nlp-tokenisation"],
+          "checkpoints": [
+            "Merge training loop implemented over a real corpus",
+            "Encode and decode round-trip verified on held-out text",
+            "Vocabulary size varied and compression measured",
+            "Compared against a reference tokeniser on the same text"
+          ],
+          "brief": "Implement byte-pair encoding: the merge-training loop, the encoder and the decoder. Train it on a corpus of your own. Verify that encode-then-decode is the identity on held-out text including punctuation, emoji and whitespace runs — that is where naive implementations quietly lose bytes. Then vary the vocabulary size and measure compression, so the trade between vocabulary and sequence length is a curve you have seen rather than a claim you have read."
+        },
+        {
+          "id": "M1.4",
+          "type": "assignment",
+          "title": "What your tokeniser costs in every language",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M1.4",
+          "skills": ["nlp-tokenisation"],
+          "checkpoints": [
+            "The same content prepared in several languages",
+            "Token counts measured per language with a production tokeniser",
+            "Cost and context consequences computed at a real price",
+            "A mitigation considered and its trade stated"
+          ],
+          "brief": "Take the same passage in every language 1 Percent More Fluent supports and measure how many tokens each becomes under the tokeniser you actually pay for. Convert that into money at the real per-token price and into context-window consumption. The ratio between the cheapest and the most expensive language will be larger than you expect, and it is a fact about your product's economics, not a curiosity. Finish by naming one thing you could do about it and what it would cost."
+        },
+        {
+          "id": "M1.5",
+          "type": "retention",
+          "title": "Retention: tokenisation and its consequences",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["nlp-tokenisation"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Attention, implemented",
+      "est_minutes": 840,
+      "items": [
+        {
+          "id": "M2.1",
+          "type": "reading",
+          "title": "The illustrated transformer",
+          "resource": "jay-alammar-transformer",
+          "est_minutes": 105,
+          "tier": 0,
+          "skills": ["transformers-attention"]
+        },
+        {
+          "id": "M2.2",
+          "type": "reading",
+          "title": "Attention Is All You Need, in full",
+          "resource": "paper-attention",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["transformers-attention", "transformers-arch"],
+          "locator": "Sections 3 and 4 entirely. AIE-201 read only 3.2.1, for the scaling argument; this is the rest of the architecture, including why multi-head exists at all."
+        },
+        {
+          "id": "M2.3",
+          "type": "lecture",
+          "title": "Let's build GPT: the attention half",
+          "resource": "karpathy-build-gpt",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["transformers-attention", "transformers-implementation"],
+          "locator": "Through the self-attention sections — the mathematical trick with the triangular mask, then single and multi-head attention."
+        },
+        {
+          "id": "M2.4",
+          "type": "assignment",
+          "title": "Multi-head self-attention, from scratch",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.4",
+          "skills": ["transformers-attention", "transformers-implementation"],
+          "checkpoints": [
+            "Single-head attention implemented and shape-checked",
+            "Causal mask applied and verified to block future positions",
+            "Extended to multi-head with heads genuinely independent",
+            "Output matched against torch.nn.MultiheadAttention on identical weights"
+          ],
+          "brief": "Implement scaled dot-product attention, then causal masking, then multi-head — without opening a reference. Verify the mask does what you think by feeding a sequence where a leak would change the output at position zero. Then load identical weights into torch.nn.MultiheadAttention and confirm your output matches to a stated tolerance. The weight-loading step is the assignment: matching on random weights proves nothing, and getting the layout right is where the understanding is."
+        },
+        {
+          "id": "M2.5",
+          "type": "assignment",
+          "title": "What the heads are actually doing",
+          "est_minutes": 150,
+          "tier": 2,
+          "rubric": "R-M2.5",
+          "skills": ["transformers-attention"],
+          "checkpoints": [
+            "Attention weights extracted per head per layer",
+            "Visualised over real input",
+            "One head given a defensible description",
+            "One head reported as not interpretable"
+          ],
+          "brief": "Extract and visualise attention weights from a small trained model across heads and layers. Find one head whose behaviour you can describe defensibly — attending to the previous token, to a matching delimiter, to the subject of the sentence — and evidence it across several inputs rather than one. Then find a head you cannot characterise and say so. The second half is the assignment: attention maps are famously easy to over-read, and a submission where every head has a tidy story is a submission that invented some."
+        },
+        {
+          "id": "M2.6",
+          "type": "lecture",
+          "title": "Self-attention in the NLP lineage",
+          "resource": "stanford-cs224n",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": ["transformers-attention"],
+          "locator": "The self-attention and transformers lectures — attention as it arrived from sequence-to-sequence models, which is the context the paper assumes."
+        },
+        {
+          "id": "M2.7",
+          "type": "retention",
+          "title": "Retention: attention mechanics",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["transformers-attention"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "A GPT you can explain line by line",
+      "est_minutes": 900,
+      "items": [
+        {
+          "id": "M3.1",
+          "type": "lecture",
+          "title": "Let's build GPT: assembling the model",
+          "resource": "karpathy-build-gpt",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["transformers-implementation"],
+          "locator": "The remainder — blocks, residual connections, layer normalisation placement, and the training loop."
+        },
+        {
+          "id": "M3.2",
+          "type": "reading",
+          "title": "The annotated transformer",
+          "resource": "annotated-transformer",
+          "est_minutes": 165,
+          "tier": 0,
+          "skills": ["transformers-implementation"]
+        },
+        {
+          "id": "M3.3",
+          "type": "assignment",
+          "title": "Build the model",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M3.3",
+          "skills": ["transformers-implementation", "transformers-arch"],
+          "checkpoints": [
+            "Token and position embeddings, blocks, and output head assembled",
+            "Parameter count computed by hand and matched",
+            "Trained on a small corpus with the loss falling",
+            "Text generated that is recognisably from the training distribution"
+          ],
+          "brief": "Assemble the full model from your attention implementation: embeddings, stacked blocks with residuals and normalisation, and a language-modelling head. Compute the parameter count by hand from the dimensions before asking the framework, and reconcile any difference. Train it on a small corpus until it produces text that is recognisably from that distribution. It will be bad text; that is fine and expected at this scale."
+        },
+        {
+          "id": "M3.4",
+          "type": "assignment",
+          "title": "Sampling is a design decision",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M3.4",
+          "skills": ["transformers-implementation"],
+          "checkpoints": [
+            "Greedy, temperature, top-k and nucleus sampling implemented",
+            "Each run on identical prompts and seeds",
+            "A quantitative measure of diversity and repetition reported",
+            "A recommendation made for one of your own products"
+          ],
+          "brief": "Implement greedy decoding, temperature scaling, top-k and nucleus sampling on your own model. Run them on identical prompts with identical seeds and measure — repetition rate and distinct-n, not just how the output reads. Then connect it back: your shipped products set these parameters, probably to whatever the default was. Say what you would now set them to and why. This is the item where a from-scratch exercise pays a dividend in production."
+        },
+        {
+          "id": "M3.5",
+          "type": "reading",
+          "title": "Building an LLM, the book-length treatment",
+          "resource": "book-build-llm-scratch",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["transformers-implementation"],
+          "locator": "The chapters on coding the attention mechanism and on implementing a GPT model from scratch — read after your own implementation exists, as a check on it rather than as instructions."
+        },
+        {
+          "id": "M3.6",
+          "type": "retention",
+          "title": "Retention: the decoder stack, component by component",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["transformers-implementation"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "What changed since 2017",
+      "est_minutes": 780,
+      "items": [
+        {
+          "id": "M4.1",
+          "type": "lecture",
+          "title": "Decoder-only architectures and their variants",
+          "resource": "stanford-cs25",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["transformers-arch"],
+          "locator": "The lectures covering decoder-only models and the architectural changes that separate a modern model from the 2017 paper."
+        },
+        {
+          "id": "M4.2",
+          "type": "reading",
+          "title": "FlashAttention",
+          "resource": "paper-flashattention",
+          "est_minutes": 105,
+          "tier": 0,
+          "skills": ["transformers-implementation"]
+        },
+        {
+          "id": "M4.3",
+          "type": "assignment",
+          "title": "Three modern components, measured one at a time",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M4.3",
+          "skills": ["transformers-arch", "transformers-implementation"],
+          "checkpoints": [
+            "Baseline model fixed and its result recorded",
+            "RMSNorm substituted and measured",
+            "A gated feed-forward substituted and measured",
+            "Rotary position embeddings substituted and measured",
+            "Parameter counts reconciled across variants"
+          ],
+          "brief": "Take your working model as the 2017 baseline and substitute three modern components one at a time: RMSNorm for LayerNorm, a gated feed-forward such as SwiGLU for the standard one, and rotary position embeddings for learned ones. Measure each independently, holding parameter count roughly constant. Report which earned its place at your scale and which did not. Modern models use all three; at a few million parameters on a laptop you may find one of them does nothing, and reporting that honestly is worth more than reproducing the expected ordering."
+        },
+        {
+          "id": "M4.4",
+          "type": "lecture",
+          "title": "The engineering decisions in a modern stack",
+          "resource": "stanford-cs336",
+          "est_minutes": 165,
+          "tier": 0,
+          "skills": ["transformers-implementation"],
+          "locator": "The lectures on architecture variants and on the systems decisions behind training a language model — attribution note: cite the course playlist, since the individually reuploaded copies are not authorised."
+        },
+        {
+          "id": "M4.5",
+          "type": "reading",
+          "title": "Mixture of experts",
+          "resource": "paper-switch-transformer",
+          "est_minutes": 90,
+          "tier": 0,
+          "skills": ["transformers-arch"]
+        },
+        {
+          "id": "M4.6",
+          "type": "assignment",
+          "title": "A KV cache, and what it buys",
+          "est_minutes": 75,
+          "tier": 1,
+          "rubric": "R-M4.6",
+          "skills": ["transformers-implementation"],
+          "checkpoints": [
+            "Cache implemented for incremental decoding",
+            "Output verified identical to the uncached path",
+            "Time per token measured with and without, across sequence lengths"
+          ],
+          "brief": "Add a key-value cache to your model's generation path. First prove it is correct: cached and uncached generation must produce identical tokens for the same seed, and if they do not, the bug is subtle and worth finding. Then measure time per generated token with and without, across several sequence lengths, and state the complexity you have changed and the memory you have traded for it."
+        },
+        {
+          "id": "M4.7",
+          "type": "retention",
+          "title": "Retention: modern architectural components",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["transformers-arch"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Reproduce a published result",
+      "est_minutes": 840,
+      "items": [
+        {
+          "id": "M5.1",
+          "type": "lecture",
+          "title": "Reproducing GPT-2",
+          "resource": "karpathy-reproduce-gpt2",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["transformers-implementation"]
+        },
+        {
+          "id": "M5.2",
+          "type": "reading",
+          "title": "nanoGPT as the reference",
+          "resource": "repo-nanogpt",
+          "est_minutes": 165,
+          "tier": 0,
+          "skills": ["transformers-implementation"],
+          "locator": "model.py and train.py — read only after your own implementation exists, and read for the decisions rather than the syntax."
+        },
+        {
+          "id": "M5.3",
+          "type": "project",
+          "title": "The reproduction: run it",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M5.3",
+          "skills": ["transformers-implementation"],
+          "checkpoints": [
+            "A published number chosen as the target, with its source cited",
+            "The scale you can actually afford stated in advance",
+            "The run completed and its result recorded",
+            "Compute and wall-clock cost accounted for"
+          ],
+          "brief": "Pick a published result you can attempt at a scale you can afford — a validation loss on a named dataset at a named parameter count. State the target and your scale before starting. Run it. Record what you got, what it cost in compute and wall-clock, and every deviation from the published setup you had to make. Failing to hit the number is an expected outcome; not knowing why is the failure."
+        },
+        {
+          "id": "M5.4",
+          "type": "project",
+          "title": "The reproduction: account for the gap",
+          "est_minutes": 150,
+          "tier": 2,
+          "rubric": "R-M5.4",
+          "skills": ["transformers-implementation", "transformers-arch"],
+          "checkpoints": [
+            "Every deviation from the published setup enumerated",
+            "Each one's likely direction and rough magnitude estimated",
+            "The estimates summed and compared against the observed gap",
+            "The residual stated as unexplained"
+          ],
+          "brief": "Enumerate every way your run differed from the published one — data, tokeniser, sequence length, batch size, schedule, precision, training tokens. For each, estimate the direction and rough size of its effect. Add them up and compare against the gap you actually observed. What is left over is the part you cannot explain, and stating it plainly is the point of the exercise. A gap analysis that exactly accounts for the difference is almost always a gap analysis that was fitted to it."
+        },
+        {
+          "id": "M5.5",
+          "type": "reading",
+          "title": "minGPT, for what it leaves out",
+          "resource": "repo-mingpt",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["transformers-implementation"],
+          "locator": "model.py — the minimal version, read specifically for what it omits relative to nanoGPT and why that is acceptable in a teaching implementation."
+        },
+        {
+          "id": "M5.6",
+          "type": "retention",
+          "title": "Retention: reproduction and its failure modes",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["transformers-implementation"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M6",
+      "title": "Publish, and defend",
+      "est_minutes": 720,
+      "items": [
+        {
+          "id": "M6.1",
+          "type": "project",
+          "title": "The annotated implementation, published",
+          "est_minutes": 180,
+          "tier": 3,
+          "rubric": "R-M6.1",
+          "skills": ["transformers-implementation", "transformers-arch"],
+          "checkpoints": [
+            "Repository public, with a README that states what it is and is not",
+            "Every non-obvious line carrying a comment that says why",
+            "Runnable end to end from a clean checkout",
+            "A stated relationship to nanoGPT and minGPT"
+          ],
+          "brief": "Publish your implementation as a public repository. It must run end to end from a clean checkout on a laptop, and its README must say plainly what it is for and what it is not — it is not a better nanoGPT and should not claim to be. The value is the annotation: every non-obvious line explains why it is there, which is the artifact that distinguishes having built one from having copied one."
+        },
+        {
+          "id": "M6.2",
+          "type": "project",
+          "title": "Every choice, and what it buys",
+          "est_minutes": 180,
+          "tier": 3,
+          "rubric": "R-M6.2",
+          "skills": ["transformers-arch"],
+          "checkpoints": [
+            "Each architectural decision listed with its alternative",
+            "Measurements cited where they exist",
+            "Choices with no measurement marked as inherited rather than justified",
+            "Published and connected backwards to an earlier chapter"
+          ],
+          "brief": "Write the chapter that goes with the repository: every architectural decision, its alternative, and what choosing it bought. Where you measured, cite the measurement. Where you inherited a choice because everyone does it, say so and mark it as unjustified rather than dressing it up. That distinction — measured versus inherited — is the most useful thing this document can contain, and almost no published write-up makes it."
+        },
+        {
+          "id": "M6.3",
+          "type": "lecture",
+          "title": "Transformer variants and efficiency, a second lineage",
+          "resource": "cmu-anlp-playlist",
+          "est_minutes": 165,
+          "tier": 0,
+          "skills": ["transformers-arch"],
+          "locator": "The lectures on transformer variants and on efficiency — a different teaching tradition from the Stanford lineage, useful for the places the two disagree."
+        },
+        {
+          "id": "M6.4",
+          "type": "assignment",
+          "title": "Read a new architecture cold",
+          "est_minutes": 120,
+          "tier": 2,
+          "rubric": "R-M6.4",
+          "skills": ["transformers-arch", "transformers-attention"],
+          "checkpoints": [
+            "A model released after this course was written, chosen",
+            "Its architecture section read and summarised",
+            "Differences from your implementation enumerated",
+            "One difference explained mechanically, not just named"
+          ],
+          "brief": "Take a model card or technical report published after this course was registered, and read its architecture section cold. Enumerate what differs from what you built. Then pick the one that matters most and explain what it is mechanically doing and what problem it solves — not what the report says it does, but what you can work out from your own implementation. This is the outcome the whole course exists to produce, and it is the only item that uses material nobody could have prepared you for."
+        },
+        {
+          "id": "M6.5",
+          "type": "defense",
+          "title": "Oral defense",
+          "est_minutes": 60,
+          "tier": 4,
+          "rubric": "R-M6.5",
+          "skills": [
+            "transformers-attention",
+            "transformers-arch",
+            "transformers-implementation",
+            "nlp-tokenisation"
+          ],
+          "brief": "Three unscripted questions generated from your own implementation and write-up at defense time, answered aloud without notes and without the code open. This is the defense that carries the transformers capability claim, so it is the one that matters most on a CV.",
+          "sample_question_shapes": [
+            "Open your model file mentally and walk me from a token id to a logit. Where does the residual stream get written to, and by what?",
+            "You said RoPE made no measurable difference at your scale. At what scale would you expect it to, and why that scale?",
+            "Your reproduction missed the published number by a margin you partly explained. A reviewer says the unexplained residual means your implementation is wrong. Answer them."
+          ]
+        },
+        {
+          "id": "M6.6",
+          "type": "retention",
+          "title": "Retention: the whole architecture, cold",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["transformers-arch", "transformers-attention"],
+          "fsrs": true
+        }
+      ]
+    }
+  ],
+  "rubrics": [
+    {
+      "id": "R-M1.3",
+      "for": "M1.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "encode-decode round-trip is the identity on held-out text including punctuation and emoji", "blocking": true },
+        { "check": "compression measured at three or more vocabulary sizes", "blocking": true },
+        { "check": "compared against a reference tokeniser on identical text", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The round-trip survives awkward input",
+          "weight": 0.4,
+          "levels": {
+            "0": "Fails on ASCII.",
+            "1": "Works on plain text only.",
+            "2": "Works including punctuation and whitespace runs.",
+            "3": "Works including multi-byte characters and emoji, with the byte-level handling explained."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The vocabulary trade is measured, not described",
+          "weight": 0.35,
+          "levels": {
+            "0": "Single vocabulary size.",
+            "1": "Two sizes.",
+            "2": "A curve across sizes.",
+            "3": "A curve across sizes with the consequence for sequence length and cost stated."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The comparison with a reference is informative",
+          "weight": 0.25,
+          "levels": {
+            "0": "Absent.",
+            "1": "Token counts only.",
+            "2": "Counts and where they diverge.",
+            "3": "Counts, divergence, and a named cause such as pre-tokenisation or special-token handling."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M1.4",
+      "for": "M1.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "identical semantic content used across every language measured", "blocking": true },
+        { "check": "a real per-token price cited with its source and date", "blocking": true },
+        { "check": "context-window consumption reported alongside cost", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The measurement is like-for-like",
+          "weight": 0.35,
+          "levels": {
+            "0": "Different content per language.",
+            "1": "Roughly equivalent text.",
+            "2": "The same content, translated.",
+            "3": "The same content, translated, with translation-length differences acknowledged as a confound."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The consequence is stated in the product's terms",
+          "weight": 0.4,
+          "levels": {
+            "0": "Token counts only.",
+            "1": "Cost mentioned.",
+            "2": "Cost computed at a real price.",
+            "3": "Cost computed at a real price and at a real volume, with the context-window effect stated separately."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The proposed mitigation is honest about its cost",
+          "weight": 0.25,
+          "levels": {
+            "0": "None offered.",
+            "1": "A suggestion with no cost.",
+            "2": "A mitigation with its trade named.",
+            "3": "A mitigation with its trade named and a recommendation on whether it is worth doing."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.4",
+      "for": "M2.4",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "output matches torch.nn.MultiheadAttention on identical loaded weights, to a stated tolerance", "blocking": true },
+        { "check": "causal mask verified by a test that would fail if information leaked backwards", "blocking": true },
+        { "check": "written before any reference implementation was opened", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The weight-transfer comparison is real",
+          "weight": 0.45,
+          "levels": {
+            "0": "Compared on random weights, or not at all.",
+            "1": "Shapes matched only.",
+            "2": "Identical weights loaded and outputs agreeing.",
+            "3": "Identical weights loaded, outputs agreeing, and the layout differences described."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The mask is proven rather than assumed",
+          "weight": 0.35,
+          "levels": {
+            "0": "Applied without testing.",
+            "1": "Visually inspected.",
+            "2": "Tested with a case that would catch a leak.",
+            "3": "Tested with a case that would catch a leak, and shown failing when the mask is removed."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Multi-head is genuinely multi-head",
+          "weight": 0.2,
+          "levels": {
+            "0": "Heads share parameters.",
+            "1": "Implemented as a loop with unclear independence.",
+            "2": "Independent heads, correctly concatenated and projected.",
+            "3": "Independent heads implemented as a single batched operation, with the reshape explained."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.5",
+      "for": "M2.5",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "attention weights extracted per head and per layer", "blocking": true },
+        { "check": "the interpretable head evidenced across at least five inputs", "blocking": true },
+        { "check": "at least one head reported as not interpretable", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The claimed head behaviour is evidenced, not asserted",
+          "weight": 0.4,
+          "levels": {
+            "0": "One example.",
+            "1": "A few cherry-picked examples.",
+            "2": "Several inputs, consistent.",
+            "3": "Several inputs including one where the behaviour breaks down, with that noted."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Over-reading is actively resisted",
+          "weight": 0.4,
+          "levels": {
+            "0": "Every head given a tidy story.",
+            "1": "Uncertainty hedged.",
+            "2": "One head declared uninterpretable.",
+            "3": "One head declared uninterpretable, with what would be needed to say more."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The visualisation supports the claim",
+          "weight": 0.2,
+          "levels": {
+            "0": "Decorative.",
+            "1": "Readable.",
+            "2": "Readable and labelled.",
+            "3": "Readable, labelled, and showing the contrast that makes the claim visible."
+          }
+        }
+      ],
+      "anti_gaming": "A submission in which every head has a clean interpretation is the failure this rubric exists to catch. Judges are instructed to score criterion 2 at 0 where no head is reported as uninterpretable."
+    },
+    {
+      "id": "R-M3.3",
+      "for": "M3.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "parameter count computed by hand and reconciled with the framework's", "blocking": true },
+        { "check": "training loss falls and generated text is included verbatim", "blocking": true },
+        { "check": "normalisation placement stated as pre- or post-block", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The model is assembled from the author's own components",
+          "weight": 0.4,
+          "levels": {
+            "0": "Framework transformer layers.",
+            "1": "Mixed.",
+            "2": "Own attention and blocks.",
+            "3": "Own attention and blocks, with framework primitives used only for linear algebra and stated as such."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The parameter count was derived",
+          "weight": 0.3,
+          "levels": {
+            "0": "Read off.",
+            "1": "Estimated.",
+            "2": "Computed and matching.",
+            "3": "Computed per component, with embedding and head sharing handled explicitly."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The output is honestly characterised",
+          "weight": 0.3,
+          "levels": {
+            "0": "Claimed to be good.",
+            "1": "Samples shown without comment.",
+            "2": "Samples shown and described accurately.",
+            "3": "Samples shown, described accurately, with what would need to change to improve them."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.4",
+      "for": "M3.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "four decoding strategies implemented", "blocking": true },
+        { "check": "identical prompts and seeds across strategies", "blocking": true },
+        { "check": "a quantitative diversity or repetition measure reported", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The comparison is quantitative, not aesthetic",
+          "weight": 0.4,
+          "levels": {
+            "0": "Reads better, in the author's view.",
+            "1": "Anecdotal with samples.",
+            "2": "A measure reported.",
+            "3": "Measures reported across a parameter sweep, so the trade is a curve."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The implementations are correct at the edges",
+          "weight": 0.35,
+          "levels": {
+            "0": "Broken at extreme parameters.",
+            "1": "Works in the middle of the range.",
+            "2": "Handles the degenerate cases.",
+            "3": "Handles the degenerate cases, with what temperature zero and top-k of one reduce to stated."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "It is carried back into production",
+          "weight": 0.25,
+          "levels": {
+            "0": "No connection made.",
+            "1": "Mentioned generically.",
+            "2": "A recommendation for a real product.",
+            "3": "A recommendation for a real product, with the current setting identified and why it was probably a default."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.3",
+      "for": "M4.3",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "three substitutions measured independently against one fixed baseline", "blocking": true },
+        { "check": "parameter counts reconciled across variants", "blocking": true },
+        { "check": "multiple seeds per variant", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Each substitution is isolated",
+          "weight": 0.35,
+          "levels": {
+            "0": "Applied together.",
+            "1": "Partly isolated.",
+            "2": "One at a time from a fixed baseline.",
+            "3": "One at a time, with capacity held constant and the compensation described."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The conclusion respects the seed noise",
+          "weight": 0.4,
+          "levels": {
+            "0": "A ranking from single runs.",
+            "1": "Differences claimed without spread.",
+            "2": "Spread reported.",
+            "3": "Spread reported, with any difference inside it stated as no difference."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The mechanism of each component is explained",
+          "weight": 0.25,
+          "levels": {
+            "0": "Named only.",
+            "1": "Described from the paper.",
+            "2": "Explained mechanically.",
+            "3": "Explained mechanically, with why the benefit might be scale-dependent."
+          }
+        }
+      ],
+      "integrity": "Finding that a component standard in modern models does nothing at a few million parameters is a legitimate full-marks result. Judges must not reward reproducing the expected ordering over reporting the measurement."
+    },
+    {
+      "id": "R-M4.6",
+      "for": "M4.6",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "cached and uncached generation produce identical tokens for the same seed", "blocking": true },
+        { "check": "time per token measured at three or more sequence lengths", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Correctness is established before speed",
+          "weight": 0.45,
+          "levels": {
+            "0": "Only speed reported.",
+            "1": "Spot-checked.",
+            "2": "Identical output verified.",
+            "3": "Identical output verified across several prompts and lengths, including the first-token edge case."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The complexity change is stated correctly",
+          "weight": 0.3,
+          "levels": {
+            "0": "Not stated.",
+            "1": "Stated loosely as 'faster'.",
+            "2": "The per-token complexity change named.",
+            "3": "Named, and matched against the shape of the measured curve."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The memory trade is quantified",
+          "weight": 0.25,
+          "levels": {
+            "0": "Not mentioned.",
+            "1": "Mentioned.",
+            "2": "Measured.",
+            "3": "Measured, with the growth in context length stated as a formula."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.3",
+      "for": "M5.3",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "target number and its source cited before the run", "blocking": true },
+        { "check": "intended scale declared in advance", "blocking": true },
+        { "check": "compute and wall-clock cost reported", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The target was fixed before the attempt",
+          "weight": 0.35,
+          "levels": {
+            "0": "Chosen afterwards.",
+            "1": "Vague.",
+            "2": "Stated in advance.",
+            "3": "Stated in advance with the specific table or figure cited."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The run is documented well enough to repeat",
+          "weight": 0.4,
+          "levels": {
+            "0": "Result only.",
+            "1": "Partial configuration.",
+            "2": "Full configuration and data described.",
+            "3": "Full configuration, data, seeds and environment, such that a stranger could attempt it."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Cost is reported honestly",
+          "weight": 0.25,
+          "levels": {
+            "0": "Not reported.",
+            "1": "Wall-clock only.",
+            "2": "Wall-clock and hardware.",
+            "3": "Wall-clock, hardware, and an estimate of what the published scale would have cost."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.4",
+      "for": "M5.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "every deviation from the published setup enumerated", "blocking": true },
+        { "check": "direction and rough magnitude estimated per deviation", "blocking": true },
+        { "check": "an unexplained residual stated explicitly", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The enumeration is complete",
+          "weight": 0.35,
+          "levels": {
+            "0": "One or two causes.",
+            "1": "The obvious ones.",
+            "2": "Systematic across data, model, schedule and precision.",
+            "3": "Systematic, including deviations the author had not initially noticed."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The residual is admitted rather than absorbed",
+          "weight": 0.4,
+          "levels": {
+            "0": "The gap is fully explained.",
+            "1": "Residual implied.",
+            "2": "Residual stated.",
+            "3": "Residual stated with candidate explanations ranked and the experiment that would separate them."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The estimates are reasoned, not asserted",
+          "weight": 0.25,
+          "levels": {
+            "0": "Numbers with no basis.",
+            "1": "Intuition.",
+            "2": "Reasoned from the literature or from a measurement.",
+            "3": "Reasoned, with at least one estimate checked by an experiment the author ran."
+          }
+        }
+      ],
+      "anti_gaming": "A gap analysis whose components sum exactly to the observed gap is almost always fitted to it. Judges are instructed to treat a stated unexplained residual as evidence of honesty and its absence as a warning sign."
+    },
+    {
+      "id": "R-M6.1",
+      "for": "M6.1",
+      "tier": 3,
+      "machine_checks": [
+        { "check": "public repository, running end to end from a clean checkout", "blocking": true },
+        { "check": "README states what it is not, including that it does not supersede nanoGPT", "blocking": true },
+        { "check": "training reproducible from a documented command", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "It runs for someone who is not the author",
+          "weight": 0.4,
+          "levels": {
+            "0": "Fails from a clean checkout.",
+            "1": "Runs with undocumented steps.",
+            "2": "Runs from documented steps.",
+            "3": "Runs from documented steps on a laptop, with runtime and expected output stated."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The annotation explains why, not what",
+          "weight": 0.35,
+          "levels": {
+            "0": "No comments, or comments restating the code.",
+            "1": "Sparse.",
+            "2": "Non-obvious lines explained.",
+            "3": "Non-obvious lines explained, including the ones the author found confusing while writing them."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Its position is stated honestly",
+          "weight": 0.25,
+          "levels": {
+            "0": "Presents itself as novel.",
+            "1": "Silent on prior art.",
+            "2": "Credits the references.",
+            "3": "Credits the references and states exactly what it adds, which may be only the annotation."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M6.2",
+      "for": "M6.2",
+      "tier": 3,
+      "machine_checks": [
+        { "check": "every architectural decision listed with its alternative", "blocking": true },
+        { "check": "each decision marked as measured or inherited", "blocking": true },
+        { "check": "published and connected backwards to an earlier chapter", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Measured and inherited are separated",
+          "weight": 0.45,
+          "levels": {
+            "0": "All choices presented as justified.",
+            "1": "Distinction implied.",
+            "2": "Each choice marked.",
+            "3": "Each choice marked, with the inherited ones listed together so the reader can see how many there are."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The alternatives are real",
+          "weight": 0.3,
+          "levels": {
+            "0": "Straw alternatives.",
+            "1": "Named.",
+            "2": "Described with their trade.",
+            "3": "Described with their trade and the conditions under which they would win."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "It reads as part of a body of work",
+          "weight": 0.25,
+          "levels": {
+            "0": "Standalone.",
+            "1": "Links back.",
+            "2": "Builds on an earlier result.",
+            "3": "Builds on and revises an earlier result, naming what the earlier chapter got wrong."
+          }
+        }
+      ],
+      "integrity": "Marking a choice as inherited is not an admission of weakness; it is the most useful sentence in the document. Judges are instructed to score a write-up that inherits honestly above one that retrofits a justification."
+    },
+    {
+      "id": "R-M6.4",
+      "for": "M6.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "the chosen model was published after this spec's registration date", "blocking": true },
+        { "check": "differences from the author's implementation enumerated", "blocking": true },
+        { "check": "one difference explained mechanically rather than quoted", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The reading is independent of the report's framing",
+          "weight": 0.4,
+          "levels": {
+            "0": "Summarises the report.",
+            "1": "Paraphrases with light comment.",
+            "2": "Identifies differences independently.",
+            "3": "Identifies differences independently, including one the report does not emphasise."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The mechanical explanation holds up",
+          "weight": 0.4,
+          "levels": {
+            "0": "Repeats the marketing claim.",
+            "1": "Vague mechanism.",
+            "2": "A correct mechanism.",
+            "3": "A correct mechanism reasoned from the author's own implementation, with what it would change in their code."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Uncertainty about undisclosed details is stated",
+          "weight": 0.2,
+          "levels": {
+            "0": "Gaps filled with assumption.",
+            "1": "Assumptions unmarked.",
+            "2": "Unknowns acknowledged.",
+            "3": "Unknowns acknowledged and separated from what the report actually states."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M6.5",
+      "for": "M6.5",
+      "tier": 4,
+      "machine_checks": [
+        { "check": "questions generated at defense time from the author's own implementation and write-up", "blocking": true },
+        { "check": "answered aloud without notes and without the code open", "blocking": true },
+        { "check": "recording or transcript retained", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The implementation can be walked from memory",
+          "weight": 0.45,
+          "levels": {
+            "0": "Cannot proceed without the code.",
+            "1": "Recalls the structure.",
+            "2": "Walks the data path correctly.",
+            "3": "Walks the data path correctly including shapes, and catches their own slip mid-answer."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Negative and null results are defended",
+          "weight": 0.3,
+          "levels": {
+            "0": "Disowned under questioning.",
+            "1": "Defended weakly.",
+            "2": "Defended with the measurement.",
+            "3": "Defended with the measurement and the scale at which the expected result would appear."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The unexplained is not covered over",
+          "weight": 0.25,
+          "levels": {
+            "0": "Invents an explanation.",
+            "1": "Deflects.",
+            "2": "States what is unknown.",
+            "3": "States what is unknown and what would resolve it."
+          }
+        }
+      ],
+      "integrity": "This defense carries the transformers capability claim. Judges are instructed that inventing a plausible mechanism under pressure is the single most damaging thing a candidate can do here, and scores criterion 3 at 0."
+    }
+  ],
+  "completion": {
+    "required": "All eight assignments, all four project parts and the defense submitted. Readings and lectures are tier 0 and are tracked but never counted toward mastery.",
+    "grade_rollup": "Deterministic. Each item's tier sets its weight; panel scores enter as per-criterion values; nothing is rounded up. Computed in TypeScript, never by a model.",
+    "mastery_note": "Sets initial mastery on all three transformer skills and on tokenisation, and is the course that makes the Transformer architecture capability claimable at all. FSRS then decays them — and for this claim specifically, the cold-recall requirement is the one that matters, because an implementation you cannot walk from memory six months later is a repository rather than a skill."
+  },
+  "optional_hours": 0
+}

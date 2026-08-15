@@ -484,6 +484,13 @@ The flagship of Block II. Ends with a working GPT you can explain line by line â
 | [Stanford CS25 - Transformers United](https://www.youtube.com/playlist?list=PLoROMvodv4rNiJRchCzutFw5ItR_Z27CM) | Stanford | 20 h | Free |
 | [Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361) | Kaplan et al. | 3 h | Free |
 | [Training Compute-Optimal Large Language Models](https://arxiv.org/abs/2203.15556) | Hoffmann et al. | 3 h | Free |
+| [Introduction - Hugging Face NLP Course](https://huggingface.co/learn/nlp-course/chapter1/1) | Hugging Face | 20 h | Free |
+| [FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135) | Dao et al. | 4 h | Free |
+| [Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity](https://arxiv.org/abs/2101.03961) | Fedus et al. | 3 h | Free |
+| [CMU Advanced NLP Fall 2024](https://www.youtube.com/playlist?list=PL8PYTP1V4I8D4BeyjwWczukWq9d8PNyZp) | Graham Neubig, Carnegie Mellon | 30 h | Free |
+| [Neural Networks: Zero to Hero](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ) | Andrej Karpathy | 25 h | Free |
+
+> Full specification: [AIE-204-transformers-and-llms-from-scratch.json](courses/AIE-204-transformers-and-llms-from-scratch.json)
 
 ### 12. AIE-205 â€” Fine-tuning and Post-training
 

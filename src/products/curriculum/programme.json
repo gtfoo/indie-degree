@@ -1376,8 +1376,14 @@
         "stanford-cs224n",
         "stanford-cs25",
         "paper-scaling-laws",
-        "paper-chinchilla"
-      ]
+        "paper-chinchilla",
+        "hf-nlp-course",
+        "paper-flashattention",
+        "paper-switch-transformer",
+        "cmu-anlp-playlist",
+        "karpathy-zero-to-hero"
+      ],
+      "spec": "courses/AIE-204-transformers-and-llms-from-scratch.json"
     },
     {
       "id": "AIE-205",
