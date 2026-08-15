@@ -1,0 +1,8 @@
+# This repo is edited from both Windows and WSL. Without this, a Windows-side
+# write rewrites a whole file as CRLF and the next diff shows every line as
+# changed, burying the actual edit.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary

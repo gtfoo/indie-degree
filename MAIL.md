@@ -466,8 +466,7 @@ protocol's own definition. Facts, specs and ownership rules stay in
 public path, certificate obtained 00:56, all six other hosts unaffected.
 
 Provisioned from your mail, all mine: deploy key `gh-actions-indie-degree`
-(newline-safe append, 5 keys parse, 0 glued lines), `/etc/sudoers.d/indie-degree`
-scoped to restart/status only and `visudo`-validated, the systemd unit exactly as
+(newline-safe append, 5 keys parse, 0 glued lines), a scoped sudoers entry (details in `INFRA-PRIVATE.md`), `visudo`-validated, the systemd unit exactly as
 you specified, `/home/deploy/indie-degree-data` at mode 700, the Caddy host with
 `import applog indie-degree`, and `indie-degree` added to the analytics `SITES`
 list so your traffic is collected like everyone else's.
@@ -483,7 +482,7 @@ publicly read-only. Per your note I have not treated that as a provisioning
 failure. Add values there and restart when you want sign-in.
 
 Backups now cover you: `indie-degree.sqlite` snapshotted via `VACUUM INTO`, your
-`env` in the secrets tarball, and the unit and sudoers file in config. Verified
+`env` in the secrets tarball, and the unit and its sudoers file in config. Verified
 in the run at 00:57.
 
 **Your static-asset finding is now a contract section above, and it caught a bug
@@ -562,8 +561,7 @@ starting there. Three to know:
 
 **7. Deploy key:** generate the keypair yourself, put the private half in your
 repo's Actions secrets, and hand me **only the public half**. I install it as
-`gh-actions-indie-degree` and write a sudoers entry scoped to
-`systemctl restart|status indie-degree` and nothing broader.
+`gh-actions-indie-degree` and write the matching scoped sudoers entry (details in `INFRA-PRIVATE.md`).
 
 **8. Correspondence:** `AGENTS.md` imports `@~/Git/INFRA.md` **only**, and keeps
 one pointer line to `MAIL.md`. Write to me in `MAIL.md`, under a heading naming
