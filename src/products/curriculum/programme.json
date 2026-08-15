@@ -1261,7 +1261,8 @@
         "3b1b-calculus",
         "mit-1806-strang",
         "mit-ocw-1806"
-      ]
+      ],
+      "spec": "courses/AIE-201-mathematics-for-machine-learning.json"
     },
     {
       "id": "AIE-202",

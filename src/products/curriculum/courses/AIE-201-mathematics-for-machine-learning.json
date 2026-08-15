@@ -1,0 +1,1102 @@
+{
+  "course": "AIE-201",
+  "title": "Mathematics for Machine Learning",
+  "credits": 3,
+  "est_hours": 70,
+  "spec_version": "0.1",
+  "registered": "2026-08-15",
+  "premise": "Targeted, not an undergraduate sequence. The failure mode of maths-for-ML is spending a year on proofs and never arriving at the machine learning, so every module here ends in something computed by hand on an object from your own work and then checked against a library. You are not being taught to prove theorems. You are being taught to read a paper's equations without skipping them, and to know what an optimiser is actually doing when a training run goes wrong.",
+  "why_here": "First in Block II and eighth overall, because everything after it — deep learning, transformers from scratch, fine-tuning, reinforcement learning — is unreadable without it, and because nothing in Block I needs it. Block I taught you to build with models. This is where you start understanding them.",
+  "laboratory": "Your own corpora, because a matrix built from your own data is a fact rather than a textbook exercise. Indie Degree's 203 verified resources make a term-document matrix whose singular values tell you something true about how repetitive your own reading list is. Career Side Quests' scoring pipeline is a real loss function with real variance. The maths lands differently when the matrix is yours.",
+  "sitting_rule": "Every item is completable in one sitting. Nothing exceeds 180 minutes, and anything over 90 declares its own checkpoints.",
+  "honesty_note": "No advanced standing is awarded for this course. Four shipped LLM products evidence nothing about eigendecompositions, and awarding credit for adjacent work would be exactly the self-flattery the programme is built to refuse.",
+  "panel": {
+    "models": [
+      "claude-opus-5",
+      "gpt-5",
+      "gemini-flash-latest"
+    ],
+    "blind": true,
+    "blind_note": "Judges see the submission and the rubric, never each other's scores, and never the learner's self-assessment.",
+    "rubric_registered_before_submission": true,
+    "disagreement": "Scores are reported per judge and never averaged into a single number when the spread is 2 or more on any criterion.",
+    "bias_warning": "Mathematics is the one subject where a language model will confidently confirm a wrong derivation that looks like a right one. Judges are instructed to recompute rather than pattern-match, and to score a plausible-looking derivation with a sign error at 0 rather than 2."
+  },
+  "modules": [
+    {
+      "id": "M1",
+      "title": "Linear algebra you actually need",
+      "est_minutes": 900,
+      "items": [
+        {
+          "id": "M1.1",
+          "type": "lecture",
+          "title": "Essence of linear algebra, the geometry",
+          "resource": "3b1b-linear-algebra",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["math-linalg"],
+          "locator": "Chapters 1–8: vectors, span, linear transformations as matrices, matrix multiplication as composition, and determinants."
+        },
+        {
+          "id": "M1.2",
+          "type": "lecture",
+          "title": "Essence of linear algebra, change of basis and eigenvectors",
+          "resource": "3b1b-linear-algebra",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["math-linalg"],
+          "locator": "Chapters 9–15: dot products, change of basis, eigenvectors and eigenvalues, abstract vector spaces."
+        },
+        {
+          "id": "M1.3",
+          "type": "reading",
+          "title": "Linear algebra, written down",
+          "resource": "book-math-for-ml",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["math-linalg"],
+          "locator": "Chapter 2, Linear Algebra, through 2.7 on linear mappings. The notation, after the geometry — this order round, because the pictures make the symbols readable and not the reverse."
+        },
+        {
+          "id": "M1.4",
+          "type": "reading",
+          "title": "Matrix decompositions",
+          "resource": "book-math-for-ml",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["math-linalg"],
+          "locator": "Chapter 4, Matrix Decompositions — eigendecomposition, the singular value decomposition, and 4.6 on low-rank approximation."
+        },
+        {
+          "id": "M1.5",
+          "type": "assignment",
+          "title": "Decompose your own corpus",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M1.5",
+          "skills": ["math-linalg"],
+          "checkpoints": [
+            "Term-document matrix built and its shape reported",
+            "SVD computed and singular values plotted",
+            "Effective rank chosen with a stated threshold",
+            "Interpretation written against the actual documents"
+          ],
+          "brief": "Build a term-document matrix from Indie Degree's own 203 verified resources — titles and notes, no embeddings and no API calls. Compute its SVD with numpy. Report the singular value spectrum, choose an effective rank with a threshold you state before looking, and reconstruct the matrix at that rank. Then do the part that matters: open the top three right singular vectors, read which resources load on each, and say in a sentence what topic each one found. If a component is not interpretable, say that instead of inventing a theme."
+        },
+        {
+          "id": "M1.6",
+          "type": "assignment",
+          "title": "Eigenvectors by hand, then by library",
+          "est_minutes": 165,
+          "tier": 1,
+          "rubric": "R-M1.6",
+          "skills": ["math-linalg"],
+          "checkpoints": [
+            "Characteristic polynomial written out for the 3×3",
+            "Eigenvalues solved by hand",
+            "Eigenvectors solved and normalised",
+            "numpy comparison run, and any disagreement explained"
+          ],
+          "brief": "Take one 2×2 and one 3×3 matrix. Find the eigenvalues by writing out and solving the characteristic polynomial, then find and normalise the eigenvectors — on paper, showing the steps. Verify against numpy.linalg.eig. Where the signs or the ordering differ from yours, explain why that is not a disagreement. Then answer in two sentences: what does it mean that a covariance matrix is symmetric, and what does that guarantee about its eigenvectors."
+        },
+        {
+          "id": "M1.7",
+          "type": "retention",
+          "title": "Retention: decompositions and what they are for",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["math-linalg"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Differentiating a computational graph",
+      "est_minutes": 840,
+      "items": [
+        {
+          "id": "M2.1",
+          "type": "lecture",
+          "title": "Essence of calculus, derivatives and the chain rule",
+          "resource": "3b1b-calculus",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["math-calc"],
+          "locator": "Chapters 1–6: the derivative as a limit, the power and product rules, and the chain rule."
+        },
+        {
+          "id": "M2.2",
+          "type": "lecture",
+          "title": "Essence of calculus, exponentials and approximation",
+          "resource": "3b1b-calculus",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["math-calc"],
+          "locator": "Chapters 7–12: implicit differentiation, limits, exponentials, and Taylor series."
+        },
+        {
+          "id": "M2.3",
+          "type": "reading",
+          "title": "Vector calculus and backpropagation",
+          "resource": "book-math-for-ml",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["math-calc"],
+          "locator": "Chapter 5, Vector Calculus — particularly 5.4 on gradients of matrices and 5.6, which derives backpropagation as repeated application of the chain rule."
+        },
+        {
+          "id": "M2.4",
+          "type": "assignment",
+          "title": "Backpropagation by hand",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.4",
+          "skills": ["math-calc"],
+          "checkpoints": [
+            "Forward pass computed by hand with numbers written down",
+            "Every partial derivative derived symbolically",
+            "Numeric gradients produced for one input",
+            "Autograd comparison run and agreement reported to a stated precision"
+          ],
+          "brief": "Take a two-layer network with three inputs, two hidden units, a sigmoid, and a squared-error loss. Choose concrete weights. Compute the forward pass by hand. Then derive every partial derivative of the loss with respect to every weight symbolically, and evaluate them numerically. Check against PyTorch autograd. Report agreement to a stated number of decimal places, and if anything disagrees, find the sign error rather than adjusting the tolerance."
+        },
+        {
+          "id": "M2.5",
+          "type": "assignment",
+          "title": "Differentiate a loss you actually use",
+          "est_minutes": 150,
+          "tier": 1,
+          "rubric": "R-M2.5",
+          "skills": ["math-calc"],
+          "checkpoints": [
+            "The loss written formally from the code that computes it",
+            "Gradient derived with respect to the logits",
+            "Result checked numerically"
+          ],
+          "brief": "Find a loss function in something you have shipped or in a library you depend on, and write it down formally from the source rather than from memory. Derive its gradient with respect to the model's logits. For cross-entropy over a softmax the answer collapses to something famously simple — if you get that, show the cancellation step by step rather than quoting the result."
+        },
+        {
+          "id": "M2.6",
+          "type": "assignment",
+          "title": "Where the chain rule explains the bug",
+          "est_minutes": 135,
+          "tier": 2,
+          "rubric": "R-M2.6",
+          "skills": ["math-calc"],
+          "checkpoints": [
+            "A deep chain constructed and its gradient magnitudes measured per layer",
+            "The saturation point identified numerically",
+            "A fix applied and re-measured"
+          ],
+          "brief": "Build a deliberately deep stack of sigmoid layers and measure the gradient magnitude at each layer. Show the decay numerically rather than asserting it. Then explain, from the derivative of the sigmoid itself, why the decay is multiplicative and roughly what factor per layer you should expect. Change one thing — the activation, the initialisation, or a residual connection — and measure again. The claim to defend is which of those you changed and why it was the right one."
+        },
+        {
+          "id": "M2.7",
+          "type": "retention",
+          "title": "Retention: the chain rule through a graph",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["math-calc"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Probability, and what a loss function is measuring",
+      "est_minutes": 840,
+      "items": [
+        {
+          "id": "M3.1",
+          "type": "reading",
+          "title": "Probability and distributions",
+          "resource": "book-math-for-ml",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["math-prob"],
+          "locator": "Chapter 6, Probability and Distributions — through 6.5 on Gaussians, and 6.6 on conjugacy and the exponential family."
+        },
+        {
+          "id": "M3.2",
+          "type": "reading",
+          "title": "Where the model meets the data",
+          "resource": "book-math-for-ml",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["math-prob"],
+          "locator": "Chapter 8, When Models Meet Data — 8.1 to 8.3: empirical risk minimisation, parameter estimation, and what maximum likelihood is actually assuming."
+        },
+        {
+          "id": "M3.3",
+          "type": "lecture",
+          "title": "The probabilistic view of a model",
+          "resource": "stanford-cs229-playlist",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["math-prob"],
+          "locator": "The lectures on the probabilistic interpretation of least squares and on generalised linear models — where a loss stops being a choice and becomes a consequence of a distributional assumption."
+        },
+        {
+          "id": "M3.4",
+          "type": "assignment",
+          "title": "Cross-entropy is not a choice",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M3.4",
+          "skills": ["math-prob"],
+          "checkpoints": [
+            "The likelihood written for a categorical model",
+            "Log taken and negated, with each step justified",
+            "The result matched against a library implementation",
+            "The Gaussian case derived to squared error"
+          ],
+          "brief": "Derive cross-entropy from maximum likelihood for a categorical model, showing every step. Then do the same for a Gaussian with fixed variance and arrive at squared error. Write the conclusion in your own words: what distributional assumption are you making every time you reach for MSE, and name one situation in your own work where that assumption is wrong."
+        },
+        {
+          "id": "M3.5",
+          "type": "assignment",
+          "title": "The variance in your own numbers",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M3.5",
+          "skills": ["math-prob"],
+          "checkpoints": [
+            "A real measured set of scores assembled",
+            "Bootstrap or analytic interval computed",
+            "A previously stated comparison re-examined against the interval"
+          ],
+          "brief": "Take a set of scores you have actually measured — an eval run, a latency sample, anything with more than thirty observations. Compute a confidence interval, by bootstrap or analytically, and say which you chose and why. Then find a comparison you or someone else has previously stated as a fact — 'X is better than Y' — and check whether the interval supports it. The valuable outcome here is discovering that a difference you believed is inside the noise."
+        },
+        {
+          "id": "M3.6",
+          "type": "retention",
+          "title": "Retention: likelihood, loss, and what follows from what",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["math-prob"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Optimisation",
+      "est_minutes": 840,
+      "items": [
+        {
+          "id": "M4.1",
+          "type": "reading",
+          "title": "Continuous optimisation",
+          "resource": "book-math-for-ml",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["math-optim"],
+          "locator": "Chapter 7, Continuous Optimization — gradient descent with momentum, stochastic gradient descent, constrained optimisation and duality."
+        },
+        {
+          "id": "M4.2",
+          "type": "reading",
+          "title": "Optimisation as it actually behaves in deep networks",
+          "resource": "book-deep-learning-goodfellow",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["math-optim"],
+          "locator": "Chapter 8, Optimization for Training Deep Models — especially 8.2 on the challenges, and 8.5 on adaptive learning rates."
+        },
+        {
+          "id": "M4.3",
+          "type": "assignment",
+          "title": "Three optimisers from their update rules",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M4.3",
+          "skills": ["math-optim"],
+          "checkpoints": [
+            "Plain gradient descent implemented and converging",
+            "Momentum added, with the update rule written above the code",
+            "Adam implemented including bias correction",
+            "All three plotted on the same objective"
+          ],
+          "brief": "Implement gradient descent, gradient descent with momentum, and Adam in numpy — from the update rules as written in the reading, not from a library and not from memory. Run all three on the same two-dimensional objective with a known minimum, and plot the trajectories. Include Adam's bias-correction terms and then run it once with them removed, so you can show what they actually do in the first few steps."
+        },
+        {
+          "id": "M4.4",
+          "type": "assignment",
+          "title": "Why Adam, and when it is worse",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M4.4",
+          "skills": ["math-optim"],
+          "checkpoints": [
+            "A case constructed where Adam wins, and measured",
+            "A case constructed where plain SGD wins, and measured",
+            "The mechanism explained from the update rules"
+          ],
+          "brief": "Construct one objective where Adam clearly beats SGD and one where it clearly does not, and measure both. Then explain the difference from the update rules themselves — what the per-parameter scaling buys you and what it costs. The second case is the point of the assignment: 'use Adam' is the default advice, and a submission that cannot produce a case against it has not understood why it works."
+        },
+        {
+          "id": "M4.5",
+          "type": "assignment",
+          "title": "Make training fail, three ways",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M4.5",
+          "skills": ["math-optim"],
+          "checkpoints": [
+            "Failure by learning rate produced and its signature recorded",
+            "Failure by initialisation produced and recorded",
+            "Failure by conditioning or scaling produced and recorded",
+            "A short diagnostic table written from the three signatures"
+          ],
+          "brief": "Deliberately break the same training run three ways: a learning rate that diverges, an initialisation that kills the gradient, and inputs on wildly different scales. Record the loss curve and the gradient norms for each. Then write the artifact that makes this worth doing — a short table mapping the symptom you would actually observe to the cause, so that next time you see it in real training you recognise it rather than guessing."
+        },
+        {
+          "id": "M4.6",
+          "type": "retention",
+          "title": "Retention: optimiser behaviour and failure signatures",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["math-optim"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "The mathematics of something you already use",
+      "est_minutes": 780,
+      "items": [
+        {
+          "id": "M5.1",
+          "type": "lecture",
+          "title": "What a network is computing",
+          "resource": "3b1b-neural-networks",
+          "est_minutes": 75,
+          "tier": 0,
+          "skills": ["math-linalg"],
+          "locator": "Chapters 1–2: a layer as a matrix multiplication followed by a nonlinearity, and what the parameters mean."
+        },
+        {
+          "id": "M5.2",
+          "type": "reading",
+          "title": "Scaled dot-product attention, the equation only",
+          "resource": "paper-attention",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["math-linalg", "math-prob"],
+          "locator": "Section 3.2.1 and its footnote on why the dot products are scaled. Read this for the mathematics alone; the architecture is AIE-204's job."
+        },
+        {
+          "id": "M5.3",
+          "type": "assignment",
+          "title": "Why the square root of d_k",
+          "est_minutes": 150,
+          "tier": 2,
+          "rubric": "R-M5.3",
+          "skills": ["math-prob", "math-linalg"],
+          "checkpoints": [
+            "Variance of a dot product of independent unit-variance vectors derived",
+            "The effect on softmax demonstrated numerically at two dimensionalities",
+            "The gradient consequence measured"
+          ],
+          "brief": "The paper justifies dividing by the square root of the key dimension in a single footnote. Derive it: show that the dot product of two independent vectors with unit-variance components has variance equal to the dimension. Then demonstrate numerically what a large-variance input does to softmax, and measure what that does to the gradient. This is the assignment where the whole course pays off — one footnote in a paper you have used for two years, turned into something you can derive."
+        },
+        {
+          "id": "M5.4",
+          "type": "project",
+          "title": "The mathematics of one system you built: derivation",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M5.4",
+          "skills": ["math-linalg", "math-prob", "math-optim"],
+          "checkpoints": [
+            "System chosen and the mathematical claim stated",
+            "The derivation written out",
+            "Every claim checked numerically against the running system"
+          ],
+          "brief": "Pick one component of something you have shipped and write down what it is doing mathematically — the similarity metric in a retrieval path, the scoring function in a pipeline, the aggregation in a ranker. Derive its behaviour rather than describing it, and check each claim against the system as it actually runs. State at least one thing the derivation tells you that you did not know before writing it, or say plainly that it told you nothing new."
+        },
+        {
+          "id": "M5.5",
+          "type": "project",
+          "title": "The mathematics of one system you built: publish",
+          "est_minutes": 180,
+          "tier": 3,
+          "rubric": "R-M5.5",
+          "skills": ["math-linalg", "math-prob"],
+          "checkpoints": [
+            "Written for a reader who has not seen the system",
+            "Notation defined once and used consistently",
+            "Published, and linked from the public log",
+            "Connected backwards to an earlier chapter's result"
+          ],
+          "brief": "Publish the derivation as a chapter of the public engineering log. It must stand alone on its own page and must connect backwards to at least one earlier chapter's result. Notation is the thing readers give up on: define it once, use it consistently, and do not switch between index and matrix form without saying so."
+        },
+        {
+          "id": "M5.6",
+          "type": "defense",
+          "title": "Oral defense",
+          "est_minutes": 60,
+          "tier": 4,
+          "rubric": "R-M5.6",
+          "skills": ["math-linalg", "math-calc", "math-prob", "math-optim"],
+          "brief": "Three unscripted questions generated from your own submissions at defense time, answered aloud without notes and without a calculator. Mathematics is where notes hide the gap most effectively, which is why there are none.",
+          "sample_question_shapes": [
+            "You divided by the square root of d_k. Talk me through the variance argument without writing anything down.",
+            "Your gradient check agreed to six decimal places. What would it have looked like if you had a sign error in exactly one weight, and would you have noticed?",
+            "You said the difference in your eval numbers was inside the noise. Someone disagrees and says thirty samples is plenty. Answer them."
+          ]
+        },
+        {
+          "id": "M5.7",
+          "type": "retention",
+          "title": "Retention: the whole course, cold",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["math-linalg", "math-calc", "math-prob", "math-optim"],
+          "fsrs": true
+        }
+      ]
+    }
+  ],
+  "rubrics": [
+    {
+      "id": "R-M1.5",
+      "for": "M1.5",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "matrix shape reported and consistent with the corpus size", "blocking": true },
+        { "check": "rank threshold stated before the spectrum was inspected", "blocking": true },
+        { "check": "reconstruction error reported at the chosen rank", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The decomposition is computed correctly and reported honestly",
+          "weight": 0.35,
+          "levels": {
+            "0": "Wrong shapes or no spectrum.",
+            "1": "Computed, barely reported.",
+            "2": "Correct with the spectrum shown.",
+            "3": "Correct, with the reconstruction error at the chosen rank and what it implies about what was thrown away."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The components are interpreted against the actual documents",
+          "weight": 0.4,
+          "levels": {
+            "0": "No interpretation.",
+            "1": "Generic themes asserted.",
+            "2": "Themes named with the loading resources cited.",
+            "3": "Themes named and cited, including at least one component the author states is not interpretable rather than inventing a label."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The rank choice is defended",
+          "weight": 0.25,
+          "levels": {
+            "0": "Arbitrary.",
+            "1": "A round number.",
+            "2": "A stated threshold applied.",
+            "3": "A threshold stated in advance, applied, and its sensitivity checked at one rank either side."
+          }
+        }
+      ],
+      "anti_gaming": "Naming a theme for a component that does not have one is the failure this rubric exists to catch. Judges are instructed to check the named resources against the claimed theme and to score criterion 2 at 0 where the loadings do not support the label."
+    },
+    {
+      "id": "R-M1.6",
+      "for": "M1.6",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "characteristic polynomial written out for both matrices", "blocking": true },
+        { "check": "eigenvectors normalised", "blocking": true },
+        { "check": "numpy comparison included", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The hand derivation is complete and correct",
+          "weight": 0.5,
+          "levels": {
+            "0": "Answers only, or wrong.",
+            "1": "Steps skipped.",
+            "2": "Complete and correct.",
+            "3": "Complete, correct, and the 3×3 solved without resorting to a numerical root-finder."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Disagreement with the library is explained rather than smoothed over",
+          "weight": 0.3,
+          "levels": {
+            "0": "Not compared.",
+            "1": "Compared, differences ignored.",
+            "2": "Differences noted.",
+            "3": "Differences explained as sign and ordering conventions, with the reason they are not errors."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The symmetry question is answered with its consequence",
+          "weight": 0.2,
+          "levels": {
+            "0": "Not answered.",
+            "1": "Restates that it is symmetric.",
+            "2": "States that eigenvectors are orthogonal.",
+            "3": "States orthogonality and real eigenvalues, and says why that matters for a covariance matrix specifically."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.4",
+      "for": "M2.4",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "concrete weights and inputs stated", "blocking": true },
+        { "check": "symbolic partials given for every weight", "blocking": true },
+        { "check": "autograd agreement reported to a stated precision", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Every partial derivative is derived, not asserted",
+          "weight": 0.45,
+          "levels": {
+            "0": "Numbers only.",
+            "1": "Some derivations.",
+            "2": "All derived.",
+            "3": "All derived with the chain rule application visible at each layer boundary."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The numerical check is real",
+          "weight": 0.35,
+          "levels": {
+            "0": "Absent.",
+            "1": "Claimed without output.",
+            "2": "Run, with agreement reported.",
+            "3": "Run, agreement reported to a stated precision, and the precision itself justified."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Disagreements were chased rather than tolerated",
+          "weight": 0.2,
+          "levels": {
+            "0": "Tolerance widened until it passed.",
+            "1": "Discrepancy noted, unexplained.",
+            "2": "Discrepancy found and fixed.",
+            "3": "Discrepancy found, fixed, and the class of error named so it is recognisable next time."
+          }
+        }
+      ],
+      "anti_gaming": "Widening the tolerance until the check passes is the specific failure here. Judges are instructed to score criterion 3 at 0 wherever the tolerance was chosen after the comparison rather than before."
+    },
+    {
+      "id": "R-M2.5",
+      "for": "M2.5",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "the loss transcribed from source, with the source identified", "blocking": true },
+        { "check": "gradient checked numerically", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The loss is written from the code rather than from memory",
+          "weight": 0.3,
+          "levels": {
+            "0": "From memory, and it shows.",
+            "1": "Roughly right.",
+            "2": "Accurate, with the source cited.",
+            "3": "Accurate, cited, and any difference from the textbook form noted."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The derivation shows the cancellation",
+          "weight": 0.45,
+          "levels": {
+            "0": "Result quoted.",
+            "1": "Partial working.",
+            "2": "Full working.",
+            "3": "Full working with the softmax Jacobian written out and the cancellation shown term by term."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The numeric check confirms it",
+          "weight": 0.25,
+          "levels": {
+            "0": "None.",
+            "1": "Asserted.",
+            "2": "Run and agreeing.",
+            "3": "Run at more than one input, including an edge case near saturation."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.6",
+      "for": "M2.6",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "per-layer gradient magnitudes measured and reported", "blocking": true },
+        { "check": "one intervention applied and re-measured", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The decay is measured rather than asserted",
+          "weight": 0.35,
+          "levels": {
+            "0": "Asserted.",
+            "1": "One measurement.",
+            "2": "Per-layer measurements.",
+            "3": "Per-layer measurements with the observed factor compared against the one predicted from the sigmoid derivative."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The mechanism is explained from the derivative itself",
+          "weight": 0.4,
+          "levels": {
+            "0": "Named only.",
+            "1": "Hand-waved as 'gradients get small'.",
+            "2": "Explained multiplicatively.",
+            "3": "Explained from the maximum of the sigmoid derivative, with the per-layer bound stated."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The intervention is chosen for a reason and verified",
+          "weight": 0.25,
+          "levels": {
+            "0": "Changed several things at once.",
+            "1": "One change, unjustified.",
+            "2": "One change, justified, re-measured.",
+            "3": "One change, justified from the mechanism above, re-measured, and its cost acknowledged."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.4",
+      "for": "M3.4",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "both derivations present — categorical and Gaussian", "blocking": true },
+        { "check": "library comparison included for the categorical case", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The categorical derivation is complete",
+          "weight": 0.35,
+          "levels": {
+            "0": "Result stated.",
+            "1": "Steps missing.",
+            "2": "Complete.",
+            "3": "Complete, with the independence assumption in the likelihood made explicit."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The Gaussian case lands on squared error honestly",
+          "weight": 0.3,
+          "levels": {
+            "0": "Asserted.",
+            "1": "Partially derived.",
+            "2": "Derived.",
+            "3": "Derived, with the constant terms shown being dropped and why that is legitimate."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The assumption is carried back to the author's own work",
+          "weight": 0.35,
+          "levels": {
+            "0": "No example.",
+            "1": "A generic example.",
+            "2": "A real example from their own systems.",
+            "3": "A real example where the assumption is wrong, with what it costs stated."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.5",
+      "for": "M3.5",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "at least 30 observations, and the source of the data named", "blocking": true },
+        { "check": "interval method stated and justified", "blocking": true },
+        { "check": "a previously stated comparison re-examined", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The interval is computed correctly for the data at hand",
+          "weight": 0.35,
+          "levels": {
+            "0": "Wrong method for the data.",
+            "1": "Computed without justification.",
+            "2": "Computed with the choice justified.",
+            "3": "Computed with the choice justified against the data's actual distribution rather than by habit."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "A real prior claim is tested against it",
+          "weight": 0.4,
+          "levels": {
+            "0": "No claim tested.",
+            "1": "A hypothetical claim.",
+            "2": "A real claim tested.",
+            "3": "A real claim the author previously made or believed, tested, with the verdict stated even when it is uncomfortable."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The conclusion respects what the interval can support",
+          "weight": 0.25,
+          "levels": {
+            "0": "Overclaims.",
+            "1": "Hedged vaguely.",
+            "2": "Stated within the interval.",
+            "3": "Stated within the interval, with the sample size that would be needed to resolve it."
+          }
+        }
+      ],
+      "integrity": "The valuable result here is finding that a believed difference is inside the noise. Judges are instructed that a submission reaching that conclusion is stronger, not weaker, and must not be penalised for a negative finding."
+    },
+    {
+      "id": "R-M4.3",
+      "for": "M4.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "three optimisers implemented from update rules, not called from a library", "blocking": true },
+        { "check": "all three run on the identical objective", "blocking": true },
+        { "check": "Adam run with and without bias correction", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The implementations match the written update rules",
+          "weight": 0.4,
+          "levels": {
+            "0": "Library calls.",
+            "1": "Implemented, diverging from the stated rules.",
+            "2": "Implemented and matching.",
+            "3": "Implemented, matching, with the rule written beside each implementation."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The comparison is fair",
+          "weight": 0.3,
+          "levels": {
+            "0": "Different objectives or starting points.",
+            "1": "Same objective, untuned.",
+            "2": "Same objective and starting point.",
+            "3": "Same objective and start, with each optimiser's learning rate tuned separately so none is handicapped."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Bias correction is shown to do something",
+          "weight": 0.3,
+          "levels": {
+            "0": "Not run.",
+            "1": "Run, no difference discussed.",
+            "2": "Difference shown.",
+            "3": "Difference shown in the first few steps specifically, with why it decays."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.4",
+      "for": "M4.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "both cases constructed and measured", "blocking": true },
+        { "check": "learning rates tuned per optimiser in both cases", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The case against Adam is constructed in good faith",
+          "weight": 0.45,
+          "levels": {
+            "0": "Absent or rigged.",
+            "1": "A degenerate objective nobody would meet.",
+            "2": "A plausible case.",
+            "3": "A case that resembles something real, with the property that causes it named."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The mechanism is explained from the update rules",
+          "weight": 0.35,
+          "levels": {
+            "0": "Not explained.",
+            "1": "Explained by analogy.",
+            "2": "Explained from the per-parameter scaling.",
+            "3": "Explained from the scaling with what the second-moment estimate does to a sparse or noisy gradient."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The measurements are fair to both",
+          "weight": 0.2,
+          "levels": {
+            "0": "Untuned.",
+            "1": "One tuned.",
+            "2": "Both tuned.",
+            "3": "Both tuned with the search stated, and multiple seeds run."
+          }
+        }
+      ],
+      "anti_gaming": "Handicapping SGD with an untuned learning rate is the easy way to make Adam look good and invalidates the assignment. Judges are instructed to score criterion 3 at 0 where tuning is not evidenced for both."
+    },
+    {
+      "id": "R-M4.5",
+      "for": "M4.5",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "three distinct failure modes produced, each with its curve", "blocking": true },
+        { "check": "gradient norms recorded for each", "blocking": true },
+        { "check": "a symptom-to-cause table produced", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The three failures are genuinely distinct",
+          "weight": 0.35,
+          "levels": {
+            "0": "The same failure three times.",
+            "1": "Two distinct.",
+            "2": "Three distinct.",
+            "3": "Three distinct, with the same base run so only one thing differs each time."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Each signature is recorded well enough to recognise later",
+          "weight": 0.35,
+          "levels": {
+            "0": "Loss curve only.",
+            "1": "Curve plus a note.",
+            "2": "Curve and gradient norms.",
+            "3": "Curve, gradient norms, and the earliest step at which the failure was distinguishable."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The diagnostic table is usable by someone else",
+          "weight": 0.3,
+          "levels": {
+            "0": "Absent.",
+            "1": "Restates the three experiments.",
+            "2": "Maps symptom to cause.",
+            "3": "Maps symptom to cause and to the first thing to check, including how to tell two similar symptoms apart."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.3",
+      "for": "M5.3",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "the variance result derived, not quoted", "blocking": true },
+        { "check": "softmax behaviour demonstrated at two dimensionalities", "blocking": true },
+        { "check": "gradient effect measured", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The variance derivation is correct and complete",
+          "weight": 0.4,
+          "levels": {
+            "0": "Quoted from the paper.",
+            "1": "Sketched.",
+            "2": "Derived.",
+            "3": "Derived with the independence and unit-variance assumptions stated as assumptions rather than smuggled in."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The softmax consequence is demonstrated numerically",
+          "weight": 0.35,
+          "levels": {
+            "0": "Asserted.",
+            "1": "One dimensionality.",
+            "2": "Two, with the distributions shown.",
+            "3": "Two, with the distributions shown and the entropy or max-probability reported so the sharpening is quantified."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The gradient consequence closes the argument",
+          "weight": 0.25,
+          "levels": {
+            "0": "Not addressed.",
+            "1": "Mentioned.",
+            "2": "Measured.",
+            "3": "Measured, and connected back to why a saturated softmax is a training problem rather than merely a sharp distribution."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.4",
+      "for": "M5.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "the system named and the component identified", "blocking": true },
+        { "check": "each mathematical claim checked against the running system", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The derivation describes what the code actually does",
+          "weight": 0.4,
+          "levels": {
+            "0": "Describes an idealisation.",
+            "1": "Mostly matches.",
+            "2": "Matches, verified.",
+            "3": "Matches, verified, with any place the implementation departs from the idealisation called out."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "It is a derivation rather than a description",
+          "weight": 0.35,
+          "levels": {
+            "0": "Prose about the system.",
+            "1": "Notation without argument.",
+            "2": "A derivation.",
+            "3": "A derivation that predicts a behaviour, which is then checked."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The author says what they learned, including nothing",
+          "weight": 0.25,
+          "levels": {
+            "0": "No reflection.",
+            "1": "Generic.",
+            "2": "A specific new understanding.",
+            "3": "A specific new understanding, or a plain statement that the derivation confirmed what was already known — which is an acceptable and honest answer."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.5",
+      "for": "M5.5",
+      "tier": 3,
+      "machine_checks": [
+        { "check": "published at a public URL", "blocking": true },
+        { "check": "links backwards to an earlier chapter's result", "blocking": true },
+        { "check": "notation defined before first use", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "It stands alone for a reader who has not seen the system",
+          "weight": 0.4,
+          "levels": {
+            "0": "Assumes the reader knows the codebase.",
+            "1": "Mostly self-contained.",
+            "2": "Self-contained.",
+            "3": "Self-contained, with the minimum context given and no more."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Notation is consistent and defined",
+          "weight": 0.35,
+          "levels": {
+            "0": "Undefined symbols.",
+            "1": "Defined late.",
+            "2": "Defined before use.",
+            "3": "Defined before use and consistent throughout, with any change of form flagged."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "It connects to the body of work rather than standing apart",
+          "weight": 0.25,
+          "levels": {
+            "0": "No connection.",
+            "1": "A link.",
+            "2": "A link with a stated relationship.",
+            "3": "A link where the earlier result is genuinely used or revised by this one."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.6",
+      "for": "M5.6",
+      "tier": 4,
+      "machine_checks": [
+        { "check": "questions generated at defense time from the author's own submissions", "blocking": true },
+        { "check": "answered aloud without notes and without a calculator", "blocking": true },
+        { "check": "recording or transcript retained", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The reasoning is reconstructed rather than recalled",
+          "weight": 0.45,
+          "levels": {
+            "0": "Recites the written answer or cannot proceed.",
+            "1": "Recalls the conclusion, cannot rebuild it.",
+            "2": "Rebuilds the argument.",
+            "3": "Rebuilds the argument and handles a variation of the question that was not in the submission."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Uncertainty is stated where it exists",
+          "weight": 0.3,
+          "levels": {
+            "0": "Confident and wrong.",
+            "1": "Vague.",
+            "2": "Says what is not known.",
+            "3": "Says what is not known and how it would be checked."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The mathematics survives being questioned",
+          "weight": 0.25,
+          "levels": {
+            "0": "Abandoned under pressure.",
+            "1": "Defended by assertion.",
+            "2": "Defended with reasoning.",
+            "3": "Defended with reasoning, and a genuine error conceded where the questioner is right."
+          }
+        }
+      ],
+      "integrity": "Conceding a real error is scored as strength, not weakness. A defense in which the author never yields on any point is evidence of stubbornness rather than understanding."
+    }
+  ],
+  "completion": {
+    "required": "All eleven assignments, both project parts and the defense submitted. Readings and lectures are tier 0 and are tracked but never counted toward mastery.",
+    "grade_rollup": "Deterministic. Each item's tier sets its weight; panel scores enter as per-criterion values; nothing is rounded up. Computed in TypeScript, never by a model.",
+    "mastery_note": "Sets initial mastery on all four mathematics skills. FSRS then decays them, and this is the course where that matters most — a derivation you cannot reproduce six months later was never knowledge, it was a transcription."
+  },
+  "optional_hours": 0
+}

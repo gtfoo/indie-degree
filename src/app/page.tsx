@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
+  blocks,
   courses,
   getSpec,
   programme,
@@ -135,12 +136,27 @@ export default async function IndieDegreePage() {
         </span>
       </Link>
 
-      <h2 className="mt-12 border-b border-border pb-2 text-lg font-semibold tracking-tight">
-        Block I — in study order
-      </h2>
+      {/* Grouped by block rather than listed flat. The heading used to be a
+          hardcoded "Block I", which was true only while Block I was the only
+          specified block — the first Block II course to land would have been
+          filed under the wrong heading with nothing to catch it. */}
+      {blocks.map((block) => {
+        const inBlock = specified.filter((c) => c.block === block.id);
+        if (inBlock.length === 0) return null;
+        const total = courses.filter((c) => c.block === block.id).length;
+        return (
+          <section key={block.id}>
+            <h2 className="mt-12 border-b border-border pb-2 text-lg font-semibold tracking-tight">
+              {block.title} — in study order
+            </h2>
+            <p className="mt-2 text-sm text-muted">
+              {block.purpose}
+              {inBlock.length < total &&
+                ` ${inBlock.length} of ${total} specified so far.`}
+            </p>
 
-      <ul className="mt-4 space-y-2">
-        {specified.map((c) => {
+            <ul className="mt-4 space-y-2">
+              {inBlock.map((c) => {
           const cp = progress.courses[c.id];
           const pct = cp?.requiredItems
             ? Math.round((cp.completeItems / cp.requiredItems) * 100)
@@ -175,16 +191,20 @@ export default async function IndieDegreePage() {
                   {cp?.earned && " · complete"}
                 </p>
               </Link>
-            </li>
-          );
-        })}
-      </ul>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        );
+      })}
 
       {courses.length > specified.length && (
         <p className="mt-6 text-sm text-muted">
-          Block II is mapped but not yet specified —{" "}
-          {courses.length - specified.length} courses, deliberately left until
-          Block I has been studied rather than designed.
+          {courses.length - specified.length} of the {courses.length} mapped
+          courses are not specified yet. They carry credits, hours and
+          prerequisites, but no items — so they are visible in the totals and
+          unstudiable, which is the honest state rather than a hidden one.
         </p>
       )}
     </div>

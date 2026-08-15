@@ -17,6 +17,7 @@ import aie104 from "@/products/curriculum/courses/AIE-104-agents-and-tool-use-sy
 import aie105 from "@/products/curriculum/courses/AIE-105-inference-cost-and-latency.json";
 import aie106 from "@/products/curriculum/courses/AIE-106-speech-and-multimodal-systems.json";
 import aie107 from "@/products/curriculum/courses/AIE-107-architecture-and-judgement.json";
+import aie201 from "@/products/curriculum/courses/AIE-201-mathematics-for-machine-learning.json";
 
 import type {
   Area,
@@ -27,13 +28,31 @@ import type {
   Skill,
 } from "@/products/types";
 
-const SPECS = [aie101, aie102, aie103, aie104, aie105, aie106, aie107] as unknown as CourseSpec[];
+const SPECS = [
+  aie101,
+  aie102,
+  aie103,
+  aie104,
+  aie105,
+  aie106,
+  aie107,
+  aie201,
+] as unknown as CourseSpec[];
 
 const specByCourse = new Map<string, CourseSpec>(
   SPECS.map((s) => [s.course, s]),
 );
 
 export const programme = programmeJson.programme;
+
+export interface Block {
+  id: string;
+  title: string;
+  purpose: string;
+  credits: number;
+}
+
+export const blocks: Block[] = programmeJson.blocks as Block[];
 
 export const courses: Course[] = (programmeJson.courses as unknown as Course[])
   .slice()

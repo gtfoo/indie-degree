@@ -395,6 +395,8 @@ Targeted, not an undergraduate sequence. Only what is needed to read the papers 
 | [Gilbert Strang lectures on Linear Algebra (MIT)](https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D) | Gilbert Strang, MIT OCW | 35 h | Free |
 | [Linear Algebra \| Mathematics \| MIT OpenCourseWare](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/) | MIT OCW | 40 h | Free |
 
+> Full specification: [AIE-201-mathematics-for-machine-learning.json](courses/AIE-201-mathematics-for-machine-learning.json)
+
 ### 9. AIE-202 — Machine Learning Foundations
 
 **3 credits · 60 hours** · prerequisites: AIE-201

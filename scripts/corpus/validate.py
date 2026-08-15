@@ -306,6 +306,18 @@ def main() -> int:
                 f"{c['est_hours']}"
             )
 
+        # Keys the renderer indexes into directly. Without this a spec can pass
+        # validation and then crash `render.py` with a KeyError, which is how
+        # AIE-201 first landed: valid by every rule here, unrenderable in fact.
+        # A validator that blesses a document the next tool cannot read is not
+        # validating the thing that matters.
+        for key in ("premise", "completion", "modules", "rubrics"):
+            if key not in spec:
+                err(f"{spec_rel}: has no {key!r} — render.py requires it")
+        for key in ("required", "grade_rollup", "mastery_note"):
+            if key not in spec.get("completion", {}):
+                err(f"{spec_rel}: completion has no {key!r} — render.py requires it")
+
         items = {i["id"]: i for m in spec["modules"] for i in m["items"]}
         rubrics = {r["id"]: r for r in spec.get("rubrics", [])}
 
