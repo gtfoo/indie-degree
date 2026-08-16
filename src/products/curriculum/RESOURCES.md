@@ -11,7 +11,7 @@ Of that, **401.9 hours is video** across lectures and lecture series. For video 
 | Resource | Author | Channel | Hours | Cost | Skills | Used by |
 |---|---|---:|---|---|---|---|
 | [Agentic AI MOOC Fall 2025](https://www.youtube.com/playlist?list=PLS01nW3RtgoqGkm4UeqNeZLccW-OGc1fJ) | UC Berkeley CS294-196 | **Berkeley RDI** | 20 h | Free | Orchestration patterns, Multi-step reliability, Evaluating agents | AIE-104 |
-| [CMU Advanced NLP Fall 2024](https://www.youtube.com/playlist?list=PL8PYTP1V4I8D4BeyjwWczukWq9d8PNyZp) | Graham Neubig, Carnegie Mellon | **Graham Neubig** | 30 h | Free | Embeddings and vector semantics, Transformer architecture, Embedding retrieval | AIE-103 |
+| [CMU Advanced NLP Fall 2024](https://www.youtube.com/playlist?list=PL8PYTP1V4I8D4BeyjwWczukWq9d8PNyZp) | Graham Neubig, Carnegie Mellon | **Graham Neubig** | 30 h | Free | Embeddings and vector semantics, Transformer architecture, Embedding retrieval | AIE-103, AIE-204 |
 | [CS231n Winter 2016](https://www.youtube.com/playlist?list=PLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC) | Fei-Fei Li, Andrej Karpathy, Justin Johnson | **—** | 30 h | Free | Network architectures, Training dynamics, Regularisation and generalisation | AIE-203 |
 | [Essence of calculus](https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr) | 3Blue1Brown | **—** | 4 h | Free | Calculus and differentiation | AIE-201 |
 | [Essence of linear algebra](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab) | 3Blue1Brown | **—** | 5 h | Free | Linear algebra | AIE-201 |
@@ -21,11 +21,11 @@ Of that, **401.9 hours is video** across lectures and lecture series. For video 
 | [MIT 6.5940 EfficientML.ai](https://www.youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB) | Song Han, MIT | **—** | 25 h | Free | Quantisation and compression, Model serving, Latency budgets and streaming | AIE-105, AIE-207 |
 | [MIT Introduction to Deep Learning \| 6.S191](https://www.youtube.com/playlist?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI) | Alexander Amini, MIT | **—** | 15 h | Free | Network architectures, Training dynamics | AIE-203 |
 | [Neural networks](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi) | 3Blue1Brown | **—** | 5 h | Free | Backpropagation and autodiff, Attention | AIE-203 |
-| [Neural Networks: Zero to Hero](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ) | Andrej Karpathy | **—** | 25 h | Free | Backpropagation and autodiff, Training dynamics, Transformer architecture, Tokenisation | AIE-203 |
+| [Neural Networks: Zero to Hero](https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ) | Andrej Karpathy | **—** | 25 h | Free | Backpropagation and autodiff, Training dynamics, Transformer architecture, Tokenisation | AIE-203, AIE-204 |
 | [Stanford CS224N: Natural Language Processing with Deep Learning](https://www.youtube.com/playlist?list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ) | Christopher Manning, Stanford | **—** | 35 h | Free | Embeddings and vector semantics, Attention, Tokenisation | AIE-204 |
 | [Stanford CS229: Machine Learning Course \| Summer 2019 (Anand Avati)](https://www.youtube.com/playlist?list=PLoROMvodv4rNH7qL6-efu_q2_bPuy0adh) | Anand Avati, Stanford | **—** | 40 h | Free | Supervised learning, Unsupervised learning, Optimisation | AIE-202, AIE-107 |
 | [Stanford CS25 - Transformers United](https://www.youtube.com/playlist?list=PLoROMvodv4rNiJRchCzutFw5ItR_Z27CM) | Stanford | **—** | 20 h | Free | Transformer architecture, Failure modes and hallucination | AIE-204 |
-| [Stanford CS336 Language Modeling from Scratch I 2025](https://www.youtube.com/playlist?list=PLoROMvodv4rOY23Y0BoGoBGgQ1zmU_MT_) | Percy Liang, Tatsunori Hashimoto, Stanford | **—** | 45 h | Free | Implementing a transformer from scratch, Training dynamics, Distributed training, GPU execution model, Supervised fine-tuning | AIE-105, AIE-204, AIE-207 |
+| [Stanford CS336 Language Modeling from Scratch I 2025](https://www.youtube.com/playlist?list=PLoROMvodv4rOY23Y0BoGoBGgQ1zmU_MT_) | Percy Liang, Tatsunori Hashimoto, Stanford | **—** | 45 h | Free | Implementing a transformer from scratch, Training dynamics, Distributed training, GPU execution model, Supervised fine-tuning | AIE-105, AIE-204, AIE-205, AIE-207 |
 
 - **Neural Networks: Zero to Hero** — The spine of the deep track. Builds backprop, then a language model, then a GPT, all from scratch in code.
 - **Essence of linear algebra** — Intuition first. Pair with Strang for the mechanics.
@@ -49,10 +49,10 @@ Of that, **401.9 hours is video** across lectures and lecture series. For video 
 | [Deep Dive into LLMs like ChatGPT](https://www.youtube.com/watch?v=7xTGNNLPyMI) | Andrej Karpathy | **—** | 4 h | Free | Supervised fine-tuning, Preference optimisation, Failure modes and hallucination | AIE-205 |
 | [Escaping Proof-of-Concept Purgatory: Building Robust LLM Powered Applications](https://www.youtube.com/watch?v=-fuXIfRIztM) | Hugo Bowne-Anderson (SciPy) | **SciPy** | 1.5 h | Free | Eval design, Tracing and production observability | AIE-102 |
 | [How to Build and Evaluate AI systems in the Age of LLMs](https://www.youtube.com/watch?v=eC3RNuI6ow0) | Hugo Bowne-Anderson (DataTalksClub) | **DataTalksClub ⬛** | 1.5 h | Free | Eval design, Regression testing and CI for models | AIE-102 |
-| [Intro to Large Language Models](https://www.youtube.com/watch?v=zjkBMFhNj_g) | Andrej Karpathy | **—** | 1 h | Free | Failure modes and hallucination, Supervised fine-tuning | AIE-101 |
+| [Intro to Large Language Models](https://www.youtube.com/watch?v=zjkBMFhNj_g) | Andrej Karpathy | **—** | 1 h | Free | Failure modes and hallucination, Supervised fine-tuning | AIE-101, AIE-205 |
 | [Learn to Spell: Prompt Engineering (LLM Bootcamp)](https://www.youtube.com/watch?v=JnBHR_yL2w8) | The Full Stack | **The Full Stack** | 1 h | Free | Prompting as engineering | AIE-101 |
 | [Let's build GPT: from scratch, in code, spelled out](https://www.youtube.com/watch?v=kCc8FmEb1nY) | Andrej Karpathy | **—** | 6 h | Free | Attention, Implementing a transformer from scratch | AIE-204 |
-| [Let's reproduce GPT-2 (124M)](https://www.youtube.com/watch?v=l8pRSuU81PU) | Andrej Karpathy | **—** | 8 h | Free | Implementing a transformer from scratch, Training dynamics, GPU execution model | AIE-204 |
+| [Let's reproduce GPT-2 (124M)](https://www.youtube.com/watch?v=l8pRSuU81PU) | Andrej Karpathy | **—** | 8 h | Free | Implementing a transformer from scratch, Training dynamics, GPU execution model | AIE-204, AIE-207 |
 | [LLM Agents MOOC \| UC Berkeley CS294-196 Fall 2024 \| LLM Reasoning](https://www.youtube.com/watch?v=QL-FS_Zcmyo) | Denny Zhou — Google DeepMind | **Berkeley RDI** | 1.5 h | Free | Planning and decomposition, Prompting as engineering | AIE-104 |
 | [LLM Agents MOOC \| UC Berkeley Fall 2024 \| Safe AI Agents + Evidence-based AI Policy by Dawn Song](https://www.youtube.com/watch?v=QAgR4uQ15rc) | Dawn Song — UC Berkeley | **Berkeley RDI** | 1.5 h | Free | Sandboxing and least privilege, Red-teaming and adversarial testing | AIE-104 |
 | [LLM Foundations (LLM Bootcamp)](https://www.youtube.com/watch?v=MyFrMFab6bo) | The Full Stack | **The Full Stack** | 1 h | Free | Transformer architecture, Failure modes and hallucination, Tokenisation | AIE-101 |
@@ -76,7 +76,7 @@ Of that, **401.9 hours is video** across lectures and lecture series. For video 
 
 | Resource | Author | Hours | Cost | Skills | Used by | Verified via |
 |---|---|---:|---|---|---|---|
-| [Introduction - Hugging Face NLP Course](https://huggingface.co/learn/nlp-course/chapter1/1) | Hugging Face | 20 h | Free | Tokenisation, Transformer architecture, Supervised fine-tuning | AIE-205 | page substring |
+| [Introduction - Hugging Face NLP Course](https://huggingface.co/learn/nlp-course/chapter1/1) | Hugging Face | 20 h | Free | Tokenisation, Transformer architecture, Supervised fine-tuning | AIE-204, AIE-205 | page substring |
 | [Linear Algebra \| Mathematics \| MIT OpenCourseWare](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/) | MIT OCW | 40 h | Free | Linear algebra | AIE-201 | page substring |
 | [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course) | Google | 20 h | Free | Supervised learning, Classical model evaluation | AIE-202, AIE-107 | page substring |
 | [Practical Deep Learning for Coders](https://course.fast.ai/) | Jeremy Howard, fast.ai | 60 h | Free | Training dynamics, Network architectures, PyTorch | AIE-203 | page substring |
@@ -92,7 +92,7 @@ Of that, **401.9 hours is video** across lectures and lecture series. For video 
 
 | Resource | Author | Hours | Cost | Skills | Used by | Verified via |
 |---|---|---:|---|---|---|---|
-| [AI Engineering](https://openlibrary.org/isbn/9781098166304) | Chip Huyen | 30 h | Paid | Eval design, Chunking strategy, Token economics, Supervised fine-tuning | AIE-101, AIE-102, AIE-103, AIE-107 | OpenLibrary ISBN → title |
+| [AI Engineering](https://openlibrary.org/isbn/9781098166304) | Chip Huyen | 30 h | Paid | Eval design, Chunking strategy, Token economics, Supervised fine-tuning | AIE-101, AIE-102, AIE-103, AIE-205, AIE-107 | OpenLibrary ISBN → title |
 | [Build a Large Language Model (From Scratch)](https://openlibrary.org/isbn/9781633437166) | Sebastian Raschka | 40 h | Paid | Implementing a transformer from scratch, Supervised fine-tuning, Parameter-efficient fine-tuning | AIE-204, AIE-205 | OpenLibrary ISBN → title |
 | [Building Machine Learning Powered Applications](https://openlibrary.org/isbn/9781492045113) | Emmanuel Ameisen | 20 h | Paid | Eval design, Deploying and operating services | AIE-202, AIE-107 | OpenLibrary ISBN → title |
 | [Deep Learning](https://www.deeplearningbook.org/) | Goodfellow, Bengio, Courville | 80 h | Free | Training dynamics, Regularisation and generalisation, Optimisation | AIE-203 | OpenLibrary ISBN → title |
@@ -140,7 +140,7 @@ Of that, **401.9 hours is video** across lectures and lecture series. For video 
 | [Fast Inference from Transformers via Speculative Decoding](https://arxiv.org/abs/2211.17192) | Leviathan et al. | 3 h | Free | Latency budgets and streaming, Model serving | AIE-105 | arXiv API → title |
 | [FastSpeech 2: Fast and High-Quality End-to-End Text to Speech](https://arxiv.org/abs/2006.04558) | Ren et al. | 3 h | Free | Speech synthesis | AIE-106 | arXiv API → title |
 | [Flamingo: a Visual Language Model for Few-Shot Learning](https://arxiv.org/abs/2204.14198) | Alayrac et al. | 3 h | Free | Network architectures | AIE-106 | arXiv API → title |
-| [FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135) | Dao et al. | 4 h | Free | GPU execution model, Implementing a transformer from scratch | AIE-207 | arXiv API → title |
+| [FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135) | Dao et al. | 4 h | Free | GPU execution model, Implementing a transformer from scratch | AIE-204, AIE-207 | arXiv API → title |
 | [G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment](https://arxiv.org/abs/2303.16634) | Liu et al. | 3 h | Free | LLM-as-judge and its pathologies | AIE-102 | arXiv API → title |
 | [Generative Agents: Interactive Simulacra of Human Behavior](https://arxiv.org/abs/2304.03442) | Park et al. | 3 h | Free | Planning and decomposition | AIE-104 | arXiv API → title |
 | [GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers](https://arxiv.org/abs/2210.17323) | Frantar et al. | 3 h | Free | Quantisation and compression | AIE-105 | arXiv API → title |
@@ -173,7 +173,7 @@ Of that, **401.9 hours is video** across lectures and lecture series. For video 
 | [Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach](https://arxiv.org/abs/2407.16833) | Li et al. | 3 h | Free | Context management, Embedding retrieval | AIE-103 | arXiv API → title |
 | [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401) | Lewis et al. | 3 h | Free | Embedding retrieval | AIE-103 | arXiv API → title |
 | [Robust Speech Recognition via Large-Scale Weak Supervision](https://arxiv.org/abs/2212.04356) | Radford et al. | 4 h | Free | Speech recognition | AIE-106 | arXiv API → title |
-| [Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361) | Kaplan et al. | 3 h | Free | Training dynamics | AIE-204 | arXiv API → title |
+| [Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361) | Kaplan et al. | 3 h | Free | Training dynamics | AIE-203, AIE-204 | arXiv API → title |
 | [SeamlessM4T: Massively Multilingual & Multimodal Machine Translation](https://arxiv.org/abs/2308.11596) | Seamless Communication et al. | 3 h | Free | Speech recognition, Speech synthesis | AIE-106 | arXiv API → title |
 | [Searching for Best Practices in Retrieval-Augmented Generation](https://arxiv.org/abs/2407.01219) | Wang et al. | 3 h | Free | Chunking strategy, Hybrid and lexical search, Reranking | AIE-103 | arXiv API → title |
 | [Selective Classification for Deep Neural Networks](https://arxiv.org/abs/1705.08500) | Geifman, El-Yaniv | 3 h | Free | Classical model evaluation | AIE-107 | arxiv-abs |
@@ -181,12 +181,12 @@ Of that, **401.9 hours is video** across lectures and lecture series. For video 
 | [SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models](https://arxiv.org/abs/2211.10438) | Xiao et al. | 3 h | Free | Quantisation and compression | AIE-105 | arXiv API → title |
 | [SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering](https://arxiv.org/abs/2405.15793) | Yang et al. | 3 h | Free | Orchestration patterns, Tool use and function calling | AIE-104 | arXiv API → title |
 | [SWE-bench: Can Language Models Resolve Real-World GitHub Issues?](https://arxiv.org/abs/2310.06770) | Jimenez et al. | 3 h | Free | Evaluating agents, Building eval datasets | AIE-104 | arXiv API → title |
-| [Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity](https://arxiv.org/abs/2101.03961) | Fedus et al. | 3 h | Free | Transformer architecture, Distributed training | AIE-207 | arXiv API → title |
+| [Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity](https://arxiv.org/abs/2101.03961) | Fedus et al. | 3 h | Free | Transformer architecture, Distributed training | AIE-204, AIE-207 | arXiv API → title |
 | [Taming Throughput-Latency Tradeoff in LLM Inference with Sarathi-Serve](https://arxiv.org/abs/2403.02310) | Agrawal et al. | 3 h | Free | Batching and throughput, Latency budgets and streaming | AIE-105 | arXiv API → title |
 | [tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains](https://arxiv.org/abs/2406.12045) | Yao et al. | 3 h | Free | Evaluating agents, Multi-step reliability | AIE-104 | arXiv API → title |
 | [Toolformer: Language Models Can Teach Themselves to Use Tools](https://arxiv.org/abs/2302.04761) | Schick et al. | 3 h | Free | Tool use and function calling | AIE-101, AIE-104 | arXiv API → title |
-| [Training Compute-Optimal Large Language Models](https://arxiv.org/abs/2203.15556) | Hoffmann et al. | 3 h | Free | Training dynamics | AIE-204 | arXiv API → title |
-| [Training language models to follow instructions with human feedback](https://arxiv.org/abs/2203.02155) | Ouyang et al. | 4 h | Free | Preference optimisation, RLHF, Calibrating automated scores to human judgement | AIE-205 | arXiv API → title |
+| [Training Compute-Optimal Large Language Models](https://arxiv.org/abs/2203.15556) | Hoffmann et al. | 3 h | Free | Training dynamics | AIE-203, AIE-204 | arXiv API → title |
+| [Training language models to follow instructions with human feedback](https://arxiv.org/abs/2203.02155) | Ouyang et al. | 4 h | Free | Preference optimisation, RLHF, Calibrating automated scores to human judgement | AIE-205, AIE-206 | arXiv API → title |
 | [Tree of Thoughts: Deliberate Problem Solving with Large Language Models](https://arxiv.org/abs/2305.10601) | Yao et al. | 3 h | Free | Planning and decomposition | AIE-104 | arXiv API → title |
 | [Universal and Transferable Adversarial Attacks on Aligned Language Models](https://arxiv.org/abs/2307.15043) | Zou et al. | 3 h | Free | Red-teaming and adversarial testing | AIE-104 | arXiv API → title |
 | [Visual Instruction Tuning](https://arxiv.org/abs/2304.08485) | Liu et al. | 3 h | Free | Network architectures | AIE-106 | arXiv API → title |
@@ -227,7 +227,7 @@ Of that, **401.9 hours is video** across lectures and lecture series. For video 
 | [ggml-org/llama.cpp](https://github.com/ggml-org/llama.cpp) | ggml | 10 h | Free | Quantisation and compression, Model serving | AIE-105 | GitHub API |
 | [huggingface/peft](https://github.com/huggingface/peft) | Hugging Face | 8 h | Free | Parameter-efficient fine-tuning | AIE-205 | GitHub API |
 | [huggingface/transformers](https://github.com/huggingface/transformers) | Hugging Face | 15 h | Free | Transformer architecture, Supervised fine-tuning | AIE-205 | GitHub API |
-| [huggingface/trl](https://github.com/huggingface/trl) | Hugging Face | 12 h | Free | Preference optimisation, RLHF | AIE-205 | GitHub API |
+| [huggingface/trl](https://github.com/huggingface/trl) | Hugging Face | 12 h | Free | Preference optimisation, RLHF | AIE-205, AIE-206 | GitHub API |
 | [karpathy/llm.c](https://github.com/karpathy/llm.c) | Andrej Karpathy | 20 h | Free | GPU execution model, Implementing a transformer from scratch | AIE-207 | GitHub API |
 | [karpathy/minGPT](https://github.com/karpathy/minGPT) | Andrej Karpathy | 8 h | Free | Implementing a transformer from scratch | AIE-204 | GitHub API |
 | [karpathy/nanoGPT](https://github.com/karpathy/nanoGPT) | Andrej Karpathy | 15 h | Free | Implementing a transformer from scratch, Training dynamics | AIE-204 | GitHub API |
@@ -239,7 +239,7 @@ Of that, **401.9 hours is video** across lectures and lecture series. For video 
 | [promptfoo/promptfoo](https://github.com/promptfoo/promptfoo) | promptfoo | 6 h | Free | Regression testing and CI for models, Eval design | AIE-102 | GitHub API |
 | [pytorch/pytorch](https://github.com/pytorch/pytorch) | PyTorch | 10 h | Free | PyTorch | AIE-207 | GitHub API |
 | [stanford-crfm/helm](https://github.com/stanford-crfm/helm) | Stanford CRFM | 8 h | Free | Eval design, Building eval datasets | AIE-102 | GitHub API |
-| [stanford-cs336/spring2025-lectures](https://github.com/stanford-cs336/spring2025-lectures) | Stanford CS336 | 6 h | Free | GPU execution model, Model serving | AIE-105 | GitHub API |
+| [stanford-cs336/spring2025-lectures](https://github.com/stanford-cs336/spring2025-lectures) | Stanford CS336 | 6 h | Free | GPU execution model, Model serving | AIE-105, AIE-207 | GitHub API |
 | [UKGovernmentBEIS/inspect_ai](https://github.com/UKGovernmentBEIS/inspect_ai) | UK AI Safety Institute | 8 h | Free | Eval design, Evaluating agents, Red-teaming and adversarial testing | AIE-102, AIE-104 | GitHub API |
 | [vllm-project/vllm](https://github.com/vllm-project/vllm) | vLLM | 12 h | Free | Model serving, Batching and throughput | AIE-105 | GitHub API |
 
@@ -259,7 +259,7 @@ Of that, **401.9 hours is video** across lectures and lecture series. For video 
 | [Introducing Contextual Retrieval](https://www.anthropic.com/news/contextual-retrieval) | Anthropic | 2 h | Free | Chunking strategy, Hybrid and lexical search | AIE-103 | page substring |
 | [LLM Evals: Everything You Need to Know](https://hamel.dev/blog/posts/evals-faq/) | Hamel Husain | 2 h | Free | Eval design, LLM-as-judge and its pathologies, Building eval datasets | AIE-102 | page substring |
 | [LLM Powered Autonomous Agents](https://lilianweng.github.io/posts/2023-06-23-agent/) | Lilian Weng | 3 h | Free | Planning and decomposition, Orchestration patterns | AIE-104 | page substring |
-| [Making Deep Learning Go Brrrr From First Principles](https://horace.io/brrr_intro.html) | Horace He | 2 h | Free | GPU execution model, Latency budgets and streaming | AIE-105 | page substring |
+| [Making Deep Learning Go Brrrr From First Principles](https://horace.io/brrr_intro.html) | Horace He | 2 h | Free | GPU execution model, Latency budgets and streaming | AIE-105, AIE-207 | page substring |
 | [Patterns for Building LLM-based Systems & Products](https://eugeneyan.com/writing/llm-patterns/) | Eugene Yan | 3 h | Free | Eval design, Embedding retrieval, Prompting as engineering | AIE-101 | page substring |
 | [Task-Specific LLM Evals that Do & Don't Work](https://eugeneyan.com/writing/evals/) | Eugene Yan | 2 h | Free | Eval design, Statistical significance in evals | AIE-102 | page substring |
 | [The Annotated Transformer](https://nlp.seas.harvard.edu/annotated-transformer/) | Harvard NLP | 6 h | Free | Implementing a transformer from scratch | AIE-204 | page substring |
