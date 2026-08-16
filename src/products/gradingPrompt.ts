@@ -30,7 +30,7 @@ export function gradingPrompt(item: Item, rubric: Rubric): string {
       const levels = ["0", "1", "2", "3"]
         .map((l) => `     ${l} — ${c.levels[l]}`)
         .join("\n");
-      return `${n + 1}. ${c.criterion}\n${levels}`;
+      return `${n + 1}. [${c.id}] ${c.criterion}\n${levels}`;
     })
     .join("\n\n");
 
@@ -63,7 +63,13 @@ a commit history, a rerun of a harness, a page at a URL — answer
 "not verifiable from this text" instead of assigning a level. Do not assume such
 evidence exists.
 
-Then stop. Do not compute a total, a percentage, an average or an overall grade.
+Do not compute a total, a percentage, an average or an overall grade. The
+arithmetic is not yours to do.
+
+Finish with this block, exactly, and write nothing after it:
+
+SCORES
+${rubric.criteria.map((c) => `${c.id}: <0, 1, 2, 3, or "not verifiable">`).join("\n")}
 
 TASK
 ${item.brief ?? item.title}

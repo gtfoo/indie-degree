@@ -36,6 +36,11 @@ const checks: [string, boolean][] = [
   ],
   ["leaks no weights", !/\d+\s*%/.test(prompt)],
   ["forbids totalling", /Do not compute a total/.test(prompt)],
+  ["asks for a parseable SCORES block", /^SCORES$/m.test(prompt)],
+  [
+    "names every criterion id in that block",
+    rubric.criteria.every((c) => new RegExp(`^${c.id}: `, "m").test(prompt)),
+  ],
   ["allows declining unverifiable criteria", /not verifiable from this text/.test(prompt)],
   ["demands a quote before a score", /Quote the exact span/.test(prompt)],
   ["asks for the counter-argument", /too generous/.test(prompt)],

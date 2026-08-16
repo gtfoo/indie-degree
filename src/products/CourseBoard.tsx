@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { gradingPrompt } from "./gradingPrompt";
+import { SubmissionPanel } from "./SubmissionPanel";
 import type {
   CourseSpec,
   Item,
@@ -138,6 +139,7 @@ export function CourseBoard({
               {m.items.map((item) => (
                 <ItemRow
                   key={item.id}
+                  courseId={courseId}
                   item={item}
                   state={stateOf(item.id)}
                   link={item.resource ? links[item.resource] : undefined}
@@ -342,6 +344,7 @@ function RubricPanel({
 }
 
 function ItemRow({
+  courseId,
   item,
   state,
   link,
@@ -354,6 +357,7 @@ function ItemRow({
   onStatus,
   onCheckpoint,
 }: {
+  courseId: string;
   item: Item;
   rubric?: Rubric;
   panelSize: number;
@@ -517,6 +521,14 @@ function ItemRow({
               ) : null}
               {rubric && (
                 <RubricPanel item={item} rubric={rubric} panelSize={panelSize} />
+              )}
+              {rubric && (
+                <SubmissionPanel
+                  courseId={courseId}
+                  item={item}
+                  rubric={rubric}
+                  canEdit={canEdit}
+                />
               )}
               {canEdit && !complete && (
                 <button

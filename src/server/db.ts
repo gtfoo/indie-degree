@@ -95,6 +95,67 @@ export function getDb(): Database.Database {
 
     CREATE INDEX IF NOT EXISTS idx_mq_sessions_learner_time
       ON study_sessions (learner_id, logged_at);
+
+    -- One submission per assessed item.
+    --
+    -- The explanations column is JSON keyed by checkpoint index: an account of
+    -- how each checkpoint was satisfied. That is a self-explanation prompt,
+    -- which is among the best-evidenced cheap interventions in the literature
+    -- (g ~ 0.55 across 64 studies), and the checkpoints already existed as
+    -- resume markers doing nothing else.
+    CREATE TABLE IF NOT EXISTS submissions (
+      learner_id   TEXT NOT NULL,
+      item_key     TEXT NOT NULL,
+      explanations TEXT NOT NULL DEFAULT '{}',
+      artifact_url TEXT,
+      submitted_at TEXT,
+      updated_at   TEXT NOT NULL,
+      PRIMARY KEY (learner_id, item_key)
+    );
+
+    -- The learner's own score, recorded BEFORE any judge sees the work.
+    --
+    -- The ordering is the point, not bookkeeping. Immediate feedback flatters
+    -- performance and depresses learning; scoring yourself first is the
+    -- desirable difficulty that makes the panel informative rather than merely
+    -- pleasant. The gap between this and the panel is calibration, and it is
+    -- the one number in this transcript that measures judgement rather than
+    -- effort.
+    CREATE TABLE IF NOT EXISTS self_assessments (
+      learner_id   TEXT    NOT NULL,
+      item_key     TEXT    NOT NULL,
+      criterion_id TEXT    NOT NULL,
+      level        INTEGER NOT NULL,
+      recorded_at  TEXT    NOT NULL,
+      PRIMARY KEY (learner_id, item_key, criterion_id)
+    );
+
+    -- A judge's verbatim response. The raw text is kept forever and scores are
+    -- derived from it, so a better parser can re-read an old judgement. A
+    -- replaced judgement is superseded, never overwritten: the moment a verdict
+    -- can be quietly rewritten after it is seen, the panel stops being evidence.
+    CREATE TABLE IF NOT EXISTS judgements (
+      id            INTEGER PRIMARY KEY AUTOINCREMENT,
+      learner_id    TEXT NOT NULL,
+      item_key      TEXT NOT NULL,
+      judge         TEXT NOT NULL,
+      body          TEXT NOT NULL,
+      pasted_at     TEXT NOT NULL,
+      superseded_at TEXT
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_judgements_item
+      ON judgements (learner_id, item_key, superseded_at);
+
+    -- Parsed per-criterion levels. NULL means the judge declined the criterion
+    -- as not verifiable from the submitted text, which is a legitimate answer
+    -- and must not be confused with a zero.
+    CREATE TABLE IF NOT EXISTS judgement_scores (
+      judgement_id INTEGER NOT NULL REFERENCES judgements(id),
+      criterion_id TEXT    NOT NULL,
+      level        INTEGER,
+      PRIMARY KEY (judgement_id, criterion_id)
+    );
   `);
 
   return db;
