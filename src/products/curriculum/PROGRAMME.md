@@ -3,7 +3,7 @@
 *Degree-rigorous internally — blocks, credits, prerequisites, capstone. The public artifact is a transcript with evidence tiers and linked artifacts, never a diploma. Rendering is a template choice; nothing here depends on it.*
 
 - **Credits** 51 · 1 credit ≈ 20 hours of work
-- **Total work** 949 hours
+- **Total work** 947 hours
 - **Opened** 2026-08-12
 - **Pacing** irregular — Hours vary week to week. Progress is banked and monotonic — no streaks, nothing destroyable by a quiet month. Projected completion is a range derived from logged hours, never from intended hours.
 
@@ -47,18 +47,18 @@ Advanced standing awards **4 of 51 credits** and evidence on **12 of 65 skills**
 
 | | Hours | At 6–12 h/week |
 |---|---:|---|
-| Block I | 369 | |
-| less advanced standing | −66 | |
-| **Block I remaining** | **304** | **6–12 months** |
-| Whole programme | 949 | |
-| less advanced standing | −66 | |
-| **Remaining** | **884** | **1.4–2.8 years** |
+| Block I | 367 | |
+| less advanced standing | −64 | |
+| **Block I remaining** | **303** | **6–12 months** |
+| Whole programme | 947 | |
+| less advanced standing | −64 | |
+| **Remaining** | **883** | **1.4–2.8 years** |
 
 ## Study order
 
 | # | Code | Course | Block | Credits | Hours | Prerequisites | Standing |
 |---:|---|---|---|---:|---:|---|---|
-| 1 | `AIE-101` | **LLM Application Engineering** | I | 3 | 50 | — | substantial |
+| 1 | `AIE-101` | **LLM Application Engineering** | I | 3 | 48 | — | substantial |
 | 2 | `AIE-102` | **Evaluation and Measurement** | I | 4 | 66 | AIE-101 | — |
 | 3 | `AIE-107` | **Architecture and Judgement** | I | 2 | 32 | AIE-101, AIE-102 | — |
 | 4 | `AIE-105` | **Inference, Cost and Latency Engineering** | I | 3 | 50 | AIE-101 | partial |
@@ -80,7 +80,7 @@ Advanced standing awards **4 of 51 credits** and evidence on **12 of 65 skills**
 
 ### 1. AIE-101 — LLM Application Engineering
 
-**3 credits · 50 hours**
+**3 credits · 48 hours**
 
 Everything else in Block I assumes you can get reliable, structured, tool-using behaviour out of a model. Four shipped products already evidence most of this.
 

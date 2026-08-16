@@ -2,7 +2,7 @@
   "course": "AIE-101",
   "title": "LLM Application Engineering",
   "credits": 3,
-  "est_hours": 50,
+  "est_hours": 48,
   "currency_note": "Reviewed 2026-08-16 after the learner reached M1 and found the intro material two to three years old. It is: the Full Stack Deep Learning bootcamp is April 2023 and anchors four of seven modules. The old material stays, because the arc from prompted chain-of-thought in 2022 to reasoning trained into the weights in 2025 explains why the field moved and is worth seeing. What was added is the other end of that arc, and one assignment that makes the learner measure the reversal rather than take it on trust.",
   "spec_version": "0.1",
   "registered": "2026-08-13",
@@ -25,7 +25,7 @@
     {
       "id": "M1",
       "title": "What you are actually programming",
-      "est_minutes": 300,
+      "est_minutes": 360,
       "items": [
         {
           "id": "M1.1",
@@ -37,7 +37,9 @@
           "skills": [
             "llm-prompting"
           ],
-          "brief": "The mechanics under the API: tokenisation, the transformer in outline, and why the model behaves as it does. Watch before anything else."
+          "brief": "The mechanics under the API: tokenisation, the transformer in outline, and why the model behaves as it does. Watch before anything else.",
+          "optional": true,
+          "optional_reason": "Duplicated. Its conceptual half — what a model is, pretraining versus fine-tuning, what these systems can do — is covered by M1.2, which is seven months newer and also carries scaling laws and a security section. Its other half, the model landscape, is covered better and currently by M1.3, which is a maintained document rather than a 2023 snapshot. Watch it if you want the 2023 view of the field; nothing later depends on it."
         },
         {
           "id": "M1.2",
@@ -75,11 +77,24 @@
         },
         {
           "id": "M1.5",
+          "type": "reading",
+          "title": "Language Models are Few-Shot Learners",
+          "resource": "paper-gpt3",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-prompting",
+            "llm-failure-modes"
+          ],
+          "brief": "Where in-context learning came from. Read section 1 and the few-shot results for the capability this whole course is built on, then the limitations section, which is unusually candid and names failure modes M6 makes you go and find in your own systems."
+        },
+        {
+          "id": "M1.6",
           "type": "assignment",
           "title": "Anatomy of a feature you already shipped",
           "est_minutes": 60,
           "tier": 2,
-          "rubric": "R-M1.5",
+          "rubric": "R-M1.6",
           "skills": [
             "llm-context"
           ],
@@ -102,7 +117,21 @@
           "skills": [
             "llm-prompting"
           ],
-          "brief": "Two competing framings — models as statistical text predictors, prompts as magic spells — and why only one of them survives contact with production."
+          "brief": "Two competing framings — models as statistical text predictors, prompts as magic spells — and why only one of them survives contact with production.",
+          "optional": true,
+          "optional_reason": "Duplicated and superseded. M2.2 and M2.3 are the same vendor's guidance from 2024 and 2025, and this is April 2023 — before reasoning models existed, which is precisely the material M2.8 corrects. Kept because the contrast with M2.8 is instructive, but it is no longer required."
+        },
+        {
+          "id": "M2.3",
+          "type": "lecture",
+          "title": "Prompting 101",
+          "resource": "anthropic-prompting-101",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-prompting",
+            "llm-structured-output"
+          ]
         },
         {
           "id": "M2.2",
@@ -116,18 +145,6 @@
             "llm-context"
           ],
           "brief": "Anthropic's own researchers disagreeing with each other in public about what actually works. Note where they disagree; that is where the field is unsettled."
-        },
-        {
-          "id": "M2.3",
-          "type": "lecture",
-          "title": "Prompting 101",
-          "resource": "anthropic-prompting-101",
-          "est_minutes": 60,
-          "tier": 0,
-          "skills": [
-            "llm-prompting",
-            "llm-structured-output"
-          ]
         },
         {
           "id": "M2.4",
@@ -476,7 +493,7 @@
     {
       "id": "M6",
       "title": "Failure modes",
-      "est_minutes": 345,
+      "est_minutes": 285,
       "items": [
         {
           "id": "M6.1",
@@ -489,18 +506,6 @@
             "llm-failure-modes"
           ],
           "brief": "How to design a product around a component that is wrong sometimes. The most directly transferable lecture in this course for a customer-facing role."
-        },
-        {
-          "id": "M6.2",
-          "type": "reading",
-          "title": "Language Models are Few-Shot Learners",
-          "resource": "paper-gpt3",
-          "est_minutes": 60,
-          "tier": 0,
-          "skills": [
-            "llm-prompting",
-            "llm-failure-modes"
-          ]
         },
         {
           "id": "M6.3",
@@ -630,8 +635,8 @@
   ],
   "rubrics": [
     {
-      "id": "R-M1.5",
-      "for": "M1.5",
+      "id": "R-M1.6",
+      "for": "M1.6",
       "tier": 2,
       "criteria": [
         {
@@ -692,10 +697,22 @@
       "for": "M2.10",
       "tier": 2,
       "preconditions": [
-        { "check": "four conditions run — two prompt styles across two model classes", "blocking": true },
-        { "check": "the task has an answer that can be judged right or wrong without a panel", "blocking": true },
-        { "check": "several repeats per condition, with the count stated", "blocking": true },
-        { "check": "token cost recorded per condition", "blocking": true }
+        {
+          "check": "four conditions run — two prompt styles across two model classes",
+          "blocking": true
+        },
+        {
+          "check": "the task has an answer that can be judged right or wrong without a panel",
+          "blocking": true
+        },
+        {
+          "check": "several repeats per condition, with the count stated",
+          "blocking": true
+        },
+        {
+          "check": "token cost recorded per condition",
+          "blocking": true
+        }
       ],
       "criteria": [
         {
@@ -1231,5 +1248,6 @@
     "required": "All non-exempt assignments and the project submitted. Exempted items are satisfied by citing the existing artifact and are recorded as advanced standing, not as coursework.",
     "grade_rollup": "Deterministic. Each item's tier sets its weight; panel scores enter as per-criterion values; nothing is rounded up. Computed in TypeScript, never by a model.",
     "mastery_note": "Sets initial mastery on the five LLM-application skills. FSRS then decays them, so the transcript reports what is currently held."
-  }
+  },
+  "optional_hours": 2
 }
