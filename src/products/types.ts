@@ -139,6 +139,13 @@ export interface Artifact {
   url: string | null;
   what: string;
   negative_result: string | null;
+  /**
+   * What this artifact must contain to count. Restated from the assignments in
+   * the course that teaches the area, so it adds no new requirement — it just
+   * means "not built yet" comes with a specification instead of leaving the
+   * builder to reconstruct one from four courses of rubrics.
+   */
+  requires?: string[];
 }
 
 /** A CV line, and what it would take to earn it honestly. */

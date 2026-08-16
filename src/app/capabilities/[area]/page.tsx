@@ -131,6 +131,24 @@ export default async function CapabilityPage({
             )}
           </p>
           <p className="mt-1 text-sm text-muted">{area.artifact.what}</p>
+
+          {area.artifact.requires && area.artifact.requires.length > 0 && (
+            <div className="mt-4">
+              <p className="text-xs font-medium text-foreground">
+                What it has to contain
+              </p>
+              <ul className="mt-1 space-y-1">
+                {area.artifact.requires.map((r) => (
+                  <li key={r} className="flex gap-2 text-xs text-muted">
+                    <span aria-hidden className="shrink-0">
+                      ▪
+                    </span>
+                    <span>{r}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           <p className="mt-3 text-sm">
             <span className="font-medium">Where it stops working. </span>
             <span className="text-muted">

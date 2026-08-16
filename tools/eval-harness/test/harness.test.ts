@@ -82,6 +82,24 @@ test("a run cannot answer the same case twice", () => {
   assert.throws(() => parseOutputs(rows), /two outputs/);
 });
 
+test("a drafted case refuses to score", () => {
+  // The dangerous default this guards against: an unfilled expected left as
+  // null would read as "the correct answer is nothing", so an unfinished
+  // corpus would rate a system that always abstains as perfect.
+  const stub = JSON.stringify({
+    id: "d1", app: "x", scorer: "span",
+    tags: ["unlabelled"], input: { document: "text" }, expected: "TODO",
+  });
+  assert.throws(() => parseCases(stub), /still a draft/);
+
+  // Filling it in and removing the tag is what makes it live.
+  const done = JSON.stringify({
+    id: "d1", app: "x", scorer: "span",
+    tags: ["positive"], input: { document: "some text here" }, expected: "some text",
+  });
+  assert.equal(parseCases(done).length, 1);
+});
+
 test("a missing output scores zero rather than being skipped", () => {
   // Otherwise a run that dropped half the corpus reports a better average than
   // one that attempted everything.

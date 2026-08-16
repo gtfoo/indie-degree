@@ -53,6 +53,10 @@ const SCORERS = new Set<string>([
 
 export class CorpusError extends Error {}
 
+/** Markers `draft` writes and `parseCases` refuses. */
+export const DRAFT_PLACEHOLDER = "TODO";
+export const DRAFT_TAG = "unlabelled";
+
 function parseLines<T>(text: string, what: string): T[] {
   const out: T[] = [];
   text.split("\n").forEach((line, i) => {
@@ -77,6 +81,17 @@ export function parseCases(text: string): Case[] {
     if (!c.id) throw new CorpusError(`a case has no id`);
     if (seen.has(c.id)) throw new CorpusError(`duplicate case id ${c.id}`);
     seen.add(c.id);
+    // `draft` produces stubs, and a stub must never score. Leaving an unfilled
+    // `expected` as null would be worse than useless: null means "the correct
+    // answer is nothing", so a half-labelled corpus would quietly turn every
+    // unfinished case into a negative and rate a system that always abstains
+    // as perfect.
+    if (c.expected === DRAFT_PLACEHOLDER || (c.tags ?? []).includes(DRAFT_TAG)) {
+      throw new CorpusError(
+        `case ${c.id} is still a draft — fill in its expected answer and remove ` +
+          `the "${DRAFT_TAG}" tag. A drafted corpus cannot be scored, on purpose.`,
+      );
+    }
     if (!SCORERS.has(c.scorer)) {
       throw new CorpusError(`case ${c.id}: unknown scorer ${String(c.scorer)}`);
     }

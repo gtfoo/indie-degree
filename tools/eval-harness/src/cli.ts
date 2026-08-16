@@ -16,7 +16,13 @@
  */
 
 import { readFileSync, writeFileSync } from "node:fs";
-import { parseCases, parseOutputs, CorpusError } from "./case.ts";
+import {
+  parseCases,
+  parseOutputs,
+  CorpusError,
+  DRAFT_PLACEHOLDER,
+  DRAFT_TAG,
+} from "./case.ts";
 import { scoreRun, compare, format, formatRegressions, type Report } from "./report.ts";
 
 const USAGE = `eval-harness
@@ -30,6 +36,11 @@ const USAGE = `eval-harness
 
   baseline --cases <file> --run <file> --out <file>
       Freeze the current scores as the thing future runs are compared to.
+
+  draft --docs <file> --out <file> [--app NAME] [--scorer NAME] [--prefix P]
+      Turn raw documents into case stubs. Does the mechanical half — ids,
+      structure, provenance — and leaves every judgement to you. The stubs
+      are refused by every other command until you fill them in.
 `;
 
 function arg(argv: string[], name: string): string | undefined {
@@ -111,6 +122,69 @@ function main(argv: string[]): number {
     }
     console.log(formatRegressions(regs));
     return 1;
+  }
+
+  if (verb === "draft") {
+    const docsPath = arg(argv, "docs");
+    const out = arg(argv, "out");
+    if (!docsPath || !out) throw new CorpusError("draft needs --docs and --out");
+
+    const app = arg(argv, "app") ?? "unknown";
+    const scorer = arg(argv, "scorer") ?? "span";
+    const prefix = arg(argv, "prefix") ?? "case";
+
+    // One JSON object per line: {"document": "...", "requirement": "..."}.
+    // requirement is optional; everything else about the case is yours.
+    const docs = read(docsPath, "docs")
+      .split("\n")
+      .map((l) => l.trim())
+      .filter((l) => l && !l.startsWith("//"))
+      .map((l, i) => {
+        try {
+          return JSON.parse(l) as { document?: string; requirement?: string; source?: string };
+        } catch {
+          throw new CorpusError(`docs line ${i + 1} is not valid JSON`);
+        }
+      });
+
+    const bad = docs.findIndex((d) => typeof d.document !== "string" || !d.document);
+    if (bad !== -1) throw new CorpusError(`docs line ${bad + 1} has no "document"`);
+
+    const width = String(docs.length).length;
+    const lines = docs.map((d, i) => {
+      const input: Record<string, unknown> = { document: d.document };
+      if (d.requirement) input.requirement = d.requirement;
+      return JSON.stringify({
+        id: `${prefix}-${String(i + 1).padStart(width, "0")}`,
+        app,
+        scorer,
+        // The tag is what makes the stub inert. Removing it is the deliberate
+        // act of saying "I have judged this one".
+        tags: [DRAFT_TAG],
+        input,
+        expected: DRAFT_PLACEHOLDER,
+        source: d.source ?? `drafted from ${docsPath}`,
+      });
+    });
+
+    writeFileSync(
+      out,
+      `// ${lines.length} DRAFT cases. Every other command refuses this file until\n` +
+        `// each case has a real "expected" and its "${DRAFT_TAG}" tag removed.\n` +
+        `//\n` +
+        `// For each: set "expected" to the verbatim span, or to null if the correct\n` +
+        `// answer is that nothing is there. Then replace the tag with something\n` +
+        `// meaningful, because an untagged case can only ever appear in the\n` +
+        `// aggregate, which is the number that hides regressions.\n` +
+        `//\n` +
+        `// A set with no negatives measures nothing: aim for at least a fifth.\n` +
+        lines.join("\n") +
+        "\n",
+      "utf-8",
+    );
+    console.log(`wrote ${lines.length} draft cases to ${out}`);
+    console.log(`they will not score until you fill them in — that is the point`);
+    return 0;
   }
 
   if (verb === "baseline") {

@@ -106,9 +106,19 @@
         "name": "1 Percent More Fluent",
         "url": "https://1-percent-more-fluent.gtfoo.com",
         "what": "A shipped product whose structured-output path and streaming decisions are documented and defensible.",
-        "negative_result": null
+        "negative_result": null,
+        "requires": [
+          "A shipped feature whose structured-output path cannot emit malformed data",
+          "The context budget stated in tokens, with the choice justified",
+          "A hallucination guard that fails closed, with the failing case shown"
+        ]
       },
-      "bar": { "min_items": 5, "min_tier": 2, "defence": true, "cold_recall": true }
+      "bar": {
+        "min_items": 5,
+        "min_tier": 2,
+        "defence": true,
+        "cold_recall": true
+      }
     },
     {
       "id": "evaluation",
@@ -120,9 +130,20 @@
         "name": "eval-harness",
         "url": "https://github.com/gtfoo/indie-degree/tree/main/tools/eval-harness",
         "what": "A replay-first harness with per-tag reporting and a baseline that fails CI on regression, run against a hand-built gold set including negatives.",
-        "negative_result": null
+        "negative_result": null,
+        "requires": [
+          "A gold set of 30+ cases with 6 or more genuine negatives",
+          "A harness run producing per-tag results, not a single number",
+          "A baseline the system had to beat, and the comparison with an interval",
+          "A regression suite wired to fail on a real regression"
+        ]
       },
-      "bar": { "min_items": 6, "min_tier": 2, "defence": true, "cold_recall": true }
+      "bar": {
+        "min_items": 6,
+        "min_tier": 2,
+        "defence": true,
+        "cold_recall": true
+      }
     },
     {
       "id": "retrieval",
@@ -134,9 +155,20 @@
         "name": "retrieval-bench",
         "url": null,
         "what": "Two corpora chosen because they fail differently — dense proper-noun rate documents against near-synonymous prose — with the crossover point where hybrid stops paying for itself.",
-        "negative_result": null
+        "negative_result": null,
+        "requires": [
+          "Two corpora chosen because they fail differently, with the properties stated",
+          "Retrieval measured separately from generation",
+          "Lexical, embedding and hybrid compared on both corpora",
+          "The crossover point where hybrid stops paying for itself"
+        ]
       },
-      "bar": { "min_items": 6, "min_tier": 2, "defence": true, "cold_recall": true }
+      "bar": {
+        "min_items": 6,
+        "min_tier": 2,
+        "defence": true,
+        "cold_recall": true
+      }
     },
     {
       "id": "agents",
@@ -148,9 +180,20 @@
         "name": "agent-vs-workflow",
         "url": null,
         "what": "One stage of a working deterministic pipeline rebuilt as an autonomous agent, with the cost, latency and reliability of both measured side by side.",
-        "negative_result": null
+        "negative_result": null,
+        "requires": [
+          "One working deterministic pipeline stage rebuilt as an autonomous agent",
+          "Cost, latency and multi-step reliability measured for both",
+          "The sandbox boundary stated: what the model may and may not touch",
+          "A verdict on workflow versus agent, with the conditions that would flip it"
+        ]
       },
-      "bar": { "min_items": 5, "min_tier": 2, "defence": true, "cold_recall": true }
+      "bar": {
+        "min_items": 5,
+        "min_tier": 2,
+        "defence": true,
+        "cold_recall": true
+      }
     },
     {
       "id": "inference",
@@ -162,9 +205,20 @@
         "name": "cost-and-latency-study",
         "url": null,
         "what": "A streaming product profiled end to end, with a caching and routing change measured against a before baseline rather than estimated.",
-        "negative_result": null
+        "negative_result": null,
+        "requires": [
+          "Token spend accounted per run, reconciled against the provider's billing",
+          "Time-to-first-token measured against a stated budget",
+          "One optimisation predicted quantitatively before it was applied, then measured",
+          "An optimisation rejected as not worth its complexity, with the number"
+        ]
       },
-      "bar": { "min_items": 5, "min_tier": 2, "defence": true, "cold_recall": true }
+      "bar": {
+        "min_items": 5,
+        "min_tier": 2,
+        "defence": true,
+        "cold_recall": true
+      }
     },
     {
       "id": "speech",
@@ -176,9 +230,19 @@
         "name": "voice-loop",
         "url": null,
         "what": "A bidirectional speech path with a measured turn-taking budget and a documented barge-in behaviour.",
-        "negative_result": null
+        "negative_result": null,
+        "requires": [
+          "A bidirectional speech loop with a measured turn-taking budget",
+          "Latency reported as a distribution from the user's action, never a mean",
+          "Barge-in behaviour documented, including what it gets wrong"
+        ]
       },
-      "bar": { "min_items": 4, "min_tier": 2, "defence": true, "cold_recall": true }
+      "bar": {
+        "min_items": 4,
+        "min_tier": 2,
+        "defence": true,
+        "cold_recall": true
+      }
     },
     {
       "id": "multimodal",
@@ -190,9 +254,19 @@
         "name": "document-extraction",
         "url": null,
         "what": "Extraction over genuinely messy source documents, scored against a parser baseline on the same inputs.",
-        "negative_result": null
+        "negative_result": null,
+        "requires": [
+          "Extraction over genuinely messy documents, not clean samples",
+          "Scored against a non-vision parser baseline on identical inputs",
+          "A case where the vision model loses, with the reason"
+        ]
       },
-      "bar": { "min_items": 2, "min_tier": 2, "defence": true, "cold_recall": true }
+      "bar": {
+        "min_items": 2,
+        "min_tier": 2,
+        "defence": true,
+        "cold_recall": true
+      }
     },
     {
       "id": "safety",
@@ -204,9 +278,19 @@
         "name": "red-team-report",
         "url": null,
         "what": "An adversarial pass over a live product, with the successful attacks published alongside the mitigations.",
-        "negative_result": null
+        "negative_result": null,
+        "requires": [
+          "An adversarial pass over a live system, with every input path enumerated",
+          "Successful attacks published verbatim, not only the mitigated ones",
+          "Personal data handling decided per category, including logs"
+        ]
       },
-      "bar": { "min_items": 2, "min_tier": 2, "defence": true, "cold_recall": true }
+      "bar": {
+        "min_items": 2,
+        "min_tier": 2,
+        "defence": true,
+        "cold_recall": true
+      }
     },
     {
       "id": "architecture",
@@ -218,9 +302,19 @@
         "name": "llm-or-not",
         "url": null,
         "what": "A classification problem currently served by an LLM, reimplemented with a baseline that is measured against it on cost, latency and accuracy.",
-        "negative_result": null
+        "negative_result": null,
+        "requires": [
+          "A problem currently served by an LLM, reimplemented with a cheaper baseline",
+          "Cost, latency and accuracy compared at a stated volume",
+          "A case where the cheaper approach won, stated plainly"
+        ]
       },
-      "bar": { "min_items": 3, "min_tier": 2, "defence": true, "cold_recall": true }
+      "bar": {
+        "min_items": 3,
+        "min_tier": 2,
+        "defence": true,
+        "cold_recall": true
+      }
     },
     {
       "id": "transformers",
@@ -232,9 +326,20 @@
         "name": "transformer-from-scratch",
         "url": null,
         "what": "A working implementation trained on something small, with the ablations that show which components matter.",
-        "negative_result": null
+        "negative_result": null,
+        "requires": [
+          "Attention and a full decoder implemented without reference, running end to end",
+          "Parameter count derived by hand and reconciled with the framework",
+          "Ablations of at least three modern components, measured one at a time",
+          "A reproduction attempt with its gap analysed and a residual left unexplained"
+        ]
       },
-      "bar": { "min_items": 3, "min_tier": 2, "defence": true, "cold_recall": true }
+      "bar": {
+        "min_items": 3,
+        "min_tier": 2,
+        "defence": true,
+        "cold_recall": true
+      }
     },
     {
       "id": "fine-tuning",
@@ -246,9 +351,20 @@
         "name": "fine-tune-study",
         "url": null,
         "what": "A fine-tune measured against a well-prompted baseline on the same eval set.",
-        "negative_result": null
+        "negative_result": null,
+        "requires": [
+          "Curation rules written before the data was collected",
+          "A fine-tune evaluated on a gold set that predates the model",
+          "A well-prompted baseline given genuine effort, with the comparison prominent",
+          "Capabilities that were not targeted measured before and after"
+        ]
       },
-      "bar": { "min_items": 3, "min_tier": 2, "defence": true, "cold_recall": true }
+      "bar": {
+        "min_items": 3,
+        "min_tier": 2,
+        "defence": true,
+        "cold_recall": true
+      }
     },
     {
       "id": "reinforcement-learning",
@@ -260,9 +376,20 @@
         "name": "rlhf-study",
         "url": null,
         "what": "A small policy-gradient implementation and a written account of a reward-hacking failure.",
-        "negative_result": null
+        "negative_result": null,
+        "requires": [
+          "A policy-gradient implementation with every seed plotted, failures included",
+          "Variance measured directly rather than read off a reward curve",
+          "A deliberate reward-hacking failure, produced and described",
+          "A defended position on when preference optimisation is enough"
+        ]
       },
-      "bar": { "min_items": 3, "min_tier": 2, "defence": true, "cold_recall": true }
+      "bar": {
+        "min_items": 3,
+        "min_tier": 2,
+        "defence": true,
+        "cold_recall": true
+      }
     }
   ],
   "skills": [
