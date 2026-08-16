@@ -2,7 +2,8 @@
   "course": "AIE-101",
   "title": "LLM Application Engineering",
   "credits": 3,
-  "est_hours": 45,
+  "est_hours": 50,
+  "currency_note": "Reviewed 2026-08-16 after the learner reached M1 and found the intro material two to three years old. It is: the Full Stack Deep Learning bootcamp is April 2023 and anchors four of seven modules. The old material stays, because the arc from prompted chain-of-thought in 2022 to reasoning trained into the weights in 2025 explains why the field moved and is worth seeing. What was added is the other end of that arc, and one assignment that makes the learner measure the reversal rather than take it on trust.",
   "spec_version": "0.1",
   "registered": "2026-08-13",
   "premise": "You have already shipped four of these. This course is not here to teach you to call an API — it is here to convert what you did by instinct into something you can specify, defend, and repeat. Two of three credits are already awarded, so most of what follows is exemptable; what is not exemptable is the part that closes your actual gap.",
@@ -89,7 +90,7 @@
     {
       "id": "M2",
       "title": "Prompting as engineering",
-      "est_minutes": 420,
+      "est_minutes": 675,
       "items": [
         {
           "id": "M2.1",
@@ -176,6 +177,50 @@
             "llm-prompting"
           ],
           "brief": "Take one prompt in a shipped product that you have changed at least twice. Reconstruct its history: what each change was meant to fix, and how you decided it worked. Then state what you would need in place to answer that second question with evidence rather than impression. This is the handoff into AIE-102."
+        },
+        {
+          "id": "M2.8",
+          "type": "reading",
+          "title": "When the reasoning moved into the model",
+          "resource": "anthropic-docs-extended-thinking",
+          "est_minutes": 60,
+          "tier": 0,
+          "skills": [
+            "llm-prompting"
+          ],
+          "brief": "Everything above this point in the module is from 2022 and 2023, when reasoning was something you coaxed out of a model with a prompt. It is now something the model does. Read this for the part that inverts: with a reasoning model, a high-level instruction to think deeply generally beats the prescriptive step-by-step guidance the earlier material teaches, because the model's own approach can exceed the one you would have prescribed."
+        },
+        {
+          "id": "M2.9",
+          "type": "reading",
+          "title": "How reasoning was trained in rather than prompted out",
+          "resource": "paper-deepseek-r1",
+          "est_minutes": 75,
+          "tier": 0,
+          "skills": [
+            "llm-prompting"
+          ],
+          "locator": "The training method and the emergent-behaviour sections. Read it against the chain-of-thought paper in M2.4: the same behaviour, moved from the prompt into the weights, and the account of what appeared without being asked for.",
+          "brief": "The open account of how a reasoning model is made. You do not need the reinforcement learning in detail — AIE-206 does that — but you do need to see that self-checking and backtracking emerged from training rather than from instructions, because that is what makes the old prompting advice obsolete."
+        },
+        {
+          "id": "M2.10",
+          "type": "assignment",
+          "title": "Prompt a reasoning model the old way, on purpose",
+          "est_minutes": 120,
+          "tier": 2,
+          "rubric": "R-M2.10",
+          "skills": [
+            "llm-prompting"
+          ],
+          "checkpoints": [
+            "One task chosen where the answer can be judged right or wrong",
+            "Prescriptive step-by-step prompt written and run on a reasoning model",
+            "High-level 'think deeply' prompt written and run on the same model and task",
+            "Both run on a non-reasoning model as the control",
+            "Outcomes and token cost recorded for all four"
+          ],
+          "brief": "Take a task with a checkable answer. Write two prompts: one in the style M2.1 to M2.5 teaches, with prescribed steps, and one that simply asks the model to think about it thoroughly. Run both on a reasoning model and both on a non-reasoning model — four runs, same task, several repeats each. Record correctness and token cost. The interesting result is the interaction: the prescriptive prompt often helps the older model and hurts the newer one. If that is not what you find, say so and show it, because the claim is common and your measurement outranks it."
         }
       ]
     },
@@ -254,7 +299,7 @@
     {
       "id": "M4",
       "title": "Tool use and function calling",
-      "est_minutes": 405,
+      "est_minutes": 450,
       "items": [
         {
           "id": "M4.1",
@@ -278,7 +323,20 @@
           "tier": 0,
           "skills": [
             "llm-tooluse"
-          ]
+          ],
+          "brief": "Read as history, not as practice. This is 2023, and it is a model teaching itself when to call an API — which is where the idea came from and is not how anyone builds tool use now. M4.7 is the current version; the pair is the point."
+        },
+        {
+          "id": "M4.7",
+          "type": "reading",
+          "title": "How tool use is actually built now",
+          "resource": "anthropic-effective-agents",
+          "est_minutes": 45,
+          "tier": 0,
+          "skills": [
+            "llm-tooluse"
+          ],
+          "brief": "The current account, and the distinction the rest of the programme rests on: a workflow follows a path you wrote, an agent chooses its own. Most systems that call themselves agents are workflows, and are better for it. AIE-104 makes you pay for the wrong choice once; this is where you first see that there is a choice."
         },
         {
           "id": "M4.3",
@@ -628,6 +686,53 @@
           }
         }
       ]
+    },
+    {
+      "id": "R-M2.10",
+      "for": "M2.10",
+      "tier": 2,
+      "preconditions": [
+        { "check": "four conditions run — two prompt styles across two model classes", "blocking": true },
+        { "check": "the task has an answer that can be judged right or wrong without a panel", "blocking": true },
+        { "check": "several repeats per condition, with the count stated", "blocking": true },
+        { "check": "token cost recorded per condition", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The comparison isolates the prompt style",
+          "weight": 0.35,
+          "levels": {
+            "0": "One prompt, one model.",
+            "1": "Two prompts, one model.",
+            "2": "Both styles on both model classes.",
+            "3": "Both styles on both classes, with the task, temperature and repeats held identical across all four."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The interaction is read, not just the totals",
+          "weight": 0.4,
+          "levels": {
+            "0": "One overall winner declared.",
+            "1": "Per-model results reported separately.",
+            "2": "The interaction identified — that the better prompt style differs by model class.",
+            "3": "The interaction identified and quantified, with the result stated even where it contradicts the module's own claim."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "Cost is weighed alongside correctness",
+          "weight": 0.25,
+          "levels": {
+            "0": "Not measured.",
+            "1": "Mentioned.",
+            "2": "Tokens reported per condition.",
+            "3": "Tokens reported per condition, with a recommendation that accounts for reasoning tokens being charged."
+          }
+        }
+      ],
+      "integrity": "The expected finding is that prescriptive step-by-step helps the older model and hurts the reasoning model. Judges are instructed that a submission measuring the opposite, and showing its working, scores higher than one that reproduces the expected result thinly. The claim is widely repeated and the learner's own measurement outranks it."
     },
     {
       "id": "R-M2.7",

@@ -11,83 +11,17 @@
   },
   "resources": [
     {
-      "id": "karpathy-zero-to-hero",
-      "title": "Neural Networks: Zero to Hero",
-      "author": "Andrej Karpathy",
+      "id": "3b1b-calculus",
+      "title": "Essence of calculus",
+      "author": "3Blue1Brown",
       "type": "youtube_playlist",
-      "ref": "PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ",
-      "url": "https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ",
+      "ref": "PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr",
+      "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr",
       "kind": "lecture_series",
-      "cost": "free",
-      "est_hours": 25,
-      "skills": [
-        "dl-backprop",
-        "dl-training",
-        "transformers-arch",
-        "nlp-tokenisation"
-      ],
-      "note": "The spine of the deep track. Builds backprop, then a language model, then a GPT, all from scratch in code."
-    },
-    {
-      "id": "karpathy-build-gpt",
-      "title": "Let's build GPT: from scratch, in code, spelled out",
-      "author": "Andrej Karpathy",
-      "type": "youtube",
-      "ref": "kCc8FmEb1nY",
-      "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 6,
-      "skills": [
-        "transformers-attention",
-        "transformers-implementation"
-      ]
-    },
-    {
-      "id": "karpathy-reproduce-gpt2",
-      "title": "Let's reproduce GPT-2 (124M)",
-      "author": "Andrej Karpathy",
-      "type": "youtube",
-      "ref": "l8pRSuU81PU",
-      "url": "https://www.youtube.com/watch?v=l8pRSuU81PU",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 8,
-      "skills": [
-        "transformers-implementation",
-        "dl-training",
-        "infra-gpu"
-      ]
-    },
-    {
-      "id": "karpathy-intro-llms",
-      "title": "Intro to Large Language Models",
-      "author": "Andrej Karpathy",
-      "type": "youtube",
-      "ref": "zjkBMFhNj_g",
-      "url": "https://www.youtube.com/watch?v=zjkBMFhNj_g",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "llm-failure-modes",
-        "ft-sft"
-      ]
-    },
-    {
-      "id": "karpathy-deep-dive-llms",
-      "title": "Deep Dive into LLMs like ChatGPT",
-      "author": "Andrej Karpathy",
-      "type": "youtube",
-      "ref": "7xTGNNLPyMI",
-      "url": "https://www.youtube.com/watch?v=7xTGNNLPyMI",
-      "kind": "lecture",
       "cost": "free",
       "est_hours": 4,
       "skills": [
-        "ft-sft",
-        "ft-preference",
-        "llm-failure-modes"
+        "math-calc"
       ]
     },
     {
@@ -121,47 +55,476 @@
       ]
     },
     {
-      "id": "3b1b-calculus",
-      "title": "Essence of calculus",
-      "author": "3Blue1Brown",
-      "type": "youtube_playlist",
-      "ref": "PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr",
-      "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr",
-      "kind": "lecture_series",
-      "cost": "free",
-      "est_hours": 4,
-      "skills": [
-        "math-calc"
-      ]
-    },
-    {
-      "id": "mit-1806-strang",
-      "title": "Gilbert Strang lectures on Linear Algebra (MIT)",
-      "author": "Gilbert Strang, MIT OCW",
-      "type": "youtube_playlist",
-      "ref": "PL49CF3715CB9EF31D",
-      "url": "https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D",
-      "kind": "lecture_series",
-      "cost": "free",
-      "est_hours": 35,
-      "skills": [
-        "math-linalg"
-      ]
-    },
-    {
-      "id": "mit-ocw-1806",
-      "title": "Linear Algebra | Mathematics | MIT OpenCourseWare",
-      "author": "MIT OCW",
+      "id": "annotated-transformer",
+      "title": "The Annotated Transformer",
+      "author": "Harvard NLP",
       "type": "web",
-      "ref": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/",
-      "expect": "Linear Algebra",
-      "kind": "course",
+      "ref": "https://nlp.seas.harvard.edu/annotated-transformer/",
+      "expect": "Annotated Transformer",
+      "kind": "article",
       "cost": "free",
+      "est_hours": 6,
+      "skills": [
+        "transformers-implementation"
+      ]
+    },
+    {
+      "id": "anthropic-agents-video",
+      "title": "Building more effective AI agents",
+      "author": "Anthropic",
+      "type": "youtube",
+      "ref": "uhJJgc-0iTQ",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "agent-orchestration",
+        "agent-planning"
+      ],
+      "note": "The authors of the Building Effective Agents post talking through what they left out of it."
+    },
+    {
+      "id": "anthropic-building-effective-agents",
+      "title": "Building effective agents",
+      "author": "Anthropic",
+      "type": "web",
+      "ref": "https://www.anthropic.com/engineering/building-effective-agents",
+      "expect": "agents",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "agent-orchestration",
+        "agent-planning"
+      ]
+    },
+    {
+      "id": "anthropic-contextual-retrieval",
+      "title": "Introducing Contextual Retrieval",
+      "author": "Anthropic",
+      "type": "web",
+      "ref": "https://www.anthropic.com/news/contextual-retrieval",
+      "expect": "retrieval",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "rag-chunking",
+        "rag-hybrid-search"
+      ],
+      "note": "Chunking destroys the context a chunk needed to be findable. This is the fix, with numbers."
+    },
+    {
+      "id": "anthropic-docs",
+      "title": "Anthropic API documentation",
+      "author": "Anthropic",
+      "type": "web",
+      "ref": "https://docs.claude.com/en/docs/overview",
+      "expect": "Claude",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 6,
+      "skills": [
+        "llm-structured-output",
+        "llm-tooluse",
+        "llm-context"
+      ]
+    },
+    {
+      "id": "anthropic-docs-caching",
+      "title": "Prompt caching",
+      "author": "Anthropic",
+      "type": "web",
+      "ref": "https://docs.claude.com/en/docs/build-with-claude/prompt-caching",
+      "expect": "Prompt caching",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "infra-caching"
+      ],
+      "atomic": true,
+      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
+    },
+    {
+      "id": "anthropic-docs-context",
+      "title": "Context windows",
+      "author": "Anthropic",
+      "type": "web",
+      "ref": "https://docs.claude.com/en/docs/build-with-claude/context-windows",
+      "expect": "Context windows",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "llm-context"
+      ],
+      "atomic": true,
+      "note": "Deep link to the single page the coursework needs, rather than to a documentation root.",
+      "published": "living"
+    },
+    {
+      "id": "anthropic-docs-extended-thinking",
+      "title": "Extended thinking",
+      "author": "Anthropic",
+      "type": "web",
+      "ref": "https://docs.claude.com/en/docs/build-with-claude/extended-thinking",
+      "expect": "Extended thinking",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "llm-prompting"
+      ],
+      "atomic": true,
+      "published": "living",
+      "note": "The correction to M2's 2022 material. Reasoning moved into the model, and the prompting advice inverts with it: high-level 'think deeply' beats prescriptive step-by-step, because the model's own approach can exceed the one you would prescribe."
+    },
+    {
+      "id": "anthropic-docs-models",
+      "title": "Models overview",
+      "author": "Anthropic",
+      "type": "web",
+      "ref": "https://docs.claude.com/en/docs/about-claude/models/overview",
+      "expect": "Models overview",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "llm-prompting"
+      ],
+      "atomic": true,
+      "note": "Deep link to the single page the coursework needs, rather than to a documentation root.",
+      "published": "living"
+    },
+    {
+      "id": "anthropic-docs-streaming",
+      "title": "Streaming messages",
+      "author": "Anthropic",
+      "type": "web",
+      "ref": "https://docs.claude.com/en/docs/build-with-claude/streaming",
+      "expect": "Streaming",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "infra-latency"
+      ],
+      "atomic": true,
+      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
+    },
+    {
+      "id": "anthropic-docs-structured",
+      "title": "Structured outputs",
+      "author": "Anthropic",
+      "type": "web",
+      "ref": "https://docs.claude.com/en/docs/build-with-claude/structured-outputs",
+      "expect": "Structured outputs",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "llm-structured-output"
+      ],
+      "atomic": true,
+      "note": "Deep link to the single page the coursework needs, rather than to a documentation root.",
+      "published": "living"
+    },
+    {
+      "id": "anthropic-docs-tooluse",
+      "title": "Tool use with Claude",
+      "author": "Anthropic",
+      "type": "web",
+      "ref": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
+      "expect": "Tool use",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "llm-tooluse"
+      ],
+      "atomic": true,
+      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
+    },
+    {
+      "id": "anthropic-docs-vision",
+      "title": "Vision",
+      "author": "Anthropic",
+      "type": "web",
+      "ref": "https://docs.claude.com/en/docs/build-with-claude/vision",
+      "expect": "Vision",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "mm-vlm",
+        "mm-document"
+      ],
+      "atomic": true,
+      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
+    },
+    {
+      "id": "anthropic-effective-agents",
+      "title": "Building effective agents",
+      "author": "Anthropic",
+      "type": "web",
+      "ref": "https://www.anthropic.com/engineering/building-effective-agents",
+      "expect": "Building effective agents",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "llm-tooluse"
+      ],
+      "published": "2024-12",
+      "note": "Current practice for tool use, and the workflow-versus-agent distinction. Toolformer explains where the idea came from; this explains how it is actually built."
+    },
+    {
+      "id": "anthropic-multi-agent",
+      "title": "How we built our multi-agent research system",
+      "author": "Anthropic",
+      "type": "web",
+      "ref": "https://www.anthropic.com/engineering/multi-agent-research-system",
+      "expect": "multi-agent",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "agent-orchestration",
+        "agent-reliability"
+      ],
+      "note": "A production multi-agent system described by the people who shipped it, including the token cost multiple and where it did not pay off."
+    },
+    {
+      "id": "anthropic-prompt-deep-dive",
+      "title": "AI prompt engineering: A deep dive",
+      "author": "Anthropic",
+      "type": "youtube",
+      "ref": "T9aRN5JkmL8",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 1.2,
+      "skills": [
+        "llm-prompting",
+        "llm-context"
+      ],
+      "note": "Anthropic's own researchers arguing with each other about what actually works. Unusually candid.",
+      "published": "2024-07"
+    },
+    {
+      "id": "anthropic-prompting-101",
+      "title": "Prompting 101 | Code w/ Claude",
+      "author": "Anthropic",
+      "type": "youtube",
+      "ref": "ysPbXH0LpIE",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "llm-prompting",
+        "llm-structured-output"
+      ],
+      "published": "2025-05"
+    },
+    {
+      "id": "anthropic-writing-tools",
+      "title": "Writing effective tools for AI agents",
+      "author": "Anthropic",
+      "type": "web",
+      "ref": "https://www.anthropic.com/engineering/writing-tools-for-agents",
+      "expect": "tools",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "llm-tooluse",
+        "agent-orchestration"
+      ],
+      "note": "Tool interface design as the actual lever. Pairs directly with AIE-101's tool-interface assignment."
+    },
+    {
+      "id": "berkeley-agent-safety",
+      "title": "LLM Agents MOOC | UC Berkeley Fall 2024 | Safe AI Agents + Evidence-based AI Policy by Dawn Song",
+      "author": "Dawn Song — UC Berkeley",
+      "type": "youtube",
+      "ref": "QAgR4uQ15rc",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 1.5,
+      "skills": [
+        "agent-sandboxing",
+        "safety-redteam"
+      ]
+    },
+    {
+      "id": "berkeley-agentic-ai-mooc",
+      "title": "Agentic AI MOOC Fall 2025",
+      "author": "UC Berkeley CS294-196",
+      "type": "youtube_playlist",
+      "ref": "PLS01nW3RtgoqGkm4UeqNeZLccW-OGc1fJ",
+      "kind": "lecture_series",
+      "cost": "free",
+      "est_hours": 20,
+      "skills": [
+        "agent-orchestration",
+        "agent-reliability",
+        "agent-eval"
+      ],
+      "note": "The successor course. More current; use where the 2024 material has dated."
+    },
+    {
+      "id": "berkeley-agents-overview",
+      "title": "Agentic AI MOOC | UC Berkeley CS294-196 Fall 2025 | LLM Agents Overview",
+      "author": "Yann Dubois — UC Berkeley",
+      "type": "youtube",
+      "ref": "r1qZpYAmqmg",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 1.5,
+      "skills": [
+        "agent-planning",
+        "agent-orchestration"
+      ]
+    },
+    {
+      "id": "berkeley-llm-agents-mooc",
+      "title": "LLM Agents MOOC Fall 2024",
+      "author": "Dawn Song, Xinyun Chen — UC Berkeley CS294-196",
+      "type": "youtube_playlist",
+      "ref": "PLS01nW3RtgopsNLeM936V4TNSsvvVglLc",
+      "kind": "lecture_series",
+      "cost": "free",
+      "est_hours": 20,
+      "skills": [
+        "agent-planning",
+        "agent-orchestration",
+        "agent-eval",
+        "agent-sandboxing"
+      ],
+      "note": "A real Berkeley course on agents specifically, with guest lecturers from the labs. The closest thing to a canonical curriculum for this topic."
+    },
+    {
+      "id": "berkeley-llm-reasoning",
+      "title": "LLM Agents MOOC | UC Berkeley CS294-196 Fall 2024 | LLM Reasoning",
+      "author": "Denny Zhou — Google DeepMind",
+      "type": "youtube",
+      "ref": "QL-FS_Zcmyo",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 1.5,
+      "skills": [
+        "agent-planning",
+        "llm-prompting"
+      ]
+    },
+    {
+      "id": "bm25-rank-fusion",
+      "title": "Reciprocal Rank Fusion outperforms Condorcet and individual Rank Learning Methods",
+      "author": "Cormack, Clarke, Buettcher",
+      "type": "pdf",
+      "ref": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "rag-hybrid-search",
+        "rag-reranking"
+      ]
+    },
+    {
+      "id": "book-ai-engineering",
+      "title": "AI Engineering",
+      "author": "Chip Huyen",
+      "type": "book",
+      "ref": "9781098166304",
+      "kind": "book",
+      "cost": "paid",
+      "est_hours": 30,
+      "skills": [
+        "eval-design",
+        "rag-chunking",
+        "infra-tokenomics",
+        "ft-sft"
+      ],
+      "note": "Closest thing to a textbook for Block I. Evaluation chapters are the strongest.",
+      "published": "2025-01"
+    },
+    {
+      "id": "book-build-llm-scratch",
+      "title": "Build a Large Language Model (From Scratch)",
+      "author": "Sebastian Raschka",
+      "type": "book",
+      "ref": "9781633437166",
+      "kind": "book",
+      "cost": "paid",
       "est_hours": 40,
       "skills": [
-        "math-linalg"
+        "transformers-implementation",
+        "ft-sft",
+        "ft-lora"
+      ]
+    },
+    {
+      "id": "book-ddia",
+      "title": "Designing Data-Intensive Applications",
+      "author": "Martin Kleppmann",
+      "type": "book",
+      "ref": "9781449373320",
+      "kind": "book",
+      "cost": "paid",
+      "est_hours": 40,
+      "skills": [
+        "eng-deployment",
+        "infra-serving"
+      ]
+    },
+    {
+      "id": "book-deep-learning-goodfellow",
+      "title": "Deep Learning",
+      "author": "Goodfellow, Bengio, Courville",
+      "type": "book",
+      "ref": "9780262035613",
+      "url": "https://www.deeplearningbook.org/",
+      "kind": "book",
+      "cost": "free",
+      "est_hours": 80,
+      "skills": [
+        "dl-training",
+        "dl-regularisation",
+        "math-optim"
       ],
-      "note": "Problem sets and exams — the part that actually teaches, as opposed to the lectures."
+      "note": "Reference, not a read-through. Free online at deeplearningbook.org."
+    },
+    {
+      "id": "book-designing-ml-systems",
+      "title": "Designing Machine Learning Systems",
+      "author": "Chip Huyen",
+      "type": "book",
+      "ref": "9781098107963",
+      "kind": "book",
+      "cost": "paid",
+      "est_hours": 30,
+      "skills": [
+        "eval-regression",
+        "eval-observability",
+        "eng-deployment"
+      ]
+    },
+    {
+      "id": "book-hands-on-ml",
+      "title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow",
+      "author": "Aurélien Géron",
+      "type": "book",
+      "ref": "9781098125974",
+      "kind": "book",
+      "cost": "paid",
+      "est_hours": 60,
+      "skills": [
+        "ml-supervised",
+        "ml-unsupervised",
+        "ml-eval-classical",
+        "ml-featureeng"
+      ]
     },
     {
       "id": "book-math-for-ml",
@@ -180,6 +543,2380 @@
         "math-calc"
       ],
       "note": "Free PDF from the authors' site. The only maths text targeted at exactly what ML needs and nothing more."
+    },
+    {
+      "id": "book-ml-powered-apps",
+      "title": "Building Machine Learning Powered Applications",
+      "author": "Emmanuel Ameisen",
+      "type": "book",
+      "ref": "9781492045113",
+      "kind": "book",
+      "cost": "paid",
+      "est_hours": 20,
+      "skills": [
+        "eval-design",
+        "eng-deployment"
+      ]
+    },
+    {
+      "id": "book-release-it",
+      "title": "Release It!",
+      "author": "Michael T. Nygard",
+      "type": "book",
+      "ref": "9781680502398",
+      "kind": "book",
+      "cost": "paid",
+      "est_hours": 20,
+      "skills": [
+        "eng-deployment"
+      ],
+      "note": "Circuit breakers, bulkheads, timeouts and graceful degradation. Pre-dates LLMs and is the better for it."
+    },
+    {
+      "id": "book-sutton-barto",
+      "title": "Reinforcement Learning: An Introduction",
+      "author": "Richard S. Sutton, Andrew G. Barto",
+      "type": "book",
+      "ref": "9780262039246",
+      "kind": "book",
+      "cost": "free",
+      "est_hours": 60,
+      "skills": [
+        "rl-mdp",
+        "rl-valuemethods",
+        "rl-policygradient"
+      ],
+      "note": "Second edition PDF is free from Sutton's site."
+    },
+    {
+      "id": "cmu-anlp-playlist",
+      "title": "CMU Advanced NLP Fall 2024",
+      "author": "Graham Neubig, Carnegie Mellon",
+      "type": "youtube_playlist",
+      "ref": "PL8PYTP1V4I8D4BeyjwWczukWq9d8PNyZp",
+      "kind": "lecture_series",
+      "cost": "free",
+      "est_hours": 30,
+      "skills": [
+        "nlp-embeddings",
+        "transformers-arch",
+        "rag-embeddings"
+      ]
+    },
+    {
+      "id": "cmu-anlp-retrieval",
+      "title": "CMU Advanced NLP Fall 2024 (10): Retrieval and RAG",
+      "author": "Graham Neubig, Carnegie Mellon",
+      "type": "youtube",
+      "ref": "KfQaYk4k9eM",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 1.5,
+      "skills": [
+        "rag-embeddings",
+        "rag-hybrid-search",
+        "llm-context"
+      ],
+      "note": "The university treatment — sparse and dense retrieval derived properly, then long-context transformers as the alternative."
+    },
+    {
+      "id": "colah-lstm",
+      "title": "Understanding LSTM Networks",
+      "author": "Christopher Olah",
+      "type": "web",
+      "ref": "https://colah.github.io/posts/2015-08-Understanding-LSTMs/",
+      "expect": "LSTM",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "dl-architectures"
+      ]
+    },
+    {
+      "id": "cs224s-llm-speech",
+      "title": "CS244S @ Stanford: LLM Based Spoken Language Processing 2025",
+      "author": "Stanford CS224S guest lecture (hosted by Gridspace)",
+      "type": "youtube",
+      "ref": "HqG79i7qyjY",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 1.5,
+      "skills": [
+        "speech-asr",
+        "speech-agents"
+      ],
+      "note": "Stanford's spoken language processing course does not publish its lectures — they are Canvas-only for enrolled students. This guest lecture is the publicly available piece, hosted on the speech company's own channel rather than Stanford's."
+    },
+    {
+      "id": "d2l",
+      "title": "Dive into Deep Learning",
+      "author": "Zhang, Lipton, Li, Smola",
+      "type": "web",
+      "ref": "https://d2l.ai/",
+      "expect": "Dive into Deep Learning",
+      "kind": "book",
+      "cost": "free",
+      "est_hours": 80,
+      "skills": [
+        "dl-architectures",
+        "dl-training",
+        "eng-pytorch"
+      ],
+      "note": "Runnable notebooks throughout. Use as reference rather than front-to-back."
+    },
+    {
+      "id": "distill-attention",
+      "title": "Attention and Augmented Recurrent Neural Networks",
+      "author": "Olah, Carter",
+      "type": "web",
+      "ref": "https://distill.pub/2016/augmented-rnns/",
+      "expect": "Attention",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "transformers-attention"
+      ]
+    },
+    {
+      "id": "elevenlabs-docs",
+      "title": "ElevenLabs Documentation",
+      "author": "ElevenLabs",
+      "type": "web",
+      "ref": "https://elevenlabs.io/docs/overview",
+      "expect": "ElevenLabs",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 6,
+      "skills": [
+        "speech-tts",
+        "speech-streaming",
+        "speech-agents"
+      ]
+    },
+    {
+      "id": "elevenlabs-latency",
+      "title": "Latency optimization | ElevenLabs Documentation",
+      "author": "ElevenLabs",
+      "type": "web",
+      "ref": "https://elevenlabs.io/docs/best-practices/latency-optimization",
+      "expect": "Latency",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "speech-latency"
+      ],
+      "atomic": true,
+      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
+    },
+    {
+      "id": "elevenlabs-streaming",
+      "title": "Streaming | ElevenLabs Documentation",
+      "author": "ElevenLabs",
+      "type": "web",
+      "ref": "https://elevenlabs.io/docs/api-reference/streaming",
+      "expect": "Streaming",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "speech-tts",
+        "speech-streaming"
+      ],
+      "atomic": true,
+      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
+    },
+    {
+      "id": "eugene-yan-evals",
+      "title": "Task-Specific LLM Evals that Do & Don't Work",
+      "author": "Eugene Yan",
+      "type": "web",
+      "ref": "https://eugeneyan.com/writing/evals/",
+      "expect": "evals",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "eval-design",
+        "eval-stat"
+      ]
+    },
+    {
+      "id": "eugene-yan-llm-patterns",
+      "title": "Patterns for Building LLM-based Systems & Products",
+      "author": "Eugene Yan",
+      "type": "web",
+      "ref": "https://eugeneyan.com/writing/llm-patterns/",
+      "expect": "Patterns",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "eval-design",
+        "rag-embeddings",
+        "llm-prompting"
+      ],
+      "published": "2023-07"
+    },
+    {
+      "id": "fastai-part1",
+      "title": "Practical Deep Learning for Coders",
+      "author": "Jeremy Howard, fast.ai",
+      "type": "web",
+      "ref": "https://course.fast.ai/",
+      "expect": "Practical Deep Learning",
+      "kind": "course",
+      "cost": "free",
+      "est_hours": 60,
+      "skills": [
+        "dl-training",
+        "dl-architectures",
+        "eng-pytorch"
+      ],
+      "note": "Top-down. Good counterweight to Karpathy's bottom-up."
+    },
+    {
+      "id": "fsdl-augmented-lm",
+      "title": "Augmented Language Models (LLM Bootcamp)",
+      "author": "The Full Stack",
+      "type": "youtube",
+      "ref": "YdeuQhlHmCA",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "llm-tooluse",
+        "llm-context",
+        "rag-embeddings"
+      ],
+      "published": "2023-04"
+    },
+    {
+      "id": "fsdl-llm-bootcamp",
+      "title": "LLM Bootcamp - Spring 2023",
+      "author": "The Full Stack",
+      "type": "youtube_playlist",
+      "ref": "PL1T8fO7ArWleyIqOy37OVXsP4hFXymdOZ",
+      "kind": "lecture_series",
+      "cost": "free",
+      "est_hours": 7,
+      "skills": [
+        "llm-prompting",
+        "llm-tooluse",
+        "llm-context",
+        "eval-regression"
+      ],
+      "note": "The whole bootcamp. Individual lectures are listed separately where a course uses only one."
+    },
+    {
+      "id": "fsdl-llm-foundations",
+      "title": "LLM Foundations (LLM Bootcamp)",
+      "author": "The Full Stack",
+      "type": "youtube",
+      "ref": "MyFrMFab6bo",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "transformers-arch",
+        "llm-failure-modes",
+        "nlp-tokenisation"
+      ],
+      "published": "2023-04"
+    },
+    {
+      "id": "fsdl-llmops",
+      "title": "LLMOps (LLM Bootcamp)",
+      "author": "The Full Stack",
+      "type": "youtube",
+      "ref": "Fquj2u7ay40",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "eval-regression",
+        "eval-observability",
+        "eval-design"
+      ],
+      "note": "Comparing and evaluating models, prompt management, and test-driven development applied to LLMs."
+    },
+    {
+      "id": "fsdl-prompt-engineering",
+      "title": "Learn to Spell: Prompt Engineering (LLM Bootcamp)",
+      "author": "The Full Stack",
+      "type": "youtube",
+      "ref": "JnBHR_yL2w8",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "llm-prompting"
+      ],
+      "note": "Treats prompting as engineering rather than incantation — decomposition, reasoning, reflection.",
+      "published": "2023-04"
+    },
+    {
+      "id": "fsdl-ux-lui",
+      "title": "UX for Language User Interfaces (LLM Bootcamp)",
+      "author": "The Full Stack",
+      "type": "youtube",
+      "ref": "l5mG4z343qg",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "llm-failure-modes",
+        "llm-context"
+      ],
+      "note": "Design patterns for products where the model is wrong sometimes. Directly relevant to a solutions role.",
+      "published": "2023-04"
+    },
+    {
+      "id": "google-ml-crash-course",
+      "title": "Machine Learning Crash Course",
+      "author": "Google",
+      "type": "web",
+      "ref": "https://developers.google.com/machine-learning/crash-course",
+      "expect": "Machine Learning Crash Course",
+      "kind": "course",
+      "cost": "free",
+      "est_hours": 20,
+      "skills": [
+        "ml-supervised",
+        "ml-eval-classical"
+      ]
+    },
+    {
+      "id": "gt-omscs-ai-spec",
+      "title": "Specialization: Artificial Intelligence",
+      "author": "Georgia Tech OMSCS",
+      "type": "web",
+      "ref": "https://omscs.gatech.edu/specialization-artificial-intelligence-formerly-interactive-intelligence",
+      "expect": "Specialization",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [],
+      "reference_only": true,
+      "note": "Structural reference for the programme map only. Not coursework, and not copied."
+    },
+    {
+      "id": "hamel-evals",
+      "title": "Your AI Product Needs Evals",
+      "author": "Hamel Husain",
+      "type": "web",
+      "ref": "https://hamel.dev/blog/posts/evals/",
+      "expect": "evals",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "eval-design",
+        "eval-human-calibration"
+      ],
+      "note": "The single most practical thing written on getting evals started. Course 2 opens with this."
+    },
+    {
+      "id": "hamel-evals-faq",
+      "title": "LLM Evals: Everything You Need to Know",
+      "author": "Hamel Husain",
+      "type": "web",
+      "ref": "https://hamel.dev/blog/posts/evals-faq/",
+      "expect": "evals",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "eval-design",
+        "eval-llm-judge",
+        "eval-datasets"
+      ]
+    },
+    {
+      "id": "hamel-llm-judge",
+      "title": "Creating a LLM-as-a-Judge That Drives Business Results",
+      "author": "Hamel Husain",
+      "type": "web",
+      "ref": "https://hamel.dev/blog/posts/llm-judge/",
+      "expect": "Judge",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "eval-llm-judge",
+        "eval-human-calibration"
+      ]
+    },
+    {
+      "id": "hf-agents-course",
+      "title": "Welcome to the Agents Course",
+      "author": "Hugging Face",
+      "type": "web",
+      "ref": "https://huggingface.co/learn/agents-course/unit0/introduction",
+      "expect": "Agents Course",
+      "kind": "course",
+      "cost": "free",
+      "est_hours": 20,
+      "skills": [
+        "agent-planning",
+        "agent-orchestration",
+        "agent-eval"
+      ]
+    },
+    {
+      "id": "hf-audio-course",
+      "title": "Welcome to the Hugging Face Audio course!",
+      "author": "Hugging Face",
+      "type": "web",
+      "ref": "https://huggingface.co/learn/audio-course/chapter0/introduction",
+      "expect": "Audio course",
+      "kind": "course",
+      "cost": "free",
+      "est_hours": 20,
+      "skills": [
+        "speech-asr",
+        "speech-tts"
+      ]
+    },
+    {
+      "id": "hf-audio-eval",
+      "title": "Evaluation metrics for ASR",
+      "author": "Hugging Face",
+      "type": "web",
+      "ref": "https://huggingface.co/learn/audio-course/chapter5/evaluation",
+      "expect": "Evaluation metrics",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "speech-asr"
+      ],
+      "atomic": true,
+      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
+    },
+    {
+      "id": "hf-deep-rl-course",
+      "title": "Welcome to the Deep Reinforcement Learning Course",
+      "author": "Hugging Face",
+      "type": "web",
+      "ref": "https://huggingface.co/learn/deep-rl-course/unit0/introduction",
+      "expect": "Deep Reinforcement Learning",
+      "kind": "course",
+      "cost": "free",
+      "est_hours": 30,
+      "skills": [
+        "rl-mdp",
+        "rl-valuemethods",
+        "rl-policygradient"
+      ]
+    },
+    {
+      "id": "hf-nlp-course",
+      "title": "Introduction - Hugging Face NLP Course",
+      "author": "Hugging Face",
+      "type": "web",
+      "ref": "https://huggingface.co/learn/nlp-course/chapter1/1",
+      "expect": "Hugging Face Course",
+      "kind": "course",
+      "cost": "free",
+      "est_hours": 20,
+      "skills": [
+        "nlp-tokenisation",
+        "transformers-arch",
+        "ft-sft"
+      ]
+    },
+    {
+      "id": "horace-brrr",
+      "title": "Making Deep Learning Go Brrrr From First Principles",
+      "author": "Horace He",
+      "type": "web",
+      "ref": "https://horace.io/brrr_intro.html",
+      "expect": "deep learning",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "infra-gpu",
+        "infra-latency"
+      ],
+      "note": "Compute, memory bandwidth, overhead — the three-way split that explains why an optimisation helped or did nothing."
+    },
+    {
+      "id": "jay-alammar-transformer",
+      "title": "The Illustrated Transformer",
+      "author": "Jay Alammar",
+      "type": "web",
+      "ref": "https://jalammar.github.io/illustrated-transformer/",
+      "expect": "Illustrated Transformer",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "transformers-attention"
+      ]
+    },
+    {
+      "id": "karpathy-build-gpt",
+      "title": "Let's build GPT: from scratch, in code, spelled out",
+      "author": "Andrej Karpathy",
+      "type": "youtube",
+      "ref": "kCc8FmEb1nY",
+      "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 6,
+      "skills": [
+        "transformers-attention",
+        "transformers-implementation"
+      ]
+    },
+    {
+      "id": "karpathy-deep-dive-llms",
+      "title": "Deep Dive into LLMs like ChatGPT",
+      "author": "Andrej Karpathy",
+      "type": "youtube",
+      "ref": "7xTGNNLPyMI",
+      "url": "https://www.youtube.com/watch?v=7xTGNNLPyMI",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 4,
+      "skills": [
+        "ft-sft",
+        "ft-preference",
+        "llm-failure-modes"
+      ]
+    },
+    {
+      "id": "karpathy-intro-llms",
+      "title": "Intro to Large Language Models",
+      "author": "Andrej Karpathy",
+      "type": "youtube",
+      "ref": "zjkBMFhNj_g",
+      "url": "https://www.youtube.com/watch?v=zjkBMFhNj_g",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "llm-failure-modes",
+        "ft-sft"
+      ],
+      "published": "2023-11"
+    },
+    {
+      "id": "karpathy-reproduce-gpt2",
+      "title": "Let's reproduce GPT-2 (124M)",
+      "author": "Andrej Karpathy",
+      "type": "youtube",
+      "ref": "l8pRSuU81PU",
+      "url": "https://www.youtube.com/watch?v=l8pRSuU81PU",
+      "kind": "lecture",
+      "cost": "free",
+      "est_hours": 8,
+      "skills": [
+        "transformers-implementation",
+        "dl-training",
+        "infra-gpu"
+      ]
+    },
+    {
+      "id": "karpathy-zero-to-hero",
+      "title": "Neural Networks: Zero to Hero",
+      "author": "Andrej Karpathy",
+      "type": "youtube_playlist",
+      "ref": "PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ",
+      "url": "https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ",
+      "kind": "lecture_series",
+      "cost": "free",
+      "est_hours": 25,
+      "skills": [
+        "dl-backprop",
+        "dl-training",
+        "transformers-arch",
+        "nlp-tokenisation"
+      ],
+      "note": "The spine of the deep track. Builds backprop, then a language model, then a GPT, all from scratch in code."
+    },
+    {
+      "id": "kipply-inference-arithmetic",
+      "title": "Transformer Inference Arithmetic",
+      "author": "kipply",
+      "type": "web",
+      "ref": "https://kipp.ly/transformer-inference-arithmetic/",
+      "expect": "inference",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "infra-tokenomics",
+        "infra-latency",
+        "infra-serving"
+      ],
+      "note": "The single most useful thing to have read before a customer asks what it will cost. First-principles arithmetic, no experiments, no hard maths."
+    },
+    {
+      "id": "lilian-weng-agents",
+      "title": "LLM Powered Autonomous Agents",
+      "author": "Lilian Weng",
+      "type": "web",
+      "ref": "https://lilianweng.github.io/posts/2023-06-23-agent/",
+      "expect": "Agent",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "agent-planning",
+        "agent-orchestration"
+      ]
+    },
+    {
+      "id": "lilian-weng-hallucination",
+      "title": "Extrinsic Hallucinations in LLMs",
+      "author": "Lilian Weng",
+      "type": "web",
+      "ref": "https://lilianweng.github.io/posts/2024-07-07-hallucination/",
+      "expect": "Hallucination",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "llm-failure-modes",
+        "eval-design"
+      ]
+    },
+    {
+      "id": "livekit-agent-latency",
+      "title": "Understand and improve voice agent latency",
+      "author": "LiveKit",
+      "type": "web",
+      "ref": "https://livekit.com/blog/understand-and-improve-agent-latency",
+      "expect": "latency",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "speech-latency",
+        "speech-streaming",
+        "speech-agents"
+      ],
+      "note": "The end-to-end budget broken down by hop. Vendor-authored, so read the numbers as a floor rather than a promise — but the decomposition is the right one."
+    },
+    {
+      "id": "mcp-docs",
+      "title": "Model Context Protocol",
+      "author": "Anthropic",
+      "type": "web",
+      "ref": "https://modelcontextprotocol.io/",
+      "expect": "Model Context Protocol",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 4,
+      "skills": [
+        "llm-tooluse",
+        "agent-orchestration"
+      ]
+    },
+    {
+      "id": "mit-1806-strang",
+      "title": "Gilbert Strang lectures on Linear Algebra (MIT)",
+      "author": "Gilbert Strang, MIT OCW",
+      "type": "youtube_playlist",
+      "ref": "PL49CF3715CB9EF31D",
+      "url": "https://www.youtube.com/playlist?list=PL49CF3715CB9EF31D",
+      "kind": "lecture_series",
+      "cost": "free",
+      "est_hours": 35,
+      "skills": [
+        "math-linalg"
+      ]
+    },
+    {
+      "id": "mit-6s191",
+      "title": "MIT Introduction to Deep Learning | 6.S191",
+      "author": "Alexander Amini, MIT",
+      "type": "youtube_playlist",
+      "ref": "PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI",
+      "url": "https://www.youtube.com/playlist?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI",
+      "kind": "lecture_series",
+      "cost": "free",
+      "est_hours": 15,
+      "skills": [
+        "dl-architectures",
+        "dl-training"
+      ]
+    },
+    {
+      "id": "mit-efficientml",
+      "title": "MIT 6.5940 EfficientML.ai",
+      "author": "Song Han, MIT",
+      "type": "youtube_playlist",
+      "ref": "PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB",
+      "url": "https://www.youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB",
+      "kind": "lecture_series",
+      "cost": "free",
+      "est_hours": 25,
+      "skills": [
+        "infra-quantisation",
+        "infra-serving",
+        "infra-latency"
+      ]
+    },
+    {
+      "id": "mit-ocw-1806",
+      "title": "Linear Algebra | Mathematics | MIT OpenCourseWare",
+      "author": "MIT OCW",
+      "type": "web",
+      "ref": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/",
+      "expect": "Linear Algebra",
+      "kind": "course",
+      "cost": "free",
+      "est_hours": 40,
+      "skills": [
+        "math-linalg"
+      ],
+      "note": "Problem sets and exams — the part that actually teaches, as opposed to the lectures."
+    },
+    {
+      "id": "openai-cookbook",
+      "title": "openai/openai-cookbook",
+      "author": "OpenAI",
+      "type": "github",
+      "ref": "openai/openai-cookbook",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 8,
+      "skills": [
+        "llm-prompting",
+        "llm-structured-output",
+        "rag-embeddings"
+      ]
+    },
+    {
+      "id": "owasp-llm-top10",
+      "title": "OWASP Top 10 for Large Language Model Applications",
+      "author": "OWASP",
+      "type": "web",
+      "ref": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "expect": "Large Language Model",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "safety-redteam",
+        "agent-sandboxing"
+      ]
+    },
+    {
+      "id": "paper-attention",
+      "title": "Attention Is All You Need",
+      "author": "Vaswani et al.",
+      "type": "arxiv",
+      "ref": "1706.03762",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 4,
+      "skills": [
+        "transformers-attention",
+        "transformers-arch"
+      ]
+    },
+    {
+      "id": "paper-autogen",
+      "title": "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation",
+      "author": "Wu et al.",
+      "type": "arxiv",
+      "ref": "2308.08155",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "agent-orchestration"
+      ]
+    },
+    {
+      "id": "paper-awq",
+      "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration",
+      "author": "Lin et al.",
+      "type": "arxiv",
+      "ref": "2306.00978",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "infra-quantisation"
+      ]
+    },
+    {
+      "id": "paper-beir",
+      "title": "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      "author": "Thakur et al.",
+      "type": "arxiv",
+      "ref": "2104.08663",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "rag-eval",
+        "eval-datasets"
+      ],
+      "note": "The paper that showed dense retrievers lose to BM25 out of domain. Read it before assuming embeddings win."
+    },
+    {
+      "id": "paper-chatbot-arena",
+      "title": "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference",
+      "author": "Chiang et al.",
+      "type": "arxiv",
+      "ref": "2403.04132",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "eval-human-calibration",
+        "eval-stat"
+      ]
+    },
+    {
+      "id": "paper-chinchilla",
+      "title": "Training Compute-Optimal Large Language Models",
+      "author": "Hoffmann et al.",
+      "type": "arxiv",
+      "ref": "2203.15556",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "dl-training"
+      ]
+    },
+    {
+      "id": "paper-clip",
+      "title": "Learning Transferable Visual Models From Natural Language Supervision",
+      "author": "Radford et al.",
+      "type": "arxiv",
+      "ref": "2103.00020",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "nlp-embeddings"
+      ]
+    },
+    {
+      "id": "paper-codeswitch-seame",
+      "title": "On the End-to-End Solution to Mandarin-English Code-switching Speech Recognition",
+      "author": "Zeng et al., NTU Singapore",
+      "type": "arxiv",
+      "ref": "1811.00241",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "speech-asr"
+      ],
+      "note": "Built on SEAME — spontaneous Mandarin-English code-switching from Singaporean and Malaysian speakers. This is your own linguistic environment, and it is where every off-the-shelf ASR system quietly falls over."
+    },
+    {
+      "id": "paper-colbert",
+      "title": "ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT",
+      "author": "Khattab, Zaharia",
+      "type": "arxiv",
+      "ref": "2004.12832",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "rag-embeddings",
+        "rag-reranking"
+      ]
+    },
+    {
+      "id": "paper-common-voice",
+      "title": "Common Voice: A Massively-Multilingual Speech Corpus",
+      "author": "Ardila et al.",
+      "type": "arxiv",
+      "ref": "1912.06670",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "speech-asr",
+        "eval-datasets"
+      ],
+      "note": "Where accented evaluation data actually comes from, and what it still does not cover."
+    },
+    {
+      "id": "paper-conformal-prediction",
+      "title": "A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification",
+      "author": "Angelopoulos, Bates",
+      "type": "arxiv",
+      "ref": "2107.07511",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 4,
+      "skills": [
+        "eval-stat",
+        "ml-eval-classical"
+      ],
+      "note": "The principled way to put a confidence threshold on a model output — the machinery under any honest human-in-the-loop routing rule."
+    },
+    {
+      "id": "paper-conformer",
+      "title": "Conformer: Convolution-augmented Transformer for Speech Recognition",
+      "author": "Gulati et al.",
+      "type": "arxiv",
+      "ref": "2005.08100",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "speech-asr"
+      ]
+    },
+    {
+      "id": "paper-constitutional-ai",
+      "title": "Constitutional AI: Harmlessness from AI Feedback",
+      "author": "Bai et al.",
+      "type": "arxiv",
+      "ref": "2212.08073",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 5,
+      "skills": [
+        "safety-alignment",
+        "ft-preference"
+      ]
+    },
+    {
+      "id": "paper-cot",
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
+      "author": "Wei et al.",
+      "type": "arxiv",
+      "ref": "2201.11903",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "llm-prompting"
+      ],
+      "published": "2022-01"
+    },
+    {
+      "id": "paper-cs-dialogue",
+      "title": "CS-Dialogue: A 104-Hour Dataset of Spontaneous Mandarin-English Code-Switching Dialogues for Speech Recognition",
+      "author": "arXiv 2502.18913",
+      "type": "arxiv",
+      "ref": "2502.18913",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "speech-asr",
+        "eval-datasets"
+      ]
+    },
+    {
+      "id": "paper-deepseek-r1",
+      "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
+      "author": "DeepSeek-AI",
+      "type": "arxiv",
+      "ref": "2501.12948",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "llm-prompting"
+      ],
+      "published": "2025-01",
+      "note": "The open account of how reasoning was trained into a model rather than prompted out of one. Read against the 2022 chain-of-thought paper: same behaviour, moved from the prompt into the weights."
+    },
+    {
+      "id": "paper-docvqa",
+      "title": "DocVQA: A Dataset for VQA on Document Images",
+      "author": "Mathew et al.",
+      "type": "arxiv",
+      "ref": "2007.00398",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "eval-datasets",
+        "llm-structured-output"
+      ],
+      "note": "The benchmark that defines what document understanding is measured on."
+    },
+    {
+      "id": "paper-donut",
+      "title": "OCR-free Document Understanding Transformer",
+      "author": "Kim et al.",
+      "type": "arxiv",
+      "ref": "2111.15664",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "llm-structured-output"
+      ],
+      "note": "Skipping OCR entirely and reading the page as an image. The direct alternative to the column-gutter approach already in Career Side Quests."
+    },
+    {
+      "id": "paper-dpo",
+      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
+      "author": "Rafailov et al.",
+      "type": "arxiv",
+      "ref": "2305.18290",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 4,
+      "skills": [
+        "ft-preference"
+      ]
+    },
+    {
+      "id": "paper-dpr",
+      "title": "Dense Passage Retrieval for Open-Domain Question Answering",
+      "author": "Karpukhin et al.",
+      "type": "arxiv",
+      "ref": "2004.04906",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "rag-embeddings",
+        "nlp-embeddings"
+      ]
+    },
+    {
+      "id": "paper-efficiently-scaling-inference",
+      "title": "Efficiently Scaling Transformer Inference",
+      "author": "Pope et al.",
+      "type": "arxiv",
+      "ref": "2211.05102",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 4,
+      "skills": [
+        "infra-serving",
+        "infra-latency",
+        "infra-batching"
+      ]
+    },
+    {
+      "id": "paper-fastspeech2",
+      "title": "FastSpeech 2: Fast and High-Quality End-to-End Text to Speech",
+      "author": "Ren et al.",
+      "type": "arxiv",
+      "ref": "2006.04558",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "speech-tts"
+      ]
+    },
+    {
+      "id": "paper-flamingo",
+      "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
+      "author": "Alayrac et al.",
+      "type": "arxiv",
+      "ref": "2204.14198",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "dl-architectures"
+      ]
+    },
+    {
+      "id": "paper-flashattention",
+      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+      "author": "Dao et al.",
+      "type": "arxiv",
+      "ref": "2205.14135",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 4,
+      "skills": [
+        "infra-gpu",
+        "transformers-implementation"
+      ]
+    },
+    {
+      "id": "paper-g-eval",
+      "title": "G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment",
+      "author": "Liu et al.",
+      "type": "arxiv",
+      "ref": "2303.16634",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "eval-llm-judge"
+      ]
+    },
+    {
+      "id": "paper-gcg-attacks",
+      "title": "Universal and Transferable Adversarial Attacks on Aligned Language Models",
+      "author": "Zou et al.",
+      "type": "arxiv",
+      "ref": "2307.15043",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "safety-redteam"
+      ]
+    },
+    {
+      "id": "paper-generative-agents",
+      "title": "Generative Agents: Interactive Simulacra of Human Behavior",
+      "author": "Park et al.",
+      "type": "arxiv",
+      "ref": "2304.03442",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "agent-planning"
+      ]
+    },
+    {
+      "id": "paper-gpt3",
+      "title": "Language Models are Few-Shot Learners",
+      "author": "Brown et al.",
+      "type": "arxiv",
+      "ref": "2005.14165",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 4,
+      "skills": [
+        "llm-prompting",
+        "eval-datasets"
+      ],
+      "published": "2020-05"
+    },
+    {
+      "id": "paper-gptq",
+      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
+      "author": "Frantar et al.",
+      "type": "arxiv",
+      "ref": "2210.17323",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "infra-quantisation"
+      ]
+    },
+    {
+      "id": "paper-helm",
+      "title": "Holistic Evaluation of Language Models",
+      "author": "Liang et al.",
+      "type": "arxiv",
+      "ref": "2211.09110",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 5,
+      "skills": [
+        "eval-design",
+        "eval-datasets"
+      ]
+    },
+    {
+      "id": "paper-hubert",
+      "title": "HuBERT: Self-Supervised Speech Representation Learning by Masked Prediction of Hidden Units",
+      "author": "Hsu et al.",
+      "type": "arxiv",
+      "ref": "2106.07447",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "speech-asr"
+      ]
+    },
+    {
+      "id": "paper-hyde",
+      "title": "Precise Zero-Shot Dense Retrieval without Relevance Labels",
+      "author": "Gao et al.",
+      "type": "arxiv",
+      "ref": "2212.10496",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "rag-embeddings"
+      ],
+      "note": "HyDE. Generate a fake answer, embed that instead of the question."
+    },
+    {
+      "id": "paper-indirect-prompt-injection",
+      "title": "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
+      "author": "Greshake et al.",
+      "type": "arxiv",
+      "ref": "2302.12173",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "safety-redteam",
+        "agent-sandboxing"
+      ],
+      "note": "The attack that matters once a model can read untrusted content and call tools. Required before M5."
+    },
+    {
+      "id": "paper-instructgpt",
+      "title": "Training language models to follow instructions with human feedback",
+      "author": "Ouyang et al.",
+      "type": "arxiv",
+      "ref": "2203.02155",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 4,
+      "skills": [
+        "ft-preference",
+        "rl-rlhf",
+        "eval-human-calibration"
+      ]
+    },
+    {
+      "id": "paper-judging-the-judges",
+      "title": "Judging the Judges: A Systematic Evaluation of Bias Mitigation Strategies in LLM-as-a-Judge Pipelines",
+      "author": "arXiv 2604.23178",
+      "type": "arxiv",
+      "ref": "2604.23178",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "eval-llm-judge"
+      ]
+    },
+    {
+      "id": "paper-layoutlmv3",
+      "title": "LayoutLMv3: Pre-training for Document AI with Unified Text and Image Masking",
+      "author": "Huang et al.",
+      "type": "arxiv",
+      "ref": "2204.08387",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "llm-structured-output"
+      ]
+    },
+    {
+      "id": "paper-length-controlled-alpacaeval",
+      "title": "Length-Controlled AlpacaEval: A Simple Way to Debias Automatic Evaluators",
+      "author": "Dubois et al.",
+      "type": "arxiv",
+      "ref": "2404.04475",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "eval-llm-judge",
+        "eval-stat"
+      ],
+      "note": "The clearest demonstration that judge scores can be gamed by output length alone."
+    },
+    {
+      "id": "paper-llama2",
+      "title": "Llama 2: Open Foundation and Fine-Tuned Chat Models",
+      "author": "Touvron et al.",
+      "type": "arxiv",
+      "ref": "2307.09288",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 5,
+      "skills": [
+        "ft-sft",
+        "ft-preference",
+        "safety-redteam"
+      ]
+    },
+    {
+      "id": "paper-llava",
+      "title": "Visual Instruction Tuning",
+      "author": "Liu et al.",
+      "type": "arxiv",
+      "ref": "2304.08485",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "dl-architectures"
+      ]
+    },
+    {
+      "id": "paper-llm-as-judge",
+      "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+      "author": "Zheng et al.",
+      "type": "arxiv",
+      "ref": "2306.05685",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 4,
+      "skills": [
+        "eval-llm-judge",
+        "eval-human-calibration"
+      ],
+      "note": "Core reading for Course 2. Position bias, verbosity bias, self-enhancement bias — named and measured."
+    },
+    {
+      "id": "paper-llm-int8",
+      "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
+      "author": "Dettmers et al.",
+      "type": "arxiv",
+      "ref": "2208.07339",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "infra-quantisation"
+      ]
+    },
+    {
+      "id": "paper-lora",
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+      "author": "Hu et al.",
+      "type": "arxiv",
+      "ref": "2106.09685",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "ft-lora"
+      ]
+    },
+    {
+      "id": "paper-lost-in-middle",
+      "title": "Lost in the Middle: How Language Models Use Long Contexts",
+      "author": "Liu et al.",
+      "type": "arxiv",
+      "ref": "2307.03172",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "llm-context",
+        "rag-reranking"
+      ],
+      "published": "2023-07"
+    },
+    {
+      "id": "paper-medusa",
+      "title": "Medusa: Simple LLM Inference Acceleration Framework with Multiple Decoding Heads",
+      "author": "Cai et al.",
+      "type": "arxiv",
+      "ref": "2401.10774",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "infra-latency"
+      ]
+    },
+    {
+      "id": "paper-metagpt",
+      "title": "MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework",
+      "author": "Hong et al.",
+      "type": "arxiv",
+      "ref": "2308.00352",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "agent-orchestration"
+      ]
+    },
+    {
+      "id": "paper-moshi",
+      "title": "Moshi: a speech-text foundation model for real-time dialogue",
+      "author": "Défossez et al.",
+      "type": "arxiv",
+      "ref": "2410.00037",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 4,
+      "skills": [
+        "speech-agents",
+        "speech-latency",
+        "speech-streaming"
+      ],
+      "note": "Full-duplex speech dialogue — the model listens and speaks at once. The clearest treatment of why turn-taking and barge-in are architectural rather than cosmetic."
+    },
+    {
+      "id": "paper-nougat",
+      "title": "Nougat: Neural Optical Understanding for Academic Documents",
+      "author": "Blecher et al.",
+      "type": "arxiv",
+      "ref": "2308.13418",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "llm-structured-output"
+      ]
+    },
+    {
+      "id": "paper-position-bias-rubric-judge",
+      "title": "Am I More Pointwise or Pairwise? Revealing Position Bias in Rubric-Based LLM-as-a-Judge",
+      "author": "arXiv 2602.02219",
+      "type": "arxiv",
+      "ref": "2602.02219",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "eval-llm-judge",
+        "eval-stat"
+      ]
+    },
+    {
+      "id": "paper-qwen2vl",
+      "title": "Qwen2-VL: Enhancing Vision-Language Model's Perception of the World at Any Resolution",
+      "author": "Wang et al.",
+      "type": "arxiv",
+      "ref": "2409.12191",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "dl-architectures"
+      ]
+    },
+    {
+      "id": "paper-rag",
+      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "author": "Lewis et al.",
+      "type": "arxiv",
+      "ref": "2005.11401",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "rag-embeddings"
+      ]
+    },
+    {
+      "id": "paper-rag-best-practices",
+      "title": "Searching for Best Practices in Retrieval-Augmented Generation",
+      "author": "Wang et al.",
+      "type": "arxiv",
+      "ref": "2407.01219",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "rag-chunking",
+        "rag-hybrid-search",
+        "rag-reranking"
+      ]
+    },
+    {
+      "id": "paper-rag-vs-longcontext",
+      "title": "Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach",
+      "author": "Li et al.",
+      "type": "arxiv",
+      "ref": "2407.16833",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "llm-context",
+        "rag-embeddings"
+      ]
+    },
+    {
+      "id": "paper-ragas",
+      "title": "RAGAS: Automated Evaluation of Retrieval Augmented Generation",
+      "author": "Es et al.",
+      "type": "arxiv",
+      "ref": "2309.15217",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "rag-eval",
+        "eval-design"
+      ]
+    },
+    {
+      "id": "paper-react",
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+      "author": "Yao et al.",
+      "type": "arxiv",
+      "ref": "2210.03629",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "agent-planning",
+        "llm-tooluse"
+      ]
+    },
+    {
+      "id": "paper-reflexion",
+      "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
+      "author": "Shinn et al.",
+      "type": "arxiv",
+      "ref": "2303.11366",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "agent-planning",
+        "agent-reliability"
+      ]
+    },
+    {
+      "id": "paper-sarathi-serve",
+      "title": "Taming Throughput-Latency Tradeoff in LLM Inference with Sarathi-Serve",
+      "author": "Agrawal et al.",
+      "type": "arxiv",
+      "ref": "2403.02310",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "infra-batching",
+        "infra-latency"
+      ],
+      "note": "Chunked prefill. The paper that names the throughput-versus-latency trade directly, which is the trade a field engineer is always being asked about."
+    },
+    {
+      "id": "paper-scaling-laws",
+      "title": "Scaling Laws for Neural Language Models",
+      "author": "Kaplan et al.",
+      "type": "arxiv",
+      "ref": "2001.08361",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "dl-training"
+      ]
+    },
+    {
+      "id": "paper-seamlessm4t",
+      "title": "SeamlessM4T: Massively Multilingual & Multimodal Machine Translation",
+      "author": "Seamless Communication et al.",
+      "type": "arxiv",
+      "ref": "2308.11596",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "speech-asr",
+        "speech-tts"
+      ]
+    },
+    {
+      "id": "paper-selective-prediction",
+      "title": "Selective Classification for Deep Neural Networks",
+      "author": "Geifman, El-Yaniv",
+      "type": "arxiv",
+      "ref": "1705.08500",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "ml-eval-classical"
+      ],
+      "note": "Abstention as a first-class option: a model that says 'I don't know' and routes to a human."
+    },
+    {
+      "id": "paper-self-consistency",
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
+      "author": "Wang et al.",
+      "type": "arxiv",
+      "ref": "2203.11171",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "llm-prompting",
+        "eval-stat"
+      ],
+      "published": "2022-03"
+    },
+    {
+      "id": "paper-smoothquant",
+      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
+      "author": "Xiao et al.",
+      "type": "arxiv",
+      "ref": "2211.10438",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "infra-quantisation"
+      ]
+    },
+    {
+      "id": "paper-speculative-decoding",
+      "title": "Fast Inference from Transformers via Speculative Decoding",
+      "author": "Leviathan et al.",
+      "type": "arxiv",
+      "ref": "2211.17192",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "infra-latency",
+        "infra-serving"
+      ]
+    },
+    {
+      "id": "paper-swe-agent",
+      "title": "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering",
+      "author": "Yang et al.",
+      "type": "arxiv",
+      "ref": "2405.15793",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "agent-orchestration",
+        "llm-tooluse"
+      ]
+    },
+    {
+      "id": "paper-swe-bench",
+      "title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
+      "author": "Jimenez et al.",
+      "type": "arxiv",
+      "ref": "2310.06770",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "agent-eval",
+        "eval-datasets"
+      ]
+    },
+    {
+      "id": "paper-switch-transformer",
+      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
+      "author": "Fedus et al.",
+      "type": "arxiv",
+      "ref": "2101.03961",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "transformers-arch",
+        "infra-distributed"
+      ]
+    },
+    {
+      "id": "paper-tau-bench",
+      "title": "tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains",
+      "author": "Yao et al.",
+      "type": "arxiv",
+      "ref": "2406.12045",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "agent-eval",
+        "agent-reliability"
+      ],
+      "note": "Agents evaluated on multi-turn tasks with a real user and real policy constraints — and pass^k, which shows reliability collapsing over repeated attempts. The most job-relevant benchmark in this list."
+    },
+    {
+      "id": "paper-toolformer",
+      "title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
+      "author": "Schick et al.",
+      "type": "arxiv",
+      "ref": "2302.04761",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "llm-tooluse"
+      ],
+      "published": "2023-02"
+    },
+    {
+      "id": "paper-tree-of-thoughts",
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
+      "author": "Yao et al.",
+      "type": "arxiv",
+      "ref": "2305.10601",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "agent-planning"
+      ]
+    },
+    {
+      "id": "paper-vall-e",
+      "title": "Neural Codec Language Models are Zero-Shot Text to Speech Synthesizers",
+      "author": "Wang et al.",
+      "type": "arxiv",
+      "ref": "2301.02111",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "speech-tts"
+      ]
+    },
+    {
+      "id": "paper-vllm",
+      "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
+      "author": "Kwon et al.",
+      "type": "arxiv",
+      "ref": "2309.06180",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "infra-serving",
+        "infra-batching"
+      ]
+    },
+    {
+      "id": "paper-wav2vec2",
+      "title": "wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations",
+      "author": "Baevski et al.",
+      "type": "arxiv",
+      "ref": "2006.11477",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "speech-asr"
+      ]
+    },
+    {
+      "id": "paper-webarena",
+      "title": "WebArena: A Realistic Web Environment for Building Autonomous Agents",
+      "author": "Zhou et al.",
+      "type": "arxiv",
+      "ref": "2307.13854",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "agent-eval"
+      ]
+    },
+    {
+      "id": "paper-whisper",
+      "title": "Robust Speech Recognition via Large-Scale Weak Supervision",
+      "author": "Radford et al.",
+      "type": "arxiv",
+      "ref": "2212.04356",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 4,
+      "skills": [
+        "speech-asr"
+      ]
+    },
+    {
+      "id": "paper-whisperx",
+      "title": "WhisperX: Time-Accurate Speech Transcription of Long-Form Audio",
+      "author": "Bain et al.",
+      "type": "arxiv",
+      "ref": "2303.00747",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "speech-asr"
+      ]
+    },
+    {
+      "id": "paper-who-validates-validators",
+      "title": "Who Validates the Validators? Aligning LLM-Assisted Evaluation of LLM Outputs with Human Preferences",
+      "author": "Shankar et al.",
+      "type": "arxiv",
+      "ref": "2404.12272",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 4,
+      "skills": [
+        "eval-llm-judge",
+        "eval-human-calibration"
+      ],
+      "note": "The criteria you think you want are not the criteria you actually apply — they drift as you grade. Core reading for the calibration module."
+    },
+    {
+      "id": "paper-why-multiagent-fails",
+      "title": "Why Do Multi-Agent LLM Systems Fail?",
+      "author": "Cemri et al.",
+      "type": "arxiv",
+      "ref": "2503.13657",
+      "kind": "paper",
+      "cost": "free",
+      "est_hours": 4,
+      "skills": [
+        "agent-reliability",
+        "agent-eval"
+      ],
+      "note": "A taxonomy of multi-agent failure modes built from real traces. Read before building one, not after."
+    },
+    {
+      "id": "pdpc-ai-guidelines",
+      "title": "Advisory Guidelines on use of Personal Data in AI Recommendation and Decision Systems",
+      "author": "PDPC Singapore",
+      "type": "web",
+      "ref": "https://www.pdpc.gov.sg/organisations/regulations-decisions/regulatory-guidance/advisory-guidelines-on-use-of-personal-data-in-ai-recommendation-and-decision-systems",
+      "expect": "Personal Data",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "safety-redteam"
+      ],
+      "note": "The regulator in your own market, on the exact question a Singapore enterprise buyer will ask you. Not legally binding, but the PDPC enforces consistently with it."
+    },
+    {
+      "id": "pinecone-learn-vector-search",
+      "title": "Vector Databases and Similarity Search",
+      "author": "Pinecone",
+      "type": "web",
+      "ref": "https://www.pinecone.io/learn/vector-database/",
+      "expect": "vector database",
+      "kind": "article",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "rag-embeddings",
+        "rag-hybrid-search"
+      ]
+    },
+    {
+      "id": "python-numpy-for-ts-devs",
+      "title": "NumPy: the absolute basics for beginners",
+      "author": "NumPy",
+      "type": "web",
+      "ref": "https://numpy.org/doc/stable/user/absolute_beginners.html",
+      "expect": "NumPy",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 4,
+      "skills": [
+        "eng-python"
+      ],
+      "note": "Python is the medium, never an objective. This exists so tensor semantics are not a surprise, not to teach programming."
+    },
+    {
+      "id": "pytorch-tutorials",
+      "title": "Welcome to PyTorch Tutorials",
+      "author": "PyTorch",
+      "type": "web",
+      "ref": "https://pytorch.org/tutorials/",
+      "expect": "PyTorch Tutorials",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 15,
+      "skills": [
+        "eng-pytorch",
+        "eng-python"
+      ]
+    },
+    {
+      "id": "repo-anthropic-cookbook",
+      "title": "anthropics/anthropic-cookbook",
+      "author": "Anthropic",
+      "type": "github",
+      "ref": "anthropics/anthropic-cookbook",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 6,
+      "skills": [
+        "llm-tooluse",
+        "llm-structured-output",
+        "llm-context"
+      ],
+      "published": "living"
+    },
+    {
+      "id": "repo-anthropic-prompt-tutorial",
+      "title": "anthropics/prompt-eng-interactive-tutorial",
+      "author": "Anthropic",
+      "type": "github",
+      "ref": "anthropics/prompt-eng-interactive-tutorial",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 6,
+      "skills": [
+        "llm-prompting",
+        "llm-structured-output"
+      ],
+      "note": "Nine chapters with exercises. Hands-on, not a read.",
+      "published": "living"
+    },
+    {
+      "id": "repo-cs336-lectures",
+      "title": "stanford-cs336/spring2025-lectures",
+      "author": "Stanford CS336",
+      "type": "github",
+      "ref": "stanford-cs336/spring2025-lectures",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 6,
+      "skills": [
+        "infra-gpu",
+        "infra-serving"
+      ]
+    },
+    {
+      "id": "repo-deepeval",
+      "title": "confident-ai/deepeval",
+      "author": "Confident AI",
+      "type": "github",
+      "ref": "confident-ai/deepeval",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 8,
+      "skills": [
+        "eval-llm-judge",
+        "eval-regression"
+      ]
+    },
+    {
+      "id": "repo-helm",
+      "title": "stanford-crfm/helm",
+      "author": "Stanford CRFM",
+      "type": "github",
+      "ref": "stanford-crfm/helm",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 8,
+      "skills": [
+        "eval-design",
+        "eval-datasets"
+      ]
+    },
+    {
+      "id": "repo-inspect-ai",
+      "title": "UKGovernmentBEIS/inspect_ai",
+      "author": "UK AI Safety Institute",
+      "type": "github",
+      "ref": "UKGovernmentBEIS/inspect_ai",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 8,
+      "skills": [
+        "eval-design",
+        "agent-eval",
+        "safety-redteam"
+      ],
+      "note": "A government safety institute's production eval framework. Unusually good design to study."
+    },
+    {
+      "id": "repo-langfuse",
+      "title": "langfuse/langfuse",
+      "author": "Langfuse",
+      "type": "github",
+      "ref": "langfuse/langfuse",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 6,
+      "skills": [
+        "eval-observability"
+      ]
+    },
+    {
+      "id": "repo-litellm",
+      "title": "BerriAI/litellm",
+      "author": "BerriAI",
+      "type": "github",
+      "ref": "BerriAI/litellm",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 4,
+      "skills": [
+        "infra-tokenomics",
+        "eng-deployment"
+      ]
+    },
+    {
+      "id": "repo-llama-cpp",
+      "title": "ggml-org/llama.cpp",
+      "author": "ggml",
+      "type": "github",
+      "ref": "ggml-org/llama.cpp",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 10,
+      "skills": [
+        "infra-quantisation",
+        "infra-serving"
+      ]
+    },
+    {
+      "id": "repo-llm-c",
+      "title": "karpathy/llm.c",
+      "author": "Andrej Karpathy",
+      "type": "github",
+      "ref": "karpathy/llm.c",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 20,
+      "skills": [
+        "infra-gpu",
+        "transformers-implementation"
+      ]
+    },
+    {
+      "id": "repo-lm-eval-harness",
+      "title": "EleutherAI/lm-evaluation-harness",
+      "author": "EleutherAI",
+      "type": "github",
+      "ref": "EleutherAI/lm-evaluation-harness",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 10,
+      "skills": [
+        "eval-datasets",
+        "eval-regression"
+      ]
+    },
+    {
+      "id": "repo-mingpt",
+      "title": "karpathy/minGPT",
+      "author": "Andrej Karpathy",
+      "type": "github",
+      "ref": "karpathy/minGPT",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 8,
+      "skills": [
+        "transformers-implementation"
+      ]
+    },
+    {
+      "id": "repo-nanogpt",
+      "title": "karpathy/nanoGPT",
+      "author": "Andrej Karpathy",
+      "type": "github",
+      "ref": "karpathy/nanoGPT",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 15,
+      "skills": [
+        "transformers-implementation",
+        "dl-training"
+      ]
+    },
+    {
+      "id": "repo-openai-evals",
+      "title": "openai/evals",
+      "author": "OpenAI",
+      "type": "github",
+      "ref": "openai/evals",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 8,
+      "skills": [
+        "eval-design",
+        "eval-datasets"
+      ]
+    },
+    {
+      "id": "repo-peft",
+      "title": "huggingface/peft",
+      "author": "Hugging Face",
+      "type": "github",
+      "ref": "huggingface/peft",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 8,
+      "skills": [
+        "ft-lora"
+      ]
+    },
+    {
+      "id": "repo-phoenix",
+      "title": "Arize-ai/phoenix",
+      "author": "Arize AI",
+      "type": "github",
+      "ref": "Arize-ai/phoenix",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 6,
+      "skills": [
+        "eval-observability",
+        "rag-eval"
+      ]
+    },
+    {
+      "id": "repo-promptfoo",
+      "title": "promptfoo/promptfoo",
+      "author": "promptfoo",
+      "type": "github",
+      "ref": "promptfoo/promptfoo",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 6,
+      "skills": [
+        "eval-regression",
+        "eval-design"
+      ],
+      "note": "The one eval tool in this list that is TypeScript-native — usable directly against Career Side Quests."
+    },
+    {
+      "id": "repo-pytorch",
+      "title": "pytorch/pytorch",
+      "author": "PyTorch",
+      "type": "github",
+      "ref": "pytorch/pytorch",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 10,
+      "skills": [
+        "eng-pytorch"
+      ]
+    },
+    {
+      "id": "repo-ragas",
+      "title": "explodinggradients/ragas",
+      "author": "Exploding Gradients",
+      "type": "github",
+      "ref": "explodinggradients/ragas",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 6,
+      "skills": [
+        "rag-eval"
+      ]
+    },
+    {
+      "id": "repo-spinningup",
+      "title": "openai/spinningup",
+      "author": "OpenAI",
+      "type": "github",
+      "ref": "openai/spinningup",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 20,
+      "skills": [
+        "rl-policygradient"
+      ]
+    },
+    {
+      "id": "repo-transformers",
+      "title": "huggingface/transformers",
+      "author": "Hugging Face",
+      "type": "github",
+      "ref": "huggingface/transformers",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 15,
+      "skills": [
+        "transformers-arch",
+        "ft-sft"
+      ]
+    },
+    {
+      "id": "repo-trl",
+      "title": "huggingface/trl",
+      "author": "Hugging Face",
+      "type": "github",
+      "ref": "huggingface/trl",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 12,
+      "skills": [
+        "ft-preference",
+        "rl-rlhf"
+      ]
+    },
+    {
+      "id": "repo-vllm",
+      "title": "vllm-project/vllm",
+      "author": "vLLM",
+      "type": "github",
+      "ref": "vllm-project/vllm",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 12,
+      "skills": [
+        "infra-serving",
+        "infra-batching"
+      ]
+    },
+    {
+      "id": "repo-whisper",
+      "title": "openai/whisper",
+      "author": "OpenAI",
+      "type": "github",
+      "ref": "openai/whisper",
+      "kind": "repo",
+      "cost": "free",
+      "est_hours": 6,
+      "skills": [
+        "speech-asr"
+      ]
+    },
+    {
+      "id": "sbert-bi-encoders",
+      "title": "Pretrained Models — Sentence Transformers",
+      "author": "UKP Lab",
+      "type": "web",
+      "ref": "https://sbert.net/docs/sentence_transformer/pretrained_models.html",
+      "expect": "Pretrained Models",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "rag-embeddings",
+        "nlp-embeddings"
+      ],
+      "atomic": true,
+      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
+    },
+    {
+      "id": "sbert-cross-encoders",
+      "title": "Pretrained Models — Cross Encoder",
+      "author": "UKP Lab",
+      "type": "web",
+      "ref": "https://sbert.net/docs/cross_encoder/pretrained_models.html",
+      "expect": "Pretrained Models",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "rag-reranking"
+      ],
+      "atomic": true,
+      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
+    },
+    {
+      "id": "sbert-docs",
+      "title": "SentenceTransformers Documentation",
+      "author": "Nils Reimers, UKP Lab",
+      "type": "web",
+      "ref": "https://www.sbert.net/",
+      "expect": "Sentence Transformers",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 5,
+      "skills": [
+        "rag-embeddings",
+        "nlp-embeddings"
+      ]
+    },
+    {
+      "id": "scipy-bootstrap",
+      "title": "scipy.stats.bootstrap",
+      "author": "SciPy",
+      "type": "web",
+      "ref": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html",
+      "expect": "bootstrap",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "eval-stat"
+      ],
+      "note": "Confidence intervals without distributional assumptions — the practical way to answer 'is this difference real?'",
+      "atomic": true
+    },
+    {
+      "id": "sklearn-calibration",
+      "title": "Probability calibration",
+      "author": "scikit-learn",
+      "type": "web",
+      "ref": "https://scikit-learn.org/stable/modules/calibration.html",
+      "expect": "calibration",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 2,
+      "skills": [
+        "ml-eval-classical"
+      ],
+      "atomic": true,
+      "note": "A confidence score you route on must actually mean what it says. This is how you check."
+    },
+    {
+      "id": "sklearn-cohen-kappa",
+      "title": "sklearn.metrics.cohen_kappa_score",
+      "author": "scikit-learn",
+      "type": "web",
+      "ref": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html",
+      "expect": "cohen_kappa_score",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 1,
+      "skills": [
+        "eval-human-calibration",
+        "eval-stat"
+      ],
+      "note": "Inter-rater agreement. The number that turns 'the judge seems fine' into a claim.",
+      "atomic": true
+    },
+    {
+      "id": "sklearn-model-evaluation",
+      "title": "Metrics and scoring: quantifying the quality of predictions",
+      "author": "scikit-learn",
+      "type": "web",
+      "ref": "https://scikit-learn.org/stable/modules/model_evaluation.html",
+      "expect": "scoring",
+      "kind": "reference",
+      "cost": "free",
+      "est_hours": 3,
+      "skills": [
+        "ml-eval-classical"
+      ],
+      "atomic": true
+    },
+    {
+      "id": "slp3",
+      "title": "Speech and Language Processing",
+      "author": "Dan Jurafsky, James H. Martin",
+      "type": "web",
+      "ref": "https://web.stanford.edu/~jurafsky/slp3/",
+      "expect": "Speech and Language Processing",
+      "kind": "book",
+      "cost": "free",
+      "est_hours": 60,
+      "skills": [
+        "nlp-tokenisation",
+        "nlp-embeddings",
+        "speech-asr"
+      ],
+      "note": "Free draft of the 3rd edition. The ASR and TTS chapters are the best free treatment there is."
+    },
+    {
+      "id": "spinning-up",
+      "title": "Welcome to Spinning Up in Deep RL!",
+      "author": "OpenAI",
+      "type": "web",
+      "ref": "https://spinningup.openai.com/en/latest/",
+      "expect": "Spinning Up",
+      "kind": "course",
+      "cost": "free",
+      "est_hours": 40,
+      "skills": [
+        "rl-policygradient",
+        "rl-valuemethods"
+      ]
+    },
+    {
+      "id": "stanford-cs224n",
+      "title": "Stanford CS224N: Natural Language Processing with Deep Learning",
+      "author": "Christopher Manning, Stanford",
+      "type": "youtube_playlist",
+      "ref": "PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ",
+      "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ",
+      "kind": "lecture_series",
+      "cost": "free",
+      "est_hours": 35,
+      "skills": [
+        "nlp-embeddings",
+        "transformers-attention",
+        "nlp-tokenisation"
+      ]
     },
     {
       "id": "stanford-cs229-playlist",
@@ -212,22 +2949,6 @@
         "dl-architectures",
         "dl-training",
         "dl-regularisation"
-      ]
-    },
-    {
-      "id": "stanford-cs224n",
-      "title": "Stanford CS224N: Natural Language Processing with Deep Learning",
-      "author": "Christopher Manning, Stanford",
-      "type": "youtube_playlist",
-      "ref": "PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ",
-      "url": "https://www.youtube.com/playlist?list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ",
-      "kind": "lecture_series",
-      "cost": "free",
-      "est_hours": 35,
-      "skills": [
-        "nlp-embeddings",
-        "transformers-attention",
-        "nlp-tokenisation"
       ]
     },
     {
@@ -265,1220 +2986,6 @@
       "note": "The most current university treatment of building an LLM end to end — tokeniser through to alignment, with dedicated lectures on GPUs, kernels and inference. Cited as a playlist deliberately: Stanford Online disables embedding on the individual lecture videos, so they cannot be identity-verified, and the video ids that do verify turn out to belong to third-party re-upload channels rather than to Stanford. The playlist is the official artifact and it verifies."
     },
     {
-      "id": "mit-6s191",
-      "title": "MIT Introduction to Deep Learning | 6.S191",
-      "author": "Alexander Amini, MIT",
-      "type": "youtube_playlist",
-      "ref": "PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI",
-      "url": "https://www.youtube.com/playlist?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI",
-      "kind": "lecture_series",
-      "cost": "free",
-      "est_hours": 15,
-      "skills": [
-        "dl-architectures",
-        "dl-training"
-      ]
-    },
-    {
-      "id": "mit-efficientml",
-      "title": "MIT 6.5940 EfficientML.ai",
-      "author": "Song Han, MIT",
-      "type": "youtube_playlist",
-      "ref": "PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB",
-      "url": "https://www.youtube.com/playlist?list=PL80kAHvQbh-pT4lCkDT53zT8DKmhE0idB",
-      "kind": "lecture_series",
-      "cost": "free",
-      "est_hours": 25,
-      "skills": [
-        "infra-quantisation",
-        "infra-serving",
-        "infra-latency"
-      ]
-    },
-    {
-      "id": "fastai-part1",
-      "title": "Practical Deep Learning for Coders",
-      "author": "Jeremy Howard, fast.ai",
-      "type": "web",
-      "ref": "https://course.fast.ai/",
-      "expect": "Practical Deep Learning",
-      "kind": "course",
-      "cost": "free",
-      "est_hours": 60,
-      "skills": [
-        "dl-training",
-        "dl-architectures",
-        "eng-pytorch"
-      ],
-      "note": "Top-down. Good counterweight to Karpathy's bottom-up."
-    },
-    {
-      "id": "d2l",
-      "title": "Dive into Deep Learning",
-      "author": "Zhang, Lipton, Li, Smola",
-      "type": "web",
-      "ref": "https://d2l.ai/",
-      "expect": "Dive into Deep Learning",
-      "kind": "book",
-      "cost": "free",
-      "est_hours": 80,
-      "skills": [
-        "dl-architectures",
-        "dl-training",
-        "eng-pytorch"
-      ],
-      "note": "Runnable notebooks throughout. Use as reference rather than front-to-back."
-    },
-    {
-      "id": "hf-nlp-course",
-      "title": "Introduction - Hugging Face NLP Course",
-      "author": "Hugging Face",
-      "type": "web",
-      "ref": "https://huggingface.co/learn/nlp-course/chapter1/1",
-      "expect": "Hugging Face Course",
-      "kind": "course",
-      "cost": "free",
-      "est_hours": 20,
-      "skills": [
-        "nlp-tokenisation",
-        "transformers-arch",
-        "ft-sft"
-      ]
-    },
-    {
-      "id": "hf-agents-course",
-      "title": "Welcome to the Agents Course",
-      "author": "Hugging Face",
-      "type": "web",
-      "ref": "https://huggingface.co/learn/agents-course/unit0/introduction",
-      "expect": "Agents Course",
-      "kind": "course",
-      "cost": "free",
-      "est_hours": 20,
-      "skills": [
-        "agent-planning",
-        "agent-orchestration",
-        "agent-eval"
-      ]
-    },
-    {
-      "id": "hf-audio-course",
-      "title": "Welcome to the Hugging Face Audio course!",
-      "author": "Hugging Face",
-      "type": "web",
-      "ref": "https://huggingface.co/learn/audio-course/chapter0/introduction",
-      "expect": "Audio course",
-      "kind": "course",
-      "cost": "free",
-      "est_hours": 20,
-      "skills": [
-        "speech-asr",
-        "speech-tts"
-      ]
-    },
-    {
-      "id": "hf-deep-rl-course",
-      "title": "Welcome to the Deep Reinforcement Learning Course",
-      "author": "Hugging Face",
-      "type": "web",
-      "ref": "https://huggingface.co/learn/deep-rl-course/unit0/introduction",
-      "expect": "Deep Reinforcement Learning",
-      "kind": "course",
-      "cost": "free",
-      "est_hours": 30,
-      "skills": [
-        "rl-mdp",
-        "rl-valuemethods",
-        "rl-policygradient"
-      ]
-    },
-    {
-      "id": "spinning-up",
-      "title": "Welcome to Spinning Up in Deep RL!",
-      "author": "OpenAI",
-      "type": "web",
-      "ref": "https://spinningup.openai.com/en/latest/",
-      "expect": "Spinning Up",
-      "kind": "course",
-      "cost": "free",
-      "est_hours": 40,
-      "skills": [
-        "rl-policygradient",
-        "rl-valuemethods"
-      ]
-    },
-    {
-      "id": "slp3",
-      "title": "Speech and Language Processing",
-      "author": "Dan Jurafsky, James H. Martin",
-      "type": "web",
-      "ref": "https://web.stanford.edu/~jurafsky/slp3/",
-      "expect": "Speech and Language Processing",
-      "kind": "book",
-      "cost": "free",
-      "est_hours": 60,
-      "skills": [
-        "nlp-tokenisation",
-        "nlp-embeddings",
-        "speech-asr"
-      ],
-      "note": "Free draft of the 3rd edition. The ASR and TTS chapters are the best free treatment there is."
-    },
-    {
-      "id": "book-ai-engineering",
-      "title": "AI Engineering",
-      "author": "Chip Huyen",
-      "type": "book",
-      "ref": "9781098166304",
-      "kind": "book",
-      "cost": "paid",
-      "est_hours": 30,
-      "skills": [
-        "eval-design",
-        "rag-chunking",
-        "infra-tokenomics",
-        "ft-sft"
-      ],
-      "note": "Closest thing to a textbook for Block I. Evaluation chapters are the strongest."
-    },
-    {
-      "id": "book-designing-ml-systems",
-      "title": "Designing Machine Learning Systems",
-      "author": "Chip Huyen",
-      "type": "book",
-      "ref": "9781098107963",
-      "kind": "book",
-      "cost": "paid",
-      "est_hours": 30,
-      "skills": [
-        "eval-regression",
-        "eval-observability",
-        "eng-deployment"
-      ]
-    },
-    {
-      "id": "book-build-llm-scratch",
-      "title": "Build a Large Language Model (From Scratch)",
-      "author": "Sebastian Raschka",
-      "type": "book",
-      "ref": "9781633437166",
-      "kind": "book",
-      "cost": "paid",
-      "est_hours": 40,
-      "skills": [
-        "transformers-implementation",
-        "ft-sft",
-        "ft-lora"
-      ]
-    },
-    {
-      "id": "book-hands-on-ml",
-      "title": "Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow",
-      "author": "Aurélien Géron",
-      "type": "book",
-      "ref": "9781098125974",
-      "kind": "book",
-      "cost": "paid",
-      "est_hours": 60,
-      "skills": [
-        "ml-supervised",
-        "ml-unsupervised",
-        "ml-eval-classical",
-        "ml-featureeng"
-      ]
-    },
-    {
-      "id": "book-deep-learning-goodfellow",
-      "title": "Deep Learning",
-      "author": "Goodfellow, Bengio, Courville",
-      "type": "book",
-      "ref": "9780262035613",
-      "url": "https://www.deeplearningbook.org/",
-      "kind": "book",
-      "cost": "free",
-      "est_hours": 80,
-      "skills": [
-        "dl-training",
-        "dl-regularisation",
-        "math-optim"
-      ],
-      "note": "Reference, not a read-through. Free online at deeplearningbook.org."
-    },
-    {
-      "id": "book-sutton-barto",
-      "title": "Reinforcement Learning: An Introduction",
-      "author": "Richard S. Sutton, Andrew G. Barto",
-      "type": "book",
-      "ref": "9780262039246",
-      "kind": "book",
-      "cost": "free",
-      "est_hours": 60,
-      "skills": [
-        "rl-mdp",
-        "rl-valuemethods",
-        "rl-policygradient"
-      ],
-      "note": "Second edition PDF is free from Sutton's site."
-    },
-    {
-      "id": "book-ml-powered-apps",
-      "title": "Building Machine Learning Powered Applications",
-      "author": "Emmanuel Ameisen",
-      "type": "book",
-      "ref": "9781492045113",
-      "kind": "book",
-      "cost": "paid",
-      "est_hours": 20,
-      "skills": [
-        "eval-design",
-        "eng-deployment"
-      ]
-    },
-    {
-      "id": "book-ddia",
-      "title": "Designing Data-Intensive Applications",
-      "author": "Martin Kleppmann",
-      "type": "book",
-      "ref": "9781449373320",
-      "kind": "book",
-      "cost": "paid",
-      "est_hours": 40,
-      "skills": [
-        "eng-deployment",
-        "infra-serving"
-      ]
-    },
-    {
-      "id": "paper-attention",
-      "title": "Attention Is All You Need",
-      "author": "Vaswani et al.",
-      "type": "arxiv",
-      "ref": "1706.03762",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 4,
-      "skills": [
-        "transformers-attention",
-        "transformers-arch"
-      ]
-    },
-    {
-      "id": "paper-gpt3",
-      "title": "Language Models are Few-Shot Learners",
-      "author": "Brown et al.",
-      "type": "arxiv",
-      "ref": "2005.14165",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 4,
-      "skills": [
-        "llm-prompting",
-        "eval-datasets"
-      ]
-    },
-    {
-      "id": "paper-instructgpt",
-      "title": "Training language models to follow instructions with human feedback",
-      "author": "Ouyang et al.",
-      "type": "arxiv",
-      "ref": "2203.02155",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 4,
-      "skills": [
-        "ft-preference",
-        "rl-rlhf",
-        "eval-human-calibration"
-      ]
-    },
-    {
-      "id": "paper-lora",
-      "title": "LoRA: Low-Rank Adaptation of Large Language Models",
-      "author": "Hu et al.",
-      "type": "arxiv",
-      "ref": "2106.09685",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "ft-lora"
-      ]
-    },
-    {
-      "id": "paper-dpo",
-      "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model",
-      "author": "Rafailov et al.",
-      "type": "arxiv",
-      "ref": "2305.18290",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 4,
-      "skills": [
-        "ft-preference"
-      ]
-    },
-    {
-      "id": "paper-cot",
-      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models",
-      "author": "Wei et al.",
-      "type": "arxiv",
-      "ref": "2201.11903",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "llm-prompting"
-      ]
-    },
-    {
-      "id": "paper-self-consistency",
-      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models",
-      "author": "Wang et al.",
-      "type": "arxiv",
-      "ref": "2203.11171",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "llm-prompting",
-        "eval-stat"
-      ]
-    },
-    {
-      "id": "paper-react",
-      "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
-      "author": "Yao et al.",
-      "type": "arxiv",
-      "ref": "2210.03629",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "agent-planning",
-        "llm-tooluse"
-      ]
-    },
-    {
-      "id": "paper-rag",
-      "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
-      "author": "Lewis et al.",
-      "type": "arxiv",
-      "ref": "2005.11401",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "rag-embeddings"
-      ]
-    },
-    {
-      "id": "paper-toolformer",
-      "title": "Toolformer: Language Models Can Teach Themselves to Use Tools",
-      "author": "Schick et al.",
-      "type": "arxiv",
-      "ref": "2302.04761",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "llm-tooluse"
-      ]
-    },
-    {
-      "id": "paper-flashattention",
-      "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
-      "author": "Dao et al.",
-      "type": "arxiv",
-      "ref": "2205.14135",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 4,
-      "skills": [
-        "infra-gpu",
-        "transformers-implementation"
-      ]
-    },
-    {
-      "id": "paper-llm-as-judge",
-      "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
-      "author": "Zheng et al.",
-      "type": "arxiv",
-      "ref": "2306.05685",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 4,
-      "skills": [
-        "eval-llm-judge",
-        "eval-human-calibration"
-      ],
-      "note": "Core reading for Course 2. Position bias, verbosity bias, self-enhancement bias — named and measured."
-    },
-    {
-      "id": "paper-helm",
-      "title": "Holistic Evaluation of Language Models",
-      "author": "Liang et al.",
-      "type": "arxiv",
-      "ref": "2211.09110",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 5,
-      "skills": [
-        "eval-design",
-        "eval-datasets"
-      ]
-    },
-    {
-      "id": "paper-chatbot-arena",
-      "title": "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference",
-      "author": "Chiang et al.",
-      "type": "arxiv",
-      "ref": "2403.04132",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "eval-human-calibration",
-        "eval-stat"
-      ]
-    },
-    {
-      "id": "paper-g-eval",
-      "title": "G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment",
-      "author": "Liu et al.",
-      "type": "arxiv",
-      "ref": "2303.16634",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "eval-llm-judge"
-      ]
-    },
-    {
-      "id": "paper-ragas",
-      "title": "RAGAS: Automated Evaluation of Retrieval Augmented Generation",
-      "author": "Es et al.",
-      "type": "arxiv",
-      "ref": "2309.15217",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "rag-eval",
-        "eval-design"
-      ]
-    },
-    {
-      "id": "paper-lost-in-middle",
-      "title": "Lost in the Middle: How Language Models Use Long Contexts",
-      "author": "Liu et al.",
-      "type": "arxiv",
-      "ref": "2307.03172",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "llm-context",
-        "rag-reranking"
-      ]
-    },
-    {
-      "id": "paper-length-controlled-alpacaeval",
-      "title": "Length-Controlled AlpacaEval: A Simple Way to Debias Automatic Evaluators",
-      "author": "Dubois et al.",
-      "type": "arxiv",
-      "ref": "2404.04475",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "eval-llm-judge",
-        "eval-stat"
-      ],
-      "note": "The clearest demonstration that judge scores can be gamed by output length alone."
-    },
-    {
-      "id": "paper-scaling-laws",
-      "title": "Scaling Laws for Neural Language Models",
-      "author": "Kaplan et al.",
-      "type": "arxiv",
-      "ref": "2001.08361",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "dl-training"
-      ]
-    },
-    {
-      "id": "paper-chinchilla",
-      "title": "Training Compute-Optimal Large Language Models",
-      "author": "Hoffmann et al.",
-      "type": "arxiv",
-      "ref": "2203.15556",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "dl-training"
-      ]
-    },
-    {
-      "id": "paper-switch-transformer",
-      "title": "Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity",
-      "author": "Fedus et al.",
-      "type": "arxiv",
-      "ref": "2101.03961",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "transformers-arch",
-        "infra-distributed"
-      ]
-    },
-    {
-      "id": "paper-vllm",
-      "title": "Efficient Memory Management for Large Language Model Serving with PagedAttention",
-      "author": "Kwon et al.",
-      "type": "arxiv",
-      "ref": "2309.06180",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "infra-serving",
-        "infra-batching"
-      ]
-    },
-    {
-      "id": "paper-speculative-decoding",
-      "title": "Fast Inference from Transformers via Speculative Decoding",
-      "author": "Leviathan et al.",
-      "type": "arxiv",
-      "ref": "2211.17192",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "infra-latency",
-        "infra-serving"
-      ]
-    },
-    {
-      "id": "paper-gptq",
-      "title": "GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers",
-      "author": "Frantar et al.",
-      "type": "arxiv",
-      "ref": "2210.17323",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "infra-quantisation"
-      ]
-    },
-    {
-      "id": "paper-whisper",
-      "title": "Robust Speech Recognition via Large-Scale Weak Supervision",
-      "author": "Radford et al.",
-      "type": "arxiv",
-      "ref": "2212.04356",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 4,
-      "skills": [
-        "speech-asr"
-      ]
-    },
-    {
-      "id": "paper-conformer",
-      "title": "Conformer: Convolution-augmented Transformer for Speech Recognition",
-      "author": "Gulati et al.",
-      "type": "arxiv",
-      "ref": "2005.08100",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "speech-asr"
-      ]
-    },
-    {
-      "id": "paper-constitutional-ai",
-      "title": "Constitutional AI: Harmlessness from AI Feedback",
-      "author": "Bai et al.",
-      "type": "arxiv",
-      "ref": "2212.08073",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 5,
-      "skills": [
-        "safety-alignment",
-        "ft-preference"
-      ]
-    },
-    {
-      "id": "paper-swe-bench",
-      "title": "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?",
-      "author": "Jimenez et al.",
-      "type": "arxiv",
-      "ref": "2310.06770",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "agent-eval",
-        "eval-datasets"
-      ]
-    },
-    {
-      "id": "paper-llama2",
-      "title": "Llama 2: Open Foundation and Fine-Tuned Chat Models",
-      "author": "Touvron et al.",
-      "type": "arxiv",
-      "ref": "2307.09288",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 5,
-      "skills": [
-        "ft-sft",
-        "ft-preference",
-        "safety-redteam"
-      ]
-    },
-    {
-      "id": "repo-nanogpt",
-      "title": "karpathy/nanoGPT",
-      "author": "Andrej Karpathy",
-      "type": "github",
-      "ref": "karpathy/nanoGPT",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 15,
-      "skills": [
-        "transformers-implementation",
-        "dl-training"
-      ]
-    },
-    {
-      "id": "repo-mingpt",
-      "title": "karpathy/minGPT",
-      "author": "Andrej Karpathy",
-      "type": "github",
-      "ref": "karpathy/minGPT",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 8,
-      "skills": [
-        "transformers-implementation"
-      ]
-    },
-    {
-      "id": "repo-llm-c",
-      "title": "karpathy/llm.c",
-      "author": "Andrej Karpathy",
-      "type": "github",
-      "ref": "karpathy/llm.c",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 20,
-      "skills": [
-        "infra-gpu",
-        "transformers-implementation"
-      ]
-    },
-    {
-      "id": "repo-openai-evals",
-      "title": "openai/evals",
-      "author": "OpenAI",
-      "type": "github",
-      "ref": "openai/evals",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 8,
-      "skills": [
-        "eval-design",
-        "eval-datasets"
-      ]
-    },
-    {
-      "id": "repo-lm-eval-harness",
-      "title": "EleutherAI/lm-evaluation-harness",
-      "author": "EleutherAI",
-      "type": "github",
-      "ref": "EleutherAI/lm-evaluation-harness",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 10,
-      "skills": [
-        "eval-datasets",
-        "eval-regression"
-      ]
-    },
-    {
-      "id": "repo-helm",
-      "title": "stanford-crfm/helm",
-      "author": "Stanford CRFM",
-      "type": "github",
-      "ref": "stanford-crfm/helm",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 8,
-      "skills": [
-        "eval-design",
-        "eval-datasets"
-      ]
-    },
-    {
-      "id": "repo-deepeval",
-      "title": "confident-ai/deepeval",
-      "author": "Confident AI",
-      "type": "github",
-      "ref": "confident-ai/deepeval",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 8,
-      "skills": [
-        "eval-llm-judge",
-        "eval-regression"
-      ]
-    },
-    {
-      "id": "repo-ragas",
-      "title": "explodinggradients/ragas",
-      "author": "Exploding Gradients",
-      "type": "github",
-      "ref": "explodinggradients/ragas",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 6,
-      "skills": [
-        "rag-eval"
-      ]
-    },
-    {
-      "id": "repo-promptfoo",
-      "title": "promptfoo/promptfoo",
-      "author": "promptfoo",
-      "type": "github",
-      "ref": "promptfoo/promptfoo",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 6,
-      "skills": [
-        "eval-regression",
-        "eval-design"
-      ],
-      "note": "The one eval tool in this list that is TypeScript-native — usable directly against Career Side Quests."
-    },
-    {
-      "id": "repo-langfuse",
-      "title": "langfuse/langfuse",
-      "author": "Langfuse",
-      "type": "github",
-      "ref": "langfuse/langfuse",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 6,
-      "skills": [
-        "eval-observability"
-      ]
-    },
-    {
-      "id": "repo-phoenix",
-      "title": "Arize-ai/phoenix",
-      "author": "Arize AI",
-      "type": "github",
-      "ref": "Arize-ai/phoenix",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 6,
-      "skills": [
-        "eval-observability",
-        "rag-eval"
-      ]
-    },
-    {
-      "id": "repo-vllm",
-      "title": "vllm-project/vllm",
-      "author": "vLLM",
-      "type": "github",
-      "ref": "vllm-project/vllm",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 12,
-      "skills": [
-        "infra-serving",
-        "infra-batching"
-      ]
-    },
-    {
-      "id": "repo-transformers",
-      "title": "huggingface/transformers",
-      "author": "Hugging Face",
-      "type": "github",
-      "ref": "huggingface/transformers",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 15,
-      "skills": [
-        "transformers-arch",
-        "ft-sft"
-      ]
-    },
-    {
-      "id": "repo-trl",
-      "title": "huggingface/trl",
-      "author": "Hugging Face",
-      "type": "github",
-      "ref": "huggingface/trl",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 12,
-      "skills": [
-        "ft-preference",
-        "rl-rlhf"
-      ]
-    },
-    {
-      "id": "repo-peft",
-      "title": "huggingface/peft",
-      "author": "Hugging Face",
-      "type": "github",
-      "ref": "huggingface/peft",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 8,
-      "skills": [
-        "ft-lora"
-      ]
-    },
-    {
-      "id": "repo-spinningup",
-      "title": "openai/spinningup",
-      "author": "OpenAI",
-      "type": "github",
-      "ref": "openai/spinningup",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 20,
-      "skills": [
-        "rl-policygradient"
-      ]
-    },
-    {
-      "id": "repo-whisper",
-      "title": "openai/whisper",
-      "author": "OpenAI",
-      "type": "github",
-      "ref": "openai/whisper",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 6,
-      "skills": [
-        "speech-asr"
-      ]
-    },
-    {
-      "id": "repo-llama-cpp",
-      "title": "ggml-org/llama.cpp",
-      "author": "ggml",
-      "type": "github",
-      "ref": "ggml-org/llama.cpp",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 10,
-      "skills": [
-        "infra-quantisation",
-        "infra-serving"
-      ]
-    },
-    {
-      "id": "repo-litellm",
-      "title": "BerriAI/litellm",
-      "author": "BerriAI",
-      "type": "github",
-      "ref": "BerriAI/litellm",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 4,
-      "skills": [
-        "infra-tokenomics",
-        "eng-deployment"
-      ]
-    },
-    {
-      "id": "repo-pytorch",
-      "title": "pytorch/pytorch",
-      "author": "PyTorch",
-      "type": "github",
-      "ref": "pytorch/pytorch",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 10,
-      "skills": [
-        "eng-pytorch"
-      ]
-    },
-    {
-      "id": "repo-inspect-ai",
-      "title": "UKGovernmentBEIS/inspect_ai",
-      "author": "UK AI Safety Institute",
-      "type": "github",
-      "ref": "UKGovernmentBEIS/inspect_ai",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 8,
-      "skills": [
-        "eval-design",
-        "agent-eval",
-        "safety-redteam"
-      ],
-      "note": "A government safety institute's production eval framework. Unusually good design to study."
-    },
-    {
-      "id": "hamel-evals",
-      "title": "Your AI Product Needs Evals",
-      "author": "Hamel Husain",
-      "type": "web",
-      "ref": "https://hamel.dev/blog/posts/evals/",
-      "expect": "evals",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "eval-design",
-        "eval-human-calibration"
-      ],
-      "note": "The single most practical thing written on getting evals started. Course 2 opens with this."
-    },
-    {
-      "id": "hamel-llm-judge",
-      "title": "Creating a LLM-as-a-Judge That Drives Business Results",
-      "author": "Hamel Husain",
-      "type": "web",
-      "ref": "https://hamel.dev/blog/posts/llm-judge/",
-      "expect": "Judge",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "eval-llm-judge",
-        "eval-human-calibration"
-      ]
-    },
-    {
-      "id": "eugene-yan-evals",
-      "title": "Task-Specific LLM Evals that Do & Don't Work",
-      "author": "Eugene Yan",
-      "type": "web",
-      "ref": "https://eugeneyan.com/writing/evals/",
-      "expect": "evals",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "eval-design",
-        "eval-stat"
-      ]
-    },
-    {
-      "id": "eugene-yan-llm-patterns",
-      "title": "Patterns for Building LLM-based Systems & Products",
-      "author": "Eugene Yan",
-      "type": "web",
-      "ref": "https://eugeneyan.com/writing/llm-patterns/",
-      "expect": "Patterns",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "eval-design",
-        "rag-embeddings",
-        "llm-prompting"
-      ]
-    },
-    {
-      "id": "lilian-weng-agents",
-      "title": "LLM Powered Autonomous Agents",
-      "author": "Lilian Weng",
-      "type": "web",
-      "ref": "https://lilianweng.github.io/posts/2023-06-23-agent/",
-      "expect": "Agent",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "agent-planning",
-        "agent-orchestration"
-      ]
-    },
-    {
-      "id": "lilian-weng-hallucination",
-      "title": "Extrinsic Hallucinations in LLMs",
-      "author": "Lilian Weng",
-      "type": "web",
-      "ref": "https://lilianweng.github.io/posts/2024-07-07-hallucination/",
-      "expect": "Hallucination",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "llm-failure-modes",
-        "eval-design"
-      ]
-    },
-    {
-      "id": "jay-alammar-transformer",
-      "title": "The Illustrated Transformer",
-      "author": "Jay Alammar",
-      "type": "web",
-      "ref": "https://jalammar.github.io/illustrated-transformer/",
-      "expect": "Illustrated Transformer",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "transformers-attention"
-      ]
-    },
-    {
-      "id": "annotated-transformer",
-      "title": "The Annotated Transformer",
-      "author": "Harvard NLP",
-      "type": "web",
-      "ref": "https://nlp.seas.harvard.edu/annotated-transformer/",
-      "expect": "Annotated Transformer",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 6,
-      "skills": [
-        "transformers-implementation"
-      ]
-    },
-    {
-      "id": "anthropic-docs",
-      "title": "Anthropic API documentation",
-      "author": "Anthropic",
-      "type": "web",
-      "ref": "https://docs.claude.com/en/docs/overview",
-      "expect": "Claude",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 6,
-      "skills": [
-        "llm-structured-output",
-        "llm-tooluse",
-        "llm-context"
-      ]
-    },
-    {
-      "id": "openai-cookbook",
-      "title": "openai/openai-cookbook",
-      "author": "OpenAI",
-      "type": "github",
-      "ref": "openai/openai-cookbook",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 8,
-      "skills": [
-        "llm-prompting",
-        "llm-structured-output",
-        "rag-embeddings"
-      ]
-    },
-    {
-      "id": "anthropic-building-effective-agents",
-      "title": "Building effective agents",
-      "author": "Anthropic",
-      "type": "web",
-      "ref": "https://www.anthropic.com/engineering/building-effective-agents",
-      "expect": "agents",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "agent-orchestration",
-        "agent-planning"
-      ]
-    },
-    {
-      "id": "google-ml-crash-course",
-      "title": "Machine Learning Crash Course",
-      "author": "Google",
-      "type": "web",
-      "ref": "https://developers.google.com/machine-learning/crash-course",
-      "expect": "Machine Learning Crash Course",
-      "kind": "course",
-      "cost": "free",
-      "est_hours": 20,
-      "skills": [
-        "ml-supervised",
-        "ml-eval-classical"
-      ]
-    },
-    {
-      "id": "sbert-docs",
-      "title": "SentenceTransformers Documentation",
-      "author": "Nils Reimers, UKP Lab",
-      "type": "web",
-      "ref": "https://www.sbert.net/",
-      "expect": "Sentence Transformers",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 5,
-      "skills": [
-        "rag-embeddings",
-        "nlp-embeddings"
-      ]
-    },
-    {
-      "id": "pinecone-learn-vector-search",
-      "title": "Vector Databases and Similarity Search",
-      "author": "Pinecone",
-      "type": "web",
-      "ref": "https://www.pinecone.io/learn/vector-database/",
-      "expect": "vector database",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "rag-embeddings",
-        "rag-hybrid-search"
-      ]
-    },
-    {
-      "id": "bm25-rank-fusion",
-      "title": "Reciprocal Rank Fusion outperforms Condorcet and individual Rank Learning Methods",
-      "author": "Cormack, Clarke, Buettcher",
-      "type": "pdf",
-      "ref": "https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "rag-hybrid-search",
-        "rag-reranking"
-      ]
-    },
-    {
-      "id": "elevenlabs-docs",
-      "title": "ElevenLabs Documentation",
-      "author": "ElevenLabs",
-      "type": "web",
-      "ref": "https://elevenlabs.io/docs/overview",
-      "expect": "ElevenLabs",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 6,
-      "skills": [
-        "speech-tts",
-        "speech-streaming",
-        "speech-agents"
-      ]
-    },
-    {
       "id": "webrtc-for-the-curious",
       "title": "WebRTC for the Curious",
       "author": "WebRTC for the Curious",
@@ -1495,109 +3002,21 @@
       "note": "Voice agents live or die on transport. This is the only free text that explains why."
     },
     {
-      "id": "pytorch-tutorials",
-      "title": "Welcome to PyTorch Tutorials",
-      "author": "PyTorch",
-      "type": "web",
-      "ref": "https://pytorch.org/tutorials/",
-      "expect": "PyTorch Tutorials",
-      "kind": "reference",
+      "id": "yt-ben-clavie-rag",
+      "title": "Beyond the Basics of Retrieval Augmented Generation",
+      "author": "Ben Clavié (Mastering LLMs Conference)",
+      "type": "youtube",
+      "ref": "0nA5QG3087g",
+      "kind": "lecture",
       "cost": "free",
-      "est_hours": 15,
+      "est_hours": 1.5,
       "skills": [
-        "eng-pytorch",
-        "eng-python"
-      ]
-    },
-    {
-      "id": "python-numpy-for-ts-devs",
-      "title": "NumPy: the absolute basics for beginners",
-      "author": "NumPy",
-      "type": "web",
-      "ref": "https://numpy.org/doc/stable/user/absolute_beginners.html",
-      "expect": "NumPy",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 4,
-      "skills": [
-        "eng-python"
+        "rag-hybrid-search",
+        "rag-reranking",
+        "rag-eval",
+        "rag-chunking"
       ],
-      "note": "Python is the medium, never an objective. This exists so tensor semantics are not a surprise, not to teach programming."
-    },
-    {
-      "id": "distill-attention",
-      "title": "Attention and Augmented Recurrent Neural Networks",
-      "author": "Olah, Carter",
-      "type": "web",
-      "ref": "https://distill.pub/2016/augmented-rnns/",
-      "expect": "Attention",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "transformers-attention"
-      ]
-    },
-    {
-      "id": "colah-lstm",
-      "title": "Understanding LSTM Networks",
-      "author": "Christopher Olah",
-      "type": "web",
-      "ref": "https://colah.github.io/posts/2015-08-Understanding-LSTMs/",
-      "expect": "LSTM",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "dl-architectures"
-      ]
-    },
-    {
-      "id": "gt-omscs-ai-spec",
-      "title": "Specialization: Artificial Intelligence",
-      "author": "Georgia Tech OMSCS",
-      "type": "web",
-      "ref": "https://omscs.gatech.edu/specialization-artificial-intelligence-formerly-interactive-intelligence",
-      "expect": "Specialization",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [],
-      "reference_only": true,
-      "note": "Structural reference for the programme map only. Not coursework, and not copied."
-    },
-    {
-      "id": "sklearn-cohen-kappa",
-      "title": "sklearn.metrics.cohen_kappa_score",
-      "author": "scikit-learn",
-      "type": "web",
-      "ref": "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html",
-      "expect": "cohen_kappa_score",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "eval-human-calibration",
-        "eval-stat"
-      ],
-      "note": "Inter-rater agreement. The number that turns 'the judge seems fine' into a claim.",
-      "atomic": true
-    },
-    {
-      "id": "scipy-bootstrap",
-      "title": "scipy.stats.bootstrap",
-      "author": "SciPy",
-      "type": "web",
-      "ref": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html",
-      "expect": "bootstrap",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "eval-stat"
-      ],
-      "note": "Confidence intervals without distributional assumptions — the practical way to answer 'is this difference real?'",
-      "atomic": true
+      "note": "The single most practical talk on retrieval that exists: why BM25 refuses to die, why reranking is the cheapest win available, and why 'RAG' as a word hides the two separate problems underneath."
     },
     {
       "id": "yt-evals-hamel-shreya",
@@ -1615,22 +3034,6 @@
         "eval-human-calibration"
       ],
       "note": "The two people who wrote the eval canon, walking real examples end to end. The single best video opener for this course."
-    },
-    {
-      "id": "fsdl-llmops",
-      "title": "LLMOps (LLM Bootcamp)",
-      "author": "The Full Stack",
-      "type": "youtube",
-      "ref": "Fquj2u7ay40",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "eval-regression",
-        "eval-observability",
-        "eval-design"
-      ],
-      "note": "Comparing and evaluating models, prompt management, and test-driven development applied to LLMs."
     },
     {
       "id": "yt-hugo-build-evaluate",
@@ -1660,1342 +3063,6 @@
         "eval-observability"
       ],
       "note": "Conference talk on why demos do not survive contact with users, and what measurement fixes it."
-    },
-    {
-      "id": "paper-who-validates-validators",
-      "title": "Who Validates the Validators? Aligning LLM-Assisted Evaluation of LLM Outputs with Human Preferences",
-      "author": "Shankar et al.",
-      "type": "arxiv",
-      "ref": "2404.12272",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 4,
-      "skills": [
-        "eval-llm-judge",
-        "eval-human-calibration"
-      ],
-      "note": "The criteria you think you want are not the criteria you actually apply — they drift as you grade. Core reading for the calibration module."
-    },
-    {
-      "id": "paper-judging-the-judges",
-      "title": "Judging the Judges: A Systematic Evaluation of Bias Mitigation Strategies in LLM-as-a-Judge Pipelines",
-      "author": "arXiv 2604.23178",
-      "type": "arxiv",
-      "ref": "2604.23178",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "eval-llm-judge"
-      ]
-    },
-    {
-      "id": "paper-position-bias-rubric-judge",
-      "title": "Am I More Pointwise or Pairwise? Revealing Position Bias in Rubric-Based LLM-as-a-Judge",
-      "author": "arXiv 2602.02219",
-      "type": "arxiv",
-      "ref": "2602.02219",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "eval-llm-judge",
-        "eval-stat"
-      ]
-    },
-    {
-      "id": "hamel-evals-faq",
-      "title": "LLM Evals: Everything You Need to Know",
-      "author": "Hamel Husain",
-      "type": "web",
-      "ref": "https://hamel.dev/blog/posts/evals-faq/",
-      "expect": "evals",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "eval-design",
-        "eval-llm-judge",
-        "eval-datasets"
-      ]
-    },
-    {
-      "id": "fsdl-llm-bootcamp",
-      "title": "LLM Bootcamp - Spring 2023",
-      "author": "The Full Stack",
-      "type": "youtube_playlist",
-      "ref": "PL1T8fO7ArWleyIqOy37OVXsP4hFXymdOZ",
-      "kind": "lecture_series",
-      "cost": "free",
-      "est_hours": 7,
-      "skills": [
-        "llm-prompting",
-        "llm-tooluse",
-        "llm-context",
-        "eval-regression"
-      ],
-      "note": "The whole bootcamp. Individual lectures are listed separately where a course uses only one."
-    },
-    {
-      "id": "fsdl-prompt-engineering",
-      "title": "Learn to Spell: Prompt Engineering (LLM Bootcamp)",
-      "author": "The Full Stack",
-      "type": "youtube",
-      "ref": "JnBHR_yL2w8",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "llm-prompting"
-      ],
-      "note": "Treats prompting as engineering rather than incantation — decomposition, reasoning, reflection."
-    },
-    {
-      "id": "fsdl-augmented-lm",
-      "title": "Augmented Language Models (LLM Bootcamp)",
-      "author": "The Full Stack",
-      "type": "youtube",
-      "ref": "YdeuQhlHmCA",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "llm-tooluse",
-        "llm-context",
-        "rag-embeddings"
-      ]
-    },
-    {
-      "id": "fsdl-llm-foundations",
-      "title": "LLM Foundations (LLM Bootcamp)",
-      "author": "The Full Stack",
-      "type": "youtube",
-      "ref": "MyFrMFab6bo",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "transformers-arch",
-        "llm-failure-modes",
-        "nlp-tokenisation"
-      ]
-    },
-    {
-      "id": "fsdl-ux-lui",
-      "title": "UX for Language User Interfaces (LLM Bootcamp)",
-      "author": "The Full Stack",
-      "type": "youtube",
-      "ref": "l5mG4z343qg",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "llm-failure-modes",
-        "llm-context"
-      ],
-      "note": "Design patterns for products where the model is wrong sometimes. Directly relevant to a solutions role."
-    },
-    {
-      "id": "anthropic-prompt-deep-dive",
-      "title": "AI prompt engineering: A deep dive",
-      "author": "Anthropic",
-      "type": "youtube",
-      "ref": "T9aRN5JkmL8",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 1.2,
-      "skills": [
-        "llm-prompting",
-        "llm-context"
-      ],
-      "note": "Anthropic's own researchers arguing with each other about what actually works. Unusually candid."
-    },
-    {
-      "id": "anthropic-prompting-101",
-      "title": "Prompting 101 | Code w/ Claude",
-      "author": "Anthropic",
-      "type": "youtube",
-      "ref": "ysPbXH0LpIE",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "llm-prompting",
-        "llm-structured-output"
-      ]
-    },
-    {
-      "id": "repo-anthropic-prompt-tutorial",
-      "title": "anthropics/prompt-eng-interactive-tutorial",
-      "author": "Anthropic",
-      "type": "github",
-      "ref": "anthropics/prompt-eng-interactive-tutorial",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 6,
-      "skills": [
-        "llm-prompting",
-        "llm-structured-output"
-      ],
-      "note": "Nine chapters with exercises. Hands-on, not a read."
-    },
-    {
-      "id": "repo-anthropic-cookbook",
-      "title": "anthropics/anthropic-cookbook",
-      "author": "Anthropic",
-      "type": "github",
-      "ref": "anthropics/anthropic-cookbook",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 6,
-      "skills": [
-        "llm-tooluse",
-        "llm-structured-output",
-        "llm-context"
-      ]
-    },
-    {
-      "id": "yt-ben-clavie-rag",
-      "title": "Beyond the Basics of Retrieval Augmented Generation",
-      "author": "Ben Clavié (Mastering LLMs Conference)",
-      "type": "youtube",
-      "ref": "0nA5QG3087g",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 1.5,
-      "skills": [
-        "rag-hybrid-search",
-        "rag-reranking",
-        "rag-eval",
-        "rag-chunking"
-      ],
-      "note": "The single most practical talk on retrieval that exists: why BM25 refuses to die, why reranking is the cheapest win available, and why 'RAG' as a word hides the two separate problems underneath."
-    },
-    {
-      "id": "cmu-anlp-retrieval",
-      "title": "CMU Advanced NLP Fall 2024 (10): Retrieval and RAG",
-      "author": "Graham Neubig, Carnegie Mellon",
-      "type": "youtube",
-      "ref": "KfQaYk4k9eM",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 1.5,
-      "skills": [
-        "rag-embeddings",
-        "rag-hybrid-search",
-        "llm-context"
-      ],
-      "note": "The university treatment — sparse and dense retrieval derived properly, then long-context transformers as the alternative."
-    },
-    {
-      "id": "cmu-anlp-playlist",
-      "title": "CMU Advanced NLP Fall 2024",
-      "author": "Graham Neubig, Carnegie Mellon",
-      "type": "youtube_playlist",
-      "ref": "PL8PYTP1V4I8D4BeyjwWczukWq9d8PNyZp",
-      "kind": "lecture_series",
-      "cost": "free",
-      "est_hours": 30,
-      "skills": [
-        "nlp-embeddings",
-        "transformers-arch",
-        "rag-embeddings"
-      ]
-    },
-    {
-      "id": "paper-dpr",
-      "title": "Dense Passage Retrieval for Open-Domain Question Answering",
-      "author": "Karpukhin et al.",
-      "type": "arxiv",
-      "ref": "2004.04906",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "rag-embeddings",
-        "nlp-embeddings"
-      ]
-    },
-    {
-      "id": "paper-beir",
-      "title": "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
-      "author": "Thakur et al.",
-      "type": "arxiv",
-      "ref": "2104.08663",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "rag-eval",
-        "eval-datasets"
-      ],
-      "note": "The paper that showed dense retrievers lose to BM25 out of domain. Read it before assuming embeddings win."
-    },
-    {
-      "id": "paper-colbert",
-      "title": "ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT",
-      "author": "Khattab, Zaharia",
-      "type": "arxiv",
-      "ref": "2004.12832",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "rag-embeddings",
-        "rag-reranking"
-      ]
-    },
-    {
-      "id": "paper-hyde",
-      "title": "Precise Zero-Shot Dense Retrieval without Relevance Labels",
-      "author": "Gao et al.",
-      "type": "arxiv",
-      "ref": "2212.10496",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "rag-embeddings"
-      ],
-      "note": "HyDE. Generate a fake answer, embed that instead of the question."
-    },
-    {
-      "id": "paper-rag-best-practices",
-      "title": "Searching for Best Practices in Retrieval-Augmented Generation",
-      "author": "Wang et al.",
-      "type": "arxiv",
-      "ref": "2407.01219",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "rag-chunking",
-        "rag-hybrid-search",
-        "rag-reranking"
-      ]
-    },
-    {
-      "id": "paper-rag-vs-longcontext",
-      "title": "Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach",
-      "author": "Li et al.",
-      "type": "arxiv",
-      "ref": "2407.16833",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "llm-context",
-        "rag-embeddings"
-      ]
-    },
-    {
-      "id": "anthropic-contextual-retrieval",
-      "title": "Introducing Contextual Retrieval",
-      "author": "Anthropic",
-      "type": "web",
-      "ref": "https://www.anthropic.com/news/contextual-retrieval",
-      "expect": "retrieval",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "rag-chunking",
-        "rag-hybrid-search"
-      ],
-      "note": "Chunking destroys the context a chunk needed to be findable. This is the fix, with numbers."
-    },
-    {
-      "id": "berkeley-llm-agents-mooc",
-      "title": "LLM Agents MOOC Fall 2024",
-      "author": "Dawn Song, Xinyun Chen — UC Berkeley CS294-196",
-      "type": "youtube_playlist",
-      "ref": "PLS01nW3RtgopsNLeM936V4TNSsvvVglLc",
-      "kind": "lecture_series",
-      "cost": "free",
-      "est_hours": 20,
-      "skills": [
-        "agent-planning",
-        "agent-orchestration",
-        "agent-eval",
-        "agent-sandboxing"
-      ],
-      "note": "A real Berkeley course on agents specifically, with guest lecturers from the labs. The closest thing to a canonical curriculum for this topic."
-    },
-    {
-      "id": "berkeley-agentic-ai-mooc",
-      "title": "Agentic AI MOOC Fall 2025",
-      "author": "UC Berkeley CS294-196",
-      "type": "youtube_playlist",
-      "ref": "PLS01nW3RtgoqGkm4UeqNeZLccW-OGc1fJ",
-      "kind": "lecture_series",
-      "cost": "free",
-      "est_hours": 20,
-      "skills": [
-        "agent-orchestration",
-        "agent-reliability",
-        "agent-eval"
-      ],
-      "note": "The successor course. More current; use where the 2024 material has dated."
-    },
-    {
-      "id": "berkeley-agents-overview",
-      "title": "Agentic AI MOOC | UC Berkeley CS294-196 Fall 2025 | LLM Agents Overview",
-      "author": "Yann Dubois — UC Berkeley",
-      "type": "youtube",
-      "ref": "r1qZpYAmqmg",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 1.5,
-      "skills": [
-        "agent-planning",
-        "agent-orchestration"
-      ]
-    },
-    {
-      "id": "berkeley-llm-reasoning",
-      "title": "LLM Agents MOOC | UC Berkeley CS294-196 Fall 2024 | LLM Reasoning",
-      "author": "Denny Zhou — Google DeepMind",
-      "type": "youtube",
-      "ref": "QL-FS_Zcmyo",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 1.5,
-      "skills": [
-        "agent-planning",
-        "llm-prompting"
-      ]
-    },
-    {
-      "id": "berkeley-agent-safety",
-      "title": "LLM Agents MOOC | UC Berkeley Fall 2024 | Safe AI Agents + Evidence-based AI Policy by Dawn Song",
-      "author": "Dawn Song — UC Berkeley",
-      "type": "youtube",
-      "ref": "QAgR4uQ15rc",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 1.5,
-      "skills": [
-        "agent-sandboxing",
-        "safety-redteam"
-      ]
-    },
-    {
-      "id": "anthropic-agents-video",
-      "title": "Building more effective AI agents",
-      "author": "Anthropic",
-      "type": "youtube",
-      "ref": "uhJJgc-0iTQ",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "agent-orchestration",
-        "agent-planning"
-      ],
-      "note": "The authors of the Building Effective Agents post talking through what they left out of it."
-    },
-    {
-      "id": "anthropic-writing-tools",
-      "title": "Writing effective tools for AI agents",
-      "author": "Anthropic",
-      "type": "web",
-      "ref": "https://www.anthropic.com/engineering/writing-tools-for-agents",
-      "expect": "tools",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "llm-tooluse",
-        "agent-orchestration"
-      ],
-      "note": "Tool interface design as the actual lever. Pairs directly with AIE-101's tool-interface assignment."
-    },
-    {
-      "id": "paper-reflexion",
-      "title": "Reflexion: Language Agents with Verbal Reinforcement Learning",
-      "author": "Shinn et al.",
-      "type": "arxiv",
-      "ref": "2303.11366",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "agent-planning",
-        "agent-reliability"
-      ]
-    },
-    {
-      "id": "paper-tree-of-thoughts",
-      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models",
-      "author": "Yao et al.",
-      "type": "arxiv",
-      "ref": "2305.10601",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "agent-planning"
-      ]
-    },
-    {
-      "id": "paper-tau-bench",
-      "title": "tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains",
-      "author": "Yao et al.",
-      "type": "arxiv",
-      "ref": "2406.12045",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "agent-eval",
-        "agent-reliability"
-      ],
-      "note": "Agents evaluated on multi-turn tasks with a real user and real policy constraints — and pass^k, which shows reliability collapsing over repeated attempts. The most job-relevant benchmark in this list."
-    },
-    {
-      "id": "paper-webarena",
-      "title": "WebArena: A Realistic Web Environment for Building Autonomous Agents",
-      "author": "Zhou et al.",
-      "type": "arxiv",
-      "ref": "2307.13854",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "agent-eval"
-      ]
-    },
-    {
-      "id": "paper-swe-agent",
-      "title": "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering",
-      "author": "Yang et al.",
-      "type": "arxiv",
-      "ref": "2405.15793",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "agent-orchestration",
-        "llm-tooluse"
-      ]
-    },
-    {
-      "id": "paper-indirect-prompt-injection",
-      "title": "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection",
-      "author": "Greshake et al.",
-      "type": "arxiv",
-      "ref": "2302.12173",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "safety-redteam",
-        "agent-sandboxing"
-      ],
-      "note": "The attack that matters once a model can read untrusted content and call tools. Required before M5."
-    },
-    {
-      "id": "paper-gcg-attacks",
-      "title": "Universal and Transferable Adversarial Attacks on Aligned Language Models",
-      "author": "Zou et al.",
-      "type": "arxiv",
-      "ref": "2307.15043",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "safety-redteam"
-      ]
-    },
-    {
-      "id": "owasp-llm-top10",
-      "title": "OWASP Top 10 for Large Language Model Applications",
-      "author": "OWASP",
-      "type": "web",
-      "ref": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
-      "expect": "Large Language Model",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "safety-redteam",
-        "agent-sandboxing"
-      ]
-    },
-    {
-      "id": "mcp-docs",
-      "title": "Model Context Protocol",
-      "author": "Anthropic",
-      "type": "web",
-      "ref": "https://modelcontextprotocol.io/",
-      "expect": "Model Context Protocol",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 4,
-      "skills": [
-        "llm-tooluse",
-        "agent-orchestration"
-      ]
-    },
-    {
-      "id": "repo-cs336-lectures",
-      "title": "stanford-cs336/spring2025-lectures",
-      "author": "Stanford CS336",
-      "type": "github",
-      "ref": "stanford-cs336/spring2025-lectures",
-      "kind": "repo",
-      "cost": "free",
-      "est_hours": 6,
-      "skills": [
-        "infra-gpu",
-        "infra-serving"
-      ]
-    },
-    {
-      "id": "kipply-inference-arithmetic",
-      "title": "Transformer Inference Arithmetic",
-      "author": "kipply",
-      "type": "web",
-      "ref": "https://kipp.ly/transformer-inference-arithmetic/",
-      "expect": "inference",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "infra-tokenomics",
-        "infra-latency",
-        "infra-serving"
-      ],
-      "note": "The single most useful thing to have read before a customer asks what it will cost. First-principles arithmetic, no experiments, no hard maths."
-    },
-    {
-      "id": "horace-brrr",
-      "title": "Making Deep Learning Go Brrrr From First Principles",
-      "author": "Horace He",
-      "type": "web",
-      "ref": "https://horace.io/brrr_intro.html",
-      "expect": "deep learning",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "infra-gpu",
-        "infra-latency"
-      ],
-      "note": "Compute, memory bandwidth, overhead — the three-way split that explains why an optimisation helped or did nothing."
-    },
-    {
-      "id": "paper-efficiently-scaling-inference",
-      "title": "Efficiently Scaling Transformer Inference",
-      "author": "Pope et al.",
-      "type": "arxiv",
-      "ref": "2211.05102",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 4,
-      "skills": [
-        "infra-serving",
-        "infra-latency",
-        "infra-batching"
-      ]
-    },
-    {
-      "id": "paper-awq",
-      "title": "AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration",
-      "author": "Lin et al.",
-      "type": "arxiv",
-      "ref": "2306.00978",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "infra-quantisation"
-      ]
-    },
-    {
-      "id": "paper-llm-int8",
-      "title": "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale",
-      "author": "Dettmers et al.",
-      "type": "arxiv",
-      "ref": "2208.07339",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "infra-quantisation"
-      ]
-    },
-    {
-      "id": "paper-smoothquant",
-      "title": "SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models",
-      "author": "Xiao et al.",
-      "type": "arxiv",
-      "ref": "2211.10438",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "infra-quantisation"
-      ]
-    },
-    {
-      "id": "paper-sarathi-serve",
-      "title": "Taming Throughput-Latency Tradeoff in LLM Inference with Sarathi-Serve",
-      "author": "Agrawal et al.",
-      "type": "arxiv",
-      "ref": "2403.02310",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "infra-batching",
-        "infra-latency"
-      ],
-      "note": "Chunked prefill. The paper that names the throughput-versus-latency trade directly, which is the trade a field engineer is always being asked about."
-    },
-    {
-      "id": "paper-medusa",
-      "title": "Medusa: Simple LLM Inference Acceleration Framework with Multiple Decoding Heads",
-      "author": "Cai et al.",
-      "type": "arxiv",
-      "ref": "2401.10774",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "infra-latency"
-      ]
-    },
-    {
-      "id": "cs224s-llm-speech",
-      "title": "CS244S @ Stanford: LLM Based Spoken Language Processing 2025",
-      "author": "Stanford CS224S guest lecture (hosted by Gridspace)",
-      "type": "youtube",
-      "ref": "HqG79i7qyjY",
-      "kind": "lecture",
-      "cost": "free",
-      "est_hours": 1.5,
-      "skills": [
-        "speech-asr",
-        "speech-agents"
-      ],
-      "note": "Stanford's spoken language processing course does not publish its lectures — they are Canvas-only for enrolled students. This guest lecture is the publicly available piece, hosted on the speech company's own channel rather than Stanford's."
-    },
-    {
-      "id": "livekit-agent-latency",
-      "title": "Understand and improve voice agent latency",
-      "author": "LiveKit",
-      "type": "web",
-      "ref": "https://livekit.com/blog/understand-and-improve-agent-latency",
-      "expect": "latency",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "speech-latency",
-        "speech-streaming",
-        "speech-agents"
-      ],
-      "note": "The end-to-end budget broken down by hop. Vendor-authored, so read the numbers as a floor rather than a promise — but the decomposition is the right one."
-    },
-    {
-      "id": "paper-wav2vec2",
-      "title": "wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations",
-      "author": "Baevski et al.",
-      "type": "arxiv",
-      "ref": "2006.11477",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "speech-asr"
-      ]
-    },
-    {
-      "id": "paper-hubert",
-      "title": "HuBERT: Self-Supervised Speech Representation Learning by Masked Prediction of Hidden Units",
-      "author": "Hsu et al.",
-      "type": "arxiv",
-      "ref": "2106.07447",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "speech-asr"
-      ]
-    },
-    {
-      "id": "paper-moshi",
-      "title": "Moshi: a speech-text foundation model for real-time dialogue",
-      "author": "Défossez et al.",
-      "type": "arxiv",
-      "ref": "2410.00037",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 4,
-      "skills": [
-        "speech-agents",
-        "speech-latency",
-        "speech-streaming"
-      ],
-      "note": "Full-duplex speech dialogue — the model listens and speaks at once. The clearest treatment of why turn-taking and barge-in are architectural rather than cosmetic."
-    },
-    {
-      "id": "paper-vall-e",
-      "title": "Neural Codec Language Models are Zero-Shot Text to Speech Synthesizers",
-      "author": "Wang et al.",
-      "type": "arxiv",
-      "ref": "2301.02111",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "speech-tts"
-      ]
-    },
-    {
-      "id": "paper-fastspeech2",
-      "title": "FastSpeech 2: Fast and High-Quality End-to-End Text to Speech",
-      "author": "Ren et al.",
-      "type": "arxiv",
-      "ref": "2006.04558",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "speech-tts"
-      ]
-    },
-    {
-      "id": "paper-seamlessm4t",
-      "title": "SeamlessM4T: Massively Multilingual & Multimodal Machine Translation",
-      "author": "Seamless Communication et al.",
-      "type": "arxiv",
-      "ref": "2308.11596",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "speech-asr",
-        "speech-tts"
-      ]
-    },
-    {
-      "id": "paper-whisperx",
-      "title": "WhisperX: Time-Accurate Speech Transcription of Long-Form Audio",
-      "author": "Bain et al.",
-      "type": "arxiv",
-      "ref": "2303.00747",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "speech-asr"
-      ]
-    },
-    {
-      "id": "paper-common-voice",
-      "title": "Common Voice: A Massively-Multilingual Speech Corpus",
-      "author": "Ardila et al.",
-      "type": "arxiv",
-      "ref": "1912.06670",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "speech-asr",
-        "eval-datasets"
-      ],
-      "note": "Where accented evaluation data actually comes from, and what it still does not cover."
-    },
-    {
-      "id": "paper-codeswitch-seame",
-      "title": "On the End-to-End Solution to Mandarin-English Code-switching Speech Recognition",
-      "author": "Zeng et al., NTU Singapore",
-      "type": "arxiv",
-      "ref": "1811.00241",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "speech-asr"
-      ],
-      "note": "Built on SEAME — spontaneous Mandarin-English code-switching from Singaporean and Malaysian speakers. This is your own linguistic environment, and it is where every off-the-shelf ASR system quietly falls over."
-    },
-    {
-      "id": "paper-cs-dialogue",
-      "title": "CS-Dialogue: A 104-Hour Dataset of Spontaneous Mandarin-English Code-Switching Dialogues for Speech Recognition",
-      "author": "arXiv 2502.18913",
-      "type": "arxiv",
-      "ref": "2502.18913",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "speech-asr",
-        "eval-datasets"
-      ]
-    },
-    {
-      "id": "paper-clip",
-      "title": "Learning Transferable Visual Models From Natural Language Supervision",
-      "author": "Radford et al.",
-      "type": "arxiv",
-      "ref": "2103.00020",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "nlp-embeddings"
-      ]
-    },
-    {
-      "id": "paper-llava",
-      "title": "Visual Instruction Tuning",
-      "author": "Liu et al.",
-      "type": "arxiv",
-      "ref": "2304.08485",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "dl-architectures"
-      ]
-    },
-    {
-      "id": "paper-flamingo",
-      "title": "Flamingo: a Visual Language Model for Few-Shot Learning",
-      "author": "Alayrac et al.",
-      "type": "arxiv",
-      "ref": "2204.14198",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "dl-architectures"
-      ]
-    },
-    {
-      "id": "paper-qwen2vl",
-      "title": "Qwen2-VL: Enhancing Vision-Language Model's Perception of the World at Any Resolution",
-      "author": "Wang et al.",
-      "type": "arxiv",
-      "ref": "2409.12191",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "dl-architectures"
-      ]
-    },
-    {
-      "id": "paper-donut",
-      "title": "OCR-free Document Understanding Transformer",
-      "author": "Kim et al.",
-      "type": "arxiv",
-      "ref": "2111.15664",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "llm-structured-output"
-      ],
-      "note": "Skipping OCR entirely and reading the page as an image. The direct alternative to the column-gutter approach already in Career Side Quests."
-    },
-    {
-      "id": "paper-layoutlmv3",
-      "title": "LayoutLMv3: Pre-training for Document AI with Unified Text and Image Masking",
-      "author": "Huang et al.",
-      "type": "arxiv",
-      "ref": "2204.08387",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "llm-structured-output"
-      ]
-    },
-    {
-      "id": "paper-nougat",
-      "title": "Nougat: Neural Optical Understanding for Academic Documents",
-      "author": "Blecher et al.",
-      "type": "arxiv",
-      "ref": "2308.13418",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "llm-structured-output"
-      ]
-    },
-    {
-      "id": "paper-docvqa",
-      "title": "DocVQA: A Dataset for VQA on Document Images",
-      "author": "Mathew et al.",
-      "type": "arxiv",
-      "ref": "2007.00398",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "eval-datasets",
-        "llm-structured-output"
-      ],
-      "note": "The benchmark that defines what document understanding is measured on."
-    },
-    {
-      "id": "anthropic-docs-models",
-      "title": "Models overview",
-      "author": "Anthropic",
-      "type": "web",
-      "ref": "https://docs.claude.com/en/docs/about-claude/models/overview",
-      "expect": "Models overview",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "llm-prompting"
-      ],
-      "atomic": true,
-      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
-    },
-    {
-      "id": "anthropic-docs-structured",
-      "title": "Structured outputs",
-      "author": "Anthropic",
-      "type": "web",
-      "ref": "https://docs.claude.com/en/docs/build-with-claude/structured-outputs",
-      "expect": "Structured outputs",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "llm-structured-output"
-      ],
-      "atomic": true,
-      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
-    },
-    {
-      "id": "anthropic-docs-tooluse",
-      "title": "Tool use with Claude",
-      "author": "Anthropic",
-      "type": "web",
-      "ref": "https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview",
-      "expect": "Tool use",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "llm-tooluse"
-      ],
-      "atomic": true,
-      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
-    },
-    {
-      "id": "anthropic-docs-context",
-      "title": "Context windows",
-      "author": "Anthropic",
-      "type": "web",
-      "ref": "https://docs.claude.com/en/docs/build-with-claude/context-windows",
-      "expect": "Context windows",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "llm-context"
-      ],
-      "atomic": true,
-      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
-    },
-    {
-      "id": "anthropic-docs-caching",
-      "title": "Prompt caching",
-      "author": "Anthropic",
-      "type": "web",
-      "ref": "https://docs.claude.com/en/docs/build-with-claude/prompt-caching",
-      "expect": "Prompt caching",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "infra-caching"
-      ],
-      "atomic": true,
-      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
-    },
-    {
-      "id": "anthropic-docs-streaming",
-      "title": "Streaming messages",
-      "author": "Anthropic",
-      "type": "web",
-      "ref": "https://docs.claude.com/en/docs/build-with-claude/streaming",
-      "expect": "Streaming",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "infra-latency"
-      ],
-      "atomic": true,
-      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
-    },
-    {
-      "id": "anthropic-docs-vision",
-      "title": "Vision",
-      "author": "Anthropic",
-      "type": "web",
-      "ref": "https://docs.claude.com/en/docs/build-with-claude/vision",
-      "expect": "Vision",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "mm-vlm",
-        "mm-document"
-      ],
-      "atomic": true,
-      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
-    },
-    {
-      "id": "elevenlabs-streaming",
-      "title": "Streaming | ElevenLabs Documentation",
-      "author": "ElevenLabs",
-      "type": "web",
-      "ref": "https://elevenlabs.io/docs/api-reference/streaming",
-      "expect": "Streaming",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "speech-tts",
-        "speech-streaming"
-      ],
-      "atomic": true,
-      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
-    },
-    {
-      "id": "elevenlabs-latency",
-      "title": "Latency optimization | ElevenLabs Documentation",
-      "author": "ElevenLabs",
-      "type": "web",
-      "ref": "https://elevenlabs.io/docs/best-practices/latency-optimization",
-      "expect": "Latency",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "speech-latency"
-      ],
-      "atomic": true,
-      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
-    },
-    {
-      "id": "sbert-bi-encoders",
-      "title": "Pretrained Models — Sentence Transformers",
-      "author": "UKP Lab",
-      "type": "web",
-      "ref": "https://sbert.net/docs/sentence_transformer/pretrained_models.html",
-      "expect": "Pretrained Models",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "rag-embeddings",
-        "nlp-embeddings"
-      ],
-      "atomic": true,
-      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
-    },
-    {
-      "id": "sbert-cross-encoders",
-      "title": "Pretrained Models — Cross Encoder",
-      "author": "UKP Lab",
-      "type": "web",
-      "ref": "https://sbert.net/docs/cross_encoder/pretrained_models.html",
-      "expect": "Pretrained Models",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "rag-reranking"
-      ],
-      "atomic": true,
-      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
-    },
-    {
-      "id": "hf-audio-eval",
-      "title": "Evaluation metrics for ASR",
-      "author": "Hugging Face",
-      "type": "web",
-      "ref": "https://huggingface.co/learn/audio-course/chapter5/evaluation",
-      "expect": "Evaluation metrics",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 1,
-      "skills": [
-        "speech-asr"
-      ],
-      "atomic": true,
-      "note": "Deep link to the single page the coursework needs, rather than to a documentation root."
-    },
-    {
-      "id": "pdpc-ai-guidelines",
-      "title": "Advisory Guidelines on use of Personal Data in AI Recommendation and Decision Systems",
-      "author": "PDPC Singapore",
-      "type": "web",
-      "ref": "https://www.pdpc.gov.sg/organisations/regulations-decisions/regulatory-guidance/advisory-guidelines-on-use-of-personal-data-in-ai-recommendation-and-decision-systems",
-      "expect": "Personal Data",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "safety-redteam"
-      ],
-      "note": "The regulator in your own market, on the exact question a Singapore enterprise buyer will ask you. Not legally binding, but the PDPC enforces consistently with it."
-    },
-    {
-      "id": "paper-conformal-prediction",
-      "title": "A Gentle Introduction to Conformal Prediction and Distribution-Free Uncertainty Quantification",
-      "author": "Angelopoulos, Bates",
-      "type": "arxiv",
-      "ref": "2107.07511",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 4,
-      "skills": [
-        "eval-stat",
-        "ml-eval-classical"
-      ],
-      "note": "The principled way to put a confidence threshold on a model output — the machinery under any honest human-in-the-loop routing rule."
-    },
-    {
-      "id": "paper-selective-prediction",
-      "title": "Selective Classification for Deep Neural Networks",
-      "author": "Geifman, El-Yaniv",
-      "type": "arxiv",
-      "ref": "1705.08500",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "ml-eval-classical"
-      ],
-      "note": "Abstention as a first-class option: a model that says 'I don't know' and routes to a human."
-    },
-    {
-      "id": "sklearn-calibration",
-      "title": "Probability calibration",
-      "author": "scikit-learn",
-      "type": "web",
-      "ref": "https://scikit-learn.org/stable/modules/calibration.html",
-      "expect": "calibration",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "ml-eval-classical"
-      ],
-      "atomic": true,
-      "note": "A confidence score you route on must actually mean what it says. This is how you check."
-    },
-    {
-      "id": "sklearn-model-evaluation",
-      "title": "Metrics and scoring: quantifying the quality of predictions",
-      "author": "scikit-learn",
-      "type": "web",
-      "ref": "https://scikit-learn.org/stable/modules/model_evaluation.html",
-      "expect": "scoring",
-      "kind": "reference",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "ml-eval-classical"
-      ],
-      "atomic": true
-    },
-    {
-      "id": "book-release-it",
-      "title": "Release It!",
-      "author": "Michael T. Nygard",
-      "type": "book",
-      "ref": "9781680502398",
-      "kind": "book",
-      "cost": "paid",
-      "est_hours": 20,
-      "skills": [
-        "eng-deployment"
-      ],
-      "note": "Circuit breakers, bulkheads, timeouts and graceful degradation. Pre-dates LLMs and is the better for it."
-    },
-    {
-      "id": "anthropic-multi-agent",
-      "title": "How we built our multi-agent research system",
-      "author": "Anthropic",
-      "type": "web",
-      "ref": "https://www.anthropic.com/engineering/multi-agent-research-system",
-      "expect": "multi-agent",
-      "kind": "article",
-      "cost": "free",
-      "est_hours": 2,
-      "skills": [
-        "agent-orchestration",
-        "agent-reliability"
-      ],
-      "note": "A production multi-agent system described by the people who shipped it, including the token cost multiple and where it did not pay off."
-    },
-    {
-      "id": "paper-why-multiagent-fails",
-      "title": "Why Do Multi-Agent LLM Systems Fail?",
-      "author": "Cemri et al.",
-      "type": "arxiv",
-      "ref": "2503.13657",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 4,
-      "skills": [
-        "agent-reliability",
-        "agent-eval"
-      ],
-      "note": "A taxonomy of multi-agent failure modes built from real traces. Read before building one, not after."
-    },
-    {
-      "id": "paper-autogen",
-      "title": "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation",
-      "author": "Wu et al.",
-      "type": "arxiv",
-      "ref": "2308.08155",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "agent-orchestration"
-      ]
-    },
-    {
-      "id": "paper-metagpt",
-      "title": "MetaGPT: Meta Programming for A Multi-Agent Collaborative Framework",
-      "author": "Hong et al.",
-      "type": "arxiv",
-      "ref": "2308.00352",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "agent-orchestration"
-      ]
-    },
-    {
-      "id": "paper-generative-agents",
-      "title": "Generative Agents: Interactive Simulacra of Human Behavior",
-      "author": "Park et al.",
-      "type": "arxiv",
-      "ref": "2304.03442",
-      "kind": "paper",
-      "cost": "free",
-      "est_hours": 3,
-      "skills": [
-        "agent-planning"
-      ]
     }
   ]
 }

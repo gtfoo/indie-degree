@@ -3,7 +3,7 @@
 *Degree-rigorous internally — blocks, credits, prerequisites, capstone. The public artifact is a transcript with evidence tiers and linked artifacts, never a diploma. Rendering is a template choice; nothing here depends on it.*
 
 - **Credits** 51 · 1 credit ≈ 20 hours of work
-- **Total work** 944 hours
+- **Total work** 949 hours
 - **Opened** 2026-08-12
 - **Pacing** irregular — Hours vary week to week. Progress is banked and monotonic — no streaks, nothing destroyable by a quiet month. Projected completion is a range derived from logged hours, never from intended hours.
 
@@ -47,18 +47,18 @@ Advanced standing awards **4 of 51 credits** and evidence on **12 of 65 skills**
 
 | | Hours | At 6–12 h/week |
 |---|---:|---|
-| Block I | 364 | |
-| less advanced standing | −62 | |
-| **Block I remaining** | **302** | **6–12 months** |
-| Whole programme | 944 | |
-| less advanced standing | −62 | |
-| **Remaining** | **882** | **1.4–2.8 years** |
+| Block I | 369 | |
+| less advanced standing | −66 | |
+| **Block I remaining** | **304** | **6–12 months** |
+| Whole programme | 949 | |
+| less advanced standing | −66 | |
+| **Remaining** | **884** | **1.4–2.8 years** |
 
 ## Study order
 
 | # | Code | Course | Block | Credits | Hours | Prerequisites | Standing |
 |---:|---|---|---|---:|---:|---|---|
-| 1 | `AIE-101` | **LLM Application Engineering** | I | 3 | 45 | — | substantial |
+| 1 | `AIE-101` | **LLM Application Engineering** | I | 3 | 50 | — | substantial |
 | 2 | `AIE-102` | **Evaluation and Measurement** | I | 4 | 66 | AIE-101 | — |
 | 3 | `AIE-107` | **Architecture and Judgement** | I | 2 | 32 | AIE-101, AIE-102 | — |
 | 4 | `AIE-105` | **Inference, Cost and Latency Engineering** | I | 3 | 50 | AIE-101 | partial |
@@ -80,7 +80,7 @@ Advanced standing awards **4 of 51 credits** and evidence on **12 of 65 skills**
 
 ### 1. AIE-101 — LLM Application Engineering
 
-**3 credits · 45 hours**
+**3 credits · 50 hours**
 
 Everything else in Block I assumes you can get reliable, structured, tool-using behaviour out of a model. Four shipped products already evidence most of this.
 
@@ -96,29 +96,32 @@ Everything else in Block I assumes you can get reliable, structured, tool-using 
 | Resource | Author | Hours | Cost |
 |---|---|---:|---|
 | [Anthropic API documentation](https://docs.claude.com/en/docs/overview) | Anthropic | 6 h | Free |
-| [openai/openai-cookbook](https://github.com/openai/openai-cookbook) | OpenAI | 8 h | Free |
-| [Patterns for Building LLM-based Systems & Products](https://eugeneyan.com/writing/llm-patterns/) | Eugene Yan | 3 h | Free |
-| [Extrinsic Hallucinations in LLMs](https://lilianweng.github.io/posts/2024-07-07-hallucination/) | Lilian Weng | 3 h | Free |
+| [Context windows](https://docs.claude.com/en/docs/build-with-claude/context-windows) | Anthropic | 1 h | Free |
+| [Extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) | Anthropic | 1 h | Free |
+| [Models overview](https://docs.claude.com/en/docs/about-claude/models/overview) | Anthropic | 1 h | Free |
+| [Structured outputs](https://docs.claude.com/en/docs/build-with-claude/structured-outputs) | Anthropic | 1 h | Free |
+| [Tool use with Claude](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview) | Anthropic | 1 h | Free |
+| [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) | Anthropic | 1 h | Free |
+| [AI prompt engineering: A deep dive](https://www.youtube.com/watch?v=T9aRN5JkmL8) | Anthropic | 1.2 h | Free |
+| [Prompting 101 \| Code w/ Claude](https://www.youtube.com/watch?v=ysPbXH0LpIE) | Anthropic | 1 h | Free |
 | [AI Engineering](https://openlibrary.org/isbn/9781098166304) | Chip Huyen | 30 h | Paid |
-| [Chain-of-Thought Prompting Elicits Reasoning in Large Language Models](https://arxiv.org/abs/2201.11903) | Wei et al. | 2 h | Free |
-| [Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165) | Brown et al. | 4 h | Free |
-| [Intro to Large Language Models](https://www.youtube.com/watch?v=zjkBMFhNj_g) | Andrej Karpathy | 1 h | Free |
-| [Self-Consistency Improves Chain of Thought Reasoning in Language Models](https://arxiv.org/abs/2203.11171) | Wang et al. | 2 h | Free |
+| [Patterns for Building LLM-based Systems & Products](https://eugeneyan.com/writing/llm-patterns/) | Eugene Yan | 3 h | Free |
+| [Augmented Language Models (LLM Bootcamp)](https://www.youtube.com/watch?v=YdeuQhlHmCA) | The Full Stack | 1 h | Free |
 | [LLM Bootcamp - Spring 2023](https://www.youtube.com/playlist?list=PL1T8fO7ArWleyIqOy37OVXsP4hFXymdOZ) | The Full Stack | 7 h | Free |
 | [LLM Foundations (LLM Bootcamp)](https://www.youtube.com/watch?v=MyFrMFab6bo) | The Full Stack | 1 h | Free |
 | [Learn to Spell: Prompt Engineering (LLM Bootcamp)](https://www.youtube.com/watch?v=JnBHR_yL2w8) | The Full Stack | 1 h | Free |
-| [Augmented Language Models (LLM Bootcamp)](https://www.youtube.com/watch?v=YdeuQhlHmCA) | The Full Stack | 1 h | Free |
 | [UX for Language User Interfaces (LLM Bootcamp)](https://www.youtube.com/watch?v=l5mG4z343qg) | The Full Stack | 1 h | Free |
-| [AI prompt engineering: A deep dive](https://www.youtube.com/watch?v=T9aRN5JkmL8) | Anthropic | 1.2 h | Free |
-| [Prompting 101 \| Code w/ Claude](https://www.youtube.com/watch?v=ysPbXH0LpIE) | Anthropic | 1 h | Free |
-| [anthropics/prompt-eng-interactive-tutorial](https://github.com/anthropics/prompt-eng-interactive-tutorial) | Anthropic | 6 h | Free |
-| [anthropics/anthropic-cookbook](https://github.com/anthropics/anthropic-cookbook) | Anthropic | 6 h | Free |
+| [Intro to Large Language Models](https://www.youtube.com/watch?v=zjkBMFhNj_g) | Andrej Karpathy | 1 h | Free |
+| [Extrinsic Hallucinations in LLMs](https://lilianweng.github.io/posts/2024-07-07-hallucination/) | Lilian Weng | 3 h | Free |
+| [openai/openai-cookbook](https://github.com/openai/openai-cookbook) | OpenAI | 8 h | Free |
+| [Chain-of-Thought Prompting Elicits Reasoning in Large Language Models](https://arxiv.org/abs/2201.11903) | Wei et al. | 2 h | Free |
+| [DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning](https://arxiv.org/abs/2501.12948) | DeepSeek-AI | 3 h | Free |
+| [Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165) | Brown et al. | 4 h | Free |
 | [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172) | Liu et al. | 2 h | Free |
+| [Self-Consistency Improves Chain of Thought Reasoning in Language Models](https://arxiv.org/abs/2203.11171) | Wang et al. | 2 h | Free |
 | [Toolformer: Language Models Can Teach Themselves to Use Tools](https://arxiv.org/abs/2302.04761) | Schick et al. | 3 h | Free |
-| [Models overview](https://docs.claude.com/en/docs/about-claude/models/overview) | Anthropic | 1 h | Free |
-| [Structured outputs](https://docs.claude.com/en/docs/build-with-claude/structured-outputs) | Anthropic | 1 h | Free |
-| [Context windows](https://docs.claude.com/en/docs/build-with-claude/context-windows) | Anthropic | 1 h | Free |
-| [Tool use with Claude](https://docs.claude.com/en/docs/agents-and-tools/tool-use/overview) | Anthropic | 1 h | Free |
+| [anthropics/anthropic-cookbook](https://github.com/anthropics/anthropic-cookbook) | Anthropic | 6 h | Free |
+| [anthropics/prompt-eng-interactive-tutorial](https://github.com/anthropics/prompt-eng-interactive-tutorial) | Anthropic | 6 h | Free |
 
 > Full specification: [AIE-101-llm-application-engineering.json](courses/AIE-101-llm-application-engineering.json)
 

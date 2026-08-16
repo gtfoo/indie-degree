@@ -1,6 +1,6 @@
 # Corpus verification report
 
-- verified: **203**
+- verified: **206**
 - needs review: **0**
 
 Every resource verified.

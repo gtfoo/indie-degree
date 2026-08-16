@@ -363,8 +363,45 @@ def main() -> int:
     for res in resources:
         res["verification"] = cache.get(res["id"], result("unverified", "not-run"))
 
+    # A resource that verified last time must not vanish because a host was
+    # busy this time. OpenLibrary returned 503s and timeouts on five books in a
+    # single run; they were dropped from the corpus and every course citing them
+    # failed validation, so a transient network condition silently rewrote the
+    # curriculum. Absence of evidence is not evidence of absence, and the
+    # distinction is mechanical: 404 and 410 mean gone, 5xx and timeouts and
+    # refused connections mean try again later.
+    TRANSIENT = ("HTTP 429", "HTTP 500", "HTTP 502", "HTTP 503", "HTTP 504",
+                 "timed out", "Connection refused", "URLError", "timeout")
+    previous = {}
+    if VERIFIED.exists():
+        try:
+            previous = {
+                r["id"]: r
+                for r in json.loads(VERIFIED.read_text("utf-8")).get("resources", [])
+            }
+        except (json.JSONDecodeError, OSError):
+            previous = {}
+
+    carried = []
+    for res in resources:
+        v = res["verification"]
+        if v["status"] == "verified" or res["id"] not in previous:
+            continue
+        if not any(t in v.get("detail", "") for t in TRANSIENT):
+            continue
+        kept = dict(previous[res["id"]]["verification"])
+        kept["carried_forward"] = v.get("detail", "transient failure")
+        res["verification"] = kept
+        carried.append(res["id"])
+
     verified = [r for r in resources if r["verification"]["status"] == "verified"]
     problems = [r for r in resources if r["verification"]["status"] != "verified"]
+
+    if carried:
+        print(f"\ncarried forward {len(carried)} previously-verified resources "
+              f"whose check failed transiently:")
+        for rid in carried:
+            print(f"  keep {rid}")
 
     VERIFIED.write_text(
         json.dumps(
