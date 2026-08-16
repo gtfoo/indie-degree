@@ -55,6 +55,7 @@ export interface CriterionCalibration {
 
 export interface Assessment {
   submission: Submission | null;
+  cold: { outcome: ColdOutcome; attemptedAt: string } | null;
   selfScores: Record<string, number>;
   judgements: Judgement[];
   calibration: CriterionCalibration[];
@@ -219,6 +220,42 @@ export function getJudgements(itemKey: string): Judgement[] {
   });
 }
 
+export type ColdOutcome = "passed" | "missed";
+
+/**
+ * Record an attempt made before studying the material.
+ *
+ * Self-reported, and that is acceptable precisely because it is limited to
+ * tier 1: the item's preconditions are objective, so "did it pass" is a fact
+ * the learner can check rather than a judgement they can flatter. Nothing here
+ * counts toward mastery — a cold pass marks the material as skippable, not the
+ * skill as demonstrated.
+ */
+export function recordColdAttempt(itemKey: string, outcome: ColdOutcome): void {
+  getDb()
+    .prepare(
+      `INSERT INTO cold_attempts (learner_id, item_key, outcome, attempted_at)
+       VALUES (?, ?, ?, ?)
+       ON CONFLICT (learner_id, item_key) DO UPDATE SET
+         outcome = excluded.outcome, attempted_at = excluded.attempted_at`,
+    )
+    .run(LEARNER, itemKey, outcome, new Date().toISOString());
+}
+
+export function getColdAttempt(
+  itemKey: string,
+): { outcome: ColdOutcome; attemptedAt: string } | null {
+  const row = getDb()
+    .prepare(
+      `SELECT outcome, attempted_at FROM cold_attempts
+        WHERE learner_id = ? AND item_key = ?`,
+    )
+    .get(LEARNER, itemKey) as
+    | { outcome: ColdOutcome; attempted_at: string }
+    | undefined;
+  return row ? { outcome: row.outcome, attemptedAt: row.attempted_at } : null;
+}
+
 export function getAssessment(itemKey: string, rubric: Rubric): Assessment {
   const selfScores = getSelfScores(itemKey);
   const judgements = getJudgements(itemKey);
@@ -246,6 +283,7 @@ export function getAssessment(itemKey: string, rubric: Rubric): Assessment {
 
   return {
     submission: getSubmission(itemKey),
+    cold: getColdAttempt(itemKey),
     selfScores,
     judgements,
     calibration,

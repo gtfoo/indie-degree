@@ -70,17 +70,51 @@ export default async function IndieDegreePage() {
         </Link>
       )}
 
+      {/* Evidence first, hours last.
+          Hours are a planning estimate, not an achievement — 300 hours of
+          reading and 120 hours that shipped four things are not the same
+          transcript, and the old dashboard scored them identically. Credits are
+          the degree metaphor and belong below the thing they are a proxy for. */}
       <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-4">
-        <Stat label="Hours logged" value={b.hoursLogged.toString()} />
-        <Stat label="Items complete" value={b.itemsComplete.toString()} />
         <Stat
-          label="Credits"
-          value={`${b.creditsEarned} / ${b.creditsAvailable}`}
+          label="Demonstrated"
+          value={`${b.evidenceComplete} / ${b.evidenceAvailable}`}
+          note="assessed work"
         />
-        <Stat label="Hours remaining" value={b.requiredHoursRemaining.toString()} />
+        <Stat
+          label="Capabilities"
+          value={`${claims.filter((c) => c.met).length} / ${claims.length}`}
+          note="CV lines earned"
+        />
+        <Stat
+          label="Artifacts"
+          value={b.artifactsShipped.toString()}
+          note="public, tier 3"
+        />
+        <Stat
+          label="Defended"
+          value={b.defended.toString()}
+          note="aloud, tier 4"
+        />
       </dl>
 
       <p className="mt-3 text-sm text-muted">
+        Read and watched:{" "}
+        <strong className="text-foreground">
+          {Object.values(progress.courses).reduce((n, c) => n + c.exposureComplete, 0)}
+        </strong>{" "}
+        of{" "}
+        {Object.values(progress.courses).reduce((n, c) => n + c.exposureItems, 0)}{" "}
+        items. Tracked, and deliberately counted apart from the figures above —
+        exposure is how you close a gap, not evidence that it closed.
+      </p>
+
+      <p className="mt-3 text-sm text-muted">
+        <span className="text-foreground">
+          {b.creditsEarned} of {b.creditsAvailable} credits
+        </span>{" "}
+        · {b.hoursLogged}h logged · {b.requiredHoursRemaining}h of required work
+        left. Planning figures, kept below the ones that mean something.{" "}
         {b.weeklyHours === null ? (
           <>
             No projection yet — it needs at least two weeks of logged hours, and
@@ -166,10 +200,13 @@ export default async function IndieDegreePage() {
 
             <ul className="mt-4 space-y-2">
               {inBlock.map((c) => {
-          const cp = progress.courses[c.id];
-          const pct = cp?.requiredItems
-            ? Math.round((cp.completeItems / cp.requiredItems) * 100)
-            : 0;
+                const cp = progress.courses[c.id];
+                // The bar tracks evidence, not exposure. A bar that filled up
+                // from readings alone would say "nearly done" to someone who
+                // had demonstrated nothing.
+                const pct = cp?.evidenceItems
+                  ? Math.round((cp.evidenceComplete / cp.evidenceItems) * 100)
+                  : 0;
           return (
             <li key={c.id}>
               <Link
@@ -196,7 +233,9 @@ export default async function IndieDegreePage() {
                   />
                 </div>
                 <p className="mt-2 text-xs text-muted">
-                  {cp?.completeItems ?? 0}/{cp?.requiredItems ?? 0} items
+                  {cp?.evidenceComplete ?? 0}/{cp?.evidenceItems ?? 0} demonstrated
+                  {" · "}
+                  {cp?.exposureComplete ?? 0}/{cp?.exposureItems ?? 0} read
                   {cp?.earned && " · complete"}
                 </p>
               </Link>
@@ -220,11 +259,20 @@ export default async function IndieDegreePage() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Stat({
+  label,
+  value,
+  note,
+}: {
+  label: string;
+  value: string;
+  note?: string;
+}) {
   return (
     <div className="bg-card px-4 py-3">
       <dt className="text-xs text-muted">{label}</dt>
       <dd className="mt-0.5 text-xl font-semibold tabular-nums">{value}</dd>
+      {note && <p className="text-[11px] text-muted">{note}</p>}
     </div>
   );
 }

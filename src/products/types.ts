@@ -207,10 +207,26 @@ export interface ItemProgress {
   completed_at: string | null;
 }
 
+/**
+ * Two counts, never one.
+ *
+ * 42% of the required items in this programme are tier 0 — reading and
+ * watching. A single completion bar lets someone who has done every reading and
+ * no assignment show the same number as someone who did the reverse, which is
+ * exactly the conflation the evidence tiers exist to refuse. Exposure is worth
+ * having and worth tracking; it is not evidence, and the UI should make that
+ * impossible to miss.
+ */
 export interface CourseProgress {
   courseId: string;
   requiredItems: number;
   completeItems: number;
+  /** Tier 0: read, watched, attended. Counts toward nothing. */
+  exposureItems: number;
+  exposureComplete: number;
+  /** Tier 1 and above: the work that can actually be assessed. */
+  evidenceItems: number;
+  evidenceComplete: number;
   requiredMinutes: number;
   completeMinutes: number;
   minutesLogged: number;
@@ -220,6 +236,13 @@ export interface CourseProgress {
 
 export interface Banked {
   itemsComplete: number;
+  /** Assessed items done — the headline, because it is the one that means something. */
+  evidenceComplete: number;
+  evidenceAvailable: number;
+  /** Tier 3: a public artifact exists. */
+  artifactsShipped: number;
+  /** Tier 4: defended aloud against questions the learner did not write. */
+  defended: number;
   hoursLogged: number;
   creditsEarned: number;
   creditsAvailable: number;

@@ -16,6 +16,7 @@ import {
   areas,
   itemKey,
   itemsOf,
+  skills,
   skillsOf,
   specifiedCourses,
 } from "./curriculum";
@@ -177,4 +178,59 @@ export function allCapabilities(progress: ProgressPayload): CapabilityStatus[] {
 
 export function claimable(progress: ProgressPayload): CapabilityStatus[] {
   return allCapabilities(progress).filter((c) => c.area.claimable);
+}
+
+export interface CourseCapability {
+  areaId: string;
+  name: string;
+  claimable: boolean;
+  /** Assessed items in THIS course that advance the area. */
+  items: number;
+  done: number;
+}
+
+/**
+ * What a course is actually for, in capability terms.
+ *
+ * The course page used to open with "38 items, 45h", which invites the reader
+ * to think about finishing a list. This answers the better question — what will
+ * I be able to do — and it is derived from the same skill tags the capability
+ * pages use, so the two can never disagree.
+ */
+export function capabilitiesOf(
+  courseId: string,
+  progress: ProgressPayload,
+): CourseCapability[] {
+  const tally = new Map<string, { items: number; done: number }>();
+
+  for (const item of itemsOf(courseId)) {
+    if (item.tier < 1 || item.optional) continue;
+    const done = progress.items[itemKey(courseId, item.id)]?.status === "complete";
+    const areasHit = new Set(
+      (item.skills ?? [])
+        .map((s) => skills.find((x) => x.id === s)?.area)
+        .filter((a): a is string => Boolean(a)),
+    );
+    for (const a of areasHit) {
+      const row = tally.get(a) ?? { items: 0, done: 0 };
+      row.items += 1;
+      if (done) row.done += 1;
+      tally.set(a, row);
+    }
+  }
+
+  return [...tally.entries()]
+    .map(([areaId, row]) => {
+      const area = areas.find((a) => a.id === areaId);
+      return {
+        areaId,
+        name: area?.cv_line ?? area?.name ?? areaId,
+        claimable: Boolean(area?.claimable),
+        ...row,
+      };
+    })
+    // Claimable first, then by how much of the course serves them.
+    .sort(
+      (a, b) => Number(b.claimable) - Number(a.claimable) || b.items - a.items,
+    );
 }

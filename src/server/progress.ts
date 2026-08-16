@@ -89,6 +89,10 @@ export function getProgress(): ProgressPayload {
   const courses: Record<string, CourseProgress> = {};
 
   let itemsComplete = 0;
+  let evidenceComplete = 0;
+  let evidenceAvailable = 0;
+  let artifactsShipped = 0;
+  let defended = 0;
   let creditsEarned = CREDITS_AWARDED_ON_ENTRY;
   let creditsAvailable = 0;
   let requiredMinutesRemaining = 0;
@@ -101,16 +105,37 @@ export function getProgress(): ProgressPayload {
     let minutesLogged = 0;
     let requiredMinutes = 0;
 
+    let exposureItems = 0;
+    let exposureComplete = 0;
+    let evidenceItems = 0;
+    let courseEvidenceComplete = 0;
+
     for (const item of itemsOf(course.id)) {
       const p = items.get(itemKey(course.id, item.id));
       if (p) minutesLogged += p.minutes_logged;
       if (item.optional) continue;
       requiredMinutes += item.est_minutes;
+
+      // Tier 0 counts toward nothing by the programme's own definition, so it
+      // is counted separately rather than blended into one bar.
+      const isEvidence = item.tier > 0;
+      if (isEvidence) evidenceItems += 1;
+      else exposureItems += 1;
+
       if (p?.status === "complete") {
         completeItems += 1;
         completeMinutes += item.est_minutes;
+        if (isEvidence) {
+          courseEvidenceComplete += 1;
+          if (item.tier >= 3) artifactsShipped += 1;
+          if (item.tier >= 4) defended += 1;
+        } else {
+          exposureComplete += 1;
+        }
       }
     }
+    evidenceAvailable += evidenceItems;
+    evidenceComplete += courseEvidenceComplete;
 
     itemsComplete += completeItems;
     const earned = required.length > 0 && completeItems === required.length;
@@ -121,6 +146,10 @@ export function getProgress(): ProgressPayload {
       courseId: course.id,
       requiredItems: required.length,
       completeItems,
+      exposureItems,
+      exposureComplete,
+      evidenceItems,
+      evidenceComplete: courseEvidenceComplete,
       requiredMinutes,
       completeMinutes,
       minutesLogged,
@@ -142,6 +171,10 @@ export function getProgress(): ProgressPayload {
   return {
     banked: {
       itemsComplete,
+      evidenceComplete,
+      evidenceAvailable,
+      artifactsShipped,
+      defended,
       hoursLogged: Math.round(((totals.mins ?? 0) / 60) * 10) / 10,
       creditsEarned,
       creditsAvailable: creditsAvailable + CREDITS_AWARDED_ON_ENTRY,

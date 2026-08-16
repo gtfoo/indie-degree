@@ -8,6 +8,7 @@ import {
   resourceUrl,
 } from "@/server/curriculum";
 import { getProgress } from "@/server/progress";
+import { capabilitiesOf } from "@/server/capabilities";
 import { isOwner } from "@/auth";
 import {
   CourseBoard,
@@ -40,6 +41,19 @@ export default async function CoursePage({
   if (!course || !spec) notFound();
 
   const progress = getProgress();
+  const caps = capabilitiesOf(course.id, progress);
+  const cp = progress.courses[course.id];
+
+  // The first assessed item not yet done. "Where to next" at course level,
+  // rather than leaving the reader to scan 38 rows for it.
+  const next = spec.modules
+    .flatMap((m) => m.items)
+    .find(
+      (i) =>
+        i.tier > 0 &&
+        !i.optional &&
+        progress.items[`${course.id}/${i.id}`]?.status !== "complete",
+    );
 
   // Resolve every resource the spec cites once, on the server, so the client
   // component never needs the corpus.
@@ -102,6 +116,63 @@ export default async function CoursePage({
           </ul>
         </div>
       )}
+
+      {/* What the course is for, before what it contains. A page that opens
+          with "38 items, 45h" invites the reader to think about finishing a
+          list; this answers the question they actually have. */}
+      {caps.length > 0 && (
+        <div className="mt-8 rounded-lg border border-border bg-card p-4">
+          <h2 className="text-sm font-medium">What this builds</h2>
+          <ul className="mt-3 space-y-2">
+            {caps.map((c) => (
+              <li key={c.areaId} className="flex flex-wrap items-baseline gap-2">
+                <span className="min-w-0 flex-1 text-sm">
+                  {c.claimable ? (
+                    <Link
+                      href={`/capabilities/${c.areaId}`}
+                      className="text-accent hover:underline"
+                    >
+                      {c.name}
+                    </Link>
+                  ) : (
+                    <span className="text-muted">{c.name}</span>
+                  )}
+                  {!c.claimable && (
+                    <span className="text-xs text-muted"> · supporting</span>
+                  )}
+                </span>
+                <span className="text-xs tabular-nums text-muted">
+                  {c.done}/{c.items} demonstrated
+                </span>
+              </li>
+            ))}
+          </ul>
+          {next && (
+            <p className="mt-4 border-t border-border pt-3 text-sm">
+              <span className="font-medium">Next assessment. </span>
+              <a href={`#${next.id}`} className="text-accent hover:underline">
+                {next.title}
+              </a>
+              <span className="text-muted">
+                {" "}
+                — {next.est_minutes} min, tier {next.tier}
+                {next.tier === 1 &&
+                  ". Machine-checkable, so you can attempt it before reading anything and find out whether you need to."}
+              </span>
+            </p>
+          )}
+        </div>
+      )}
+
+      <p className="mt-6 text-sm text-muted">
+        <strong className="text-foreground">
+          {cp?.evidenceComplete ?? 0}/{cp?.evidenceItems ?? 0}
+        </strong>{" "}
+        assessed items demonstrated ·{" "}
+        {cp?.exposureComplete ?? 0}/{cp?.exposureItems ?? 0} read or watched. The
+        second number is how you close a gap; only the first is evidence that it
+        closed.
+      </p>
 
       <div className="mt-10">
         <CourseBoard

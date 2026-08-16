@@ -147,6 +147,24 @@ export function getDb(): Database.Database {
     CREATE INDEX IF NOT EXISTS idx_judgements_item
       ON judgements (learner_id, item_key, superseded_at);
 
+    -- Attempting an assessment before reading anything.
+    --
+    -- Deliberately restricted to tier 1, where the item's own preconditions are
+    -- objective and the learner can tell unaided whether they passed. Extending
+    -- this to tier 2 would mean convening a three-model panel before every
+    -- reading, which costs more than the reading it was meant to save.
+    --
+    -- A miss is not a failure and is not scored. It is the most efficient way
+    -- to find out which material is worth your time, which is the only thing
+    -- this table is for.
+    CREATE TABLE IF NOT EXISTS cold_attempts (
+      learner_id   TEXT NOT NULL,
+      item_key     TEXT NOT NULL,
+      outcome      TEXT NOT NULL CHECK (outcome IN ('passed', 'missed')),
+      attempted_at TEXT NOT NULL,
+      PRIMARY KEY (learner_id, item_key)
+    );
+
     -- Parsed per-criterion levels. NULL means the judge declined the criterion
     -- as not verifiable from the submitted text, which is a legitimate answer
     -- and must not be confused with a zero.

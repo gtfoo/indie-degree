@@ -87,8 +87,10 @@ export function CourseBoard({
   }
 
   const cp = progress.courses[courseId];
-  const pct = cp?.requiredItems
-    ? Math.round((cp.completeItems / cp.requiredItems) * 100)
+  // Evidence, not the blend. A bar that fills from readings tells someone who
+  // has demonstrated nothing that they are nearly finished.
+  const pct = cp?.evidenceItems
+    ? Math.round((cp.evidenceComplete / cp.evidenceItems) * 100)
     : 0;
 
   return (
@@ -97,9 +99,12 @@ export function CourseBoard({
         <div className="flex flex-wrap items-baseline justify-between gap-2">
           <p className="text-sm text-muted">
             <span className="font-medium text-foreground">
-              {cp?.completeItems ?? 0} of {cp?.requiredItems ?? 0}
+              {cp?.evidenceComplete ?? 0} of {cp?.evidenceItems ?? 0}
             </span>{" "}
-            required items complete
+            demonstrated ·{" "}
+            <span className="text-muted">
+              {cp?.exposureComplete ?? 0}/{cp?.exposureItems ?? 0} read
+            </span>
           </p>
           <p className="text-sm text-muted">
             {minutes(cp?.completeMinutes ?? 0)} of{" "}

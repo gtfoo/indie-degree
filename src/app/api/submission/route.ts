@@ -6,6 +6,7 @@ import {
   getAssessment,
   saveSelfAssessment,
   saveSubmission,
+  recordColdAttempt,
   OrderError,
 } from "@/server/submissions";
 
@@ -53,18 +54,21 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "invalid json" }, { status: 400 });
   }
 
-  const { courseId, itemId, action, explanations, artifactUrl, submit, scores, judge, text } =
-    (body ?? {}) as {
-      courseId?: string;
-      itemId?: string;
-      action?: string;
-      explanations?: Record<string, string>;
-      artifactUrl?: string | null;
-      submit?: boolean;
-      scores?: Record<string, number>;
-      judge?: string;
-      text?: string;
-    };
+  const {
+    courseId, itemId, action, explanations, artifactUrl, submit, scores, judge,
+    text, outcome,
+  } = (body ?? {}) as {
+    courseId?: string;
+    itemId?: string;
+    action?: string;
+    explanations?: Record<string, string>;
+    artifactUrl?: string | null;
+    submit?: boolean;
+    scores?: Record<string, number>;
+    judge?: string;
+    text?: string;
+    outcome?: string;
+  };
 
   const found = resolve(courseId, itemId);
   if (!found) return NextResponse.json({ error: "unknown item" }, { status: 400 });
@@ -94,6 +98,22 @@ export async function POST(request: Request) {
       );
     }
     saveSelfAssessment(key, clean);
+    return NextResponse.json(getAssessment(key, rubric));
+  }
+
+  if (action === "cold") {
+    // Tier 1 only. Above that the check needs a panel, and convening one before
+    // every reading costs more than the reading it was meant to save.
+    if (found.item.tier !== 1) {
+      return NextResponse.json(
+        { error: "attempting cold only applies to tier-1 items" },
+        { status: 400 },
+      );
+    }
+    if (outcome !== "passed" && outcome !== "missed") {
+      return NextResponse.json({ error: "unknown outcome" }, { status: 400 });
+    }
+    recordColdAttempt(key, outcome);
     return NextResponse.json(getAssessment(key, rubric));
   }
 

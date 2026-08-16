@@ -32,6 +32,7 @@ interface Assessment {
     artifactUrl: string | null;
     submittedAt: string | null;
   } | null;
+  cold: { outcome: "passed" | "missed"; attemptedAt: string } | null;
   selfScores: Record<string, number>;
   judgements: { id: number; judge: string; pastedAt: string }[];
   calibration: CriterionCalibration[];
@@ -120,6 +121,64 @@ export function SubmissionPanel({
             <p className="rounded border border-border bg-card p-2 text-xs text-foreground">
               {error}
             </p>
+          )}
+
+          {/* 0 — try it before reading anything.
+              Tier 1 only: its preconditions are objective, so whether you
+              passed is a fact you can check rather than a judgement you can
+              flatter. Above tier 1 this would mean convening a three-model
+              panel before every reading, which costs more than the reading. */}
+          {item.tier === 1 && (
+            <section className="rounded border border-border bg-card p-3">
+              <h4 className="text-xs font-medium text-foreground">
+                0. Try it before you read anything
+              </h4>
+              <p className="mt-1 text-xs text-muted">
+                The preconditions on this item are objective, so you can find out
+                in one sitting whether you need the material at all. Missing is
+                not a failure and is not scored — it is the cheapest way to learn
+                which reading is worth your time.
+              </p>
+              {data?.cold ? (
+                <p className="mt-2 text-xs">
+                  {data.cold.outcome === "passed" ? (
+                    <span className="text-accent">
+                      Passed cold on {data.cold.attemptedAt.slice(0, 10)} — the
+                      readings in this module are optional for you. Still finish
+                      the item itself; a cold pass marks material skippable, not
+                      the skill demonstrated.
+                    </span>
+                  ) : (
+                    <span className="text-muted">
+                      Attempted cold on {data.cold.attemptedAt.slice(0, 10)} and
+                      missed. The readings in this module are now targeted rather
+                      than general — you know what you are looking for.
+                    </span>
+                  )}
+                </p>
+              ) : (
+                canEdit && (
+                  <div className="mt-2 flex gap-2">
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => void post({ action: "cold", outcome: "passed" })}
+                      className="rounded border border-border px-2 py-1 text-xs hover:border-accent"
+                    >
+                      I passed it cold
+                    </button>
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => void post({ action: "cold", outcome: "missed" })}
+                      className="rounded border border-border px-2 py-1 text-xs hover:border-accent"
+                    >
+                      I tried and missed
+                    </button>
+                  </div>
+                )
+              )}
+            </section>
           )}
 
           {/* 1 — the work, explained checkpoint by checkpoint */}
