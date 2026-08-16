@@ -1,0 +1,1456 @@
+{
+  "course": "AIE-300",
+  "title": "Capstone",
+  "credits": 6,
+  "est_hours": 120,
+  "spec_version": "0.1",
+  "registered": "2026-08-15",
+  "premise": "One substantial system that exercises the whole programme, shipped publicly and defended aloud. This is the artifact the transcript is built around, and it is the only course whose output a hiring manager will actually open. Everything before it was practice with a rubric attached; this is the thing itself, with the same rubrics applied to work nobody set for you.",
+  "why_here": "Last, and gated on seven courses rather than a chain of two, because the point is integration. A capstone attempted before evaluation, retrieval, agents, inference, speech, transformers and architecture is a project with an AI feature in it. Attempted after, it is a system whose every component you can defend.",
+  "laboratory": "Whatever you choose, subject to one rule: it must be something a stranger can use without you present. Not a notebook, not a demo you drive. The programme's other courses all borrowed their laboratory from products that already existed; this one has to produce a new one, because reusing an existing product would let you skip the part where a system meets someone who was not expecting it.",
+  "sitting_rule": "Every item is completable in one sitting. Nothing exceeds 180 minutes, and anything over 90 declares its own checkpoints. A 120-hour project is 45 sittings, and the granularity is deliberate — it is what makes an irregular schedule survivable.",
+  "honesty_note": "No advanced standing, and none is conceivable. The four existing products were built before this programme and cannot be resubmitted; the capstone must be new work, and the scope document registers what existed beforehand so the boundary is checkable.",
+  "panel": {
+    "models": [
+      "claude-opus-5",
+      "gpt-5",
+      "gemini-flash-latest"
+    ],
+    "blind": true,
+    "blind_note": "Judges see the submission and the rubric, never each other's scores, and never the learner's self-assessment.",
+    "rubric_registered_before_submission": true,
+    "disagreement": "Scores are reported per judge and never averaged into a single number when the spread is 2 or more on any criterion.",
+    "bias_warning": "Judges are instructed to assess the system against its own registered scope rather than against an ideal one, and to score a small system that is honestly evaluated above an ambitious one that is not."
+  },
+  "modules": [
+    {
+      "id": "M1",
+      "title": "Scope, and commit to it in writing",
+      "est_minutes": 1080,
+      "items": [
+        {
+          "id": "M1.1",
+          "type": "assignment",
+          "title": "Three candidates, and the criteria that choose between them",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M1.1",
+          "skills": ["arch-routing"],
+          "checkpoints": [
+            "Selection criteria written before the candidates",
+            "Three genuinely different systems described",
+            "Each scored against the criteria",
+            "The winner chosen and the runner-up's strongest argument recorded"
+          ],
+          "brief": "Write the criteria for choosing a capstone before you write the candidates: who it is for, what evidence it can produce, what it would cost to run, and whether it can be evaluated at all. Then describe three genuinely different systems and score each. Record the runner-up's strongest argument, because in four weeks you will wonder whether you picked wrong and the honest answer should already be written down."
+        },
+        {
+          "id": "M1.2",
+          "type": "assignment",
+          "title": "Does this need AI at all",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M1.2",
+          "skills": ["arch-routing"],
+          "checkpoints": [
+            "The core task isolated",
+            "A non-AI approach specified in enough detail to cost",
+            "Both approaches costed at a stated volume",
+            "The decision recorded with the conditions that would reverse it"
+          ],
+          "brief": "Apply AIE-107 to your own capstone before building it. Isolate the core task and specify a non-AI approach in enough detail that you could cost it — rules, a lookup, a classical model, or a human doing it. Cost both at a realistic volume. If the honest answer is that the system does not need a model, change the capstone rather than the answer; a capstone chosen because it needs AI is a better capstone than one that merely tolerates it."
+        },
+        {
+          "id": "M1.3",
+          "type": "assignment",
+          "title": "The evaluation plan, registered before any code",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M1.3",
+          "skills": ["eval-design"],
+          "checkpoints": [
+            "The success criterion stated as a number with a threshold",
+            "The eval method specified, including negatives",
+            "A baseline named that the system must beat",
+            "Committed to a timestamped record before implementation begins"
+          ],
+          "brief": "Write and register the evaluation before writing any code: what number defines success, what threshold you will accept, what the negatives look like, and which baseline the system must beat. Commit it with a timestamp. Every course in this programme has argued that the measurement must predate the thing measured, and this is the item where you do it for work of your own choosing."
+        },
+        {
+          "id": "M1.4",
+          "type": "assignment",
+          "title": "What you will not build",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M1.4",
+          "skills": ["arch-routing"],
+          "checkpoints": [
+            "At least six excluded features listed",
+            "Each with the reason for exclusion",
+            "The 120-hour budget allocated across the remaining modules",
+            "A named trigger for cutting further"
+          ],
+          "brief": "List at least six things a reasonable person would expect this system to do, and exclude them. Give the reason for each. Then allocate the remaining 120 hours across the phases below and name the trigger that will make you cut further — a date, or an hours-spent threshold. Capstones fail by scope, not by difficulty, and a scope you have not written down is one you will quietly expand."
+        },
+        {
+          "id": "M1.5",
+          "type": "assignment",
+          "title": "Data handling and risk, before there is data",
+          "est_minutes": 165,
+          "tier": 1,
+          "rubric": "R-M1.5",
+          "skills": ["eng-deployment"],
+          "checkpoints": [
+            "Every category of data the system will touch listed",
+            "Retention and deletion decided per category",
+            "The failure that would most embarrass you identified",
+            "A mitigation or an accepted-risk statement for each"
+          ],
+          "brief": "List every category of data this system will touch, including logs and traces. Decide retention and deletion for each before the first row exists, because retrofitting deletion is how personal data ends up living forever in a backup. Then name the failure that would most embarrass you in public and either mitigate it or write down that you are accepting the risk and why."
+        },
+        {
+          "id": "M1.6",
+          "type": "project",
+          "title": "Publish the scope document",
+          "est_minutes": 180,
+          "tier": 3,
+          "rubric": "R-M1.6",
+          "skills": ["arch-routing", "eval-design"],
+          "checkpoints": [
+            "Scope, exclusions, evaluation plan and baseline in one public document",
+            "What already existed before the capstone stated explicitly",
+            "Published before implementation begins",
+            "Linked from the public log"
+          ],
+          "brief": "Publish the scope document publicly before you write code. It carries the selection, the exclusions, the registered evaluation and the baseline, and it states plainly what existed before this capstone started so the boundary of new work is checkable by a reader. Publishing it in advance is what makes every later claim about intent verifiable rather than reconstructed."
+        },
+        {
+          "id": "M1.7",
+          "type": "retention",
+          "title": "Retention: the registered scope and its thresholds",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["arch-routing"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Build",
+      "est_minutes": 1800,
+      "items": [
+        {
+          "id": "M2.1",
+          "type": "assignment",
+          "title": "The walking skeleton",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.1",
+          "skills": ["eng-deployment"],
+          "checkpoints": [
+            "End-to-end path working with the simplest possible behaviour",
+            "Deployed somewhere reachable from the internet",
+            "One real request served and logged",
+            "Committed and reproducible from a clean checkout"
+          ],
+          "brief": "Build the thinnest possible end-to-end path and deploy it: request in, trivial answer out, logged. No intelligence yet. Doing this first means every later component lands in a system that already exists rather than accumulating toward one, and it moves the deployment problem to the day when nothing is at stake."
+        },
+        {
+          "id": "M2.2",
+          "type": "assignment",
+          "title": "The core capability, first pass",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.2",
+          "skills": ["arch-routing"],
+          "checkpoints": [
+            "The main task working on a handful of real inputs",
+            "Prompt or model choice recorded with its reason",
+            "Known failure cases collected as they appear",
+            "No evaluation yet — that is M3"
+          ],
+          "brief": "Make the system do its actual job, badly, on real inputs. Record why you chose the model and the approach. Start a file of failure cases the moment you see the first one — these become the regression corpus later, and the ones you notice now are the ones you will have forgotten by then."
+        },
+        {
+          "id": "M2.3",
+          "type": "assignment",
+          "title": "Context and retrieval, or the argument for not having it",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.3",
+          "skills": ["arch-routing"],
+          "checkpoints": [
+            "A context strategy chosen and implemented, or explicitly declined",
+            "The choice justified against the corpus's actual properties",
+            "Context budget stated in tokens",
+            "Retrieval evaluated separately from generation, if present"
+          ],
+          "brief": "Decide what the model needs to see and implement it — retrieval, a fixed context, or nothing. Justify the choice against the properties of your actual corpus, as AIE-103 argued: dense proper nouns favour lexical search, near-synonymous prose favours embeddings. If you decline retrieval entirely, that is a legitimate answer and it needs the same justification. State the context budget in tokens, because you now know what those cost."
+        },
+        {
+          "id": "M2.4",
+          "type": "assignment",
+          "title": "Output that cannot be malformed",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.4",
+          "skills": ["eng-deployment"],
+          "checkpoints": [
+            "A schema defined for every model output the system depends on",
+            "Validation at the boundary, with the invalid payload retained",
+            "Behaviour on validation failure defined and tested",
+            "A deliberate malformed response injected to prove the path"
+          ],
+          "brief": "Define a schema for every model output the system relies on and validate at the boundary. When validation fails, retain the invalid payload — a rejected response that is discarded is a bug you cannot investigate. Prove the path works by injecting a malformed response deliberately, because this code runs rarely and is therefore the code most likely to be wrong."
+        },
+        {
+          "id": "M2.5",
+          "type": "assignment",
+          "title": "Failing closed",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.5",
+          "skills": ["eng-deployment"],
+          "checkpoints": [
+            "Every external dependency's failure mode enumerated",
+            "Timeouts set explicitly rather than inherited",
+            "The degraded behaviour defined and visible to the user",
+            "A dependency failure simulated end to end"
+          ],
+          "brief": "Enumerate what happens when each external dependency fails: the model API, the datastore, the network. Set every timeout explicitly — an inherited default is a decision someone else made about your product. Define what the user sees when the system is degraded, and make it honest rather than a spinner. Then simulate a real failure and confirm the system does what you said."
+        },
+        {
+          "id": "M2.6",
+          "type": "assignment",
+          "title": "Cost and latency instrumented from the start",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.6",
+          "skills": ["eng-deployment"],
+          "checkpoints": [
+            "Per-request token counts and cost recorded",
+            "Latency recorded per stage, not only end to end",
+            "A cost-per-thousand-requests figure computed",
+            "The data written somewhere queryable"
+          ],
+          "brief": "Record tokens, cost and per-stage latency for every request from the first real one. AIE-105 argued that cost is a design constraint rather than a bill you read later, and instrumenting on day one is the difference between knowing what a change cost and estimating it. Compute a cost per thousand requests now, while the number is small enough to be surprising."
+        },
+        {
+          "id": "M2.7",
+          "type": "assignment",
+          "title": "An interface a stranger can use",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.7",
+          "skills": ["eng-deployment"],
+          "checkpoints": [
+            "The primary task completable without instruction",
+            "The system's limits stated in the interface itself",
+            "Error states written for someone who does not know the internals",
+            "Tested by watching someone use it without help"
+          ],
+          "brief": "Build the interface to the standard of someone arriving with no context. State the system's limits in the interface rather than in a README nobody opens. Write error messages for a person who does not know your architecture. Then watch one real person use it without helping them, and write down every point at which you wanted to intervene."
+        },
+        {
+          "id": "M2.8",
+          "type": "assignment",
+          "title": "Deploy it properly",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.8",
+          "skills": ["eng-deployment"],
+          "checkpoints": [
+            "Reproducible deployment from a clean checkout",
+            "Secrets outside the repository and outside the tree",
+            "State outside the deployable artifact",
+            "A rollback path tested, not assumed"
+          ],
+          "brief": "Make the deployment reproducible and boring. Secrets outside the repo, state outside the artifact, and a rollback you have actually performed rather than one you believe exists. This programme runs on a box where a failed build once overwrote a running server's assets and the service reported healthy while serving nothing — deployment failures are quiet, and the only defence is having tested the recovery."
+        },
+        {
+          "id": "M2.9",
+          "type": "assignment",
+          "title": "Observability, so failures are visible",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.9",
+          "skills": ["eng-deployment", "eval-design"],
+          "checkpoints": [
+            "Full traces retained for a stated window",
+            "A way to find the requests that went wrong without reading everything",
+            "An alert or check that would catch total failure",
+            "Retention consistent with the M1.5 data decisions"
+          ],
+          "brief": "Make it possible to answer 'what went wrong for that user' without reading every log line. Retain full traces for a window you state, consistent with the data decisions you already registered. Add one check that would catch the system being entirely broken, because the failure that costs most is the one nobody notices for a week."
+        },
+        {
+          "id": "M2.10",
+          "type": "assignment",
+          "title": "The first external user",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M2.10",
+          "skills": ["eng-deployment"],
+          "checkpoints": [
+            "At least one person who is not you uses it unaided",
+            "Their session observed or recorded with consent",
+            "Every point of confusion logged",
+            "One change made in response, and its effect checked"
+          ],
+          "brief": "Put the system in front of at least one person who is not you and does not work on it, with their consent to observe. Do not help them. Log every point of confusion and every assumption they made that you did not expect. Make one change in response and check whether it helped. This is the item that separates a capstone from a demo, and it is routinely skipped because it is uncomfortable."
+        },
+        {
+          "id": "M2.11",
+          "type": "retention",
+          "title": "Retention: the system's architecture and failure paths",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["eng-deployment"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Evaluate, against the plan you registered",
+      "est_minutes": 1440,
+      "items": [
+        {
+          "id": "M3.1",
+          "type": "assignment",
+          "title": "Build the eval set the plan specified",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M3.1",
+          "skills": ["eval-design"],
+          "checkpoints": [
+            "Cases built to the registered specification",
+            "Negatives included at the stated proportion",
+            "Every case carrying its provenance",
+            "Loaded and validated by the harness"
+          ],
+          "brief": "Build the evaluation set your M1.3 plan specified, at the size it specified, with the negatives it specified. Record where each case came from. Load it into tools/eval-harness so the format is validated rather than trusted — the harness rejects a corpus with untagged cases or spans that are not verbatim in their source, and those are exactly the errors that make a gold set quietly wrong."
+        },
+        {
+          "id": "M3.2",
+          "type": "assignment",
+          "title": "Run it, and record the baseline",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M3.2",
+          "skills": ["eval-design"],
+          "checkpoints": [
+            "The system scored through the harness",
+            "Per-tag results reported, not only the aggregate",
+            "A baseline frozen for future comparison",
+            "The result compared against the registered threshold"
+          ],
+          "brief": "Score the system through the harness and read the per-tag results rather than the headline number. Freeze the run as a baseline. Then compare against the threshold you registered in M1.3 and state plainly whether you hit it. This is the moment the registered plan pays for itself, and it is the moment most projects renegotiate their success criterion instead."
+        },
+        {
+          "id": "M3.3",
+          "type": "assignment",
+          "title": "Error analysis on real traces",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M3.3",
+          "skills": ["eval-design"],
+          "checkpoints": [
+            "At least 50 real traces read individually",
+            "Failures open-coded rather than bucketed in advance",
+            "Categories counted and ranked",
+            "The top category traced to a specific cause"
+          ],
+          "brief": "Read at least fifty real traces one at a time and code the failures as you find them rather than sorting them into categories you decided in advance. Count and rank the categories. Then take the largest and find its actual cause in the system. AIE-102 argued that error analysis beats eval design as a first move; this is where you do it on a system you built to your own specification."
+        },
+        {
+          "id": "M3.4",
+          "type": "assignment",
+          "title": "Beat the baseline you named",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M3.4",
+          "skills": ["eval-design", "arch-routing"],
+          "checkpoints": [
+            "The M1.3 baseline implemented properly, not as a straw man",
+            "Both evaluated on the identical set through the same harness",
+            "The comparison stated with an interval",
+            "A verdict recorded even where it is unflattering"
+          ],
+          "brief": "Implement the baseline you named in the registered plan, and implement it in good faith. Evaluate both on the identical set. State the comparison with an interval rather than two numbers. If the baseline wins, that is the finding, it goes in the write-up, and it is worth more to a reader than a system that beat nothing."
+        },
+        {
+          "id": "M3.5",
+          "type": "assignment",
+          "title": "How much of this is noise",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M3.5",
+          "skills": ["eval-design"],
+          "checkpoints": [
+            "The eval re-run several times with sampling enabled",
+            "Run-to-run variation quantified",
+            "An interval computed for the headline number",
+            "The smallest detectable difference stated"
+          ],
+          "brief": "Run the same evaluation several times without changing anything and measure how much the number moves. Compute an interval. Then state the smallest difference this eval could detect — that figure governs every improvement claim you will make for the rest of the project, and knowing it stops you reporting a two-point gain that your own harness cannot distinguish from nothing."
+        },
+        {
+          "id": "M3.6",
+          "type": "assignment",
+          "title": "A regression suite that runs itself",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M3.6",
+          "skills": ["eval-design"],
+          "checkpoints": [
+            "Every failure case from M2.2 onward turned into a case",
+            "The suite wired to run automatically",
+            "Non-zero exit on regression against the frozen baseline",
+            "One deliberate regression introduced to prove it fires"
+          ],
+          "brief": "Turn the failure file you have been keeping since M2.2 into a regression suite, wire it to run automatically, and make it fail the build on regression against the frozen baseline. Then break something on purpose and confirm it fires. A check that has never been seen to fail is a check nobody should trust, and this programme has already caught two of those in its own tooling."
+        },
+        {
+          "id": "M3.7",
+          "type": "assignment",
+          "title": "Act on the error analysis, and measure",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M3.7",
+          "skills": ["eval-design"],
+          "checkpoints": [
+            "One change made addressing the top failure category",
+            "Expected effect predicted before the change",
+            "Re-evaluated on the identical set",
+            "Result compared against both the prediction and the noise floor"
+          ],
+          "brief": "Make one change targeting the largest failure category, and predict its effect before making it. Re-evaluate. Compare the outcome against your prediction and against the smallest detectable difference from M3.5. A gain smaller than your noise floor is not a gain, and reporting it as one is the most common dishonesty in applied machine learning."
+        },
+        {
+          "id": "M3.8",
+          "type": "assignment",
+          "title": "Where this system stops working",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M3.8",
+          "skills": ["eval-design"],
+          "checkpoints": [
+            "The failure boundary probed deliberately",
+            "The conditions under which quality collapses identified",
+            "The boundary quantified rather than described",
+            "Recorded as the capability's negative result"
+          ],
+          "brief": "Find where your system stops working and write it down with numbers: input length, domain distance, language, ambiguity, volume. Every capability claim in this programme requires a documented negative result, and this is the item that produces one for the capstone. Anyone can ship a demo; the boundary is the part a reader learns from."
+        },
+        {
+          "id": "M3.9",
+          "type": "retention",
+          "title": "Retention: the system's measured behaviour and limits",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["eval-design"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "Harden",
+      "est_minutes": 1080,
+      "items": [
+        {
+          "id": "M4.1",
+          "type": "assignment",
+          "title": "Red-team your own system",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M4.1",
+          "skills": ["eng-deployment"],
+          "checkpoints": [
+            "An attack surface enumerated for this specific system",
+            "Prompt injection attempted through every input path",
+            "Successful attacks recorded verbatim",
+            "Mitigations applied and re-tested"
+          ],
+          "brief": "Attack your own system deliberately. Enumerate every path by which text you did not write reaches the model — user input, retrieved documents, tool results, file names. Attempt injection through each. Record what worked, exactly. Apply mitigations and try again. The attacks that still work after mitigation go in the write-up, because a security section listing only solved problems tells a reader nothing."
+        },
+        {
+          "id": "M4.2",
+          "type": "assignment",
+          "title": "The controls that actually hold",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M4.2",
+          "skills": ["eng-deployment"],
+          "checkpoints": [
+            "Authentication and authorisation implemented if there is anything to protect",
+            "Rate limiting in place with a stated threshold",
+            "Input size bounded",
+            "Each control tested by attempting to violate it"
+          ],
+          "brief": "Implement the controls the system actually needs — access control if there is anything to protect, rate limiting with a threshold you chose rather than inherited, bounded input sizes. Test each by attempting to violate it. An unbounded input field in front of a per-token bill is a funding request from a stranger."
+        },
+        {
+          "id": "M4.3",
+          "type": "assignment",
+          "title": "What it costs under load",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M4.3",
+          "skills": ["eng-deployment"],
+          "checkpoints": [
+            "A load profile defined and justified",
+            "The system run under it",
+            "Cost and latency at load compared against the single-request figures",
+            "The breaking point identified"
+          ],
+          "brief": "Define a realistic load, run the system under it, and compare cost and latency against your single-request numbers from M2.6. They will not scale linearly. Find the point at which the system stops meeting its latency target or its cost stops being acceptable, and state it as a number of concurrent users. A system whose breaking point is unknown is one you cannot responsibly show anyone."
+        },
+        {
+          "id": "M4.4",
+          "type": "assignment",
+          "title": "The failure drill",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M4.4",
+          "skills": ["eng-deployment"],
+          "checkpoints": [
+            "The model provider's failure simulated",
+            "The datastore's failure simulated",
+            "A bad deploy performed and rolled back",
+            "Time to detect and time to recover recorded for each"
+          ],
+          "brief": "Break the system on purpose in three ways and recover from each: the model provider unavailable, the datastore unavailable, and a bad deploy. Record how long detection took and how long recovery took. The numbers matter less than discovering which failure you had no plan for, which is always one of them."
+        },
+        {
+          "id": "M4.5",
+          "type": "assignment",
+          "title": "What you would not ship to a paying customer",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M4.5",
+          "skills": ["arch-routing", "eng-deployment"],
+          "checkpoints": [
+            "An honest list of what is not production-grade",
+            "Each item's risk stated concretely",
+            "The work required to close each estimated",
+            "A judgement on which would be worth doing"
+          ],
+          "brief": "Write the list you would give a colleague inheriting this system: what is not production-grade, what risk each thing carries, and roughly what it would cost to fix. Then say which you would actually do and which you would accept. This list is the single most credible thing in a capstone write-up, because everyone who has shipped anything knows it exists and most authors pretend theirs does not."
+        },
+        {
+          "id": "M4.6",
+          "type": "assignment",
+          "title": "The runbook someone else could operate from",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M4.6",
+          "skills": ["eng-deployment"],
+          "checkpoints": [
+            "Every routine operation documented as steps, not prose",
+            "Each failure from the M4.4 drill given a procedure",
+            "Where the secrets, the data and the logs live, stated",
+            "Tested by following it exactly, without improvising"
+          ],
+          "brief": "Write the document that lets someone who is not you keep this running: how to deploy, how to roll back, where the secrets and the data and the logs live, and what to do for each failure you drilled in M4.4. Then test it the only way that works — follow it exactly, without using anything you know that is not written down. Every step you had to improvise is a step that was missing, and finding them now is cheaper than finding them during an outage."
+        },
+        {
+          "id": "M4.7",
+          "type": "retention",
+          "title": "Retention: attack surface and operational limits",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["eng-deployment"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Write it up, and ship it",
+      "est_minutes": 1080,
+      "items": [
+        {
+          "id": "M5.1",
+          "type": "project",
+          "title": "The ten-minute assessment",
+          "est_minutes": 180,
+          "tier": 3,
+          "rubric": "R-M5.1",
+          "skills": ["eval-design", "arch-routing"],
+          "checkpoints": [
+            "What it does, for whom, in the first paragraph",
+            "The headline number with its interval, above the fold",
+            "The limitations visible without scrolling past praise",
+            "A working link a reader can use immediately"
+          ],
+          "brief": "Write the document a hiring manager reads in ten minutes and then decides. What it does and for whom in the first paragraph; the headline number with its interval near the top; the limitations where they cannot be missed; a link that works. Most capstone write-ups bury the result under a narrative of the journey. Yours puts the result first and the journey underneath, where the reader can choose it."
+        },
+        {
+          "id": "M5.2",
+          "type": "project",
+          "title": "The technical write-up",
+          "est_minutes": 180,
+          "tier": 3,
+          "rubric": "R-M5.2",
+          "skills": ["arch-routing", "eval-design"],
+          "checkpoints": [
+            "Every significant decision recorded with its alternative",
+            "Each marked as measured or inherited",
+            "The evaluation method described well enough to criticise",
+            "The error analysis and its consequences included"
+          ],
+          "brief": "Write the version for someone who wants to argue with you. Every significant decision, its alternative, and whether it was measured or inherited — the distinction AIE-204 introduced, and the one almost no published write-up makes. Describe the evaluation in enough detail that a reader could attack it, because an evaluation nobody can criticise is one nobody can trust."
+        },
+        {
+          "id": "M5.3",
+          "type": "project",
+          "title": "The chapter that connects backwards",
+          "est_minutes": 180,
+          "tier": 3,
+          "rubric": "R-M5.3",
+          "skills": ["arch-routing"],
+          "checkpoints": [
+            "Published into the public engineering log",
+            "Connected to at least three earlier chapters",
+            "At least one earlier conclusion revised",
+            "Stands alone on its own page"
+          ],
+          "brief": "Publish the capstone chapter into the growing public log. It must stand alone and must connect to at least three earlier chapters — and it must revise at least one earlier conclusion, because after twelve courses and a shipped system, something you wrote in the first six weeks is now wrong. Finding it and correcting it in public is the point of keeping one log rather than six posts."
+        },
+        {
+          "id": "M5.4",
+          "type": "assignment",
+          "title": "The limitations section, written honestly",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M5.4",
+          "skills": ["eval-design"],
+          "checkpoints": [
+            "The negative result from M3.8 stated prominently",
+            "Every unfavourable measurement included",
+            "The gap between registered scope and delivered system stated",
+            "Nothing removed between draft and publication"
+          ],
+          "brief": "Write the limitations from the measurements rather than from modesty. The failure boundary from M3.8, every unfavourable number, and the honest gap between what M1.6 registered and what you actually delivered. Then check your draft against your published scope document and confirm nothing quietly disappeared between them."
+        },
+        {
+          "id": "M5.5",
+          "type": "project",
+          "title": "Ship it publicly",
+          "est_minutes": 165,
+          "tier": 3,
+          "rubric": "R-M5.5",
+          "skills": ["eng-deployment"],
+          "checkpoints": [
+            "Live at a public URL a stranger can reach",
+            "Source public, or the reason for keeping it closed stated",
+            "Running cost stated and sustainable",
+            "A stated intention for how long it will stay up"
+          ],
+          "brief": "Put it in the world. A public URL that works without you, source public unless you can state why not, and a running cost you can sustain. Say how long you intend to keep it up — a capstone that quietly disappears in three months makes every link in the transcript dead, and stating a horizon in advance is more honest than letting it rot."
+        },
+        {
+          "id": "M5.6",
+          "type": "assignment",
+          "title": "Update the capability claims this earns",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M5.6",
+          "skills": ["eval-design", "arch-routing"],
+          "checkpoints": [
+            "Each capability this system evidences identified",
+            "The specific evidence named per claim",
+            "Claims the system does not support explicitly declined",
+            "The artifact and negative-result fields updated where earned"
+          ],
+          "brief": "Go through the capability pages and decide what this system actually earns. For each claim you make, name the specific evidence. For each one it does not support, say so and leave it unearned. The temptation at the end of a capstone is to let one system justify every line on the CV, and refusing that is the whole reason the evidence ledger exists."
+        },
+        {
+          "id": "M5.7",
+          "type": "retention",
+          "title": "Retention: the write-up's claims and their evidence",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["eval-design"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M6",
+      "title": "Defend",
+      "est_minutes": 720,
+      "items": [
+        {
+          "id": "M6.1",
+          "type": "assignment",
+          "title": "The questions you are afraid of",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M6.1",
+          "skills": ["arch-routing", "eval-design"],
+          "checkpoints": [
+            "At least fifteen questions written, targeting real weaknesses",
+            "Answers drafted for each",
+            "The three with no good answer identified",
+            "Those three addressed in the write-up rather than hidden"
+          ],
+          "brief": "Write the fifteen questions you least want to be asked about this system, aimed at real weaknesses rather than easy ones. Draft answers. Identify the three you cannot answer well, and put those into the write-up as acknowledged limitations rather than hoping nobody asks. A question you have already conceded in writing cannot be used against you."
+        },
+        {
+          "id": "M6.2",
+          "type": "defense",
+          "title": "The capstone defense",
+          "est_minutes": 180,
+          "tier": 4,
+          "rubric": "R-M6.2",
+          "skills": ["arch-routing", "eval-design", "eng-deployment"],
+          "checkpoints": [
+            "Questions generated at defense time from the published artifacts",
+            "Answered aloud without notes and without the system open",
+            "At least one hostile line of questioning pursued to its end",
+            "Recording retained"
+          ],
+          "brief": "The longest defense in the programme, because it covers a whole system rather than one assignment. Questions are generated at defense time from your published write-up and repository. Answered aloud, without notes and without the system open in front of you. At least one line of questioning is pursued past the point of comfort, because the difference between a system you built and one you assembled shows up three questions deep, not one."
+        },
+        {
+          "id": "M6.3",
+          "type": "assignment",
+          "title": "Correct what the defense exposed",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M6.3",
+          "skills": ["eval-design"],
+          "checkpoints": [
+            "Every point where the defense revealed an error listed",
+            "The write-up corrected rather than annotated",
+            "The correction dated and visible",
+            "Anything that turned out to be unfixable stated as such"
+          ],
+          "brief": "The defense will expose errors — a number you could not justify, a decision you could not reconstruct, a claim broader than the evidence. Correct the published write-up rather than leaving it and adding a note. Date the correction and leave it visible. A public document that quietly changes is worse than one that was wrong, and a visible correction is the strongest possible evidence that the rest is honest."
+        },
+        {
+          "id": "M6.4",
+          "type": "assignment",
+          "title": "What you would do differently",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M6.4",
+          "skills": ["arch-routing"],
+          "checkpoints": [
+            "The largest wrong decision identified",
+            "The point at which it could have been caught named",
+            "What would have caught it stated as a practice, not a resolution",
+            "One practice actually adopted"
+          ],
+          "brief": "Name the largest thing you got wrong, and the moment at which it was still cheap to catch. Then convert that into a practice rather than a resolution — 'register the evaluation before building' is a practice, 'be more careful' is not. Adopt one of them formally, by writing it into the rules of a repository you own, so the lesson survives your memory of this project."
+        },
+        {
+          "id": "M6.5",
+          "type": "retention",
+          "title": "Retention: the capstone, cold",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["arch-routing", "eval-design"],
+          "fsrs": true
+        }
+      ]
+    }
+  ],
+  "rubrics": [
+    {
+      "id": "R-M1.1",
+      "for": "M1.1",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "criteria timestamped before the candidate descriptions", "blocking": true },
+        { "check": "three candidates scored against every criterion", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The criteria precede and constrain the choice", "weight": 0.4,
+          "levels": { "0": "Written to justify a decision already made.", "1": "Partly prior.", "2": "Prior and applied.", "3": "Prior, applied, and one criterion eliminated a candidate the author preferred." } },
+        { "id": "c2", "criterion": "The candidates are genuinely different", "weight": 0.35,
+          "levels": { "0": "Three variants of one idea.", "1": "Some variety.", "2": "Materially different systems.", "3": "Materially different in the evidence they could produce, not just in subject." } },
+        { "id": "c3", "criterion": "The runner-up's case is preserved", "weight": 0.25,
+          "levels": { "0": "Not recorded.", "1": "Mentioned.", "2": "Its strongest argument recorded.", "3": "Its strongest argument recorded, with what would have made it win." } }
+      ]
+    },
+    {
+      "id": "R-M1.2",
+      "for": "M1.2",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "a non-AI approach specified in enough detail to cost", "blocking": true },
+        { "check": "both approaches costed at a stated volume", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The alternative is specified in good faith", "weight": 0.45,
+          "levels": { "0": "Dismissed in a sentence.", "1": "Sketched.", "2": "Specified and costed.", "3": "Specified well enough that someone could build it instead." } },
+        { "id": "c2", "criterion": "The comparison uses real numbers", "weight": 0.3,
+          "levels": { "0": "Qualitative.", "1": "One side costed.", "2": "Both costed.", "3": "Both costed at a stated volume with accuracy, latency and maintenance included." } },
+        { "id": "c3", "criterion": "The decision states its reversal conditions", "weight": 0.25,
+          "levels": { "0": "None.", "1": "Vague.", "2": "Stated.", "3": "Stated with thresholds that could actually be observed later." } }
+      ]
+    },
+    {
+      "id": "R-M1.3",
+      "for": "M1.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "success threshold stated as a number before implementation", "blocking": true },
+        { "check": "a named baseline the system must beat", "blocking": true },
+        { "check": "committed with a verifiable timestamp", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The success criterion is falsifiable", "weight": 0.4,
+          "levels": { "0": "Aspirational.", "1": "A metric with no threshold.", "2": "A metric and a threshold.", "3": "A metric, a threshold, and what the author will do if it is missed." } },
+        { "id": "c2", "criterion": "The eval design anticipates the hard cases", "weight": 0.35,
+          "levels": { "0": "Positives only.", "1": "Negatives mentioned.", "2": "Negatives specified with a proportion.", "3": "Negatives specified as near-misses rather than obvious non-matches." } },
+        { "id": "c3", "criterion": "The baseline is one that could plausibly win", "weight": 0.25,
+          "levels": { "0": "A straw man.", "1": "Weak.", "2": "Reasonable.", "3": "Strong enough that beating it would be a real result." } }
+      ]
+    },
+    {
+      "id": "R-M1.4",
+      "for": "M1.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "six or more exclusions listed with reasons", "blocking": true },
+        { "check": "a cut trigger stated as a date or an hours threshold", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The exclusions are things a reader would expect", "weight": 0.4,
+          "levels": { "0": "Straw exclusions nobody wanted.", "1": "Some real.", "2": "Mostly real.", "3": "All real, including at least one the author wanted to build." } },
+        { "id": "c2", "criterion": "The budget allocation is plausible", "weight": 0.35,
+          "levels": { "0": "Unallocated.", "1": "Round numbers.", "2": "Allocated per phase.", "3": "Allocated per phase with contingency stated explicitly." } },
+        { "id": "c3", "criterion": "The cut trigger is operable", "weight": 0.25,
+          "levels": { "0": "Absent.", "1": "'If I run out of time'.", "2": "A concrete trigger.", "3": "A concrete trigger with what gets cut first, ranked." } }
+      ]
+    },
+    {
+      "id": "R-M1.5",
+      "for": "M1.5",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "retention and deletion decided per data category", "blocking": true },
+        { "check": "logs and traces included as categories", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The inventory is complete", "weight": 0.4,
+          "levels": { "0": "User input only.", "1": "Main stores.", "2": "Includes logs and traces.", "3": "Includes logs, traces, backups and anything sent to a third party." } },
+        { "id": "c2", "criterion": "Deletion is designed rather than deferred", "weight": 0.35,
+          "levels": { "0": "Not addressed.", "1": "Intended.", "2": "Specified per category.", "3": "Specified and implementable with the storage actually chosen." } },
+        { "id": "c3", "criterion": "Accepted risks are stated as accepted", "weight": 0.25,
+          "levels": { "0": "Risks unstated.", "1": "Listed.", "2": "Mitigated or accepted.", "3": "Mitigated or accepted, with who bears the consequence named." } }
+      ]
+    },
+    {
+      "id": "R-M1.6",
+      "for": "M1.6",
+      "tier": 3,
+      "machine_checks": [
+        { "check": "published before the first implementation commit", "blocking": true },
+        { "check": "states what already existed before the capstone", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "It is genuinely prior", "weight": 0.45,
+          "levels": { "0": "Published afterwards.", "1": "Published during.", "2": "Published before code.", "3": "Published before code, with the commit history proving it." } },
+        { "id": "c2", "criterion": "The boundary of new work is checkable", "weight": 0.3,
+          "levels": { "0": "Not stated.", "1": "Vague.", "2": "Stated.", "3": "Stated with links to what pre-existed, so a reader can verify it." } },
+        { "id": "c3", "criterion": "It commits to something specific", "weight": 0.25,
+          "levels": { "0": "Aspirations.", "1": "Loose scope.", "2": "Scope, exclusions and threshold.", "3": "Scope, exclusions, threshold and baseline, all falsifiable." } }
+      ]
+    },
+    {
+      "id": "R-M2.1",
+      "for": "M2.1",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "deployed and reachable, with one logged real request", "blocking": true },
+        { "check": "reproducible from a clean checkout", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "It is genuinely end to end", "weight": 0.45,
+          "levels": { "0": "Runs locally only.", "1": "Deployed, incomplete path.", "2": "Full path deployed.", "3": "Full path deployed, with the request visible in logs from the outside." } },
+        { "id": "c2", "criterion": "It is deliberately trivial", "weight": 0.3,
+          "levels": { "0": "Half the system built already.", "1": "More than needed.", "2": "Minimal.", "3": "Minimal, with the intelligence explicitly deferred." } },
+        { "id": "c3", "criterion": "Reproducibility is proven", "weight": 0.25,
+          "levels": { "0": "Untested.", "1": "Claimed.", "2": "Rebuilt once.", "3": "Rebuilt from clean with the steps documented." } }
+      ]
+    },
+    {
+      "id": "R-M2.2",
+      "for": "M2.2",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "model and approach choice recorded with a reason", "blocking": true },
+        { "check": "a failure-case file started and non-empty", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "It works on real inputs, not curated ones", "weight": 0.4,
+          "levels": { "0": "Hand-picked examples.", "1": "Mostly curated.", "2": "Real inputs.", "3": "Real inputs including ones the author expected to fail." } },
+        { "id": "c2", "criterion": "Failures are captured as they appear", "weight": 0.35,
+          "levels": { "0": "Not captured.", "1": "Remembered.", "2": "Written down.", "3": "Written down with the input retained so it can become a test case." } },
+        { "id": "c3", "criterion": "The choice of model is reasoned", "weight": 0.25,
+          "levels": { "0": "Default.", "1": "Familiarity.", "2": "Reasoned.", "3": "Reasoned with an alternative named and why it was not chosen." } }
+      ]
+    },
+    {
+      "id": "R-M2.3",
+      "for": "M2.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "context budget stated in tokens", "blocking": true },
+        { "check": "retrieval evaluated separately from generation where present", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The strategy fits the corpus's actual properties", "weight": 0.4,
+          "levels": { "0": "Default choice.", "1": "Convention.", "2": "Justified against the corpus.", "3": "Justified against measured properties of the corpus." } },
+        { "id": "c2", "criterion": "Declining retrieval is argued as strongly as adopting it", "weight": 0.3,
+          "levels": { "0": "Adopted or declined without argument.", "1": "Asserted.", "2": "Argued.", "3": "Argued with what would change the decision." } },
+        { "id": "c3", "criterion": "Retrieval quality is separable from output quality", "weight": 0.3,
+          "levels": { "0": "Not separated.", "1": "Acknowledged.", "2": "Measured separately.", "3": "Measured separately with a retrieval metric reported." } }
+      ]
+    },
+    {
+      "id": "R-M2.4",
+      "for": "M2.4",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "invalid payloads retained rather than discarded", "blocking": true },
+        { "check": "a malformed response injected and the path exercised", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "Validation covers every dependent output", "weight": 0.4,
+          "levels": { "0": "None.", "1": "The main path.", "2": "All model outputs.", "3": "All model outputs, with the schema versioned." } },
+        { "id": "c2", "criterion": "The failure path is proven, not assumed", "weight": 0.35,
+          "levels": { "0": "Untested.", "1": "Reasoned about.", "2": "Tested with an injected failure.", "3": "Tested, with the retained payload shown." } },
+        { "id": "c3", "criterion": "Behaviour on failure is a decision", "weight": 0.25,
+          "levels": { "0": "Exception to the user.", "1": "Generic error.", "2": "Defined and sensible.", "3": "Defined, sensible, and surfaced honestly to the user." } }
+      ]
+    },
+    {
+      "id": "R-M2.5",
+      "for": "M2.5",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "explicit timeouts on every external call", "blocking": true },
+        { "check": "a dependency failure simulated end to end", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "Failure modes are enumerated per dependency", "weight": 0.4,
+          "levels": { "0": "Not enumerated.", "1": "The obvious one.", "2": "Per dependency.", "3": "Per dependency, distinguishing slow from unavailable from wrong." } },
+        { "id": "c2", "criterion": "Timeouts are chosen rather than inherited", "weight": 0.3,
+          "levels": { "0": "Defaults.", "1": "Some set.", "2": "All set.", "3": "All set, each justified against a latency budget." } },
+        { "id": "c3", "criterion": "Degraded behaviour is honest to the user", "weight": 0.3,
+          "levels": { "0": "Hangs or lies.", "1": "Generic failure.", "2": "Clear message.", "3": "Clear message stating what is unavailable and what still works." } }
+      ]
+    },
+    {
+      "id": "R-M2.6",
+      "for": "M2.6",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "per-request tokens, cost and per-stage latency recorded", "blocking": true },
+        { "check": "cost per thousand requests computed", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "Instrumentation is per stage, not just end to end", "weight": 0.4,
+          "levels": { "0": "Total only.", "1": "Two stages.", "2": "Per stage.", "3": "Per stage, with the dominant contributor identifiable per request." } },
+        { "id": "c2", "criterion": "The data is queryable", "weight": 0.3,
+          "levels": { "0": "Printed.", "1": "In logs.", "2": "Structured and stored.", "3": "Structured, stored, and aggregated by a query the author shows." } },
+        { "id": "c3", "criterion": "The cost figure is real", "weight": 0.3,
+          "levels": { "0": "Estimated from list prices.", "1": "Partly measured.", "2": "Measured.", "3": "Measured, with the provider's own billing reconciled against it." } }
+      ]
+    },
+    {
+      "id": "R-M2.7",
+      "for": "M2.7",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "observed session with someone who did not build it", "blocking": true },
+        { "check": "limits stated in the interface itself", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The primary task needs no explanation", "weight": 0.4,
+          "levels": { "0": "Requires a walkthrough.", "1": "Requires a README.", "2": "Self-evident.", "3": "Self-evident, evidenced by the observed session." } },
+        { "id": "c2", "criterion": "Errors are written for a stranger", "weight": 0.3,
+          "levels": { "0": "Stack traces.", "1": "Technical messages.", "2": "Plain language.", "3": "Plain language stating what to do next." } },
+        { "id": "c3", "criterion": "The observation was not interfered with", "weight": 0.3,
+          "levels": { "0": "The author helped throughout.", "1": "Occasional help.", "2": "No help, points logged.", "3": "No help, points logged, including the urge to intervene." } }
+      ]
+    },
+    {
+      "id": "R-M2.8",
+      "for": "M2.8",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "secrets outside the repository and outside the deployed tree", "blocking": true },
+        { "check": "a rollback actually performed, not merely available", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "State survives a deployment", "weight": 0.4,
+          "levels": { "0": "State inside the artifact.", "1": "Backed up manually.", "2": "Outside the artifact.", "3": "Outside the artifact, with a restore tested." } },
+        { "id": "c2", "criterion": "The rollback is proven", "weight": 0.35,
+          "levels": { "0": "Assumed.", "1": "Documented.", "2": "Performed once.", "3": "Performed, with time-to-recover recorded." } },
+        { "id": "c3", "criterion": "The deploy is reproducible by someone else", "weight": 0.25,
+          "levels": { "0": "Manual steps in the author's head.", "1": "Partially scripted.", "2": "Scripted.", "3": "Scripted, with a failure in the script causing the deploy to stop rather than continue." } }
+      ]
+    },
+    {
+      "id": "R-M2.9",
+      "for": "M2.9",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "traces retained for a stated window consistent with M1.5", "blocking": true },
+        { "check": "a check that would catch total failure", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "A specific bad request can be found", "weight": 0.4,
+          "levels": { "0": "Only aggregate logs.", "1": "Searchable text.", "2": "Traces retrievable by identifier.", "3": "Traces retrievable with the full input and output of each stage." } },
+        { "id": "c2", "criterion": "Retention matches the registered decision", "weight": 0.3,
+          "levels": { "0": "Contradicts it.", "1": "Unclear.", "2": "Matches.", "3": "Matches, with deletion demonstrated." } },
+        { "id": "c3", "criterion": "The failure check is meaningful", "weight": 0.3,
+          "levels": { "0": "None.", "1": "Process liveness only.", "2": "A functional check.", "3": "A functional check that would have caught a past real failure mode." } }
+      ]
+    },
+    {
+      "id": "R-M2.10",
+      "for": "M2.10",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "at least one unaided session with consent recorded", "blocking": true },
+        { "check": "one change made in response and its effect checked", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The session was genuinely unaided", "weight": 0.4,
+          "levels": { "0": "Guided.", "1": "Occasional prompting.", "2": "Unaided.", "3": "Unaided, with the author's own interventions they resisted noted." } },
+        { "id": "c2", "criterion": "Confusion is recorded specifically", "weight": 0.35,
+          "levels": { "0": "Summarised as 'went well'.", "1": "General notes.", "2": "Specific points.", "3": "Specific points with the user's own words." } },
+        { "id": "c3", "criterion": "The response was measured", "weight": 0.25,
+          "levels": { "0": "No change.", "1": "Change without check.", "2": "Change and re-check.", "3": "Change re-checked with a second person." } }
+      ]
+    },
+    {
+      "id": "R-M3.1",
+      "for": "M3.1",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "corpus validates in the harness", "blocking": true },
+        { "check": "negatives present at the registered proportion", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "It matches the registered specification", "weight": 0.4,
+          "levels": { "0": "Different from the plan.", "1": "Mostly.", "2": "Matches.", "3": "Matches, with any deviation stated and justified." } },
+        { "id": "c2", "criterion": "The negatives are traps rather than filler", "weight": 0.35,
+          "levels": { "0": "Absent.", "1": "Obvious non-matches.", "2": "Plausible.", "3": "Near-misses a naive system would confidently get wrong." } },
+        { "id": "c3", "criterion": "Provenance is recorded per case", "weight": 0.25,
+          "levels": { "0": "None.", "1": "Source type.", "2": "Per case.", "3": "Per case, including which came from observed failures." } }
+      ]
+    },
+    {
+      "id": "R-M3.2",
+      "for": "M3.2",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "per-tag results reported", "blocking": true },
+        { "check": "compared against the registered threshold explicitly", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The registered threshold is honoured", "weight": 0.45,
+          "levels": { "0": "Renegotiated after seeing the result.", "1": "Reinterpreted.", "2": "Compared honestly.", "3": "Compared honestly, with a miss stated as a miss." } },
+        { "id": "c2", "criterion": "Per-tag reading is done", "weight": 0.3,
+          "levels": { "0": "Aggregate only.", "1": "Tags shown.", "2": "Tags interpreted.", "3": "Tags interpreted with the weakest one named as the next target." } },
+        { "id": "c3", "criterion": "The baseline is frozen properly", "weight": 0.25,
+          "levels": { "0": "Not frozen.", "1": "Saved informally.", "2": "Frozen as an artifact.", "3": "Frozen and committed, so later comparison is mechanical." } }
+      ]
+    },
+    {
+      "id": "R-M3.3",
+      "for": "M3.3",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "50 or more real traces read individually", "blocking": true },
+        { "check": "categories emergent rather than predefined", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The coding is genuinely open", "weight": 0.4,
+          "levels": { "0": "Sorted into preset buckets.", "1": "Mostly preset.", "2": "Emergent.", "3": "Emergent, with at least one category the author did not anticipate." } },
+        { "id": "c2", "criterion": "Counts are real and ranked", "weight": 0.3,
+          "levels": { "0": "Impressions.", "1": "Rough counts.", "2": "Counted and ranked.", "3": "Counted, ranked, with the long tail described." } },
+        { "id": "c3", "criterion": "The top category is traced to a cause", "weight": 0.3,
+          "levels": { "0": "Described only.", "1": "Speculated.", "2": "Traced.", "3": "Traced to a specific component with the evidence." } }
+      ]
+    },
+    {
+      "id": "R-M3.4",
+      "for": "M3.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "baseline and system evaluated on the identical set", "blocking": true },
+        { "check": "comparison reported with an interval", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The baseline is implemented in good faith", "weight": 0.45,
+          "levels": { "0": "Straw man.", "1": "Minimal.", "2": "Reasonable.", "3": "The best version the author could build, with its iterations shown." } },
+        { "id": "c2", "criterion": "The verdict follows the numbers", "weight": 0.3,
+          "levels": { "0": "Predetermined.", "1": "Loosely argued.", "2": "Follows the numbers.", "3": "Follows the numbers including where they are unflattering." } },
+        { "id": "c3", "criterion": "The comparison is statistically honest", "weight": 0.25,
+          "levels": { "0": "Two bare numbers.", "1": "Difference asserted.", "2": "Interval given.", "3": "Interval given, with a difference inside it called no difference." } }
+      ],
+      "anti_gaming": "A weak baseline invalidates the capstone's central claim. Judges are instructed to inspect it and score criterion 1 at 0 where no genuine effort is evidenced."
+    },
+    {
+      "id": "R-M3.5",
+      "for": "M3.5",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "eval re-run at least five times without changes", "blocking": true },
+        { "check": "smallest detectable difference stated", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "Run-to-run variation is measured", "weight": 0.4,
+          "levels": { "0": "Assumed zero.", "1": "Two runs.", "2": "Several runs, spread reported.", "3": "Several runs, spread reported, with its sources identified." } },
+        { "id": "c2", "criterion": "The detection floor is stated usefully", "weight": 0.35,
+          "levels": { "0": "Absent.", "1": "Vague.", "2": "Stated.", "3": "Stated and carried forward as a rule for later claims." } },
+        { "id": "c3", "criterion": "The interval method is appropriate", "weight": 0.25,
+          "levels": { "0": "Wrong method.", "1": "Unjustified.", "2": "Justified.", "3": "Justified against the data's actual distribution." } }
+      ]
+    },
+    {
+      "id": "R-M3.6",
+      "for": "M3.6",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "suite runs automatically and exits non-zero on regression", "blocking": true },
+        { "check": "a deliberate regression introduced and caught", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The suite is built from real failures", "weight": 0.4,
+          "levels": { "0": "Synthetic cases.", "1": "Mixed.", "2": "From the failure file.", "3": "From the failure file, each linked to the incident that produced it." } },
+        { "id": "c2", "criterion": "It has been proven to fail", "weight": 0.35,
+          "levels": { "0": "Never seen to fail.", "1": "Failed once by accident.", "2": "Deliberately broken and caught.", "3": "Deliberately broken in two different ways and caught both." } },
+        { "id": "c3", "criterion": "It is wired where it will be noticed", "weight": 0.25,
+          "levels": { "0": "Run manually.", "1": "Scriptable.", "2": "Automated.", "3": "Automated and blocking, so a regression cannot ship." } }
+      ]
+    },
+    {
+      "id": "R-M3.7",
+      "for": "M3.7",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "prediction recorded before the change", "blocking": true },
+        { "check": "result compared against the noise floor from M3.5", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The change targets the measured top category", "weight": 0.4,
+          "levels": { "0": "Unrelated.", "1": "Loosely related.", "2": "Targets the top category.", "3": "Targets the top category with a mechanism connecting change to cause." } },
+        { "id": "c2", "criterion": "The prediction was prior and specific", "weight": 0.3,
+          "levels": { "0": "Retrofitted.", "1": "Directional.", "2": "Specific and prior.", "3": "Specific, prior, with a stated range." } },
+        { "id": "c3", "criterion": "The result respects the noise floor", "weight": 0.3,
+          "levels": { "0": "Sub-noise gain claimed as improvement.", "1": "Noise not considered.", "2": "Compared against the floor.", "3": "Compared against the floor, with a null result reported as null." } }
+      ]
+    },
+    {
+      "id": "R-M3.8",
+      "for": "M3.8",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "the boundary quantified along at least two dimensions", "blocking": true },
+        { "check": "recorded as the capability's negative result", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The probing is deliberate and systematic", "weight": 0.4,
+          "levels": { "0": "Anecdotal.", "1": "One dimension.", "2": "Several, varied systematically.", "3": "Several, with the transition located rather than just bracketed." } },
+        { "id": "c2", "criterion": "The boundary is stated in numbers", "weight": 0.35,
+          "levels": { "0": "Described in prose.", "1": "Loosely quantified.", "2": "Quantified.", "3": "Quantified with the degradation curve shown." } },
+        { "id": "c3", "criterion": "It is usable by a reader deciding whether to adopt", "weight": 0.25,
+          "levels": { "0": "Not actionable.", "1": "Vague guidance.", "2": "Clear limits.", "3": "Clear limits phrased as when not to use this system." } }
+      ]
+    },
+    {
+      "id": "R-M4.1",
+      "for": "M4.1",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "every input path to the model enumerated", "blocking": true },
+        { "check": "successful attacks recorded verbatim", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The attack surface is complete", "weight": 0.4,
+          "levels": { "0": "User input only.", "1": "Two paths.", "2": "All direct paths.", "3": "All paths including retrieved content, tool output and metadata." } },
+        { "id": "c2", "criterion": "Surviving attacks are published", "weight": 0.35,
+          "levels": { "0": "Only solved ones.", "1": "Mentioned.", "2": "Listed.", "3": "Listed with their impact, and what a user should know about them." } },
+        { "id": "c3", "criterion": "Mitigations are tested rather than added", "weight": 0.25,
+          "levels": { "0": "Added untested.", "1": "Spot-checked.", "2": "Re-tested.", "3": "Re-tested including attempts to bypass the new mitigation." } }
+      ]
+    },
+    {
+      "id": "R-M4.2",
+      "for": "M4.2",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "rate limit and input size bounds in place with stated thresholds", "blocking": true },
+        { "check": "each control tested by attempting to violate it", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The controls match what is at risk", "weight": 0.4,
+          "levels": { "0": "Absent or ceremonial.", "1": "Partial.", "2": "Proportionate.", "3": "Proportionate, with the threat each addresses named." } },
+        { "id": "c2", "criterion": "Thresholds are chosen, not inherited", "weight": 0.3,
+          "levels": { "0": "Defaults.", "1": "Arbitrary.", "2": "Reasoned.", "3": "Reasoned from the cost model in M2.6." } },
+        { "id": "c3", "criterion": "Violation was attempted", "weight": 0.3,
+          "levels": { "0": "Not tested.", "1": "One control.", "2": "All controls.", "3": "All controls, with the observed behaviour recorded." } }
+      ]
+    },
+    {
+      "id": "R-M4.3",
+      "for": "M4.3",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "load profile stated and justified", "blocking": true },
+        { "check": "breaking point identified as a number", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The load profile is realistic", "weight": 0.35,
+          "levels": { "0": "Arbitrary.", "1": "Round numbers.", "2": "Justified.", "3": "Justified from an actual or credibly projected usage pattern." } },
+        { "id": "c2", "criterion": "Non-linearity is surfaced", "weight": 0.35,
+          "levels": { "0": "Assumed linear.", "1": "Noted.", "2": "Measured.", "3": "Measured, with the component that degrades first identified." } },
+        { "id": "c3", "criterion": "The breaking point is actionable", "weight": 0.3,
+          "levels": { "0": "Unknown.", "1": "Approximate.", "2": "Stated.", "3": "Stated with what would raise it and at what cost." } }
+      ]
+    },
+    {
+      "id": "R-M4.4",
+      "for": "M4.4",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "three failures simulated end to end", "blocking": true },
+        { "check": "time to detect and time to recover recorded per failure", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The drills are real, not thought experiments", "weight": 0.4,
+          "levels": { "0": "Reasoned about.", "1": "One performed.", "2": "All three performed.", "3": "All three performed against the deployed system." } },
+        { "id": "c2", "criterion": "Detection time is measured honestly", "weight": 0.3,
+          "levels": { "0": "Not measured.", "1": "Estimated.", "2": "Measured.", "3": "Measured, including a case where nothing would have detected it." } },
+        { "id": "c3", "criterion": "The unplanned failure is identified", "weight": 0.3,
+          "levels": { "0": "Everything went to plan.", "1": "Minor surprises.", "2": "One gap found.", "3": "One gap found and closed, with the fix verified by re-running the drill." } }
+      ]
+    },
+    {
+      "id": "R-M4.5",
+      "for": "M4.5",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "each item carries a risk and an estimate", "blocking": true },
+        { "check": "a judgement recorded per item on whether to close it", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The list is genuinely uncomfortable", "weight": 0.45,
+          "levels": { "0": "Cosmetic items.", "1": "Minor gaps.", "2": "Real gaps.", "3": "Real gaps including at least one the author would rather a reader did not notice." } },
+        { "id": "c2", "criterion": "Risks are stated concretely", "weight": 0.3,
+          "levels": { "0": "Generic.", "1": "Named.", "2": "With consequence.", "3": "With consequence and who would be affected." } },
+        { "id": "c3", "criterion": "The judgement is decisive", "weight": 0.25,
+          "levels": { "0": "All deferred.", "1": "Unclear.", "2": "Decided.", "3": "Decided with the acceptance stated as acceptance rather than omission." } }
+      ]
+    },
+    {
+      "id": "R-M4.6",
+      "for": "M4.6",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "the runbook followed exactly at least once, without improvisation", "blocking": true },
+        { "check": "a procedure present for each failure drilled in M4.4", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "It is operable by someone without the author's knowledge", "weight": 0.45,
+          "levels": { "0": "Prose describing the system.", "1": "Steps with gaps.", "2": "Complete steps.", "3": "Complete steps, verified by following them without improvising." } },
+        { "id": "c2", "criterion": "The gaps found by testing are recorded", "weight": 0.3,
+          "levels": { "0": "Not tested.", "1": "Tested informally.", "2": "Gaps found and closed.", "3": "Gaps found, closed, and listed so the class of omission is visible." } },
+        { "id": "c3", "criterion": "Locations are stated rather than assumed", "weight": 0.25,
+          "levels": { "0": "Implicit.", "1": "Partly stated.", "2": "Secrets, data and logs located.", "3": "Located, with access requirements for each stated." } }
+      ]
+    },
+    {
+      "id": "R-M5.1",
+      "for": "M5.1",
+      "tier": 3,
+      "machine_checks": [
+        { "check": "headline number with its interval in the first screen", "blocking": true },
+        { "check": "a working public link", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "A reader knows what it is within a paragraph", "weight": 0.4,
+          "levels": { "0": "Buried in narrative.", "1": "By the third paragraph.", "2": "First paragraph.", "3": "First paragraph, with who it is for and what it replaces." } },
+        { "id": "c2", "criterion": "The result is above the fold and honest", "weight": 0.35,
+          "levels": { "0": "Absent or buried.", "1": "Present, no interval.", "2": "Present with interval.", "3": "Present with interval and the baseline comparison beside it." } },
+        { "id": "c3", "criterion": "Limitations are not hidden behind praise", "weight": 0.25,
+          "levels": { "0": "At the end.", "1": "Softened.", "2": "Visible.", "3": "Visible without scrolling past achievements." } }
+      ]
+    },
+    {
+      "id": "R-M5.2",
+      "for": "M5.2",
+      "tier": 3,
+      "machine_checks": [
+        { "check": "each significant decision marked measured or inherited", "blocking": true },
+        { "check": "the evaluation described in enough detail to be attacked", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "Measured and inherited are separated", "weight": 0.45,
+          "levels": { "0": "All presented as justified.", "1": "Implied.", "2": "Marked.", "3": "Marked, with the inherited ones grouped so their number is visible." } },
+        { "id": "c2", "criterion": "The evaluation is criticisable", "weight": 0.3,
+          "levels": { "0": "Result only.", "1": "Method summarised.", "2": "Method described.", "3": "Method described with its known weaknesses stated by the author." } },
+        { "id": "c3", "criterion": "The error analysis is carried through", "weight": 0.25,
+          "levels": { "0": "Absent.", "1": "Mentioned.", "2": "Included.", "3": "Included with what it changed in the system." } }
+      ]
+    },
+    {
+      "id": "R-M5.3",
+      "for": "M5.3",
+      "tier": 3,
+      "machine_checks": [
+        { "check": "connects to three or more earlier chapters", "blocking": true },
+        { "check": "revises at least one earlier conclusion", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The revision is substantive", "weight": 0.45,
+          "levels": { "0": "None.", "1": "Cosmetic.", "2": "A real correction.", "3": "A real correction with what caused the original error." } },
+        { "id": "c2", "criterion": "It stands alone", "weight": 0.3,
+          "levels": { "0": "Requires the other chapters.", "1": "Mostly.", "2": "Self-contained.", "3": "Self-contained with the minimum context and no more." } },
+        { "id": "c3", "criterion": "The connections are used, not decorative", "weight": 0.25,
+          "levels": { "0": "Links only.", "1": "Referenced.", "2": "Built on.", "3": "Built on, with each earlier result doing work in this argument." } }
+      ]
+    },
+    {
+      "id": "R-M5.4",
+      "for": "M5.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "the M3.8 negative result stated prominently", "blocking": true },
+        { "check": "delivered system compared against the registered scope", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "Unfavourable measurements are all present", "weight": 0.45,
+          "levels": { "0": "Selectively reported.", "1": "Most present.", "2": "All present.", "3": "All present, with the worst stated first." } },
+        { "id": "c2", "criterion": "The scope gap is stated", "weight": 0.3,
+          "levels": { "0": "Unmentioned.", "1": "Implied.", "2": "Stated.", "3": "Stated with why each cut was made." } },
+        { "id": "c3", "criterion": "Nothing was removed before publication", "weight": 0.25,
+          "levels": { "0": "Draft differs materially.", "1": "Softened.", "2": "Unchanged in substance.", "3": "Unchanged, and the check against the scope document shown." } }
+      ],
+      "integrity": "The temptation at this point is to trim the limitations. Judges are instructed to compare the limitations against the registered scope and the reported measurements, and to score criterion 1 at 0 where a measured weakness has gone missing."
+    },
+    {
+      "id": "R-M5.5",
+      "for": "M5.5",
+      "tier": 3,
+      "machine_checks": [
+        { "check": "reachable at a public URL by someone with no credentials from the author", "blocking": true },
+        { "check": "running cost stated and an uptime horizon declared", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "A stranger can actually use it", "weight": 0.45,
+          "levels": { "0": "Requires setup.", "1": "Requires an invite.", "2": "Publicly usable.", "3": "Publicly usable and verified by someone unconnected to the project." } },
+        { "id": "c2", "criterion": "The cost is sustainable and stated", "weight": 0.3,
+          "levels": { "0": "Unknown.", "1": "Estimated.", "2": "Stated.", "3": "Stated with the cap or control that prevents it running away." } },
+        { "id": "c3", "criterion": "The horizon is declared", "weight": 0.25,
+          "levels": { "0": "No statement.", "1": "Indefinite.", "2": "A horizon given.", "3": "A horizon given with what happens to the artifact afterwards." } }
+      ]
+    },
+    {
+      "id": "R-M5.6",
+      "for": "M5.6",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "specific evidence named per claimed capability", "blocking": true },
+        { "check": "at least one capability explicitly declined", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "Claims are matched to evidence individually", "weight": 0.45,
+          "levels": { "0": "Blanket claim.", "1": "Loosely mapped.", "2": "Evidence per claim.", "3": "Evidence per claim, each traceable to a specific artifact or measurement." } },
+        { "id": "c2", "criterion": "Unearned claims are declined", "weight": 0.35,
+          "levels": { "0": "Everything claimed.", "1": "One declined weakly.", "2": "Declined with reasons.", "3": "Declined with what would still be needed to earn each." } },
+        { "id": "c3", "criterion": "The ledger is updated accurately", "weight": 0.2,
+          "levels": { "0": "Not updated.", "1": "Partially.", "2": "Updated.", "3": "Updated, including the negative-result field where one now exists." } }
+      ]
+    },
+    {
+      "id": "R-M6.1",
+      "for": "M6.1",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "fifteen or more questions written", "blocking": true },
+        { "check": "the three weakest answers moved into the write-up", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The questions target real weaknesses", "weight": 0.45,
+          "levels": { "0": "Easy questions.", "1": "Mixed.", "2": "Mostly hard.", "3": "Hard, and aimed at the decisions the author is least sure of." } },
+        { "id": "c2", "criterion": "The unanswerable ones are conceded in public", "weight": 0.35,
+          "levels": { "0": "Hidden.", "1": "Softened.", "2": "Added to the write-up.", "3": "Added prominently, as limitations rather than footnotes." } },
+        { "id": "c3", "criterion": "The drafted answers are grounded", "weight": 0.2,
+          "levels": { "0": "Assertions.", "1": "Partly evidenced.", "2": "Evidenced.", "3": "Evidenced, each pointing at a measurement or an artifact." } }
+      ]
+    },
+    {
+      "id": "R-M6.2",
+      "for": "M6.2",
+      "tier": 4,
+      "machine_checks": [
+        { "check": "questions generated at defense time from the published artifacts", "blocking": true },
+        { "check": "answered without notes and without the system open", "blocking": true },
+        { "check": "recording retained", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The system can be reconstructed from memory", "weight": 0.4,
+          "levels": { "0": "Cannot proceed without the code.", "1": "Recalls the shape.", "2": "Walks the request path correctly.", "3": "Walks the request path correctly including failure branches." } },
+        { "id": "c2", "criterion": "It survives three questions deep", "weight": 0.35,
+          "levels": { "0": "Collapses at the first follow-up.", "1": "Holds one level.", "2": "Holds two.", "3": "Holds to the end of a hostile line, or concedes precisely where the evidence stops." } },
+        { "id": "c3", "criterion": "Numbers are defended with their method", "weight": 0.25,
+          "levels": { "0": "Quoted.", "1": "Recalled.", "2": "Method explained.", "3": "Method explained with its weaknesses volunteered." } }
+      ],
+      "integrity": "Inventing a plausible answer under pressure is the most damaging thing a candidate can do here and scores criterion 2 at 0. Conceding precisely, with the reason, is the highest-scoring response to a question that cannot be answered."
+    },
+    {
+      "id": "R-M6.3",
+      "for": "M6.3",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "corrections dated and visible in the published document", "blocking": true },
+        { "check": "the original claim still legible alongside the correction", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "Corrections are visible rather than silent", "weight": 0.45,
+          "levels": { "0": "Silently edited.", "1": "Edited with a vague note.", "2": "Dated correction.", "3": "Dated correction showing what was originally claimed." } },
+        { "id": "c2", "criterion": "Everything exposed is addressed", "weight": 0.35,
+          "levels": { "0": "The easy ones.", "1": "Most.", "2": "All.", "3": "All, including the ones that could not be fixed, stated as such." } },
+        { "id": "c3", "criterion": "The write-up is genuinely better afterwards", "weight": 0.2,
+          "levels": { "0": "Unchanged.", "1": "Patched.", "2": "Improved.", "3": "Improved in a way a reader of the first version would notice." } }
+      ]
+    },
+    {
+      "id": "R-M6.4",
+      "for": "M6.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "the largest wrong decision named specifically", "blocking": true },
+        { "check": "one practice written into a repository's rules", "blocking": true }
+      ],
+      "criteria": [
+        { "id": "c1", "criterion": "The admission is specific and costly", "weight": 0.4,
+          "levels": { "0": "Generic.", "1": "Minor.", "2": "Real.", "3": "Real, with the hours or quality it cost estimated." } },
+        { "id": "c2", "criterion": "The catch point is identified", "weight": 0.3,
+          "levels": { "0": "Not identified.", "1": "Vague.", "2": "Named.", "3": "Named, with what signal was already present and ignored." } },
+        { "id": "c3", "criterion": "The lesson becomes a practice", "weight": 0.3,
+          "levels": { "0": "A resolution.", "1": "A note.", "2": "A stated practice.", "3": "A practice written into a repository's rules where it will be read again." } }
+      ]
+    }
+  ],
+  "completion": {
+    "required": "All thirty-eight assignments and projects and the defense submitted. This course has no tier-0 items: there is nothing to read here, only work to do.",
+    "grade_rollup": "Deterministic. Each item's tier sets its weight; panel scores enter as per-criterion values; nothing is rounded up. Computed in TypeScript, never by a model.",
+    "mastery_note": "Sets initial mastery on evaluation design, approach selection and deployment, and is the only course whose output is intended to be opened by a stranger. Its defense is the longest in the programme because it covers a whole system rather than a single assignment."
+  },
+  "optional_hours": 0
+}

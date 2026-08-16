@@ -1,0 +1,922 @@
+{
+  "course": "AIE-206",
+  "title": "Reinforcement Learning",
+  "credits": 3,
+  "est_hours": 65,
+  "spec_version": "0.1",
+  "registered": "2026-08-15",
+  "premise": "The lowest immediate employability of the deep track, and placed late on purpose rather than apologised for. Its value is that RLHF and reasoning-model training are built on it, and AIE-205 taught preference optimisation as a method without ever explaining the problem it was avoiding. This course explains the problem. By the end, DPO's whole appeal — that it removes the reinforcement learning — is something you can argue about rather than repeat.",
+  "why_here": "Fourteenth of fifteen, and the ordering is a judgement rather than a prerequisite chain. Almost nothing in applied AI engineering requires it day to day, so it sits behind everything that does. It is here at all because a preference-optimisation pipeline you cannot connect to policy gradients is a recipe you follow rather than a technique you understand.",
+  "laboratory": "Classic control environments on a laptop, and then your own AIE-205 checkpoints. The first half needs nothing but CPU — cart-pole and grid worlds are small enough to train in seconds and are the right size for watching an algorithm fail. The second half returns to the model you fine-tuned, which is where the abstractions stop being toys.",
+  "sitting_rule": "Every item is completable in one sitting. Nothing exceeds 180 minutes, and anything over 90 declares its own checkpoints.",
+  "honesty_note": "No advanced standing. Running DPO in AIE-205 evidences a library call, not an understanding of the objective it approximates.",
+  "panel": {
+    "models": [
+      "claude-opus-5",
+      "gpt-5",
+      "gemini-flash-latest"
+    ],
+    "blind": true,
+    "blind_note": "Judges see the submission and the rubric, never each other's scores, and never the learner's self-assessment.",
+    "rubric_registered_before_submission": true,
+    "disagreement": "Scores are reported per judge and never averaged into a single number when the spread is 2 or more on any criterion.",
+    "bias_warning": "Reinforcement learning results are extremely seed-sensitive. Judges are instructed to treat a single-seed claim as unsupported regardless of how clean the curve looks, and to score a submission reporting high variance across seeds above one reporting a single tidy run."
+  },
+  "modules": [
+    {
+      "id": "M1",
+      "title": "Markov decision processes",
+      "est_minutes": 780,
+      "items": [
+        {
+          "id": "M1.1",
+          "type": "reading",
+          "title": "The reinforcement learning problem",
+          "resource": "book-sutton-barto",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["rl-mdp"],
+          "locator": "Chapters 1 and 3 — the problem setting, then finite Markov decision processes, returns, and the value functions."
+        },
+        {
+          "id": "M1.2",
+          "type": "reading",
+          "title": "The framework, with code",
+          "resource": "hf-deep-rl-course",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["rl-mdp"],
+          "locator": "Unit 1 — the agent-environment loop and the reward hypothesis — and the introduction to the Bellman equation in unit 2."
+        },
+        {
+          "id": "M1.3",
+          "type": "assignment",
+          "title": "Formalise something of your own as an MDP",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M1.3",
+          "skills": ["rl-mdp"],
+          "checkpoints": [
+            "A real decision problem chosen from your own systems",
+            "States, actions, transitions and rewards defined precisely",
+            "The discount factor chosen with a stated justification",
+            "One property of the formalisation shown to be false in reality"
+          ],
+          "brief": "Take a real decision problem from one of your own products — which model to route a request to, when to re-index, how many retrieval results to fetch — and formalise it as an MDP. Define the state, action and reward precisely enough that someone else could implement it. Choose a discount factor and justify it in terms of the actual decision horizon rather than by using 0.99 because everyone does. Then name one place where the Markov property does not hold in reality, because that is almost always true and pretending otherwise is where applied RL goes wrong."
+        },
+        {
+          "id": "M1.4",
+          "type": "assignment",
+          "title": "Where the framing breaks",
+          "est_minutes": 150,
+          "tier": 2,
+          "rubric": "R-M1.4",
+          "skills": ["rl-mdp"],
+          "checkpoints": [
+            "Partial observability identified concretely in the chosen problem",
+            "The consequence for a learned policy stated",
+            "A reformulation attempted",
+            "A judgement recorded on whether RL is the right tool at all"
+          ],
+          "brief": "Take the MDP you just wrote and attack it. Where is the state only partially observable? Where does the reward arrive so late that credit assignment becomes hopeless? Where would exploration be unacceptable because it means giving real users bad answers? Attempt a reformulation. Then record the judgement this course wants you to be able to make: given all that, is reinforcement learning the right tool for this problem, and if not, what is."
+        },
+        {
+          "id": "M1.5",
+          "type": "reading",
+          "title": "Dynamic programming, before learning",
+          "resource": "book-sutton-barto",
+          "est_minutes": 105,
+          "tier": 0,
+          "skills": ["rl-mdp", "rl-valuemethods"],
+          "locator": "Chapter 4 — policy evaluation, policy improvement and policy iteration, with the model known. Everything later is this without the model."
+        },
+        {
+          "id": "M1.6",
+          "type": "retention",
+          "title": "Retention: MDPs and their assumptions",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["rl-mdp"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M2",
+      "title": "Value-based methods",
+      "est_minutes": 780,
+      "items": [
+        {
+          "id": "M2.1",
+          "type": "reading",
+          "title": "Monte Carlo and temporal difference",
+          "resource": "book-sutton-barto",
+          "est_minutes": 165,
+          "tier": 0,
+          "skills": ["rl-valuemethods"],
+          "locator": "Chapters 5 and 6 — Monte Carlo prediction and control, then TD learning, SARSA and Q-learning."
+        },
+        {
+          "id": "M2.2",
+          "type": "lecture",
+          "title": "Q-learning and deep Q-networks",
+          "resource": "hf-deep-rl-course",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["rl-valuemethods"],
+          "locator": "Units 2 and 3 — tabular Q-learning, then the deep Q-network and the tricks that make it work."
+        },
+        {
+          "id": "M2.3",
+          "type": "assignment",
+          "title": "Tabular Q-learning from the update rule",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M2.3",
+          "skills": ["rl-valuemethods"],
+          "checkpoints": [
+            "The update rule written out before the code",
+            "Implemented on a small environment and converging",
+            "Exploration schedule chosen and its effect shown",
+            "Learned value function inspected against intuition"
+          ],
+          "brief": "Implement tabular Q-learning on a small environment from the update rule as written in the book, not from an example. Get it to converge. Then vary the exploration schedule and show what happens with too little exploration — the agent finds a mediocre policy and stops, confidently. Finally, print the learned value function and check it against what you would expect: states near the goal should be worth more, and if they are not, something is wrong that the reward curve did not tell you."
+        },
+        {
+          "id": "M2.4",
+          "type": "assignment",
+          "title": "Break it with function approximation",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M2.4",
+          "skills": ["rl-valuemethods"],
+          "checkpoints": [
+            "The tabular version replaced with a function approximator",
+            "Instability produced and its signature recorded",
+            "One of the three destabilising ingredients removed and re-measured",
+            "The deadly triad named in terms of what was observed"
+          ],
+          "brief": "Replace your table with a neural network and watch it become unstable. Record what that looks like — diverging values, oscillation, catastrophic forgetting of an earlier good policy. Then remove one leg of the deadly triad: use on-policy data, or drop bootstrapping, or add a target network to slow the moving target. Measure the difference. The claim to defend is which ingredient you removed and why that specific one addressed what you actually saw."
+        },
+        {
+          "id": "M2.5",
+          "type": "reading",
+          "title": "The taxonomy of algorithms",
+          "resource": "spinning-up",
+          "est_minutes": 105,
+          "tier": 0,
+          "skills": ["rl-valuemethods", "rl-policygradient"],
+          "locator": "Part 2, Kinds of RL Algorithms — the model-free split between policy optimisation and Q-learning, and what each trades away."
+        },
+        {
+          "id": "M2.6",
+          "type": "retention",
+          "title": "Retention: value methods and the deadly triad",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["rl-valuemethods"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M3",
+      "title": "Policy gradients",
+      "est_minutes": 840,
+      "items": [
+        {
+          "id": "M3.1",
+          "type": "reading",
+          "title": "Intro to policy optimisation",
+          "resource": "spinning-up",
+          "est_minutes": 180,
+          "tier": 0,
+          "skills": ["rl-policygradient"],
+          "locator": "Part 3, Intro to Policy Optimization — the derivation of the simplest policy gradient, line by line, including why the log appears."
+        },
+        {
+          "id": "M3.2",
+          "type": "reading",
+          "title": "The policy gradient theorem",
+          "resource": "book-sutton-barto",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["rl-policygradient"],
+          "locator": "Chapter 13 — the policy gradient theorem, REINFORCE, REINFORCE with baseline, and actor-critic."
+        },
+        {
+          "id": "M3.3",
+          "type": "assignment",
+          "title": "REINFORCE, from the derivation",
+          "est_minutes": 180,
+          "tier": 1,
+          "rubric": "R-M3.3",
+          "skills": ["rl-policygradient"],
+          "checkpoints": [
+            "The gradient estimator derived in the submission",
+            "Implemented and learning on a small environment",
+            "At least five seeds run",
+            "Spread across seeds reported alongside the mean"
+          ],
+          "brief": "Derive the REINFORCE estimator in your own writing, then implement it. Train on a small control task. Run at least five seeds and plot all of them, not the mean alone — reinforcement learning curves are famously seed-sensitive, and a single run is a screenshot rather than a result. Report the spread. If two seeds solve the task and three never learn, that is the finding and it is entirely normal."
+        },
+        {
+          "id": "M3.4",
+          "type": "assignment",
+          "title": "Variance reduction, measured",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M3.4",
+          "skills": ["rl-policygradient"],
+          "checkpoints": [
+            "Gradient variance measured directly, not inferred from the reward curve",
+            "A baseline added and variance re-measured",
+            "Sample efficiency compared at equal environment steps",
+            "The bias question addressed"
+          ],
+          "brief": "Measure the variance of your gradient estimates directly rather than inferring it from how wobbly the reward curve looks. Add a baseline — a learned value function, or even a running mean of returns — and measure the variance again. Compare sample efficiency at equal environment steps rather than equal wall-clock. Then answer the question that makes the baseline legitimate: why does subtracting it not bias the estimator."
+        },
+        {
+          "id": "M3.5",
+          "type": "reading",
+          "title": "Reference implementations, afterwards",
+          "resource": "repo-spinningup",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["rl-policygradient"],
+          "locator": "The vpg and ppo implementations — read only after your own REINFORCE works, and read for the engineering details the derivations omit."
+        },
+        {
+          "id": "M3.6",
+          "type": "retention",
+          "title": "Retention: policy gradients and variance",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["rl-policygradient"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M4",
+      "title": "From policy optimisation to preference optimisation",
+      "est_minutes": 780,
+      "items": [
+        {
+          "id": "M4.1",
+          "type": "reading",
+          "title": "InstructGPT, as a reinforcement learning paper",
+          "resource": "paper-instructgpt",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["rl-rlhf"]
+        },
+        {
+          "id": "M4.2",
+          "type": "reading",
+          "title": "The PPO trainer, against the DPO one",
+          "resource": "repo-trl",
+          "est_minutes": 120,
+          "tier": 0,
+          "skills": ["rl-rlhf"],
+          "locator": "The PPO trainer, read directly against the DPO trainer you used in AIE-205 — the interesting content is everything PPO needs that DPO does not."
+        },
+        {
+          "id": "M4.3",
+          "type": "assignment",
+          "title": "Where the reward actually lands",
+          "est_minutes": 180,
+          "tier": 2,
+          "rubric": "R-M4.3",
+          "skills": ["rl-rlhf"],
+          "checkpoints": [
+            "The RLHF setup mapped onto the MDP vocabulary from M1",
+            "The credit assignment problem stated concretely for token generation",
+            "The KL penalty's role identified in RL terms",
+            "One consequence for behaviour predicted and checked against the literature"
+          ],
+          "brief": "Map RLHF onto the MDP vocabulary you learned in M1: what is the state, what is the action, when does the reward arrive. Then state the credit assignment problem precisely — a single scalar at the end of a sequence has to explain every token choice. Identify what the KL penalty is doing in reinforcement learning terms rather than as a regularisation trick. Finish by predicting one behavioural consequence and checking it against what the papers report."
+        },
+        {
+          "id": "M4.4",
+          "type": "assignment",
+          "title": "Why DPO gets to skip all this",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M4.4",
+          "skills": ["rl-rlhf", "rl-policygradient"],
+          "checkpoints": [
+            "The DPO objective related to the RLHF objective it approximates",
+            "The assumption that permits the reparameterisation identified",
+            "A case constructed where that assumption is questionable",
+            "A position taken on when PPO-style RLHF is still worth its cost"
+          ],
+          "brief": "You ran DPO in AIE-205 as a method. Now explain what it is doing: it reparameterises the RLHF objective so the reward model disappears and the optimisation becomes supervised. Identify the assumption that makes this legal. Then construct a case where that assumption is questionable, and take a position — with reasons — on when the full PPO pipeline is still worth its considerable extra cost. This is the item that retroactively justifies putting this course in the programme."
+        },
+        {
+          "id": "M4.5",
+          "type": "reading",
+          "title": "PPO, as documented",
+          "resource": "spinning-up",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["rl-policygradient", "rl-rlhf"],
+          "locator": "The PPO page — the objective, the clipping, and the pseudocode."
+        },
+        {
+          "id": "M4.6",
+          "type": "retention",
+          "title": "Retention: RLHF and its relation to DPO",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["rl-rlhf"],
+          "fsrs": true
+        }
+      ]
+    },
+    {
+      "id": "M5",
+      "title": "Publish, and defend",
+      "est_minutes": 720,
+      "items": [
+        {
+          "id": "M5.1",
+          "type": "project",
+          "title": "rlhf-study, published",
+          "est_minutes": 180,
+          "tier": 3,
+          "rubric": "R-M5.1",
+          "skills": ["rl-policygradient", "rl-rlhf"],
+          "checkpoints": [
+            "The policy-gradient implementation published with its seed spread",
+            "The written account of reward hacking included",
+            "The DPO-versus-PPO argument stated as a position, not a summary",
+            "Connected backwards to AIE-205"
+          ],
+          "brief": "Publish the study the reinforcement-learning capability points at: your policy-gradient implementation with its honest seed spread, the reward-hacking failure you produced, and your position on when preference optimisation is enough. It must connect backwards to AIE-205, because the whole argument of this course is that the method you used there is an approximation to something, and this is where you say to what."
+        },
+        {
+          "id": "M5.2",
+          "type": "assignment",
+          "title": "Make it hack the reward",
+          "est_minutes": 165,
+          "tier": 2,
+          "rubric": "R-M5.2",
+          "skills": ["rl-rlhf", "rl-policygradient"],
+          "checkpoints": [
+            "A reward function written with a plausible flaw",
+            "An agent trained that exploits it",
+            "The exploit described and its reward accounted for",
+            "The reward repaired and the new exploit found, or its absence argued"
+          ],
+          "brief": "Write a reward function that looks reasonable and contains an exploitable flaw, then train an agent until it finds the exploit. Describe what it did and show the reward it obtained. Then repair the reward and try again. The second round is the point: reward specifications are usually broken in more than one way, and the experience of fixing one and immediately finding another is the thing that transfers to writing evaluation criteria for anything, including the rubrics in this programme."
+        },
+        {
+          "id": "M5.3",
+          "type": "lecture",
+          "title": "Actor-critic and PPO in practice",
+          "resource": "hf-deep-rl-course",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["rl-policygradient"],
+          "locator": "The advantage actor-critic and PPO units, including the practical notes on what breaks in real training runs."
+        },
+        {
+          "id": "M5.4",
+          "type": "defense",
+          "title": "Oral defense",
+          "est_minutes": 60,
+          "tier": 4,
+          "rubric": "R-M5.4",
+          "skills": ["rl-mdp", "rl-valuemethods", "rl-policygradient", "rl-rlhf"],
+          "brief": "Three unscripted questions generated from your own submissions at defense time, answered aloud without notes. This defense carries the reinforcement-learning capability claim.",
+          "sample_question_shapes": [
+            "Three of your five seeds never learned. A reader says the method does not work. Answer them.",
+            "Explain, without saying the words 'policy gradient', why subtracting a baseline does not bias the estimator.",
+            "You argued DPO is enough for most cases. Give me the strongest case against your own position."
+          ]
+        },
+        {
+          "id": "M5.5",
+          "type": "reading",
+          "title": "What remains unsolved",
+          "resource": "book-sutton-barto",
+          "est_minutes": 150,
+          "tier": 0,
+          "skills": ["rl-mdp"],
+          "locator": "Chapter 17 — the frontiers section, read for the problems that are still open rather than for technique."
+        },
+        {
+          "id": "M5.6",
+          "type": "retention",
+          "title": "Retention: the whole course, cold",
+          "est_minutes": 15,
+          "tier": 1,
+          "skills": ["rl-mdp", "rl-rlhf"],
+          "fsrs": true
+        }
+      ]
+    }
+  ],
+  "rubrics": [
+    {
+      "id": "R-M1.3",
+      "for": "M1.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "state, action, transition and reward each defined explicitly", "blocking": true },
+        { "check": "discount factor justified against a stated decision horizon", "blocking": true },
+        { "check": "at least one violation of the Markov property named", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The formalisation is precise enough to implement",
+          "weight": 0.4,
+          "levels": {
+            "0": "Prose description.",
+            "1": "Partially specified.",
+            "2": "Fully specified.",
+            "3": "Fully specified, with the state space's size or parameterisation stated."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The reward is designed rather than assumed",
+          "weight": 0.35,
+          "levels": {
+            "0": "An obvious proxy taken uncritically.",
+            "1": "Chosen with light reasoning.",
+            "2": "Justified against the real objective.",
+            "3": "Justified, with one way it could be gamed identified in advance."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The discount factor means something",
+          "weight": 0.25,
+          "levels": {
+            "0": "0.99 by default.",
+            "1": "Chosen arbitrarily.",
+            "2": "Tied to a horizon.",
+            "3": "Tied to a horizon with the effective horizon computed."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M1.4",
+      "for": "M1.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "partial observability identified in the specific problem, not in general", "blocking": true },
+        { "check": "a verdict recorded on whether RL is appropriate", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The attack on the formalisation is concrete",
+          "weight": 0.4,
+          "levels": {
+            "0": "Generic caveats.",
+            "1": "One concrete issue.",
+            "2": "Several, specific to this problem.",
+            "3": "Several, specific, with which would be fatal and which merely inconvenient."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The exploration cost is taken seriously",
+          "weight": 0.3,
+          "levels": {
+            "0": "Not considered.",
+            "1": "Mentioned.",
+            "2": "Costed in terms of real users.",
+            "3": "Costed, with an offline or simulated alternative proposed."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The verdict is decisive and reasoned",
+          "weight": 0.3,
+          "levels": {
+            "0": "Avoided.",
+            "1": "Hedged.",
+            "2": "Stated with reasons.",
+            "3": "Stated with reasons and a named alternative technique, which may be a bandit or a heuristic."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.3",
+      "for": "M2.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "update rule reproduced in the submission before the code", "blocking": true },
+        { "check": "converged policy demonstrated", "blocking": true },
+        { "check": "learned value function inspected and shown", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The implementation follows the written rule",
+          "weight": 0.4,
+          "levels": {
+            "0": "Library call.",
+            "1": "Implemented, diverging from the rule.",
+            "2": "Implemented and matching.",
+            "3": "Implemented, matching, with the difference from SARSA identified in the code."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Exploration is investigated, not set and forgotten",
+          "weight": 0.35,
+          "levels": {
+            "0": "One schedule.",
+            "1": "Two, no analysis.",
+            "2": "Effect of too little exploration shown.",
+            "3": "Effect shown, with the mediocre policy it converged to described concretely."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The value function is sanity-checked",
+          "weight": 0.25,
+          "levels": {
+            "0": "Not inspected.",
+            "1": "Printed.",
+            "2": "Checked against intuition.",
+            "3": "Checked against intuition, with a state whose value was surprising investigated."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M2.4",
+      "for": "M2.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "instability produced and recorded, not merely described", "blocking": true },
+        { "check": "exactly one destabilising ingredient removed, and re-measured", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The instability is documented well enough to recognise",
+          "weight": 0.35,
+          "levels": {
+            "0": "Asserted.",
+            "1": "A reward curve.",
+            "2": "Curves plus value magnitudes.",
+            "3": "Curves, value magnitudes, and the point at which divergence became irreversible."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The intervention is chosen for a reason",
+          "weight": 0.4,
+          "levels": {
+            "0": "Several things changed.",
+            "1": "One change, unmotivated.",
+            "2": "One change tied to a triad component.",
+            "3": "One change tied to a component, justified by what the failure actually looked like."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The triad is explained rather than recited",
+          "weight": 0.25,
+          "levels": {
+            "0": "Named.",
+            "1": "Defined.",
+            "2": "Explained mechanically.",
+            "3": "Explained mechanically in terms of the observed run, not the textbook example."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M3.3",
+      "for": "M3.3",
+      "tier": 1,
+      "machine_checks": [
+        { "check": "estimator derived in the submission", "blocking": true },
+        { "check": "five or more seeds run and all plotted", "blocking": true },
+        { "check": "spread reported alongside any mean", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The derivation is the author's own",
+          "weight": 0.35,
+          "levels": {
+            "0": "Quoted.",
+            "1": "Sketched.",
+            "2": "Derived.",
+            "3": "Derived with the log-derivative trick explained rather than applied."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Seed variance is reported honestly",
+          "weight": 0.4,
+          "levels": {
+            "0": "One seed.",
+            "1": "Mean only.",
+            "2": "All seeds plotted.",
+            "3": "All seeds plotted, with failed seeds counted and left in."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The implementation is correct in its details",
+          "weight": 0.25,
+          "levels": {
+            "0": "Does not learn.",
+            "1": "Learns unreliably with unclear cause.",
+            "2": "Learns, with returns computed correctly.",
+            "3": "Learns, with discounting and episode boundaries handled correctly and shown."
+          }
+        }
+      ],
+      "anti_gaming": "Reporting the best seed, or a mean without a spread, is the specific failure here. Judges are instructed to score criterion 2 at 0 where individual seeds are not visible."
+    },
+    {
+      "id": "R-M3.4",
+      "for": "M3.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "gradient variance measured directly", "blocking": true },
+        { "check": "compared at equal environment steps rather than equal wall-clock", "blocking": true },
+        { "check": "the unbiasedness argument given", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Variance is measured, not inferred",
+          "weight": 0.4,
+          "levels": {
+            "0": "Read off the reward curve.",
+            "1": "Proxy measure.",
+            "2": "Gradient variance computed.",
+            "3": "Gradient variance computed per update and shown falling with the baseline."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The unbiasedness argument is correct",
+          "weight": 0.35,
+          "levels": {
+            "0": "Asserted.",
+            "1": "Hand-waved.",
+            "2": "Argued.",
+            "3": "Argued from the expectation of the score function being zero, with the step shown."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The comparison is fair",
+          "weight": 0.25,
+          "levels": {
+            "0": "Different budgets.",
+            "1": "Wall-clock.",
+            "2": "Equal environment steps.",
+            "3": "Equal environment steps across matched seeds."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.3",
+      "for": "M4.3",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "state, action and reward identified for token generation specifically", "blocking": true },
+        { "check": "the KL term explained in RL terms", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The mapping is precise",
+          "weight": 0.4,
+          "levels": {
+            "0": "Loose analogy.",
+            "1": "Partially mapped.",
+            "2": "Fully mapped.",
+            "3": "Fully mapped, with the sequence-level reward's sparsity quantified against the number of actions."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The KL penalty is understood structurally",
+          "weight": 0.35,
+          "levels": {
+            "0": "Called regularisation.",
+            "1": "Described as keeping the model close.",
+            "2": "Explained as constraining policy drift.",
+            "3": "Explained as constraining drift, with what happens without it stated concretely."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The prediction is checked against the literature",
+          "weight": 0.25,
+          "levels": {
+            "0": "No prediction.",
+            "1": "Unchecked.",
+            "2": "Checked.",
+            "3": "Checked against a cited result, with agreement or disagreement stated."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M4.4",
+      "for": "M4.4",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "the reparameterisation stated, relating the two objectives", "blocking": true },
+        { "check": "the enabling assumption named", "blocking": true },
+        { "check": "a position taken on when PPO-style RLHF remains worth it", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The relationship between the objectives is correct",
+          "weight": 0.45,
+          "levels": {
+            "0": "Treated as unrelated methods.",
+            "1": "Related loosely.",
+            "2": "The reparameterisation described.",
+            "3": "The reparameterisation described with what the implicit reward is in DPO."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The assumption is identified and stressed",
+          "weight": 0.3,
+          "levels": {
+            "0": "Not identified.",
+            "1": "Named.",
+            "2": "Named with a case where it is doubtful.",
+            "3": "Named with a concrete case, and what would be observed if it failed."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The position is argued, not hedged",
+          "weight": 0.25,
+          "levels": {
+            "0": "Both sides, no view.",
+            "1": "A weak preference.",
+            "2": "A position with reasons.",
+            "3": "A position with reasons and the conditions that would change it."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.1",
+      "for": "M5.1",
+      "tier": 3,
+      "machine_checks": [
+        { "check": "published at a public URL and linked from the log", "blocking": true },
+        { "check": "individual seed curves included", "blocking": true },
+        { "check": "connects backwards to AIE-205", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The seed honesty survives publication",
+          "weight": 0.4,
+          "levels": {
+            "0": "Best run shown.",
+            "1": "Mean shown.",
+            "2": "All seeds shown.",
+            "3": "All seeds shown, with the failure rate stated in the text rather than left to the plot."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The DPO argument is a position",
+          "weight": 0.35,
+          "levels": {
+            "0": "A summary of both.",
+            "1": "A leaning.",
+            "2": "A defended position.",
+            "3": "A defended position that engages with the strongest counter-argument."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "It joins the two courses",
+          "weight": 0.25,
+          "levels": {
+            "0": "Standalone.",
+            "1": "Links back.",
+            "2": "Builds on AIE-205.",
+            "3": "Builds on AIE-205 and revises something stated there."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.2",
+      "for": "M5.2",
+      "tier": 2,
+      "machine_checks": [
+        { "check": "the exploit described with the reward it obtained", "blocking": true },
+        { "check": "the reward repaired and a second round run", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "The flawed reward is plausible rather than contrived",
+          "weight": 0.35,
+          "levels": {
+            "0": "Obviously broken.",
+            "1": "Artificial.",
+            "2": "Plausible.",
+            "3": "The kind of proxy a reasonable engineer would actually write."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "The exploit is documented convincingly",
+          "weight": 0.35,
+          "levels": {
+            "0": "Asserted.",
+            "1": "Described.",
+            "2": "Described with the reward obtained.",
+            "3": "Described with the reward obtained and a trace or rollout showing the behaviour."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The second round is taken seriously",
+          "weight": 0.3,
+          "levels": {
+            "0": "Not run.",
+            "1": "Run, no finding.",
+            "2": "A second exploit found.",
+            "3": "A second exploit found, or its absence argued with what was checked."
+          }
+        }
+      ]
+    },
+    {
+      "id": "R-M5.4",
+      "for": "M5.4",
+      "tier": 4,
+      "machine_checks": [
+        { "check": "questions generated at defense time from the author's own submissions", "blocking": true },
+        { "check": "answered aloud without notes", "blocking": true },
+        { "check": "recording or transcript retained", "blocking": true }
+      ],
+      "criteria": [
+        {
+          "id": "c1",
+          "criterion": "Derivations can be rebuilt aloud",
+          "weight": 0.4,
+          "levels": {
+            "0": "Recites conclusions.",
+            "1": "Recalls the shape.",
+            "2": "Rebuilds the argument.",
+            "3": "Rebuilds the argument without the jargon that usually carries it."
+          }
+        },
+        {
+          "id": "c2",
+          "criterion": "Variance is defended rather than excused",
+          "weight": 0.35,
+          "levels": {
+            "0": "Blames the environment.",
+            "1": "Apologises for it.",
+            "2": "Explains it as characteristic.",
+            "3": "Explains it as characteristic and says what a trustworthy claim would have required."
+          }
+        },
+        {
+          "id": "c3",
+          "criterion": "The author can argue against their own position",
+          "weight": 0.25,
+          "levels": {
+            "0": "Cannot.",
+            "1": "A token counter-argument.",
+            "2": "A real one.",
+            "3": "A real one, and says what evidence would move them."
+          }
+        }
+      ],
+      "integrity": "This defense carries the reinforcement-learning capability claim. A candidate who can state the strongest case against their own conclusion scores higher than one who defends it uniformly."
+    }
+  ],
+  "completion": {
+    "required": "All eight assignments, the project and the defense submitted. Readings and lectures are tier 0 and are tracked but never counted toward mastery.",
+    "grade_rollup": "Deterministic. Each item's tier sets its weight; panel scores enter as per-criterion values; nothing is rounded up. Computed in TypeScript, never by a model.",
+    "mastery_note": "Sets initial mastery on all four reinforcement-learning skills, which makes the last unclaimable area claimable and completes the programme's coverage. FSRS then decays them."
+  },
+  "optional_hours": 0
+}

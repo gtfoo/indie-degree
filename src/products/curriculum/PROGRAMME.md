@@ -576,6 +576,10 @@ Lowest immediate employability of the deep track, and the necessary grounding fo
 | [Welcome to Spinning Up in Deep RL!](https://spinningup.openai.com/en/latest/) | OpenAI | 40 h | Free |
 | [openai/spinningup](https://github.com/openai/spinningup) | OpenAI | 20 h | Free |
 | [Welcome to the Deep Reinforcement Learning Course](https://huggingface.co/learn/deep-rl-course/unit0/introduction) | Hugging Face | 30 h | Free |
+| [Training language models to follow instructions with human feedback](https://arxiv.org/abs/2203.02155) | Ouyang et al. | 4 h | Free |
+| [huggingface/trl](https://github.com/huggingface/trl) | Hugging Face | 12 h | Free |
+
+> Full specification: [AIE-206-reinforcement-learning.json](courses/AIE-206-reinforcement-learning.json)
 
 ### 15. AIE-300 — Capstone
 
@@ -589,6 +593,10 @@ One substantial system that exercises the whole programme, shipped publicly and 
 - Report honestly on what did not work and what the numbers actually say
 - Defend the design under unscripted questioning
 - Write it up so a hiring manager can assess it in ten minutes
+
+**Skills** Eval design, Choosing an AI approach, Deploying and operating services
+
+> Full specification: [AIE-300-capstone.json](courses/AIE-300-capstone.json)
 
 ## Skill map
 

@@ -1458,8 +1458,11 @@
         "book-sutton-barto",
         "spinning-up",
         "repo-spinningup",
-        "hf-deep-rl-course"
-      ]
+        "hf-deep-rl-course",
+        "paper-instructgpt",
+        "repo-trl"
+      ],
+      "spec": "courses/AIE-206-reinforcement-learning.json"
     },
     {
       "id": "AIE-207",
@@ -1520,12 +1523,18 @@
         "Defend the design under unscripted questioning",
         "Write it up so a hiring manager can assess it in ten minutes"
       ],
-      "skills_taught": [],
+      "skills_taught": [
+        "eval-design",
+        "arch-routing",
+        "eng-deployment"
+      ],
+      "skills_note": "Deliberately narrow. The capstone exercises far more than three skills, but only these are true of every capstone regardless of what the learner builds: it must be measured, its approach must be justified, and it must ship. Claiming the rest would let one system underwrite every line on a CV, which is what the evidence ledger exists to prevent.",
       "required_evidence_tiers": [
         3,
         4
       ],
-      "resources": []
+      "resources": [],
+      "spec": "courses/AIE-300-capstone.json"
     },
     {
       "id": "AIE-107",
