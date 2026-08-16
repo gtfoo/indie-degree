@@ -780,7 +780,7 @@
       "id": "R-M1.7",
       "for": "M1.7",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "three systems compared on the identical audio",
           "blocking": true
@@ -808,7 +808,7 @@
       "id": "R-M2.4",
       "for": "M2.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "WER plus at least two additional measures implemented",
           "blocking": true
@@ -876,7 +876,7 @@
       "id": "R-M3.4",
       "for": "M3.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "60 or more utterances across three declared conditions",
           "blocking": true
@@ -931,7 +931,7 @@
       "id": "R-M3.5",
       "for": "M3.5",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "three or more systems run on the identical set",
           "blocking": true
@@ -970,7 +970,7 @@
       "id": "R-M4.5",
       "for": "M4.5",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "voices and models enumerated live rather than hardcoded",
           "blocking": true
@@ -998,7 +998,7 @@
       "id": "R-M4.6",
       "for": "M4.6",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "time to first audio measured from user action, before and after",
           "blocking": true
@@ -1066,7 +1066,7 @@
       "id": "R-M5.3",
       "for": "M5.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "every hop instrumented, from user action to audible output",
           "blocking": true
@@ -1134,7 +1134,7 @@
       "id": "R-M6.3",
       "for": "M6.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "stop latency measured from onset of user speech",
           "blocking": true
@@ -1202,7 +1202,7 @@
       "id": "R-M8.1",
       "for": "M8.1",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "publicly reachable",
           "blocking": true
@@ -1285,7 +1285,7 @@
       "id": "R-M8.3",
       "for": "M8.3",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "stable public URL",
           "blocking": true
@@ -1369,7 +1369,7 @@
       "id": "R-M7.8",
       "for": "M7.8",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "25 or more labelled documents including known-hard layouts",
           "blocking": true
@@ -1409,7 +1409,7 @@
       "id": "R-M7.9",
       "for": "M7.9",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "an unlocatable value is discarded, not returned with low confidence",
           "blocking": true

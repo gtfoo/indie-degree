@@ -407,7 +407,7 @@
       "id": "R-M1.3",
       "for": "M1.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "both linear implementations produce coefficients agreeing to a stated tolerance", "blocking": true },
         { "check": "logistic gradient derived in the submission, not only coded", "blocking": true },
         { "check": "sklearn comparison on identical data and split", "blocking": true }
@@ -452,7 +452,7 @@
       "id": "R-M1.5",
       "for": "M1.5",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "impurity verified by hand at one node and shown", "blocking": true },
         { "check": "stopping rule stated before results", "blocking": true },
         { "check": "variance measured across at least five seeds, before and after bagging", "blocking": true }
@@ -497,7 +497,7 @@
       "id": "R-M2.3",
       "for": "M2.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "both curves plotted with training and validation on shared axes", "blocking": true },
         { "check": "the same dataset used for both models", "blocking": true }
       ],
@@ -541,7 +541,7 @@
       "id": "R-M2.4",
       "for": "M2.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "the diagnosis recorded with a timestamp before any fix", "blocking": true },
         { "check": "curves produced from real data, with its size stated", "blocking": true },
         { "check": "post-fix measurement on the same axes", "blocking": true }
@@ -587,7 +587,7 @@
       "id": "R-M3.2",
       "for": "M3.2",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "raw-feature baseline measured before any engineering", "blocking": true },
         { "check": "each feature's lift measured individually", "blocking": true },
         { "check": "the same split used throughout", "blocking": true }
@@ -632,7 +632,7 @@
       "id": "R-M3.3",
       "for": "M3.3",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "the leak's effect on the metric quantified", "blocking": true },
         { "check": "a detection procedure stated independently of knowing the answer", "blocking": true },
         { "check": "the procedure run against a real pipeline", "blocking": true }
@@ -677,7 +677,7 @@
       "id": "R-M4.2",
       "for": "M4.2",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "same matrix as AIE-201 M1.5, and stated as such", "blocking": true },
         { "check": "k chosen by a method declared before inspecting clusters", "blocking": true },
         { "check": "cluster membership compared against the earlier components", "blocking": true }
@@ -722,7 +722,7 @@
       "id": "R-M4.3",
       "for": "M4.3",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "clustering run on data with no cluster structure", "blocking": true },
         { "check": "a validity measure computed and reported", "blocking": true }
       ],
@@ -766,7 +766,7 @@
       "id": "R-M5.3",
       "for": "M5.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "base rate stated", "blocking": true },
         { "check": "majority-class baseline scored under every candidate metric", "blocking": true },
         { "check": "error costs stated for the specific setting", "blocking": true }
@@ -811,7 +811,7 @@
       "id": "R-M5.4",
       "for": "M5.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "reliability diagrams before and after, with bin counts stated", "blocking": true },
         { "check": "calibration fitted on data held out from both training and test", "blocking": true },
         { "check": "ranking metric reported before and after", "blocking": true }
@@ -856,7 +856,7 @@
       "id": "R-M5.5",
       "for": "M5.5",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         { "check": "published at a public URL and linked from the log", "blocking": true },
         { "check": "connected backwards to the AIE-107 chapter", "blocking": true },
         { "check": "tuning procedure and search space documented", "blocking": true },
@@ -903,7 +903,7 @@
       "id": "R-M5.6",
       "for": "M5.6",
       "tier": 4,
-      "machine_checks": [
+      "preconditions": [
         { "check": "questions generated at defense time from the author's own submissions", "blocking": true },
         { "check": "answered aloud without notes", "blocking": true },
         { "check": "recording or transcript retained", "blocking": true }

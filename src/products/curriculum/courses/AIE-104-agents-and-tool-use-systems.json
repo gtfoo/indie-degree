@@ -726,7 +726,7 @@
       "id": "R-M1.5",
       "for": "M1.5",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "per-stage rates measured on 30 or more real inputs",
           "blocking": true
@@ -765,7 +765,7 @@
       "id": "R-M2.4",
       "for": "M2.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "both versions evaluated on the identical gold set",
           "blocking": true
@@ -834,7 +834,7 @@
       "id": "R-M3.4",
       "for": "M3.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "15 or more labelled compound tasks",
           "blocking": true
@@ -902,7 +902,7 @@
       "id": "R-M4.3",
       "for": "M4.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "8 independent runs per task",
           "blocking": true
@@ -941,7 +941,7 @@
       "id": "R-M4.4",
       "for": "M4.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "the predicted improvement is timestamped before the implementation",
           "blocking": true
@@ -976,7 +976,7 @@
       "id": "R-M5.4",
       "for": "M5.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "each stated limit demonstrated to hold when the agent is directly instructed to exceed it",
           "blocking": true
@@ -1015,7 +1015,7 @@
       "id": "R-M6.3",
       "for": "M6.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "three prohibited behaviours recorded before the attacks",
           "blocking": true
@@ -1098,7 +1098,7 @@
       "id": "R-M7.3",
       "for": "M7.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "success determined by inspecting world state, not agent output",
           "blocking": true
@@ -1166,7 +1166,7 @@
       "id": "R-M9.1",
       "for": "M9.1",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "publicly reachable",
           "blocking": true
@@ -1238,7 +1238,7 @@
       "id": "R-M9.3",
       "for": "M9.3",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "stable public URL",
           "blocking": true
@@ -1322,7 +1322,7 @@
       "id": "R-M5.6",
       "for": "M5.6",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "data flow traced for every provider that receives personal data",
           "blocking": true
@@ -1361,7 +1361,7 @@
       "id": "R-M8.5",
       "for": "M8.5",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "single-agent baseline evaluated on the identical task set",
           "blocking": true

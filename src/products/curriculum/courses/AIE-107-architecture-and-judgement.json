@@ -394,7 +394,7 @@
       "id": "R-M1.4",
       "for": "M1.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "200 or more hand-labelled lines with a held-out split declared before modelling",
           "blocking": true
@@ -449,7 +449,7 @@
       "id": "R-M2.4",
       "for": "M2.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "confusion matrix and precision-recall curve produced per approach",
           "blocking": true
@@ -506,7 +506,7 @@
       "id": "R-M3.3",
       "for": "M3.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "threshold derived from calibration and error costs, not chosen by inspection",
           "blocking": true
@@ -632,7 +632,7 @@
       "id": "R-M5.1",
       "for": "M5.1",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "publicly reachable",
           "blocking": true
@@ -700,7 +700,7 @@
       "id": "R-M5.3",
       "for": "M5.3",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "published at the same origin as previous chapters, reachable from the log index",
           "blocking": true

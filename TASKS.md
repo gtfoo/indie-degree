@@ -33,22 +33,6 @@ lives in a letter or a commit, and a one-line task strands the *why*.
       part of a capability claim nobody can fake.
       `from: indie-degree · programme.json areas.evaluation.artifact`
 
-- [ ] **Rename `machine_checks` to `preconditions`** — recounted 2026-08-16
-      after Block II landed: **458 of 468 are prose conditions a human
-      confirms**, and only 10 carry a number and a comparator that a machine
-      could evaluate. The UI label was corrected on 2026-08-15 but the JSON key
-      still promises an automation that does not exist. Now touches **15**
-      course specs, `validate.py`, `render.py`, `types.ts` and the grading
-      prompt, so it is one deliberate pass rather than something done in
-      passing. It got four times bigger while it sat here, which is the
-      argument for doing it before the next thing is built on top of it.
-      `from: indie-degree · rubric audit 2026-08-15, recounted 2026-08-16`
-
-- [ ] **Render capabilities into `PROGRAMME.md`** — the app shows them, the
-      generated Markdown does not, so the two are quietly different documents.
-      `render.py` needs an areas section.
-      `from: indie-degree · capability layer commit`
-
 - [ ] **Paste-back UI for panel judgements** — designed, not built: a
       `submission` and `judgement` table holding each judge's raw response
       verbatim, owner-gated, keeping prior versions when one is replaced.

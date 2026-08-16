@@ -9,6 +9,29 @@
 
 > **Ordering.** Value-weighted within prerequisite constraints. Stopping at any point should leave the highest-value skills already banked, so an unfinished programme is still a gain.
 
+## Capabilities
+
+*The unit that matters is not the credit, it is the capability claim — the line you are willing to put in the skills section of a CV and then defend to someone who sets the questions. Areas carry that claim; courses sequence the work that earns it. A claim needs a purpose-built public artifact, a measured result, a documented place where the technique stops working, an unscripted defence, and recall a week later without notes. Four of those can be faked by a diligent afternoon; the negative result and the defence cannot, which is why both are mandatory rather than bonus.*
+
+The unit that matters is the claim, not the credit. Each of these is a line that could go in the skills section of a CV, and each is unearned until its artifact is public **and** its negative result is written down.
+
+| Claim | Requires | Artifact | Built |
+|---|---|---|---|
+| LLM application engineering | 5 items at tier 2+, defended, recalled cold | `1 Percent More Fluent` | [yes](https://1-percent-more-fluent.gtfoo.com) |
+| LLM evaluation | 6 items at tier 2+, defended, recalled cold | `eval-harness` | [yes](https://github.com/gtfoo/indie-degree/tree/main/tools/eval-harness) |
+| Retrieval-augmented generation (RAG) | 6 items at tier 2+, defended, recalled cold | `retrieval-bench` | not yet |
+| LLM agents and tool use | 5 items at tier 2+, defended, recalled cold | `agent-vs-workflow` | not yet |
+| LLM inference cost and latency optimisation | 5 items at tier 2+, defended, recalled cold | `cost-and-latency-study` | not yet |
+| Speech interfaces and voice agents | 4 items at tier 2+, defended, recalled cold | `voice-loop` | not yet |
+| Multimodal and document understanding | 2 items at tier 2+, defended, recalled cold | `document-extraction` | not yet |
+| LLM safety and red-teaming | 2 items at tier 2+, defended, recalled cold | `red-team-report` | not yet |
+| AI architecture and build-versus-buy | 3 items at tier 2+, defended, recalled cold | `llm-or-not` | not yet |
+| Transformer architecture | 3 items at tier 2+, defended, recalled cold | `transformer-from-scratch` | not yet |
+| Fine-tuning and post-training | 3 items at tier 2+, defended, recalled cold | `fine-tune-study` | not yet |
+| Reinforcement learning and RLHF | 3 items at tier 2+, defended, recalled cold | `rlhf-study` | not yet |
+
+Supporting areas, deliberately not claims of their own: **Engineering foundations**, **Mathematics for machine learning**, **Machine learning foundations**, **Deep learning**, **Text representation**.
+
 ## Where this starts
 
 Advanced standing awards **4 of 51 credits** and evidence on **12 of 65 skills**, from work already shipped.

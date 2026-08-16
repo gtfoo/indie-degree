@@ -671,7 +671,7 @@
       "id": "R-M2.3",
       "for": "M2.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "50 labelled queries total, 25 per corpus",
           "blocking": true
@@ -740,7 +740,7 @@
       "id": "R-M3.3",
       "for": "M3.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "four strategies run against the identical query set",
           "blocking": true
@@ -790,7 +790,7 @@
       "id": "R-M3.4",
       "for": "M3.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "improvement recomputes from submitted outputs",
           "blocking": true
@@ -830,7 +830,7 @@
       "id": "R-M4.3",
       "for": "M4.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "BM25 run over both corpora with the same query sets as M2.3",
           "blocking": true
@@ -869,7 +869,7 @@
       "id": "R-M4.4",
       "for": "M4.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "fusion compared against the stronger of its two inputs, not against the weaker",
           "blocking": true
@@ -904,7 +904,7 @@
       "id": "R-M5.3",
       "for": "M5.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "p50 and p95 latency reported",
           "blocking": true
@@ -972,7 +972,7 @@
       "id": "R-M6.3",
       "for": "M6.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "harness runs unattended over both corpora",
           "blocking": true
@@ -1040,7 +1040,7 @@
       "id": "R-M7.3",
       "for": "M7.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "both approaches run on the identical query set",
           "blocking": true
@@ -1090,7 +1090,7 @@
       "id": "R-M9.1",
       "for": "M9.1",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "publicly reachable",
           "blocking": true
@@ -1158,7 +1158,7 @@
       "id": "R-M9.3",
       "for": "M9.3",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "stable public URL",
           "blocking": true
@@ -1242,7 +1242,7 @@
       "id": "R-M8.2",
       "for": "M8.2",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "filtering applied before retrieval results reach the model",
           "blocking": true

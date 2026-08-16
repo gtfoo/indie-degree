@@ -518,7 +518,7 @@
       "id": "R-M1.3",
       "for": "M1.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "encode-decode round-trip is the identity on held-out text including punctuation and emoji", "blocking": true },
         { "check": "compression measured at three or more vocabulary sizes", "blocking": true },
         { "check": "compared against a reference tokeniser on identical text", "blocking": true }
@@ -563,7 +563,7 @@
       "id": "R-M1.4",
       "for": "M1.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "identical semantic content used across every language measured", "blocking": true },
         { "check": "a real per-token price cited with its source and date", "blocking": true },
         { "check": "context-window consumption reported alongside cost", "blocking": true }
@@ -608,7 +608,7 @@
       "id": "R-M2.4",
       "for": "M2.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "output matches torch.nn.MultiheadAttention on identical loaded weights, to a stated tolerance", "blocking": true },
         { "check": "causal mask verified by a test that would fail if information leaked backwards", "blocking": true },
         { "check": "written before any reference implementation was opened", "blocking": true }
@@ -653,7 +653,7 @@
       "id": "R-M2.5",
       "for": "M2.5",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "attention weights extracted per head and per layer", "blocking": true },
         { "check": "the interpretable head evidenced across at least five inputs", "blocking": true },
         { "check": "at least one head reported as not interpretable", "blocking": true }
@@ -699,7 +699,7 @@
       "id": "R-M3.3",
       "for": "M3.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "parameter count computed by hand and reconciled with the framework's", "blocking": true },
         { "check": "training loss falls and generated text is included verbatim", "blocking": true },
         { "check": "normalisation placement stated as pre- or post-block", "blocking": true }
@@ -744,7 +744,7 @@
       "id": "R-M3.4",
       "for": "M3.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "four decoding strategies implemented", "blocking": true },
         { "check": "identical prompts and seeds across strategies", "blocking": true },
         { "check": "a quantitative diversity or repetition measure reported", "blocking": true }
@@ -789,7 +789,7 @@
       "id": "R-M4.3",
       "for": "M4.3",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "three substitutions measured independently against one fixed baseline", "blocking": true },
         { "check": "parameter counts reconciled across variants", "blocking": true },
         { "check": "multiple seeds per variant", "blocking": true }
@@ -835,7 +835,7 @@
       "id": "R-M4.6",
       "for": "M4.6",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "cached and uncached generation produce identical tokens for the same seed", "blocking": true },
         { "check": "time per token measured at three or more sequence lengths", "blocking": true }
       ],
@@ -879,7 +879,7 @@
       "id": "R-M5.3",
       "for": "M5.3",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "target number and its source cited before the run", "blocking": true },
         { "check": "intended scale declared in advance", "blocking": true },
         { "check": "compute and wall-clock cost reported", "blocking": true }
@@ -924,7 +924,7 @@
       "id": "R-M5.4",
       "for": "M5.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "every deviation from the published setup enumerated", "blocking": true },
         { "check": "direction and rough magnitude estimated per deviation", "blocking": true },
         { "check": "an unexplained residual stated explicitly", "blocking": true }
@@ -970,7 +970,7 @@
       "id": "R-M6.1",
       "for": "M6.1",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         { "check": "public repository, running end to end from a clean checkout", "blocking": true },
         { "check": "README states what it is not, including that it does not supersede nanoGPT", "blocking": true },
         { "check": "training reproducible from a documented command", "blocking": true }
@@ -1015,7 +1015,7 @@
       "id": "R-M6.2",
       "for": "M6.2",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         { "check": "every architectural decision listed with its alternative", "blocking": true },
         { "check": "each decision marked as measured or inherited", "blocking": true },
         { "check": "published and connected backwards to an earlier chapter", "blocking": true }
@@ -1061,7 +1061,7 @@
       "id": "R-M6.4",
       "for": "M6.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "the chosen model was published after this spec's registration date", "blocking": true },
         { "check": "differences from the author's implementation enumerated", "blocking": true },
         { "check": "one difference explained mechanically rather than quoted", "blocking": true }
@@ -1106,7 +1106,7 @@
       "id": "R-M6.5",
       "for": "M6.5",
       "tier": 4,
-      "machine_checks": [
+      "preconditions": [
         { "check": "questions generated at defense time from the author's own implementation and write-up", "blocking": true },
         { "check": "answered aloud without notes and without the code open", "blocking": true },
         { "check": "recording or transcript retained", "blocking": true }

@@ -34,9 +34,9 @@ export function gradingPrompt(item: Item, rubric: Rubric): string {
     })
     .join("\n\n");
 
-  const gates = rubric.machine_checks?.length
+  const gates = rubric.preconditions?.length
     ? `\nPRECONDITIONS (the author asserts these are met; flag any the text contradicts)\n` +
-      rubric.machine_checks
+      rubric.preconditions
         .map((c) => `- ${c.check}${c.blocking ? "" : "  [not blocking]"}`)
         .join("\n") +
       "\n"

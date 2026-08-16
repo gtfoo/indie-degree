@@ -466,7 +466,7 @@
       "id": "R-M1.5",
       "for": "M1.5",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "matrix shape reported and consistent with the corpus size", "blocking": true },
         { "check": "rank threshold stated before the spectrum was inspected", "blocking": true },
         { "check": "reconstruction error reported at the chosen rank", "blocking": true }
@@ -512,7 +512,7 @@
       "id": "R-M1.6",
       "for": "M1.6",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "characteristic polynomial written out for both matrices", "blocking": true },
         { "check": "eigenvectors normalised", "blocking": true },
         { "check": "numpy comparison included", "blocking": true }
@@ -557,7 +557,7 @@
       "id": "R-M2.4",
       "for": "M2.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "concrete weights and inputs stated", "blocking": true },
         { "check": "symbolic partials given for every weight", "blocking": true },
         { "check": "autograd agreement reported to a stated precision", "blocking": true }
@@ -603,7 +603,7 @@
       "id": "R-M2.5",
       "for": "M2.5",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "the loss transcribed from source, with the source identified", "blocking": true },
         { "check": "gradient checked numerically", "blocking": true }
       ],
@@ -647,7 +647,7 @@
       "id": "R-M2.6",
       "for": "M2.6",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "per-layer gradient magnitudes measured and reported", "blocking": true },
         { "check": "one intervention applied and re-measured", "blocking": true }
       ],
@@ -691,7 +691,7 @@
       "id": "R-M3.4",
       "for": "M3.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "both derivations present — categorical and Gaussian", "blocking": true },
         { "check": "library comparison included for the categorical case", "blocking": true }
       ],
@@ -735,7 +735,7 @@
       "id": "R-M3.5",
       "for": "M3.5",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "at least 30 observations, and the source of the data named", "blocking": true },
         { "check": "interval method stated and justified", "blocking": true },
         { "check": "a previously stated comparison re-examined", "blocking": true }
@@ -781,7 +781,7 @@
       "id": "R-M4.3",
       "for": "M4.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "three optimisers implemented from update rules, not called from a library", "blocking": true },
         { "check": "all three run on the identical objective", "blocking": true },
         { "check": "Adam run with and without bias correction", "blocking": true }
@@ -826,7 +826,7 @@
       "id": "R-M4.4",
       "for": "M4.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "both cases constructed and measured", "blocking": true },
         { "check": "learning rates tuned per optimiser in both cases", "blocking": true }
       ],
@@ -871,7 +871,7 @@
       "id": "R-M4.5",
       "for": "M4.5",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "three distinct failure modes produced, each with its curve", "blocking": true },
         { "check": "gradient norms recorded for each", "blocking": true },
         { "check": "a symptom-to-cause table produced", "blocking": true }
@@ -916,7 +916,7 @@
       "id": "R-M5.3",
       "for": "M5.3",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "the variance result derived, not quoted", "blocking": true },
         { "check": "softmax behaviour demonstrated at two dimensionalities", "blocking": true },
         { "check": "gradient effect measured", "blocking": true }
@@ -961,7 +961,7 @@
       "id": "R-M5.4",
       "for": "M5.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "the system named and the component identified", "blocking": true },
         { "check": "each mathematical claim checked against the running system", "blocking": true }
       ],
@@ -1005,7 +1005,7 @@
       "id": "R-M5.5",
       "for": "M5.5",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         { "check": "published at a public URL", "blocking": true },
         { "check": "links backwards to an earlier chapter's result", "blocking": true },
         { "check": "notation defined before first use", "blocking": true }
@@ -1050,7 +1050,7 @@
       "id": "R-M5.6",
       "for": "M5.6",
       "tier": 4,
-      "machine_checks": [
+      "preconditions": [
         { "check": "questions generated at defense time from the author's own submissions", "blocking": true },
         { "check": "answered aloud without notes and without a calculator", "blocking": true },
         { "check": "recording or transcript retained", "blocking": true }

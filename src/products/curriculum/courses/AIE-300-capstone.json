@@ -765,7 +765,7 @@
       "id": "R-M1.1",
       "for": "M1.1",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "criteria timestamped before the candidate descriptions", "blocking": true },
         { "check": "three candidates scored against every criterion", "blocking": true }
       ],
@@ -782,7 +782,7 @@
       "id": "R-M1.2",
       "for": "M1.2",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "a non-AI approach specified in enough detail to cost", "blocking": true },
         { "check": "both approaches costed at a stated volume", "blocking": true }
       ],
@@ -799,7 +799,7 @@
       "id": "R-M1.3",
       "for": "M1.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "success threshold stated as a number before implementation", "blocking": true },
         { "check": "a named baseline the system must beat", "blocking": true },
         { "check": "committed with a verifiable timestamp", "blocking": true }
@@ -817,7 +817,7 @@
       "id": "R-M1.4",
       "for": "M1.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "six or more exclusions listed with reasons", "blocking": true },
         { "check": "a cut trigger stated as a date or an hours threshold", "blocking": true }
       ],
@@ -834,7 +834,7 @@
       "id": "R-M1.5",
       "for": "M1.5",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "retention and deletion decided per data category", "blocking": true },
         { "check": "logs and traces included as categories", "blocking": true }
       ],
@@ -851,7 +851,7 @@
       "id": "R-M1.6",
       "for": "M1.6",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         { "check": "published before the first implementation commit", "blocking": true },
         { "check": "states what already existed before the capstone", "blocking": true }
       ],
@@ -868,7 +868,7 @@
       "id": "R-M2.1",
       "for": "M2.1",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "deployed and reachable, with one logged real request", "blocking": true },
         { "check": "reproducible from a clean checkout", "blocking": true }
       ],
@@ -885,7 +885,7 @@
       "id": "R-M2.2",
       "for": "M2.2",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "model and approach choice recorded with a reason", "blocking": true },
         { "check": "a failure-case file started and non-empty", "blocking": true }
       ],
@@ -902,7 +902,7 @@
       "id": "R-M2.3",
       "for": "M2.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "context budget stated in tokens", "blocking": true },
         { "check": "retrieval evaluated separately from generation where present", "blocking": true }
       ],
@@ -919,7 +919,7 @@
       "id": "R-M2.4",
       "for": "M2.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "invalid payloads retained rather than discarded", "blocking": true },
         { "check": "a malformed response injected and the path exercised", "blocking": true }
       ],
@@ -936,7 +936,7 @@
       "id": "R-M2.5",
       "for": "M2.5",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "explicit timeouts on every external call", "blocking": true },
         { "check": "a dependency failure simulated end to end", "blocking": true }
       ],
@@ -953,7 +953,7 @@
       "id": "R-M2.6",
       "for": "M2.6",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "per-request tokens, cost and per-stage latency recorded", "blocking": true },
         { "check": "cost per thousand requests computed", "blocking": true }
       ],
@@ -970,7 +970,7 @@
       "id": "R-M2.7",
       "for": "M2.7",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "observed session with someone who did not build it", "blocking": true },
         { "check": "limits stated in the interface itself", "blocking": true }
       ],
@@ -987,7 +987,7 @@
       "id": "R-M2.8",
       "for": "M2.8",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "secrets outside the repository and outside the deployed tree", "blocking": true },
         { "check": "a rollback actually performed, not merely available", "blocking": true }
       ],
@@ -1004,7 +1004,7 @@
       "id": "R-M2.9",
       "for": "M2.9",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "traces retained for a stated window consistent with M1.5", "blocking": true },
         { "check": "a check that would catch total failure", "blocking": true }
       ],
@@ -1021,7 +1021,7 @@
       "id": "R-M2.10",
       "for": "M2.10",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "at least one unaided session with consent recorded", "blocking": true },
         { "check": "one change made in response and its effect checked", "blocking": true }
       ],
@@ -1038,7 +1038,7 @@
       "id": "R-M3.1",
       "for": "M3.1",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "corpus validates in the harness", "blocking": true },
         { "check": "negatives present at the registered proportion", "blocking": true }
       ],
@@ -1055,7 +1055,7 @@
       "id": "R-M3.2",
       "for": "M3.2",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "per-tag results reported", "blocking": true },
         { "check": "compared against the registered threshold explicitly", "blocking": true }
       ],
@@ -1072,7 +1072,7 @@
       "id": "R-M3.3",
       "for": "M3.3",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "50 or more real traces read individually", "blocking": true },
         { "check": "categories emergent rather than predefined", "blocking": true }
       ],
@@ -1089,7 +1089,7 @@
       "id": "R-M3.4",
       "for": "M3.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "baseline and system evaluated on the identical set", "blocking": true },
         { "check": "comparison reported with an interval", "blocking": true }
       ],
@@ -1107,7 +1107,7 @@
       "id": "R-M3.5",
       "for": "M3.5",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "eval re-run at least five times without changes", "blocking": true },
         { "check": "smallest detectable difference stated", "blocking": true }
       ],
@@ -1124,7 +1124,7 @@
       "id": "R-M3.6",
       "for": "M3.6",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "suite runs automatically and exits non-zero on regression", "blocking": true },
         { "check": "a deliberate regression introduced and caught", "blocking": true }
       ],
@@ -1141,7 +1141,7 @@
       "id": "R-M3.7",
       "for": "M3.7",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "prediction recorded before the change", "blocking": true },
         { "check": "result compared against the noise floor from M3.5", "blocking": true }
       ],
@@ -1158,7 +1158,7 @@
       "id": "R-M3.8",
       "for": "M3.8",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "the boundary quantified along at least two dimensions", "blocking": true },
         { "check": "recorded as the capability's negative result", "blocking": true }
       ],
@@ -1175,7 +1175,7 @@
       "id": "R-M4.1",
       "for": "M4.1",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "every input path to the model enumerated", "blocking": true },
         { "check": "successful attacks recorded verbatim", "blocking": true }
       ],
@@ -1192,7 +1192,7 @@
       "id": "R-M4.2",
       "for": "M4.2",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "rate limit and input size bounds in place with stated thresholds", "blocking": true },
         { "check": "each control tested by attempting to violate it", "blocking": true }
       ],
@@ -1209,7 +1209,7 @@
       "id": "R-M4.3",
       "for": "M4.3",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "load profile stated and justified", "blocking": true },
         { "check": "breaking point identified as a number", "blocking": true }
       ],
@@ -1226,7 +1226,7 @@
       "id": "R-M4.4",
       "for": "M4.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "three failures simulated end to end", "blocking": true },
         { "check": "time to detect and time to recover recorded per failure", "blocking": true }
       ],
@@ -1243,7 +1243,7 @@
       "id": "R-M4.5",
       "for": "M4.5",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "each item carries a risk and an estimate", "blocking": true },
         { "check": "a judgement recorded per item on whether to close it", "blocking": true }
       ],
@@ -1260,7 +1260,7 @@
       "id": "R-M4.6",
       "for": "M4.6",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "the runbook followed exactly at least once, without improvisation", "blocking": true },
         { "check": "a procedure present for each failure drilled in M4.4", "blocking": true }
       ],
@@ -1277,7 +1277,7 @@
       "id": "R-M5.1",
       "for": "M5.1",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         { "check": "headline number with its interval in the first screen", "blocking": true },
         { "check": "a working public link", "blocking": true }
       ],
@@ -1294,7 +1294,7 @@
       "id": "R-M5.2",
       "for": "M5.2",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         { "check": "each significant decision marked measured or inherited", "blocking": true },
         { "check": "the evaluation described in enough detail to be attacked", "blocking": true }
       ],
@@ -1311,7 +1311,7 @@
       "id": "R-M5.3",
       "for": "M5.3",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         { "check": "connects to three or more earlier chapters", "blocking": true },
         { "check": "revises at least one earlier conclusion", "blocking": true }
       ],
@@ -1328,7 +1328,7 @@
       "id": "R-M5.4",
       "for": "M5.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "the M3.8 negative result stated prominently", "blocking": true },
         { "check": "delivered system compared against the registered scope", "blocking": true }
       ],
@@ -1346,7 +1346,7 @@
       "id": "R-M5.5",
       "for": "M5.5",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         { "check": "reachable at a public URL by someone with no credentials from the author", "blocking": true },
         { "check": "running cost stated and an uptime horizon declared", "blocking": true }
       ],
@@ -1363,7 +1363,7 @@
       "id": "R-M5.6",
       "for": "M5.6",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "specific evidence named per claimed capability", "blocking": true },
         { "check": "at least one capability explicitly declined", "blocking": true }
       ],
@@ -1380,7 +1380,7 @@
       "id": "R-M6.1",
       "for": "M6.1",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "fifteen or more questions written", "blocking": true },
         { "check": "the three weakest answers moved into the write-up", "blocking": true }
       ],
@@ -1397,7 +1397,7 @@
       "id": "R-M6.2",
       "for": "M6.2",
       "tier": 4,
-      "machine_checks": [
+      "preconditions": [
         { "check": "questions generated at defense time from the published artifacts", "blocking": true },
         { "check": "answered without notes and without the system open", "blocking": true },
         { "check": "recording retained", "blocking": true }
@@ -1416,7 +1416,7 @@
       "id": "R-M6.3",
       "for": "M6.3",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "corrections dated and visible in the published document", "blocking": true },
         { "check": "the original claim still legible alongside the correction", "blocking": true }
       ],
@@ -1433,7 +1433,7 @@
       "id": "R-M6.4",
       "for": "M6.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "the largest wrong decision named specifically", "blocking": true },
         { "check": "one practice written into a repository's rules", "blocking": true }
       ],

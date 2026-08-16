@@ -812,7 +812,7 @@
       "id": "R-M2.5",
       "for": "M2.5",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "case_count >= 30",
           "blocking": true
@@ -888,7 +888,7 @@
       "id": "R-M3.7",
       "for": "M3.7",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "judge runs over the full gold set unattended",
           "blocking": true
@@ -927,7 +927,7 @@
       "id": "R-M3.8",
       "for": "M3.8",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "three controlled experiments present",
           "blocking": true
@@ -1017,7 +1017,7 @@
       "id": "R-M4.4",
       "for": "M4.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "kappa recomputes from submitted labels and judge outputs",
           "blocking": true
@@ -1114,7 +1114,7 @@
       "id": "R-M5.3",
       "for": "M5.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "interval recomputes from submitted scores",
           "blocking": true
@@ -1200,7 +1200,7 @@
       "id": "R-M6.4",
       "for": "M6.4",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "a public Actions run link is provided and the run is green",
           "blocking": true
@@ -1250,7 +1250,7 @@
       "id": "R-M6.5",
       "for": "M6.5",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "a link to a red run is provided",
           "blocking": true
@@ -1366,7 +1366,7 @@
       "id": "R-M7.1c",
       "for": "M7.1c",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "published at a reachable public URL",
           "blocking": true

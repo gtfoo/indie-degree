@@ -189,8 +189,8 @@ function RubricPanel({
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
   const [fallback, setFallback] = useState(false);
-  const blocking = rubric.machine_checks?.filter((c) => c.blocking) ?? [];
-  const advisory = rubric.machine_checks?.filter((c) => !c.blocking) ?? [];
+  const blocking = rubric.preconditions?.filter((c) => c.blocking) ?? [];
+  const advisory = rubric.preconditions?.filter((c) => !c.blocking) ?? [];
 
   // The clipboard API is refused in plenty of ordinary situations — an
   // insecure origin, a permissions policy, an embedded view. Falling back to a

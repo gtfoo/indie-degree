@@ -437,7 +437,7 @@
       "id": "R-M1.3",
       "for": "M1.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "gradients match torch.autograd to a stated tolerance", "blocking": true },
         { "check": "the test expression contains at least one repeated variable", "blocking": true },
         { "check": "topological ordering implemented rather than assumed by construction order", "blocking": true }
@@ -482,7 +482,7 @@
       "id": "R-M1.4",
       "for": "M1.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "loss decreases on a held-out split, not only on training data", "blocking": true },
         { "check": "the same architecture trained in PyTorch for comparison", "blocking": true },
         { "check": "wall-clock time reported for both", "blocking": true }
@@ -527,7 +527,7 @@
       "id": "R-M1.6",
       "for": "M1.6",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "three or more differences named", "blocking": true },
         { "check": "one demonstrated with runnable code", "blocking": true }
       ],
@@ -571,7 +571,7 @@
       "id": "R-M2.3",
       "for": "M2.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "per-layer activation and gradient statistics recorded across training", "blocking": true },
         { "check": "update-to-weight ratio computed", "blocking": true },
         { "check": "numeric ranges for a healthy run stated", "blocking": true }
@@ -616,7 +616,7 @@
       "id": "R-M2.4",
       "for": "M2.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "three distinct failures produced from one base run, one variable changed each time", "blocking": true },
         { "check": "the blind identification actually performed and its result reported", "blocking": true },
         { "check": "earliest distinguishing step reported per failure", "blocking": true }
@@ -662,7 +662,7 @@
       "id": "R-M3.3",
       "for": "M3.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "activation variance measured per layer at initialisation, before any training", "blocking": true },
         { "check": "three schemes compared on an identical architecture", "blocking": true }
       ],
@@ -706,7 +706,7 @@
       "id": "R-M3.4",
       "for": "M3.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "learning rate tuned separately for each variant", "blocking": true },
         { "check": "at least three seeds per variant", "blocking": true },
         { "check": "learning-rate sensitivity reported separately from final accuracy", "blocking": true }
@@ -752,7 +752,7 @@
       "id": "R-M4.3",
       "for": "M4.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "parameter count computed by hand and compared against the framework's count", "blocking": true },
         { "check": "reference implementation consulted only after completion, and differences listed", "blocking": true },
         { "check": "a forward pass runs on real input of the stated shape", "blocking": true }
@@ -797,7 +797,7 @@
       "id": "R-M4.5",
       "for": "M4.5",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "parameter count held within a stated tolerance of the original", "blocking": true },
         { "check": "at least three seeds per variant", "blocking": true }
       ],
@@ -841,7 +841,7 @@
       "id": "R-M5.3",
       "for": "M5.3",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "four or more sizes trained to a stated convergence criterion", "blocking": true },
         { "check": "compute or parameter count reported per run", "blocking": true },
         { "check": "the extrapolation range explicitly bounded", "blocking": true }
@@ -886,7 +886,7 @@
       "id": "R-M5.4",
       "for": "M5.4",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         { "check": "published at a public URL and linked from the log", "blocking": true },
         { "check": "connects backwards to an earlier chapter", "blocking": true },
         { "check": "at least one negative result included", "blocking": true }
@@ -931,7 +931,7 @@
       "id": "R-M5.5",
       "for": "M5.5",
       "tier": 4,
-      "machine_checks": [
+      "preconditions": [
         { "check": "questions generated at defense time from the author's own submissions", "blocking": true },
         { "check": "answered aloud without notes", "blocking": true },
         { "check": "recording or transcript retained", "blocking": true }

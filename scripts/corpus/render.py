@@ -121,6 +121,38 @@ def render_programme(prog: dict, verified: list[dict], standing: dict) -> str:
     a(f"> **Ordering.** {p['ordering_principle']}")
     a("")
 
+    # The capability layer is what the app leads with, and PROGRAMME.md used to
+    # omit it entirely — which made the Markdown and the site quietly different
+    # documents describing the same programme.
+    areas = prog.get("areas", [])
+    claimable = [x for x in areas if x.get("claimable")]
+    if claimable:
+        a("## Capabilities")
+        a("")
+        a(f"*{p.get('capability_note', '')}*")
+        a("")
+        a("The unit that matters is the claim, not the credit. Each of these is a "
+          "line that could go in the skills section of a CV, and each is unearned "
+          "until its artifact is public **and** its negative result is written down.")
+        a("")
+        a("| Claim | Requires | Artifact | Built |")
+        a("|---|---|---|---|")
+        for x in claimable:
+            bar = x.get("bar", {})
+            art = x.get("artifact", {}) or {}
+            req = (f"{bar.get('min_items', 0)} items at tier {bar.get('min_tier', 1)}+"
+                   + (", defended" if bar.get("defence") else "")
+                   + (", recalled cold" if bar.get("cold_recall") else ""))
+            url = art.get("url")
+            built = f"[yes]({url})" if url else "not yet"
+            a(f"| {x.get('cv_line', x['name'])} | {req} | `{art.get('name', '—')}` | {built} |")
+        a("")
+        support = [x for x in areas if not x.get("claimable")]
+        if support:
+            a("Supporting areas, deliberately not claims of their own: "
+              + ", ".join(f"**{x['name']}**" for x in support) + ".")
+            a("")
+
     a("## Where this starts")
     a("")
     t = standing["totals"]
@@ -430,11 +462,15 @@ def render_course(spec: dict, verified: list[dict], prog: dict) -> str:
     for rid, r in rubrics.items():
         a(f"### {rid} — {r['for']}")
         a("")
-        if r.get("machine_checks"):
-            a("**Machine checks** (blocking)")
+        if r.get("preconditions"):
+            # Not "machine checks": 458 of the 468 in this programme are prose a
+            # human confirms, so the label states what they are rather than
+            # promising an automation that does not exist.
+            a("**Preconditions** — must hold before the work is judged")
             a("")
-            for mc in r["machine_checks"]:
-                a(f"- `{mc['check']}`")
+            for pc in r["preconditions"]:
+                suffix = "" if pc.get("blocking") else "  *(not blocking)*"
+                a(f"- `{pc['check']}`{suffix}")
             a("")
         a("| Criterion | Weight | 0 | 1 | 2 | 3 |")
         a("|---|---:|---|---|---|---|")

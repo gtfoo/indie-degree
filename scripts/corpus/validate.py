@@ -401,6 +401,18 @@ def main() -> int:
                 missing = {"0", "1", "2", "3"} - set(x.get("levels", {}))
                 if missing:
                     err(f"{spec_rel}: rubric {rid} criterion {x['id']} missing levels {sorted(missing)}")
+            # The field was called `machine_checks` until 2026-08-16, when the
+            # count showed 458 of 468 were prose a human confirms. Nothing
+            # validated the key, which is how a rename could half-land and leave
+            # two spellings that both silently render as nothing.
+            if "machine_checks" in r:
+                err(
+                    f"{spec_rel}: rubric {rid} uses `machine_checks`, renamed to "
+                    f"`preconditions` — the old key renders as nothing rather than failing"
+                )
+            for pc in r.get("preconditions", []):
+                if "check" not in pc or "blocking" not in pc:
+                    err(f"{spec_rel}: rubric {rid} has a precondition missing `check` or `blocking`")
         for iid, i in items.items():
             if i.get("rubric") and rubrics.get(i["rubric"], {}).get("for") != iid:
                 err(f"{spec_rel}: item {iid} and rubric {i['rubric']} do not point at each other")

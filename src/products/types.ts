@@ -61,8 +61,16 @@ export interface RubricCriterion {
   levels: Record<string, string>;
 }
 
-/** A pass/fail gate. Blocking checks run before any judge is convened. */
-export interface MachineCheck {
+/**
+ * A condition that must hold before the work is judged.
+ *
+ * Named `preconditions` rather than `machine_checks`, which is what this was
+ * called until the count was done: of 468 across the programme, 458 are prose
+ * a human confirms and only 10 carry a number and a comparator a machine could
+ * evaluate. The old name promised an automation that does not exist, and a
+ * field name that lies is worse than a vague one because nobody re-reads it.
+ */
+export interface Precondition {
   check: string;
   blocking: boolean;
 }
@@ -72,7 +80,7 @@ export interface Rubric {
   for: string;
   tier: number;
   criteria: RubricCriterion[];
-  machine_checks?: MachineCheck[];
+  preconditions?: Precondition[];
   anti_gaming?: string;
   integrity?: string;
 }

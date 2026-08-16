@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS rubric_criteria (   -- derived
   PRIMARY KEY (rubric_id, criterion_id)
 );
 
-CREATE TABLE IF NOT EXISTS rubric_machine_checks (  -- derived
+CREATE TABLE IF NOT EXISTS rubric_preconditions (  -- derived
   rubric_id TEXT    NOT NULL REFERENCES rubrics(id),
   position  INTEGER NOT NULL,
   check_desc TEXT   NOT NULL,

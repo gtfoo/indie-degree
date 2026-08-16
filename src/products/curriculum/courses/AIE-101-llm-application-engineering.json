@@ -605,7 +605,7 @@
       "id": "R-M2.6",
       "for": "M2.6",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "notebook submitted with outputs present for all nine chapters",
           "blocking": true
@@ -662,7 +662,7 @@
       "id": "R-M3.3",
       "for": "M3.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "a malformed model response is provably unable to reach application code",
           "blocking": true
@@ -730,7 +730,7 @@
       "id": "R-M4.4",
       "for": "M4.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "at least four tools with overlapping applicability",
           "blocking": true
@@ -813,7 +813,7 @@
       "id": "R-M5.4",
       "for": "M5.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "three or more settings compared",
           "blocking": true
@@ -933,7 +933,7 @@
       "id": "R-M6.4",
       "for": "M6.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "an unverifiable claim is discarded, not annotated",
           "blocking": true
@@ -972,7 +972,7 @@
       "id": "R-M7.1",
       "for": "M7.1",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "publicly reachable",
           "blocking": true
@@ -1040,7 +1040,7 @@
       "id": "R-M7.3",
       "for": "M7.3",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "stable public URL",
           "blocking": true

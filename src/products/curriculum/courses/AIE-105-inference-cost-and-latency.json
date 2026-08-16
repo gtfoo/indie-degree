@@ -658,7 +658,7 @@
       "id": "R-M1.4",
       "for": "M1.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "cost reported per user-visible operation, not only per API call",
           "blocking": true
@@ -682,7 +682,7 @@
       "id": "R-M1.5",
       "for": "M1.5",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "the cost model is timestamped before any implementation commit",
           "blocking": true
@@ -733,7 +733,7 @@
       "id": "R-M2.3",
       "for": "M2.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "100 or more requests at three or more input lengths",
           "blocking": true
@@ -805,7 +805,7 @@
       "id": "R-M3.3",
       "for": "M3.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "hit rate measured on real traffic, not a synthetic loop",
           "blocking": true
@@ -873,7 +873,7 @@
       "id": "R-M4.4",
       "for": "M4.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "concurrency swept across at least four levels",
           "blocking": true
@@ -941,7 +941,7 @@
       "id": "R-M5.6",
       "for": "M5.6",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "two or more quantisation levels measured",
           "blocking": true
@@ -980,7 +980,7 @@
       "id": "R-M6.3",
       "for": "M6.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "TTFT measured from user action, not from the outbound API call",
           "blocking": true
@@ -1048,7 +1048,7 @@
       "id": "R-M8.1",
       "for": "M8.1",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "before and after measured on comparable real traffic",
           "blocking": true
@@ -1117,7 +1117,7 @@
       "id": "R-M8.3",
       "for": "M8.3",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "stable public URL",
           "blocking": true
@@ -1242,7 +1242,7 @@
       "id": "R-M7.3",
       "for": "M7.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         {
           "check": "primary provider failure simulated and the degraded path exercised",
           "blocking": true

@@ -407,7 +407,7 @@
       "id": "R-M1.4",
       "for": "M1.4",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "both microbenchmarks timed with warmup and repeated runs", "blocking": true },
         { "check": "achieved bandwidth and achieved FLOP/s computed from the timings", "blocking": true },
         { "check": "device model and its published specification stated", "blocking": true }
@@ -452,7 +452,7 @@
       "id": "R-M1.5",
       "for": "M1.5",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "bytes and FLOPs counted analytically with the shapes stated", "blocking": true },
         { "check": "prediction recorded before the timed run", "blocking": true },
         { "check": "two sequence lengths measured", "blocking": true }
@@ -497,7 +497,7 @@
       "id": "R-M2.2",
       "for": "M2.2",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "arithmetic intensity derived by hand for all four operations", "blocking": true },
         { "check": "predictions timestamped before measurement", "blocking": true },
         { "check": "prediction accuracy reported", "blocking": true }
@@ -542,7 +542,7 @@
       "id": "R-M2.3",
       "for": "M2.3",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "peaks established empirically rather than from the datasheet", "blocking": true },
         { "check": "ridge point computed and stated", "blocking": true },
         { "check": "the four operations plotted", "blocking": true }
@@ -587,7 +587,7 @@
       "id": "R-M3.3",
       "for": "M3.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "a real profiler used, not wall-clock timers around blocks", "blocking": true },
         { "check": "time attributed across forward, backward, optimiser and data loading", "blocking": true },
         { "check": "unattributed remainder reported as a number", "blocking": true }
@@ -632,7 +632,7 @@
       "id": "R-M3.4",
       "for": "M3.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "quantitative prediction timestamped before the change", "blocking": true },
         { "check": "the optimisation justified by the profile, not by reputation", "blocking": true },
         { "check": "re-profiled after the change with the same method", "blocking": true }
@@ -677,7 +677,7 @@
       "id": "R-M4.3",
       "for": "M4.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "model size, batch and cluster shape stated", "blocking": true },
         { "check": "bytes per step derived for all three strategies", "blocking": true },
         { "check": "converted to time against a stated interconnect bandwidth", "blocking": true }
@@ -722,7 +722,7 @@
       "id": "R-M4.4",
       "for": "M4.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "scenario fully specified before the recommendation", "blocking": true },
         { "check": "the recommendation traced to the M4.3 arithmetic", "blocking": true },
         { "check": "conditions that would flip the decision stated", "blocking": true }
@@ -767,7 +767,7 @@
       "id": "R-M5.1",
       "for": "M5.1",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "a real product's inference path described stage by stage", "blocking": true },
         { "check": "AIE-105's measurements cited and reconciled", "blocking": true }
       ],
@@ -811,7 +811,7 @@
       "id": "R-M5.2",
       "for": "M5.2",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         { "check": "published at a public URL and linked from the log", "blocking": true },
         { "check": "at least one wrong prediction retained in the text", "blocking": true },
         { "check": "connects backwards to AIE-105 or AIE-204", "blocking": true }
@@ -856,7 +856,7 @@
       "id": "R-M5.3",
       "for": "M5.3",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "the feature named and its systems motivation distinguished from its modelling motivation", "blocking": true },
         { "check": "the argument reconstructed with the author's own measured ratios", "blocking": true }
       ],
@@ -900,7 +900,7 @@
       "id": "R-M5.4",
       "for": "M5.4",
       "tier": 4,
-      "machine_checks": [
+      "preconditions": [
         { "check": "questions generated at defense time from the author's own submissions", "blocking": true },
         { "check": "answered aloud without notes and without a calculator", "blocking": true },
         { "check": "recording or transcript retained", "blocking": true }

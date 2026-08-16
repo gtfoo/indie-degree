@@ -423,7 +423,7 @@
       "id": "R-M1.3",
       "for": "M1.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "state, action, transition and reward each defined explicitly", "blocking": true },
         { "check": "discount factor justified against a stated decision horizon", "blocking": true },
         { "check": "at least one violation of the Markov property named", "blocking": true }
@@ -468,7 +468,7 @@
       "id": "R-M1.4",
       "for": "M1.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "partial observability identified in the specific problem, not in general", "blocking": true },
         { "check": "a verdict recorded on whether RL is appropriate", "blocking": true }
       ],
@@ -512,7 +512,7 @@
       "id": "R-M2.3",
       "for": "M2.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "update rule reproduced in the submission before the code", "blocking": true },
         { "check": "converged policy demonstrated", "blocking": true },
         { "check": "learned value function inspected and shown", "blocking": true }
@@ -557,7 +557,7 @@
       "id": "R-M2.4",
       "for": "M2.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "instability produced and recorded, not merely described", "blocking": true },
         { "check": "exactly one destabilising ingredient removed, and re-measured", "blocking": true }
       ],
@@ -601,7 +601,7 @@
       "id": "R-M3.3",
       "for": "M3.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "estimator derived in the submission", "blocking": true },
         { "check": "five or more seeds run and all plotted", "blocking": true },
         { "check": "spread reported alongside any mean", "blocking": true }
@@ -647,7 +647,7 @@
       "id": "R-M3.4",
       "for": "M3.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "gradient variance measured directly", "blocking": true },
         { "check": "compared at equal environment steps rather than equal wall-clock", "blocking": true },
         { "check": "the unbiasedness argument given", "blocking": true }
@@ -692,7 +692,7 @@
       "id": "R-M4.3",
       "for": "M4.3",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "state, action and reward identified for token generation specifically", "blocking": true },
         { "check": "the KL term explained in RL terms", "blocking": true }
       ],
@@ -736,7 +736,7 @@
       "id": "R-M4.4",
       "for": "M4.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "the reparameterisation stated, relating the two objectives", "blocking": true },
         { "check": "the enabling assumption named", "blocking": true },
         { "check": "a position taken on when PPO-style RLHF remains worth it", "blocking": true }
@@ -781,7 +781,7 @@
       "id": "R-M5.1",
       "for": "M5.1",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         { "check": "published at a public URL and linked from the log", "blocking": true },
         { "check": "individual seed curves included", "blocking": true },
         { "check": "connects backwards to AIE-205", "blocking": true }
@@ -826,7 +826,7 @@
       "id": "R-M5.2",
       "for": "M5.2",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "the exploit described with the reward it obtained", "blocking": true },
         { "check": "the reward repaired and a second round run", "blocking": true }
       ],
@@ -870,7 +870,7 @@
       "id": "R-M5.4",
       "for": "M5.4",
       "tier": 4,
-      "machine_checks": [
+      "preconditions": [
         { "check": "questions generated at defense time from the author's own submissions", "blocking": true },
         { "check": "answered aloud without notes", "blocking": true },
         { "check": "recording or transcript retained", "blocking": true }

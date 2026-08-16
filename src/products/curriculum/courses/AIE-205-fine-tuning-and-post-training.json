@@ -424,7 +424,7 @@
       "id": "R-M1.3",
       "for": "M1.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "rules timestamped before the first candidate was collected", "blocking": true },
         { "check": "100 or more candidates judged individually", "blocking": true },
         { "check": "rejections counted per rule", "blocking": true }
@@ -469,7 +469,7 @@
       "id": "R-M1.4",
       "for": "M1.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "at least a day between the two judging passes", "blocking": true },
         { "check": "second pass performed without access to the first", "blocking": true },
         { "check": "agreement reported as a number", "blocking": true }
@@ -514,7 +514,7 @@
       "id": "R-M2.3",
       "for": "M2.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "loss masking verified — prompt-token gradients are zero", "blocking": true },
         { "check": "training and validation loss both recorded", "blocking": true },
         { "check": "evaluated through the harness on the pre-existing gold set", "blocking": true }
@@ -559,7 +559,7 @@
       "id": "R-M2.4",
       "for": "M2.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "prompt iterations logged with a stated time-box", "blocking": true },
         { "check": "few-shot examples drawn from the training split, not the gold set", "blocking": true },
         { "check": "identical gold set and harness used for both", "blocking": true },
@@ -606,7 +606,7 @@
       "id": "R-M3.3",
       "for": "M3.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "three ranks trained on identical data and schedule", "blocking": true },
         { "check": "trainable parameter count reported per rank", "blocking": true },
         { "check": "time and peak memory recorded per rank", "blocking": true }
@@ -651,7 +651,7 @@
       "id": "R-M3.4",
       "for": "M3.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "prediction recorded before the experiment", "blocking": true },
         { "check": "a full fine-tune comparison run, or its substitution justified with a smaller model", "blocking": true }
       ],
@@ -695,7 +695,7 @@
       "id": "R-M4.3",
       "for": "M4.3",
       "tier": 1,
-      "machine_checks": [
+      "preconditions": [
         { "check": "loss implemented from the paper's equation, with the equation reproduced", "blocking": true },
         { "check": "matches the library implementation on identical inputs to a stated tolerance", "blocking": true },
         { "check": "two beta values run and their effect described", "blocking": true }
@@ -740,7 +740,7 @@
       "id": "R-M4.4",
       "for": "M4.4",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "preference criterion stated before pairs were built", "blocking": true },
         { "check": "run from an SFT checkpoint, not a base model", "blocking": true },
         { "check": "two or more untargeted capabilities measured before and after", "blocking": true }
@@ -785,7 +785,7 @@
       "id": "R-M5.1",
       "for": "M5.1",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "capability set defined before fine-tuning", "blocking": true },
         { "check": "base and fine-tuned models scored on the identical set", "blocking": true },
         { "check": "results reported per capability, not aggregated", "blocking": true }
@@ -830,7 +830,7 @@
       "id": "R-M5.2",
       "for": "M5.2",
       "tier": 3,
-      "machine_checks": [
+      "preconditions": [
         { "check": "published at a public URL and linked from the log", "blocking": true },
         { "check": "the baseline comparison appears before any discussion section", "blocking": true },
         { "check": "connects backwards to the AIE-102 gold set and the harness", "blocking": true },
@@ -877,7 +877,7 @@
       "id": "R-M5.3",
       "for": "M5.3",
       "tier": 2,
-      "machine_checks": [
+      "preconditions": [
         { "check": "the behaviour measured at three points — base, post-SFT, post-DPO", "blocking": true },
         { "check": "the probe set fixed before the first measurement", "blocking": true }
       ],
@@ -921,7 +921,7 @@
       "id": "R-M5.4",
       "for": "M5.4",
       "tier": 4,
-      "machine_checks": [
+      "preconditions": [
         { "check": "questions generated at defense time from the author's own submissions", "blocking": true },
         { "check": "answered aloud without notes", "blocking": true },
         { "check": "recording or transcript retained", "blocking": true }
