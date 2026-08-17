@@ -11,5 +11,7 @@ agent write to `~/Git/MAIL.md`; to reach another app write to that repo's
 
 ---
 
+---
+
 The inbox is empty. An empty inbox is the read receipt: a letter still sitting
 here means unprocessed, so there is nothing outstanding for this app.

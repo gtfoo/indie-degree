@@ -17,6 +17,7 @@ import NextAuth, { type NextAuthConfig } from "next-auth";
 import Resend from "next-auth/providers/resend";
 import { SqliteAdapter } from "@/server/auth-adapter";
 import { LINK_MINUTES, sendVerificationRequest } from "@/server/signin-email";
+import { reportUserCounts } from "@/server/user-counts";
 
 /**
  * The single account permitted to exist.
@@ -84,6 +85,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async session({ session, token }) {
       if (typeof token.email === "string") session.user.email = token.email;
       return session;
+    },
+  },
+
+  events: {
+    // After a sign-in actually completes, refresh the count gtfoo.com/admin
+    // renders. Fire and forget: a failed write must never fail a sign-in.
+    signIn() {
+      reportUserCounts(true);
     },
   },
 });

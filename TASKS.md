@@ -39,6 +39,14 @@ lives in a letter or a commit, and a one-line task strands the *why*.
       Blocked on nothing but time.
       `from: owner · 2026-08-15`
 
+- [ ] **Batch pushes to main.** Each deploy builds into the tree the live
+      process is serving from, so every push is a window where the site can
+      return 500. On 2026-08-16 there were eleven pushes and one of them served
+      30 real errors; the other ten were luck. **Standalone is not atomic** —
+      the unit says `Next.js, standalone` and that protects nothing here. Fixed
+      properly by phase 2 below; until then the only lever is fewer deploys.
+      `from: droplet → indie-degree · MAIL-ARCHIVE.md 2026-08-16`
+
 - [ ] **Phase 2 migration, when the droplet agent schedules it** — volunteered
       to go first. Answers delivered 2026-08-15 after sitting undelivered since
       08-14. The parts that must survive into whatever gets built: pin the
