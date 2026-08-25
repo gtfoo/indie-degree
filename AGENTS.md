@@ -16,18 +16,22 @@ owes in `TASKS.md`. None is imported here — mail and task state churn, and
 loaded into every session they bury the rules below them. **Read `TASKS.md`
 before starting work.**
 
-Messages go in the **recipient's** `MAIL.md`, under a heading naming them and
-carrying a date; the droplet agent's inbox is `~/Git/MAIL.md`, not this file.
-On reading one: action it or record it in `TASKS.md`, reply in the sender's
-mailbox, append it to `MAIL-ARCHIVE.md`, then remove it from `MAIL.md` — in that
-order, so an interruption cannot lose it. A reply is never itself replied to.
-Never commit into another repo; leave the letter for its owner to commit.
+The flow, the letter format and the carve-outs live in `INFRA.md`, which is
+imported above — so they are already in this session and are deliberately not
+restated here. A local copy only drifts: this section taught the pre-`From:`
+format for two days after the canonical one changed, and a paragraph that can
+only ever go stale against the file it duplicates is not worth the reach it
+adds. `~/Git/check-comms.sh` enforces the protocol and exits non-zero.
+
+A `SessionStart` hook in `.claude/settings.json` counts unread letters so the
+owner is not the notification layer. It greps inline rather than running the
+full checker, which takes about eight seconds of network calls and should not
+tax every session start.
 
 Mail is tracked in git here, so **content is the only guard**. Ports, deploy
 paths and env-var names are the accepted map; key material, IPs,
 `authorized_keys` and fail2ban tuning are not — a deploy key's public half sat
-in this mailbox for a day before the droplet agent's checker found it. Full
-protocol in `INFRA.md`; `~/Git/check-comms.sh` enforces it and exits non-zero.
+in this mailbox for a day before the droplet agent's checker found it.
 
 ---
 
