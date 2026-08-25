@@ -28,6 +28,15 @@ owner is not the notification layer. It greps inline rather than running the
 full checker, which takes about eight seconds of network calls and should not
 tax every session start.
 
+**It is installed, tested, and currently unreachable — do not read it as
+working.** The hook fires only for sessions rooted in the repo containing it,
+and sessions for this app are opened in `~/Git/gtfoo`, so gtfoo's hook fires
+instead. Proved by its output: it announced three unread letters on a session
+where this inbox held none and gtfoo's held three. Both obvious fixes are worse
+than the gap — a hook in gtfoo's repo announcing this app's mail hands that
+agent a notification it cannot action, and an absolute path breaks the `~` rule.
+The fix is where the session is opened, which is a habit and not a config.
+
 Mail is tracked in git here, so **content is the only guard**. Ports, deploy
 paths and env-var names are the accepted map; key material, IPs,
 `authorized_keys` and fail2ban tuning are not — a deploy key's public half sat
