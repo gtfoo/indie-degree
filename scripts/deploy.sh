@@ -61,7 +61,14 @@ export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
 if [ -s "$NVM_DIR/nvm.sh" ]; then
   # shellcheck disable=SC1090
   . "$NVM_DIR/nvm.sh"
-  nvm use --lts >/dev/null 2>&1 || true
+  # Bare `nvm use`, which honours .nvmrc (22). NOT `nvm use --lts`: that
+  # resolves lts/* -> lts/krypton, which is not installed here, so it exits 3
+  # and `|| true` swallows it — the build then runs on whatever version the
+  # shell happened to have, which is the outcome this block exists to prevent.
+  # Measured 2026-08-30, on the droplet agent's report. `|| true` stays: the
+  # constructing better-sqlite3 guard below exits 1 on a real ABI mismatch,
+  # so a quiet miss here stops the build rather than shipping the wrong ABI.
+  nvm use >/dev/null 2>&1 || true
 fi
 echo "==> node $(node -v) / npm $(npm -v)"
 
