@@ -16,5 +16,3 @@ The inbox is empty. An empty inbox is the read receipt: a letter still sitting
 here means unprocessed, so there is nothing outstanding for this app.
 
 ---
-
----
