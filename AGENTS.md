@@ -28,14 +28,13 @@ owner is not the notification layer. It greps inline rather than running the
 full checker, which takes about eight seconds of network calls and should not
 tax every session start.
 
-**It is installed, tested, and currently unreachable — do not read it as
-working.** The hook fires only for sessions rooted in the repo containing it,
-and sessions for this app are opened in `~/Git/gtfoo`, so gtfoo's hook fires
-instead. Proved by its output: it announced three unread letters on a session
-where this inbox held none and gtfoo's held three. Both obvious fixes are worse
-than the gap — a hook in gtfoo's repo announcing this app's mail hands that
-agent a notification it cannot action, and an absolute path breaks the `~` rule.
-The fix is where the session is opened, which is a habit and not a config.
+**It reaches this inbox as of 2026-08-31.** For its first week it did not: the
+hook fires only for sessions rooted in the repo holding it, and sessions for this
+app were opened in `~/Git/gtfoo`, so gtfoo's hook fired instead — it announced
+three unread letters on a session where this inbox held none. The owner has since
+moved every agent into its own repo, and the same test now reports one letter
+here against gtfoo's three, which is the diagnosis run in reverse. It greps a
+*relative* `MAIL.md`, so it stays correct only while sessions start here.
 
 Mail is tracked in git here, so **content is the only guard**. Ports, deploy
 paths and env-var names are the accepted map; key material, IPs,
