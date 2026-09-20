@@ -33,11 +33,14 @@ lives in a letter or a commit, and a one-line task strands the *why*.
       part of a capability claim nobody can fake.
       `from: indie-degree · programme.json areas.evaluation.artifact`
 
-- [ ] **Paste-back UI for panel judgements** — designed, not built: a
-      `submission` and `judgement` table holding each judge's raw response
-      verbatim, owner-gated, keeping prior versions when one is replaced.
-      Blocked on nothing but time.
-      `from: owner · 2026-08-15`
+- [ ] **Paste-back UI for panel judgements — the page, not the feature.** The
+      server half is built and was already built when this task was written:
+      the `submissions`, `self_assessments`, `judgements` and `judgement_scores`
+      tables, `src/server/submissions.ts` enforcing score-yourself-before-judge,
+      `parseScores.ts`, and `POST /api/submission`. What is missing is the
+      owner-gated page a human pastes into, and keeping prior versions when a
+      judgement is replaced.
+      `from: owner · 2026-08-15 · scope corrected 2026-09-20 against the repo`
 
 - [ ] **Batch pushes to main.** Each deploy builds into the tree the live
       process is serving from, so every push is a window where the site can
@@ -55,6 +58,22 @@ lives in a letter or a commit, and a one-line task strands the *why*.
       because the artifact carries compiled binaries and builder and runtime
       must match on ABI, CPU architecture and libc.
       `from: droplet → indie-degree · INFRA.md#phase-2 · not yet scheduled`
+
+- [ ] **Explain the `/skills/*` latency tail** — droplet reports every
+      `/skills/*` page at ~2,750ms and a box-high p95 of 1,344ms. Not
+      reproducible from outside: 20 samples per route give a **105ms median**,
+      with a real tail of 1-in-20 at 1.1–1.3s on `/skills/*` against nothing
+      above 206ms on `/`. `skillGraph()` is now memoised, which removes the only
+      genuine per-request work, but 75 nodes cannot cost 2.6s and five of the six
+      slow examples are `/skills/<id>`, which never called it. Asked how the
+      figures were produced before optimising further.
+      `from: droplet → indie-degree · MAIL-ARCHIVE.md 2026-09-20`
+
+- [ ] **Four HTTP 500s on `/`, 2026-09-14 04:54** — four inside one minute, none
+      before or since, 9–36ms each, so something threw rather than hung; the
+      service shows 0 restarts in 7 days. The access log cannot say what. Asked
+      droplet for the journal lines, which are on the box and out of my reach.
+      `from: droplet → indie-degree · MAIL-ARCHIVE.md 2026-09-20`
 
 ## Declined
 

@@ -86,7 +86,14 @@ function wrap(name: string, max = 24): string[] {
   return [lines[0], lines.slice(1).join(" ").slice(0, max - 1) + "…"];
 }
 
+// The layout is a pure function of the static curriculum -- nothing below reads
+// progress, the database or any request state -- so it is identical on every
+// request and is computed once for the life of the process. Callers must not
+// mutate it; skills/page.tsx copies before sorting.
+let layout: GraphLayout | null = null;
+
 export function skillGraph(): GraphLayout {
+  if (layout) return layout;
   const depth = depths();
   const maxDepth = Math.max(...depth.values());
 
@@ -161,13 +168,14 @@ export function skillGraph(): GraphLayout {
 
   const height =
     PAD * 2 + Math.max(...layers.map((l) => l.length)) * ROW - (ROW - NODE_H);
-  return {
+  layout = {
     nodes,
     edges,
     width: PAD * 2 + maxDepth * COL + NODE_W,
     height,
     depths: maxDepth + 1,
   };
+  return layout;
 }
 
 /** What sits directly on top of a skill — the inverse of prereqs. */
