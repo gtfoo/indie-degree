@@ -75,7 +75,30 @@ lives in a letter or a commit, and a one-line task strands the *why*.
       droplet for the journal lines, which are on the box and out of my reach.
       `from: droplet → indie-degree · MAIL-ARCHIVE.md 2026-09-20`
 
+- [ ] **Pin the grading panel's model aliases** — the panel names
+      `gemini-flash-latest`, a floating alias, while
+      `tools/eval-harness/README.md` rejects exactly that shape because a
+      vendor's new checkpoint would be indistinguishable from a real change.
+      Found while declining Jev for the same property, and the weakness is mine
+      rather than Jev's — which is why it is recorded here instead of being used
+      as an argument there.
+      `from: indie-degree · 2026-10-02 · tools/eval-harness/README.md:22`
+
 ## Declined
+
+- ~~**Jev as a fourth judge on the grading panel**~~ — declined 2026-10-02. Not on
+      cost: at $0.0247 per thousand judgments the spend objection is gone. The
+      open counter-proposal above is a model that *diagnoses* disagreement, and
+      Jev cannot generate explanations by design, so it can only fill the role
+      already declined — resolving the grade — with a probability attached. That
+      probability is more honest than a confident paragraph and does not change
+      the shape. Separately, `gradingPrompt.ts` offers every judge
+      `"not verifiable"` on 45 of 251 criteria and `parseScores.ts` records it
+      as `null`, never `0`; Jev's Score primitive cannot abstain, and encoding
+      the rubric as a Choice to recover it discards the ordinal.
+      **Open, not declined:** Jev in an opt-in `eval-harness` judge scorer, if
+      one is ever added — dev-time, replay-default, and the learner's call.
+      `from: gtfoo → indie-degree · MAIL-ARCHIVE.md 2026-10-02`
 
 - ~~**An LLM that emits the final grade**~~ — declined as specified.
       Aggregating three judges is arithmetic; a model doing it reintroduces the
