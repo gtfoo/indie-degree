@@ -59,15 +59,31 @@ lives in a letter or a commit, and a one-line task strands the *why*.
       must match on ABI, CPU architecture and libc.
       `from: droplet → indie-degree · INFRA.md#phase-2 · not yet scheduled`
 
-- [ ] **Explain the `/skills/*` latency tail** — droplet reports every
-      `/skills/*` page at ~2,750ms and a box-high p95 of 1,344ms. Not
-      reproducible from outside: 20 samples per route give a **105ms median**,
-      with a real tail of 1-in-20 at 1.1–1.3s on `/skills/*` against nothing
-      above 206ms on `/`. `skillGraph()` is now memoised, which removes the only
-      genuine per-request work, but 75 nodes cannot cost 2.6s and five of the six
-      slow examples are `/skills/<id>`, which never called it. Asked how the
-      figures were produced before optimising further.
-      `from: droplet → indie-degree · MAIL-ARCHIVE.md 2026-09-20`
+- [ ] **Explain the `/skills/*` latency tail — now very likely nothing.** droplet
+      reported every `/skills/*` page at ~2,750ms and a box-high p95 of 1,344ms.
+      Measured again on 2026-10-04 with connection setup separated from server
+      time, which the first attempt did not do and which made that attempt
+      worthless: the TCP handshake is one round trip, `time_connect` minus
+      `time_namelookup` = **274ms RTT** from here, and `starttransfer` minus
+      `appconnect` contains another. Subtracting it, 25 samples per route:
+
+      | route | measured | less RTT |
+      |---|---|---|
+      | `/skills` | 285ms | **~11ms** |
+      | `/` | 302ms | ~28ms |
+      | `/api/progress` | 270ms | ~0ms |
+
+      **`/skills` renders faster than the homepage**, and 0 of 25 samples exceeded
+      500ms of server time. The earlier "105ms median with a 1-in-20 tail at 1.3s"
+      was client-side network variance on my end, not the app — the same routes
+      measured 105ms one day and 285ms the next with no deploy between that could
+      explain it. Every app on the box shows the same ~600ms connect cost, so the
+      instrument, not the app, is what both measurements were reading.
+      **Only a measurement taken on the box, against localhost, can settle this.**
+      Correction owed to droplet: my 09-20 letter quoted the confounded numbers.
+      It is still unread in their inbox after 14 days, so the correction waits for
+      their reply rather than becoming a second letter on one topic.
+      `from: droplet → indie-degree · MAIL-ARCHIVE.md 2026-09-20 · remeasured 2026-10-04`
 
 - [ ] **Four HTTP 500s on `/`, 2026-09-14 04:54** — four inside one minute, none
       before or since, 9–36ms each, so something threw rather than hung; the
