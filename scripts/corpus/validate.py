@@ -563,6 +563,48 @@ def main() -> int:
     # Keyed by course and rubric id: ids are unique only within a course -- 245
     # rubrics share 62 ids, R-M5.4 appearing in fourteen -- so a bare id
     # collapses the lock last-writer-wins and drops 183 of them.
+    # --- evidence dimensions: a claim should be covered, not just counted
+    DIMENSIONS = {"implementation", "diagnosis", "judgment", "transfer"}
+    by_area_dim: dict[str, set[str]] = {}
+    for cid, c in courses.items():
+        spec_rel = c.get("spec")
+        if not spec_rel or not (CURRICULUM / spec_rel).exists():
+            continue
+        spec = json.loads((CURRICULUM / spec_rel).read_text("utf-8"))
+        for m in spec.get("modules", []):
+            for it in m.get("items", []):
+                d = it.get("dimension")
+                if d is None:
+                    continue
+                if d not in DIMENSIONS:
+                    err(f"{cid} {it['id']}: unknown dimension {d!r}")
+                    continue
+                if (it.get("tier") or 0) < 1:
+                    err(
+                        f"{cid} {it['id']}: tier-0 item carries dimension {d!r} — "
+                        "a reading demonstrates nothing, so it cannot cover one"
+                    )
+                for sk in it.get("skills", []):
+                    a = skills.get(sk, {}).get("area")
+                    if a:
+                        by_area_dim.setdefault(a, set()).add(d)
+
+    for a in areas.values():
+        bar = a.get("bar") or {}
+        dims = bar.get("dimensions") or []
+        if len(set(dims)) != len(dims):
+            err(f"area {a['id']}: duplicate entries in bar.dimensions")
+        for d in dims:
+            if d not in DIMENSIONS:
+                err(f"area {a['id']}: unknown dimension {d!r} in bar")
+            elif d not in by_area_dim.get(a["id"], set()):
+                # Same rule as the rest of the bar: a requirement nothing in the
+                # programme can satisfy is a claim that can never be earned.
+                err(
+                    f"area {a['id']}: bar requires {d!r} but no assessed item "
+                    "tagged with it evidences a skill in this area"
+                )
+
     lock_path = CURRICULUM / "rubrics.lock.json"
     if not lock_path.exists():
         err("rubrics.lock.json is missing — run scripts/corpus/lock_rubrics.py")

@@ -44,6 +44,12 @@ export interface Item {
   optional_reason?: string;
   advanced_standing_exempt?: boolean;
   exempt_rationale?: string;
+  /**
+   * What this item establishes, for bars that require coverage rather than
+   * only a count. Only meaningful on assessed items: a reading demonstrates
+   * nothing, so tier 0 may not carry one.
+   */
+  dimension?: Dimension;
 }
 
 export interface Module {
@@ -150,11 +156,43 @@ export interface Skill {
  * `defence` means answering questions you did not write; `cold_recall` means
  * explaining it again later with no notes.
  */
+/**
+ * What kind of thing an assessed item actually establishes.
+ *
+ * `min_items` counts evidence and `min_tier` grades it, but neither says
+ * anything about coverage: five tier-2 assignments can all be implementation,
+ * and a claim backed only by "I built it" is weaker than its count suggests.
+ * These four are the dimensions a capability is tested on, so a bar can ask
+ * for one of each rather than five of anything.
+ */
+export type Dimension =
+  /** Can the learner build the thing. */
+  | "implementation"
+  /** Can they find and fix a failure they did not create. */
+  | "diagnosis"
+  /** Can they defend a trade-off and say what they would do instead. */
+  | "judgment"
+  /** Can they apply it to something unfamiliar, or after a delay. */
+  | "transfer";
+
+export const DIMENSIONS: Dimension[] = [
+  "implementation",
+  "diagnosis",
+  "judgment",
+  "transfer",
+];
+
 export interface Bar {
   min_items: number;
   min_tier: number;
   defence: boolean;
   cold_recall: boolean;
+  /**
+   * Dimensions this claim must show evidence in, one qualifying item each.
+   * Absent means the claim is counted but not covered — which is the weaker
+   * bar every area starts on.
+   */
+  dimensions?: Dimension[];
 }
 
 /**

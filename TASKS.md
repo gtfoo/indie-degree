@@ -108,6 +108,17 @@ lives in a letter or a commit, and a one-line task strands the *why*.
       for in hours. Downgrade them one at a time as each is actually studied.
       `from: owner · education-as-a-compiler review 2026-10-11`
 
+- [ ] **Tag assessed items with an evidence dimension, then raise the bars** —
+      `Item.dimension` and `Bar.dimensions` exist, validated and rendered, but
+      nothing carries one yet, so every bar still asks for five of anything
+      rather than one of each. The four are implementation, diagnosis, judgment
+      and transfer. Starting point rather than an answer: `defense` items are
+      usually judgment and `retention` items are usually transfer, but which
+      assignment tests *diagnosis* versus *implementation* is a reading of the
+      rubric, and an agent guessing it would weaken the exact claim the field
+      exists to strengthen.
+      `from: owner · live-site review 2026-10-11`
+
 ## Declined
 
 - ~~**Jev as a fourth judge on the grading panel**~~ — declined 2026-10-02. Not on

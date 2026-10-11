@@ -88,6 +88,25 @@ export function capabilityStatus(
     });
   }
 
+  // Coverage, not volume. Checked against qualifying items so a dimension
+  // cannot be satisfied by a reading or by work below the bar's own tier.
+  for (const dim of bar?.dimensions ?? []) {
+    const available = tagged.filter(
+      (t) => t.item.dimension === dim && t.item.tier >= minTier,
+    );
+    const done = available.filter((t) => isComplete(t.courseId, t.item));
+    requirements.push({
+      label: `Evidence of ${dim}`,
+      met: done.length > 0,
+      gap:
+        available.length === 0
+          ? `Nothing in the programme tests ${dim} for this claim yet`
+          : done.length === 0
+            ? `${available.length} available, none done`
+            : null,
+    });
+  }
+
   // Defence and recall are the two a self-set bar cannot award itself, so they
   // are checked against the curriculum rather than against an assertion.
   if (bar?.defence) {
