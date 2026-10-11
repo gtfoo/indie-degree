@@ -100,6 +100,14 @@ lives in a letter or a commit, and a one-line task strands the *why*.
       as an argument there.
       `from: indie-degree · 2026-10-02 · tools/eval-harness/README.md:22`
 
+- [ ] **Reclassify the hard edges that are not actually hard** — `Skill` now
+      carries `recommends` beside `prereqs`, validated and rendered dashed, but
+      all 93 edges are still hard because which ones are merely helpful is a
+      curriculum judgement and not an agent's to make. Over-constraining the
+      order is the expensive mistake here: a hard edge you did not need is paid
+      for in hours. Downgrade them one at a time as each is actually studied.
+      `from: owner · education-as-a-compiler review 2026-10-11`
+
 ## Declined
 
 - ~~**Jev as a fourth judge on the grading panel**~~ — declined 2026-10-02. Not on

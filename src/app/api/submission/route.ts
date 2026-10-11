@@ -97,7 +97,7 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
-    saveSelfAssessment(key, clean);
+    saveSelfAssessment(key, clean, rubric.version ?? 1);
     return NextResponse.json(getAssessment(key, rubric));
   }
 

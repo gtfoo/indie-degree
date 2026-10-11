@@ -87,6 +87,24 @@ export default async function SkillPage({
           )}
         </div>
         <div>
+          <h2 className="text-sm font-medium">Helps first</h2>
+          {!skill.recommends?.length ? (
+            <p className="mt-2 text-sm text-muted">
+              Nothing recommended beyond what is required.
+            </p>
+          ) : (
+            <ul className="mt-2 space-y-1 text-sm">
+              {skill.recommends.map((p) => (
+                <li key={p}>
+                  <Link href={`/skills/${p}`} className="text-accent hover:underline">
+                    {getSkill(p)?.name ?? p}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <div>
           <h2 className="text-sm font-medium">Unlocks</h2>
           {dependents.length === 0 ? (
             <p className="mt-2 text-sm text-muted">

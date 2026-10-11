@@ -9,6 +9,7 @@ import {
 } from "@/server/curriculum";
 import { getProgress, nextItem } from "@/server/progress";
 import { claimable } from "@/server/capabilities";
+import { skillGraph } from "@/server/skillGraph";
 import { isOwner } from "@/auth";
 
 export const dynamic = "force-dynamic";
@@ -20,6 +21,13 @@ export const metadata: Metadata = {
 };
 
 export default async function IndieDegreePage() {
+  // Derived, not written down. These three numbers were prose until skills
+  // grew a second edge kind: depth counts recommended foundations too, so one
+  // soft edge would have made a hardcoded "eight levels deep" quietly false.
+  // skillGraph() is memoised, so reading it here costs nothing.
+  const graph = skillGraph();
+  const hardEdges = graph.edges.filter((e) => !e.recommended).length;
+
   const progress = getProgress();
   const next = nextItem();
   const nextSpec = next ? getSpec(next.courseId) : undefined;
@@ -165,8 +173,23 @@ export default async function IndieDegreePage() {
         <span className="font-medium">The skill graph</span>
         <span className="text-muted">
           {" "}
-          — 75 skills, 93 prerequisites, eight levels deep. What has to come
-          before what.
+          — {graph.nodes.length} skills, {hardEdges} prerequisites,{" "}
+          {graph.depths} levels deep. What has to come before what.
+        </span>
+      </Link>
+
+      {/* Calibration is the only figure in this transcript that measures
+          judgement rather than effort, so it sits beside the graph rather than
+          inside any one course. */}
+      <Link
+        href="/calibration"
+        className="mt-3 block rounded-lg border border-border bg-card p-4 text-sm transition-colors hover:border-accent"
+      >
+        <span className="font-medium">Calibration</span>
+        <span className="text-muted">
+          {" "}
+          — whether this learner&apos;s own scoring can be trusted, measured
+          against the panel on every judged item.
         </span>
       </Link>
 

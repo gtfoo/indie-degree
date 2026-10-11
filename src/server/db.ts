@@ -176,6 +176,26 @@ export function getDb(): Database.Database {
     );
   `);
 
+  /**
+   * Additive migrations, applied after the schema so an existing database
+   * gains the column too — `CREATE TABLE IF NOT EXISTS` does nothing to a
+   * table that already exists, which is the trap this avoids.
+   *
+   * Nullable on purpose. A null means "written before rubrics carried a
+   * version", which is true and is not the same claim as version 1.
+   */
+  for (const [table, column] of [
+    ["self_assessments", "rubric_version"],
+    ["judgements", "rubric_version"],
+  ] as const) {
+    const cols = db.prepare(`PRAGMA table_info(${table})`).all() as {
+      name: string;
+    }[];
+    if (!cols.some((c) => c.name === column)) {
+      db.exec(`ALTER TABLE ${table} ADD COLUMN ${column} INTEGER`);
+    }
+  }
+
   return db;
 }
 

@@ -11,6 +11,7 @@
     "verify": "python3 scripts/corpus/verify.py",
     "validate": "python3 scripts/corpus/validate.py",
     "render": "python3 scripts/corpus/render.py",
+    "lock:rubrics": "python3 scripts/corpus/lock_rubrics.py",
     "curriculum": "npm run verify && npm run validate && npm run render",
     "check:email": "node --experimental-strip-types scripts/check-signin-email.ts",
     "check:mutate": "node --experimental-strip-types scripts/mutate-signin-email.ts",

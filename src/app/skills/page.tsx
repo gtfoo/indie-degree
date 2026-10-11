@@ -72,7 +72,11 @@ export default async function SkillsPage() {
         >
           <g stroke="var(--color-border)" fill="none" strokeWidth={1}>
             {graph.edges.map((e) => (
-              <path key={`${e.from}->${e.to}`} d={e.path} />
+              <path
+                key={`${e.from}->${e.to}:${e.recommended ? "r" : "p"}`}
+                d={e.path}
+                strokeDasharray={e.recommended ? "4 3" : undefined}
+              />
             ))}
           </g>
           {graph.nodes.map((n) => {

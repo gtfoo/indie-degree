@@ -36,6 +36,8 @@ export interface LaidOutEdge {
   from: string;
   to: string;
   path: string;
+  /** A recommended foundation rather than a hard prerequisite. Drawn dashed. */
+  recommended: boolean;
 }
 
 export interface GraphLayout {
@@ -48,6 +50,19 @@ export interface GraphLayout {
 
 const byId = new Map(skills.map((s) => [s.id, s]));
 
+/**
+ * Both edge kinds, for layout only.
+ *
+ * Depth and ordering read the union so that every edge points forward and the
+ * picture stays readable. Only `prereqs` states a requirement, and only
+ * `prereqs` is counted in a node's dependents — "most depended-on skill" is a
+ * claim about what is required, not about what was suggested.
+ */
+const ordering = (id: string): string[] => {
+  const s = byId.get(id);
+  return s ? [...s.prereqs, ...(s.recommends ?? [])] : [];
+};
+
 /** Longest path from a root. A skill sits one level below its deepest prereq. */
 function depths(): Map<string, number> {
   const memo = new Map<string, number>();
@@ -57,9 +72,9 @@ function depths(): Map<string, number> {
     // Written before the recursion so a cycle cannot hang the render. The
     // validator already rejects cycles; this is belt and braces on a page.
     memo.set(id, 0);
-    const prereqs = byId.get(id)?.prereqs ?? [];
-    const d = prereqs.length
-      ? 1 + Math.max(...prereqs.map((p) => (byId.has(p) ? visit(p) : -1)))
+    const before = ordering(id);
+    const d = before.length
+      ? 1 + Math.max(...before.map((p) => (byId.has(p) ? visit(p) : -1)))
       : 0;
     memo.set(id, d);
     return d;
@@ -117,7 +132,7 @@ export function skillGraph(): GraphLayout {
   });
 
   function bary(id: string): number {
-    const ps = (byId.get(id)?.prereqs ?? []).filter((p) => index.has(p));
+    const ps = ordering(id).filter((p) => index.has(p));
     if (!ps.length) return Number.MAX_SAFE_INTEGER;
     return ps.reduce((sum, p) => sum + index.get(p)!, 0) / ps.length;
   }
@@ -150,7 +165,12 @@ export function skillGraph(): GraphLayout {
   const edges: LaidOutEdge[] = [];
   for (const s of skills) {
     const to = pos.get(s.id)!;
-    for (const p of s.prereqs) {
+    const kinds: [string[], boolean][] = [
+      [s.prereqs, false],
+      [s.recommends ?? [], true],
+    ];
+    for (const [ids, recommended] of kinds)
+    for (const p of ids) {
       const from = pos.get(p);
       if (!from) continue;
       const x1 = from.x + NODE_W;
@@ -162,6 +182,7 @@ export function skillGraph(): GraphLayout {
         from: p,
         to: s.id,
         path: `M ${x1} ${y1} C ${mid} ${y1}, ${mid} ${y2}, ${x2} ${y2}`,
+        recommended,
       });
     }
   }

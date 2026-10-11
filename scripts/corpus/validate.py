@@ -15,6 +15,7 @@ Usage:
 
 from __future__ import annotations
 
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -37,6 +38,18 @@ def err(msg: str) -> None:
 
 def warn(msg: str) -> None:
     warnings.append(msg)
+
+
+def rubric_hash(rubric: dict) -> str:
+    """Hash of a rubric's judged content, excluding its version.
+
+    Must stay identical to content_hash() in lock_rubrics.py. If the two drift,
+    every rubric reports as changed at once, and a check that cries wolf on all
+    245 is a check someone deletes.
+    """
+    judged = {k: v for k, v in rubric.items() if k != "version"}
+    blob = json.dumps(judged, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()[:16]
 
 
 def find_cycle(nodes: Iterable[str], edges: dict[str, list[str]]) -> list[str] | None:
@@ -106,6 +119,30 @@ def main() -> int:
         for p in s.get("prereqs", []):
             if p not in skills:
                 err(f"skill {sid}: unknown prereq {p!r}")
+    # Recommended foundations are a second, weaker edge kind. They are checked
+    # as strictly as prereqs because a dangling or contradictory recommendation
+    # is the same defect wearing a softer word, and the layout orders on both.
+    for sid, s in skills.items():
+        hard = set(s.get("prereqs", []))
+        for p in s.get("recommends", []):
+            if p not in skills:
+                err(f"skill {sid}: unknown recommends {p!r}")
+            if p == sid:
+                err(f"skill {sid}: recommends itself")
+            if p in hard:
+                err(
+                    f"skill {sid}: {p!r} is both a prereq and a recommends — "
+                    "one of them is wrong, and a reader cannot tell which"
+                )
+
+    both = {
+        k: list(v.get("prereqs", [])) + list(v.get("recommends", []))
+        for k, v in skills.items()
+    }
+    cycle = find_cycle(skills, both)
+    if cycle:
+        err(f"skill prereq/recommends cycle: {' -> '.join(cycle)}")
+
     cycle = find_cycle(skills, {k: v.get("prereqs", []) for k, v in skills.items()})
     if cycle:
         err(f"skill prerequisite cycle: {' -> '.join(cycle)}")
@@ -515,6 +552,48 @@ def main() -> int:
     total_actual = sum(c["credits"] for c in courses.values())
     if total_claimed != total_actual:
         err(f"programme claims {total_claimed} credits, courses sum to {total_actual}")
+
+    # --- rubric versions must move when a rubric's judged content moves
+    #
+    # A score is interpretable only against the rubric that produced it, which
+    # is why Rubric.version is stamped onto every evidence row. A version
+    # nobody is forced to bump rots, so the lock holds a hash of each rubric's
+    # judged content and a silent edit is an error rather than a convention.
+    #
+    # Keyed by course and rubric id: ids are unique only within a course -- 245
+    # rubrics share 62 ids, R-M5.4 appearing in fourteen -- so a bare id
+    # collapses the lock last-writer-wins and drops 183 of them.
+    lock_path = CURRICULUM / "rubrics.lock.json"
+    if not lock_path.exists():
+        err("rubrics.lock.json is missing — run scripts/corpus/lock_rubrics.py")
+    else:
+        locked = json.loads(lock_path.read_text("utf-8"))
+        seen: set[str] = set()
+        for cid, c in courses.items():
+            spec_rel = c.get("spec")
+            if not spec_rel or not (CURRICULUM / spec_rel).exists():
+                continue
+            spec = json.loads((CURRICULUM / spec_rel).read_text("utf-8"))
+            for r in spec.get("rubrics", []):
+                key = f"{cid}/{r['id']}"
+                seen.add(key)
+                version = r.get("version", 1)
+                if not isinstance(version, int) or isinstance(version, bool) or version < 1:
+                    err(f"rubric {key}: version must be an integer >= 1, got {version!r}")
+                    continue
+                was = locked.get(key)
+                if was is None:
+                    err(f"rubric {key}: absent from rubrics.lock.json — run lock_rubrics.py")
+                elif was["version"] > version:
+                    err(f"rubric {key}: version went backwards, {was['version']} -> {version}")
+                elif was["hash"] != rubric_hash(r) and was["version"] == version:
+                    err(
+                        f"rubric {key}: content changed but version is still {version}. "
+                        "Bump it and re-run lock_rubrics.py — every score already "
+                        "recorded was given against the old wording."
+                    )
+        for key in sorted(set(locked) - seen):
+            err(f"rubrics.lock.json holds {key}, which no course defines — run lock_rubrics.py")
 
     print(f"{len(verified)} resources · {len(skills)} skills · {len(courses)} courses")
     for w in warnings:

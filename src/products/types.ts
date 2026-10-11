@@ -79,6 +79,20 @@ export interface Rubric {
   id: string;
   for: string;
   tier: number;
+  /**
+   * Which definition of mastery a score was produced under. Absent means 1.
+   *
+   * Without it, editing a criterion silently reinterprets every score already
+   * recorded against it: a 2 awarded under the old wording is filed as a 2
+   * under the new one, and the transcript claims evidence it does not have.
+   * Evidence rows stamp the version in force when they were written, so an old
+   * score stays readable against the rubric that produced it.
+   *
+   * Bumping is not left to memory. `rubrics.lock.json` holds a hash of every
+   * rubric's judged content and `validate.py` refuses a changed rubric whose
+   * version did not move — the same reason a lockfile exists at all.
+   */
+  version?: number;
   criteria: RubricCriterion[];
   preconditions?: Precondition[];
   anti_gaming?: string;
@@ -108,7 +122,22 @@ export interface Skill {
   id: string;
   name: string;
   area: string;
+  /**
+   * Hard prerequisites: this skill cannot be attempted honestly without them.
+   * These are the edges that order the programme.
+   */
   prereqs: string[];
+  /**
+   * Recommended foundations — they help substantially and are not required.
+   *
+   * Kept separate from `prereqs` because the two were conflated for the first
+   * 93 edges of this graph, and in a one-learner programme the expensive
+   * mistake is over-constraining the order, not under-constraining it: a hard
+   * edge you did not actually need is paid for in hours. Both kinds order the
+   * layout, so the suggested path still reads left to right; only `prereqs`
+   * states a requirement.
+   */
+  recommends?: string[];
   note?: string;
 }
 

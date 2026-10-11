@@ -36,6 +36,8 @@ export interface Judgement {
   judge: string;
   body: string;
   pastedAt: string;
+  /** Rubric version in force when this was pasted; null if it predates versioning. */
+  rubricVersion: number | null;
   /** criterion id -> level, or null where the judge declined it. */
   scores: Record<string, number | null>;
 }
@@ -63,6 +65,14 @@ export interface Assessment {
   meanGap: number | null;
   /** The criterion the panel scored lowest — the feed-forward answer. */
   weakest: CriterionCalibration | null;
+  /** The rubric version in force now. */
+  rubricVersion: number;
+  /**
+   * Judgements recorded against an older version of this rubric. Non-empty
+   * means the criteria moved under evidence already given, and those scores
+   * answer a question that is no longer the one being asked.
+   */
+  staleJudgements: number[];
 }
 
 const median = (xs: number[]): number | null => {
@@ -122,17 +132,21 @@ export function saveSubmission(
 export function saveSelfAssessment(
   itemKey: string,
   scores: Record<string, number>,
+  rubricVersion?: number,
 ): void {
   const db = getDb();
   const now = new Date().toISOString();
   const stmt = db.prepare(
-    `INSERT INTO self_assessments (learner_id, item_key, criterion_id, level, recorded_at)
-     VALUES (?, ?, ?, ?, ?)
+    `INSERT INTO self_assessments
+       (learner_id, item_key, criterion_id, level, recorded_at, rubric_version)
+     VALUES (?, ?, ?, ?, ?, ?)
      ON CONFLICT (learner_id, item_key, criterion_id) DO UPDATE SET
-       level = excluded.level, recorded_at = excluded.recorded_at`,
+       level = excluded.level, recorded_at = excluded.recorded_at,
+       rubric_version = excluded.rubric_version`,
   );
   db.transaction(() => {
-    for (const [cid, level] of Object.entries(scores)) stmt.run(LEARNER, itemKey, cid, level, now);
+    for (const [cid, level] of Object.entries(scores))
+      stmt.run(LEARNER, itemKey, cid, level, now, rubricVersion ?? null);
   })();
 }
 
@@ -181,10 +195,11 @@ export function addJudgement(
 
     const info = db
       .prepare(
-        `INSERT INTO judgements (learner_id, item_key, judge, body, pasted_at)
-         VALUES (?, ?, ?, ?, ?)`,
+        `INSERT INTO judgements
+           (learner_id, item_key, judge, body, pasted_at, rubric_version)
+         VALUES (?, ?, ?, ?, ?, ?)`,
       )
-      .run(LEARNER, itemKey, judge, body, now);
+      .run(LEARNER, itemKey, judge, body, now, rubric.version ?? 1);
 
     const stmt = db.prepare(
       `INSERT INTO judgement_scores (judgement_id, criterion_id, level) VALUES (?, ?, ?)`,
@@ -199,12 +214,17 @@ export function getJudgements(itemKey: string): Judgement[] {
   const db = getDb();
   const rows = db
     .prepare(
-      `SELECT id, judge, body, pasted_at FROM judgements
+      `SELECT id, judge, body, pasted_at, rubric_version FROM judgements
         WHERE learner_id = ? AND item_key = ? AND superseded_at IS NULL
         ORDER BY judge`,
     )
-    .all(LEARNER, itemKey) as
-    { id: number; judge: string; body: string; pasted_at: string }[];
+    .all(LEARNER, itemKey) as {
+      id: number;
+      judge: string;
+      body: string;
+      pasted_at: string;
+      rubric_version: number | null;
+    }[];
 
   return rows.map((r) => {
     const s = db
@@ -215,6 +235,7 @@ export function getJudgements(itemKey: string): Judgement[] {
       judge: r.judge,
       body: r.body,
       pastedAt: r.pasted_at,
+      rubricVersion: r.rubric_version,
       scores: Object.fromEntries(s.map((x) => [x.criterion_id, x.level])),
     };
   });
@@ -281,7 +302,13 @@ export function getAssessment(itemKey: string, rubric: Rubric): Assessment {
   const gaps = calibration.map((c) => c.gap).filter((g): g is number => g !== null);
   const scored = calibration.filter((c) => c.panel !== null);
 
+  const version = rubric.version ?? 1;
+
   return {
+    rubricVersion: version,
+    staleJudgements: judgements
+      .filter((j) => j.rubricVersion !== null && j.rubricVersion !== version)
+      .map((j) => j.id),
     submission: getSubmission(itemKey),
     cold: getColdAttempt(itemKey),
     selfScores,
